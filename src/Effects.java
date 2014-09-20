@@ -4,6 +4,6 @@
  *
  */
 
-public class Effects implements Mobile {
+public class Effects extends Mobile {
 
 }

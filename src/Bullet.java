@@ -4,6 +4,6 @@
  *
  */
 
-public class Bullet implements Mobile {
+public class Bullet extends Mobile {
 
 }

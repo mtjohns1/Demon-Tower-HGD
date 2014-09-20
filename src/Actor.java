@@ -4,6 +4,6 @@
  *
  */
 
-public class Actor implements Mobile {
+public class Actor extends Mobile {
 
 }
