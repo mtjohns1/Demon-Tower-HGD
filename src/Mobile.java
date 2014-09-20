@@ -11,36 +11,52 @@ public class Mobile {
 	private int _w, _h, _d; //dimensions
 	private Room _home; //room the object is in
 	
-	//get the home room
+	/**
+	 * @return the room the object lives in
+	 */
 	public Room getHome() {
 		return _home;
 	}
-	//set the home room
+	/**
+	 * @param _home set the room the object lives in
+	 */
 	public void setHome(Room _home) {
 		this._home = _home;
 	}
 	
-	//get the x coordinate
+	/**
+	 * @return the x coordinate
+	 */
 	public int get_x() {
 		return _x;
 	}
-	//set the x coordinate
+	/**
+	 * @param _x the new x coordinate
+	 */
 	public void set_x(int _x) {
 		this._x = _x;
 	}
-	//get the y coordinate
+	/**
+	 * @return the y coordinate
+	 */
 	public int get_y() {
 		return _y;
 	}
-	//set the y coordinate
+	/**
+	 * @param _y the new y coordinate
+	 */
 	public void set_y(int _y) {
 		this._y = _y;
 	}
-	//get the z coordinate
+	/**
+	 * @return the z coordinate
+	 */
 	public int get_z() {
 		return _z;
 	}
-	//set the z coordinate
+	/**
+	 * @param _z the new z coordinate
+	 */
 	public void set_z(int _z) {
 		this._z = _z;
 	}
