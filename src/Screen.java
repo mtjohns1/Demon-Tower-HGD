@@ -12,21 +12,29 @@ import java.awt.*;
 import java.io.*;
 
 public class Screen {
-	
-	
+
+
 	public static void startup(){
 		final Game game = new Game();
-		game.setVisible(true);
-    }
-	
-	
-	
+		
+		JFrame frame = new JFrame();
+		frame.add(game);
+		frame.setSize(600,600);
+		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+		frame.repaint();
+		
+	}
+
+
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		startup();
 	}
 
 
-	
-	
+
+
 }
