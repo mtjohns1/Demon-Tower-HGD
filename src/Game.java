@@ -19,6 +19,9 @@ public class Game extends JPanel {
 
 	
 	
+	private int circlex;
+	private int circley;
+
 	//private JButton exit = new JButton("Exit Button");
 	
 	
@@ -26,6 +29,9 @@ public class Game extends JPanel {
 		//box.add(exit);
 		final int WIDTH = 640;
 		final int HEIGHT = 480; 
+		
+		this.circlex = 10;
+		this.circley = 10;
 
 		this.setSize(WIDTH, HEIGHT);
 		
@@ -38,9 +44,27 @@ public class Game extends JPanel {
 		
 		
 		g.setColor(Color.red);
-		g.drawOval( 10,10,10,10);
+		g.drawOval( this.circlex, this.circley ,10,10);
 		repaint();
 	}
 
+	public void setCX(int x){
+		this.circlex = x;
+		
+	}
+	
+	public void setCY(int y){
+		this.circley = y;
+		
+	}
+	
+	public int getCY(){
+		return this.circley;
+	}
+	
+	public int getCX(){
+		return this.circlex;
+	}
+	
 	
 }

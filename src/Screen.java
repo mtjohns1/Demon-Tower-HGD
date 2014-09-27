@@ -19,11 +19,29 @@ public class Screen {
 		
 		JFrame frame = new JFrame();
 		frame.add(game);
-		frame.setSize(600,600);
+		frame.setSize(600,480);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		frame.repaint();
+		while(true){
+			while(game.getCX() < 590){
+				game.setCX(game.getCX()+1);
+				frame.repaint();
+			}
+			while(game.getCY() < 470){
+				game.setCY(game.getCY()+1);
+				frame.repaint();
+			}
+			while(game.getCX() > 10){
+				game.setCX(game.getCX()-1);
+				frame.repaint();
+			}
+			while(game.getCY() > 10){
+				game.setCY(game.getCY()-1);
+				frame.repaint();
+			}
+			
+		}
 		
 	}
 
