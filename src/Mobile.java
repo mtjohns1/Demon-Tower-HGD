@@ -1,7 +1,8 @@
 /**
  * 
- * Interface for mobile objects
- *
+ * Base class for mobile objects
+ * @author Jacob Charles
+ * 
  */
 
 import javax.swing.*;
@@ -10,14 +11,14 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.*;
 
-public class Mobile {
+public abstract class Mobile {
 
 	private int _x, _y, _z; //position in 3D space
 	private int _vx, _vy, _vz; //3D velocities
 	private int _w, _h, _d; //dimensions
 	private Room _home; //room the object is in
 	
-	//TODO: Add mobile to tile collision
+	//TODO: Add mobile-to-tile collision
 	
 	/**
 	 * Apply the mobile object's velocity to its position
@@ -28,7 +29,14 @@ public class Mobile {
 		_z += _vz;
 	}
 	
-	//TODO: Add mobile-mobile collisions.
+	/**
+	 * 
+	 * @param g
+	 */
+	public void draw(Graphics g)
+	{
+		//TODO: Make a generic drawing function here
+	}
 	
 	/**
 	 * @return the room the object lives in
@@ -46,109 +54,183 @@ public class Mobile {
 	/**
 	 * @return the x coordinate
 	 */
-	public int get_x() {
+	public int getX() {
 		return _x;
 	}
 	/**
-	 * @param _x: the new x coordinate
+	 * @param x: the new x coordinate
 	 */
-	public void set_x(int _x) {
-		this._x = _x;
+	public void setX(int x) {
+		this._x = x;
 	}
 	/**
 	 * @return the y coordinate
 	 */
-	public int get_y() {
+	public int getY() {
 		return _y;
 	}
 	/**
-	 * @param _y: the new y coordinate
+	 * @param y: the new y coordinate
 	 */
-	public void set_y(int _y) {
-		this._y = _y;
+	public void setY(int y) {
+		this._y = y;
 	}
 	/**
 	 * @return the z coordinate
 	 */
-	public int get_z() {
+	public int getZ() {
 		return _z;
 	}
 	/**
-	 * @param _z: the new z coordinate
+	 * @param z: the new z coordinate
 	 */
-	public void set_z(int _z) {
-		this._z = _z;
+	public void setZ(int z) {
+		this._z = z;
 	}
 	/**
 	 * @return the x velocity
 	 */
-	public int get_vx() {
+	public int getVx() {
 		return _vx;
 	}
 	/**
-	 * @param _vx: the new x velocity
+	 * @param vx: the new x velocity
 	 */
-	public void set_vx(int _vx) {
-		this._vx = _vx;
+	public void setVx(int vx) {
+		this._vx = vx;
 	}
 	/**
 	 * @return the y velocity
 	 */
-	public int get_vy() {
+	public int getVy() {
 		return _vy;
 	}
 	/**
-	 * @param _vy: the new y velocity
+	 * @param vy: the new y velocity
 	 */
-	public void set_vy(int _vy) {
-		this._vy = _vy;
+	public void setVy(int vy) {
+		this._vy = vy;
 	}
 	/**
 	 * @return the z velocity
 	 */
-	public int get_vz() {
+	public int getVz() {
 		return _vz;
 	}
 	/**
-	 * @param _vz: the new z velocity
+	 * @param vz: the new z velocity
 	 */
-	public void set_vz(int _vz) {
-		this._vz = _vz;
+	public void setVz(int vz) {
+		this._vz = vz;
 	}
 	/**
 	 * @return the width (in x)
 	 */
-	public int get_w() {
+	public int getW() {
 		return _w;
 	}
 	/**
-	 * @param _w: the new width (in x)
+	 * @param w: the new width (in x)
 	 */
-	public void set_w(int _w) {
-		this._w = _w;
+	public void setW(int w) {
+		this._w = w;
 	}
 	/**
 	 * @return the height (in y)
 	 */
-	public int get_h() {
+	public int getH() {
 		return _h;
 	}
 	/**
-	 * @param _h: the new height (in y)
+	 * @param h: the new height (in y)
 	 */
-	public void set_h(int _h) {
-		this._h = _h;
+	public void setH(int h) {
+		this._h = h;
 	}
 	/**
 	 * @return the depth (in z)
 	 */
-	public int get_d() {
+	public int getD() {
 		return _d;
 	}
 	/**
-	 * @param _d: the new depth (in z)
+	 * @param d: the new depth (in z)
 	 */
-	public void set_d(int _d) {
-		this._d = _d;
+	public void setD(int d) {
+		this._d = d;
+	}
+	
+	/**
+	 * @return y coordinate of the top edge
+	 */
+	public int getTop() {
+		return _y-_h/2;
+	}
+	/**
+	 * @return y coordinate of the bottom edge
+	 */
+	public int getBottom() {
+		return _y+_h/2;
+	}
+	/**
+	 * @return x coordinate of the left edge
+	 */
+	public int getLeft() {
+		return _x-_w/2;
+	}
+	/**
+	 * @return x coordinate of the right edge
+	 */
+	public int getRight() {
+		return _x+_w/2;
+	}
+	/**
+	 * @return z coordinate of the front edge (screen-facing)
+	 */
+	public int getFront() {
+		return _z-_d;
+	}
+	/**
+	 * @return z coordinate of the back edge (ground-facing)
+	 */
+	public int getBack() {
+		return _z;
+	}
+	
+	/**
+	 * @return y coordinate of the top edge after movement
+	 */
+	public int getNextTop() {
+		return _y-_h/2+_vy;
+	}
+	/**
+	 * @return y coordinate of the bottom edge after movement
+	 */
+	public int getNextBottom() {
+		return _y+_h/2+_vy;
+	}
+	/**
+	 * @return x coordinate of the left edge after movement
+	 */
+	public int getNextLeft() {
+		return _x-_w/2+_vx;
+	}
+	/**
+	 * @return x coordinate of the right edge after movement
+	 */
+	public int getNextRight() {
+		return _x+_w/2+_vx;
+	}
+	/**
+	 * @return z coordinate of the front edge (screen-facing) after movement
+	 */
+	public int getNextFront() {
+		return _z-_d+_vz;
+	}
+	/**
+	 * @return z coordinate of the back edge (ground-facing) after movement
+	 */
+	public int getNextBack() {
+		return _z+_vz;
 	}
 }
