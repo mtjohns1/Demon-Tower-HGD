@@ -17,6 +17,19 @@ public class Mobile {
 	private int _w, _h, _d; //dimensions
 	private Room _home; //room the object is in
 	
+	//TODO: Add mobile to tile collision
+	
+	/**
+	 * Apply the mobile object's velocity to its position
+	 */
+	public void move() {
+		_x += _vx;
+		_y += _vy;
+		_z += _vz;
+	}
+	
+	//TODO: Add mobile-mobile collisions.
+	
 	/**
 	 * @return the room the object lives in
 	 */
@@ -24,7 +37,7 @@ public class Mobile {
 		return _home;
 	}
 	/**
-	 * @param _home set the room the object lives in
+	 * @param _home: set the room the object lives in
 	 */
 	public void setHome(Room _home) {
 		this._home = _home;
@@ -37,7 +50,7 @@ public class Mobile {
 		return _x;
 	}
 	/**
-	 * @param _x the new x coordinate
+	 * @param _x: the new x coordinate
 	 */
 	public void set_x(int _x) {
 		this._x = _x;
@@ -49,7 +62,7 @@ public class Mobile {
 		return _y;
 	}
 	/**
-	 * @param _y the new y coordinate
+	 * @param _y: the new y coordinate
 	 */
 	public void set_y(int _y) {
 		this._y = _y;
@@ -61,56 +74,80 @@ public class Mobile {
 		return _z;
 	}
 	/**
-	 * @param _z the new z coordinate
+	 * @param _z: the new z coordinate
 	 */
 	public void set_z(int _z) {
 		this._z = _z;
 	}
-	//get the x velocity
+	/**
+	 * @return the x velocity
+	 */
 	public int get_vx() {
 		return _vx;
 	}
-	//set the y velocity
+	/**
+	 * @param _vx: the new x velocity
+	 */
 	public void set_vx(int _vx) {
 		this._vx = _vx;
 	}
-	//get the y velocity
+	/**
+	 * @return the y velocity
+	 */
 	public int get_vy() {
 		return _vy;
 	}
-	//set the y velocity
+	/**
+	 * @param _vy: the new y velocity
+	 */
 	public void set_vy(int _vy) {
 		this._vy = _vy;
 	}
-	//get the z velocity
+	/**
+	 * @return the z velocity
+	 */
 	public int get_vz() {
 		return _vz;
 	}
-	//set the z velocity
+	/**
+	 * @param _vz: the new z velocity
+	 */
 	public void set_vz(int _vz) {
 		this._vz = _vz;
 	}
-	//get the width of the object
+	/**
+	 * @return the width (in x)
+	 */
 	public int get_w() {
 		return _w;
 	}
-	//set the width of the object
+	/**
+	 * @param _w: the new width (in x)
+	 */
 	public void set_w(int _w) {
 		this._w = _w;
 	}
-	//get height of the object
+	/**
+	 * @return the height (in y)
+	 */
 	public int get_h() {
 		return _h;
 	}
-	//set height of the object
+	/**
+	 * @param _h: the new height (in y)
+	 */
 	public void set_h(int _h) {
 		this._h = _h;
 	}
-	//get the depth of the object
+	/**
+	 * @return the depth (in z)
+	 */
 	public int get_d() {
 		return _d;
 	}
-	//set the depth of the object
+	/**
+	 * @param _d: the new depth (in z)
+	 */
 	public void set_d(int _d) {
 		this._d = _d;
 	}
