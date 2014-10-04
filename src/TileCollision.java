@@ -15,13 +15,31 @@ public class TileCollision {
 	private Tile _t;
 
 	/**
-	 * Generate a collision record between two Mobile objects
+	 * Generate a collision record between a Mobile object and the room
 	 * 
-	 * @param a the object recording collisions
-	 * @param b the other object
+	 * @param m the object recording collisions
+	 * @param r the room being collided with
 	 */
 	public TileCollision (Mobile m, Room r) {
 		_m = m;
+		/**
+		 * find the destination tile
+		 * compare edges, calculate x and y axis
+		 */
+		//TODO: replace with actual collision detection!
+		_t = null;
+		_xAxis = 0;
+		_yAxis = 0;
+	}
+	
+	/**
+	 * Generate a collision record between a Mobile object and its Home room
+	 * 
+	 * @param m the object recording collisions
+	 */
+	public TileCollision (Mobile m) {
+		_m = m;
+		Room r = m.getHome(); //calculate the room from the object's home
 		/**
 		 * find the destination tile
 		 * compare edges, calculate x and y axis
