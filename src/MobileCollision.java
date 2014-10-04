@@ -1,11 +1,11 @@
 /**
  * 
- * Base class for storing mobile collision information
+ * Base class for storing mobile-to-mobile collision information
  * @author Jacob Charles
  * 
  */
 
-public class Collision {
+public class MobileCollision {
 
 	//A collides with B's side at a point along an axis
 	private int _xAxis;
@@ -20,7 +20,7 @@ public class Collision {
 	 * @param a the object recording collisions
 	 * @param b the other object
 	 */
-	public Collision (Mobile a, Mobile b) {
+	public MobileCollision (Mobile a, Mobile b) {
 		//record the two objects
 		_a = a;
 		_b = b;
@@ -70,7 +70,7 @@ public class Collision {
 	 * 
 	 * @param c the Collision to clone
 	 */
-	public Collision(Collision c) {
+	public MobileCollision(MobileCollision c) {
 		_a = c.getObjectA();
 		_b = c.getObjectB();
 		_xAxis = -c.getXAxis();
@@ -97,8 +97,8 @@ public class Collision {
 	 * 
 	 * @return an reversed copy
 	 */
-	public Collision reverse() {
-		Collision mirror = new Collision(this);
+	public MobileCollision reverse() {
+		MobileCollision mirror = new MobileCollision(this);
 		mirror._invert();
 		return mirror;
 	}

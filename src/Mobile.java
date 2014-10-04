@@ -17,8 +17,32 @@ public abstract class Mobile {
 	private int _vx, _vy, _vz; //3D velocities
 	private int _w, _h, _d; //dimensions
 	private Room _home; //room the object is in
+	private boolean _dead; //dead state
 	
-	//TODO: Add mobile-to-tile collision
+	/**
+	 * @param home: the room the object is inside
+	 */
+	public Mobile(Room home) {
+		_dead = false;
+		_home = home;
+	}
+	
+	/**
+	 * no-argument constructor, for easy use
+	 */
+	public Mobile() {
+		_dead = false;
+		_home = null;
+	}
+	
+	/**
+	 * Get the Tile the mobile object currently occupies
+	 * 
+	 * @return a reference to the current Tile
+	 */
+	public Tile floor() {
+		return null; //TODO: Return a real tile from the room!
+	}
 	
 	/**
 	 * Apply the mobile object's velocity to its position
@@ -30,12 +54,27 @@ public abstract class Mobile {
 	}
 	
 	/**
+	 * Draw the object to the screen
 	 * 
-	 * @param g
+	 * @param g: graphics object to use for drawing
 	 */
 	public void draw(Graphics g)
 	{
 		//TODO: Make a generic drawing function here
+	}
+	
+	/**
+	 * @return true if the object is dead
+	 */
+	public boolean getDead() {
+		return _dead;
+	}
+	
+	/**
+	 * Kills the object, deactivating most functions
+	 */
+	public void setDead() {
+		_dead = true;
 	}
 	
 	/**
@@ -45,10 +84,10 @@ public abstract class Mobile {
 		return _home;
 	}
 	/**
-	 * @param _home: set the room the object lives in
+	 * @param home: set the room the object lives in
 	 */
-	public void setHome(Room _home) {
-		this._home = _home;
+	public void setHome(Room home) {
+		this._home = home;
 	}
 	
 	/**
