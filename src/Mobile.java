@@ -54,6 +54,13 @@ public abstract class Mobile {
 	}
 	
 	/**
+	 * Tell the object to take its actions this frame
+	 */
+	public void act() {
+		//TODO: Probably make this an abstract!
+	}
+	
+	/**
 	 * Draw the object to the screen
 	 * 
 	 * @param g: graphics object to use for drawing
