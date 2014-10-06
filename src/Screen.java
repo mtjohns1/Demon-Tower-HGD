@@ -16,8 +16,9 @@ public class Screen {
 
 	public static void startup(){
 		final Game game = new Game();
-		
+		final Stick controls = new Stick();
 		JFrame frame = new JFrame();
+		frame.addKeyListener(controls);
 		frame.add(game);
 		frame.setSize(600,480);
 		
