@@ -28,7 +28,7 @@ public abstract class Mobile {
 	}
 	
 	/**
-	 * no-argument constructor, for easy use
+	 * Public no-argument constructor, for easy use
 	 */
 	public Mobile() {
 		_dead = false;
@@ -56,7 +56,7 @@ public abstract class Mobile {
 	/**
 	 * Tell the object to take its actions this frame
 	 */
-	public void act() {
+	public void update() {
 		//TODO: Probably make this an abstract!
 	}
 	

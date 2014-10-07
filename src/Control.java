@@ -33,27 +33,27 @@ public class Control {
 	/**
 	 * @return the stick that controls movement
 	 */
-	public Stick get_move() {
+	public Stick getMove() {
 		return _move;
 	}
 	/**
-	 * @param _move
+	 * @param move
 	 * 			the new movement stick
 	 */
-	public void set_move(Stick _move) {
-		this._move = _move;
+	public void setMove(Stick move) {
+		this._move = move;
 	}
 	/**
 	 * @return the stick that controls firing
 	 */
-	public Stick get_shoot() {
+	public Stick getShoot() {
 		return _shoot;
 	}
 	/**
-	 * @param _shoot
+	 * @param shoot
 	 * 			the new firing stick
 	 */
-	public void set_shoot(Stick _shoot) {
-		this._shoot = _shoot;
+	public void setShoot(Stick shoot) {
+		this._shoot = shoot;
 	}
 }

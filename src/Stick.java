@@ -17,22 +17,22 @@ public class Stick implements KeyListener {
 
 	
 	
-	private int _x, y;
+	private int _x, _y;
 
 	/**
 	 * 
 	 * @return horizontal position of the stick
 	 */
-	public int get_x() {
+	public int getX() {
 		return _x;
 	}
 
 	/**
 	 * 
-	 * @param _x new horizontal position of stick
+	 * @param x new horizontal position of stick
 	 */
-	public void set_x(int _x) {
-		this._x = _x;
+	public void setX(int x) {
+		this._x = x;
 	}
 
 	/**
@@ -40,7 +40,7 @@ public class Stick implements KeyListener {
 	 * @return vertical position of the stick
 	 */
 	public int getY() {
-		return y;
+		return _y;
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class Stick implements KeyListener {
 	 * @param y new vertical position of the stick
 	 */
 	public void setY(int y) {
-		this.y = y;
+		this._y = y;
 	}
 
 	@Override
@@ -67,13 +67,13 @@ public class Stick implements KeyListener {
 		}
 		//if a pressed
 		if (arg0.getExtendedKeyCode() ==65){
-			System.out.println("Left");
-			this.set_x(-100);
+			System.out.println("left");
+			this.setX(-100);
 		}
 		//if d pressed
 		else if (arg0.getExtendedKeyCode() == 68){
-			System.out.println("Right");
-			this.set_x(100);
+			System.out.println("right");
+			this.setX(100);
 			
 		}
 	}
@@ -93,13 +93,13 @@ public class Stick implements KeyListener {
 		}
 		//if a pressed
 		if (arg0.getExtendedKeyCode() ==65){
-			System.out.println("Left");
-			this.set_x(0);
+			System.out.println("left");
+			this.setX(0);
 		}
 		//if d pressed
 		else if (arg0.getExtendedKeyCode() == 68){
-			System.out.println("Right");
-			this.set_x(0);
+			System.out.println("right");
+			this.setX(0);
 		}
 	}
 
