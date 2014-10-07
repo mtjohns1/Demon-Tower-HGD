@@ -28,18 +28,22 @@ public class Screen {
 			while(game.getCX() < 590){
 				game.setCX(game.getCX()+1);
 				frame.repaint();
+				
 			}
 			while(game.getCY() < 470){
 				game.setCY(game.getCY()+1);
 				frame.repaint();
+				
 			}
 			while(game.getCX() > 10){
 				game.setCX(game.getCX()-1);
 				frame.repaint();
+				
 			}
 			while(game.getCY() > 10){
 				game.setCY(game.getCY()-1);
 				frame.repaint();
+				
 			}
 			
 		}
