@@ -7,6 +7,7 @@
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.imageio.ImageIO;
+
 import java.awt.*;
 import java.io.*;
 
@@ -59,5 +60,16 @@ public class Player extends Actor {
 		//TODO: check bounding / room change
 		
 		move(); //move to new position
+	}
+	
+	/**
+	 * Draw the player to the screen
+	 * 
+	 * @param g: graphics object to use for drawing
+	 */
+	public void draw(Graphics g)
+	{
+		g.setColor(Color.GREEN); //green for the player!
+		g.drawOval(getLeft(), getTop(), getW(), getH()); //draw oval in hitbox
 	}
 }
