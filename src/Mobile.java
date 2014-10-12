@@ -8,8 +8,10 @@
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.imageio.ImageIO;
+
 import java.awt.*;
 import java.io.*;
+import java.util.*;
 
 public abstract class Mobile {
 
@@ -40,8 +42,8 @@ public abstract class Mobile {
 	 * 
 	 * @return a reference to the current Tile
 	 */
-	public Tile floor() {
-		return null; //TODO: Return a real tile from the room!
+	public ArrayList<Tile> floor() {
+		return _home.getRange(getLeft()/32, getTop()/32, getRight()/32, getBottom()/32);
 	}
 	
 	/**

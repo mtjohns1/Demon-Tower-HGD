@@ -104,6 +104,13 @@ public class MobileCollision {
 	}
 	
 	/**
+	 * @return true if a collision has occured, otherwise false
+	 */
+	public boolean getCollision() {
+		return (_xAxis != 0)||(_yAxis != 0);
+	}
+	
+	/**
 	 * @return the primary object of the collision
 	 */
 	public Mobile getObjectA() {
