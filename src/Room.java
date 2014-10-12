@@ -1,7 +1,10 @@
 /**
  * 
  * A class for individual rooms
- *
+ * 
+ * @author Brett Miller
+ * @author Jacob Charles
+ * 
  */
 
 import javax.swing.*;
