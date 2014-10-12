@@ -36,7 +36,7 @@ public abstract class Mobile {
 		_dead = false;
 		_home = null;
 	}
-	
+
 	/**
 	 * Get the Tile the mobile object currently occupies
 	 * 
@@ -45,7 +45,7 @@ public abstract class Mobile {
 	public ArrayList<Tile> floor() {
 		return _home.getRange(getLeft()/32, getTop()/32, getRight()/32, getBottom()/32);
 	}
-	
+
 	/**
 	 * Apply the mobile object's velocity to its position
 	 */
