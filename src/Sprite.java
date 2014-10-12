@@ -1,3 +1,5 @@
+
+
 /**
  * @author Thomas
  */
@@ -9,6 +11,8 @@ import java.awt.*;
 public class Sprite {
 	private int X,Y,Width,Height,SpriteX,SpriteY,Layer;
 	
+	
+
 	private Image img;
 	
 	private ImageObserver observer;
@@ -18,7 +22,41 @@ public class Sprite {
 	}
 	
 	public void draw(Graphics g){
-		g.drawImage(img, X, Y, null);
+		g.drawImage(img, X, Y, X+Width-1, Y+Height-1, SpriteX, SpriteY, SpriteX+Width-1, SpriteY+Height-1, observer);
 		
 	}
+	
+	public int getX() {
+		return X;
+	}
+
+	public int getY() {
+		return Y;
+	}
+
+	public int getWidth() {
+		return Width;
+	}
+
+	public int getHeight() {
+		return Height;
+	}
+
+	public int getSpriteX() {
+		return SpriteX;
+	}
+
+	public int getSpriteY() {
+		return SpriteY;
+	}
+
+	public int getLayer() {
+		return Layer;
+	}
+
+	public Image getImg() {
+		return img;
+	}
+
+	
 }
