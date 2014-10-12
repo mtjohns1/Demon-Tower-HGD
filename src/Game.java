@@ -1,7 +1,7 @@
 /**
  * 
  * The main class for executing the game
- * 
+ * 	@author Thomas
  */
 
 import javax.swing.*;

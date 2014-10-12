@@ -1,7 +1,7 @@
 /**
  * 
  * A class for handling screen drawing
- *
+ *	@author Thomas
  */
 
 import javax.swing.*;
