@@ -20,7 +20,7 @@ public class Room {
 	/**
 	 * Creates a new blank room with walls surrounding it.
 	 */
-	public void createBlankRoom() //creates a blank room
+	public Room() //creates a blank room
 	{
 		for(int i = 0; i < 15; i++)
 		{
