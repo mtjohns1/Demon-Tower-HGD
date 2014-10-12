@@ -15,6 +15,7 @@ public class Control {
 
 	private Stick _move;
 	private Stick _shoot;
+	private Stick _mouse;
 	
 	private int[] movementList = {87,83,65,68};
 	private int[] shootList = {38,40,37,39};
@@ -25,6 +26,7 @@ public class Control {
 	public Control(){
 		_move = new Stick(movementList);
 		_shoot = new Stick(shootList);
+		_mouse = new Stick(1);
 	}
 	
 	/**
@@ -55,11 +57,20 @@ public class Control {
 	public Stick getShoot() {
 		return _shoot;
 	}
+	
 	/**
 	 * @param shoot
 	 * 			the new firing stick
 	 */
 	public void setShoot(Stick shoot) {
 		this._shoot = shoot;
+	}
+	/**
+	 * 
+	 * @return Mouse 
+	 * 			used if mouse controls wanted
+	 */
+	public Stick getMouse(){
+		return _mouse;
 	}
 }
