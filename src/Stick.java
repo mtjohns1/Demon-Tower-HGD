@@ -24,6 +24,7 @@ public class Stick implements KeyListener, MouseInputListener {
 	private int[] mouseAxis = {-1,1};
 	//preset for testing
 	private int[] keys ={87,83,65,68};
+	private Mobile player =null;
 	
 	//empty for testing
 	public Stick(){
@@ -31,11 +32,14 @@ public class Stick implements KeyListener, MouseInputListener {
 	}
 	
 	/**
-	 * nulls default keys to use as a Mouse Listener.
-	 * @param isMouseListener can be anything, does nothing
+	 * nulls default keys to use as a Mouse Listener
+	 * and asks for player so mouse can give click relative
+	 * to player.
+	 * @param player used for relative place
 	 */
-	public Stick(int isMouseListener){
+	public Stick(Mobile player){
 		keys =null;
+		this.player = player;
 	}
 
 	/**
@@ -48,8 +52,13 @@ public class Stick implements KeyListener, MouseInputListener {
 	/**
 	 * 
 	 * @return horizontal position of the stick
+	 * also returns relative mouse position
 	 */
 	public int getX() {
+		//gets x if stick is mouse
+		if(player != null){
+			return mouseAxis[0] - player.getX();
+		}
 		return x0 + x1;
 	}
 
@@ -58,11 +67,20 @@ public class Stick implements KeyListener, MouseInputListener {
 	/**
 	 * 
 	 * @return vertical position of the stick
+	 * also returns relative mouse position
 	 */
 	public int getY() {
+		//gets y if stick is mouse
+		if(player != null){
+			return mouseAxis[1] - player.getY();
+		}
 		return y0 + y1;
 	}
 	
+	/**
+	 * gives mouse location relative to screen
+	 * @return mouseAxis list with 0 = x position 1 = y position
+	 */
 	public int[] getMouseLocation(){
 		return mouseAxis;
 	}

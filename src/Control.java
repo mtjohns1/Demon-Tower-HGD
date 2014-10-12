@@ -15,18 +15,28 @@ public class Control {
 
 	private Stick _move;
 	private Stick _shoot;
-	private Stick _mouse;
 	
-	private int[] movementList = {87,83,65,68};
-	private int[] shootList = {38,40,37,39};
+	private Stick wsad;
+	private Stick arrow;
+	private Stick mouse;
+	//wsad, arrows, joysticks, etc as well
+	
+	private Mobile player = null;
+	
+	//used for keynumber of wsad and arrows
+	private int[] wsadList = {87,83,65,68};
+	private int[] arrowList = {38,40,37,39};
 	
 	/**
 	 * initilizes keyboard using wasd and arrow keys
 	 */
 	public Control(){
-		_move = new Stick(movementList);
-		_shoot = new Stick(shootList);
-		_mouse = new Stick(1);
+		wsad = new Stick(wsadList);
+		arrow = new Stick(arrowList);
+		mouse = new Stick(player);
+		
+		_move = wsad;
+		_shoot = arrow;
 	}
 	
 	/**
@@ -34,9 +44,9 @@ public class Control {
 	 * 
 	 * @param Stick keyboard
 	 */
-	public Control(Stick arg0){
+	public Control(Stick arg0, Stick arg1){
 		_move = arg0;
-		_move = _shoot;
+		_shoot = arg1;
 	}
 	/**
 	 * @return the stick that controls movement
@@ -64,13 +74,14 @@ public class Control {
 	 */
 	public void setShoot(Stick shoot) {
 		this._shoot = shoot;
-	}
+	}	
+	
 	/**
 	 * 
-	 * @return Mouse 
-	 * 			used if mouse controls wanted
+	 * @param playerObject player object to set mouse listener to
+	 * 						use player as a reference point.
 	 */
-	public Stick getMouse(){
-		return _mouse;
+	public void setMouse (Mobile playerObject){
+		player = playerObject;
 	}
 }

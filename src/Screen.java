@@ -22,9 +22,6 @@ public class Screen {
 		//adds key listeners for movement and shooting
 		frame.addKeyListener(controls.getMove());
 		frame.addKeyListener(controls.getShoot());
-		//adds mouse listener, needs both to allow for click and hold
-		frame.addMouseListener(controls.getMouse());
-		frame.addMouseMotionListener(controls.getMouse());
 		
 		frame.add(game);
 		frame.setSize(600,480);
