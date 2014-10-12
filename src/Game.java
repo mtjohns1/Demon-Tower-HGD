@@ -74,16 +74,15 @@ public class Game extends JPanel {
 	}
 
 
-	public void paint(Graphics g) {
+	
+	public void redraw(){
+		Image backBuffer = createImage(640,480);
+		
+		Graphics g = backBuffer.getGraphics();
+		
 		g.setColor(Color.black);
 		g.fillRect(0, 0, getWidth(), getHeight());
 
-
-
-		//g.setColor(Color.red);
-		//g.drawOval( this.circlex, this.circley ,10,10);
-
-		//g.drawImage(testImage, this.circlex, this.circley, observer);
 
 		if(!sprites.isEmpty()){
 			for(int c = 0; c < sprites.size(); c++){
@@ -91,12 +90,9 @@ public class Game extends JPanel {
 
 			}
 		}
-		//sprites.clear();
-
-
-		//g.setColor(Color.red);
-		//g.fillRect(0, 0, getWidth(), getHeight());
-		repaint();
+		sprites.clear();
+		getGraphics().drawImage(backBuffer, 0, 0, null);
+		
 	}
 
 	public void setCX(int x){
