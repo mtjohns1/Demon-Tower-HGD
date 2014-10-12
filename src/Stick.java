@@ -17,63 +17,62 @@ public class Stick implements KeyListener {
 
 	
 	
-	private int _x, _y;
+	private int x0, x1, y0, y1;
+	
+	//preset for testing
+	private int[] keys ={87,83,65,68};
+	
+	//empty for testing
+	public Stick(){
+		
+	}
 
+	/**
+	 * 
+	 * @param argList Sets what keys are being listened for.
+	 */
+	public Stick(int[] argList){
+		keys = argList;
+	}
 	/**
 	 * 
 	 * @return horizontal position of the stick
 	 */
 	public int getX() {
-		return _x;
+		return x0 + x1;
 	}
 
-	/**
-	 * 
-	 * @param x new horizontal position of stick
-	 */
-	public void setX(int x) {
-		this._x = x;
-	}
+	
 
 	/**
 	 * 
 	 * @return vertical position of the stick
 	 */
 	public int getY() {
-		return _y;
-	}
-
-	/**
-	 * 
-	 * @param y new vertical position of the stick
-	 */
-	public void setY(int y) {
-		this._y = y;
+		return y0 + y1;
 	}
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		
-		//if w pressed
-		if (arg0.getExtendedKeyCode() == 87){
-			System.out.println("up");
-			this.setY(-100);
+		//if w or up pressed
+		System.out.println(arg0.getExtendedKeyCode());
+		if (arg0.getExtendedKeyCode() == keys[0]){
+			y1 = -100;
 		}
-		//if s pressed
-		else if (arg0.getExtendedKeyCode() ==83){
-			System.out.println("down");
-			this.setY(100);
+		//if s or down pressed
+		else if (arg0.getExtendedKeyCode() == keys[1]){
+			y0 = 100;
 		}
-		//if a pressed
-		if (arg0.getExtendedKeyCode() ==65){
-			System.out.println("left");
-			this.setX(-100);
+		
+		//if a or left pressed
+		if (arg0.getExtendedKeyCode() == keys[2]){
+			x1 = -100;
 		}
-		//if d pressed
-		else if (arg0.getExtendedKeyCode() == 68){
-			System.out.println("right");
-			this.setX(100);
+		//if d or right pressed
+		else if (arg0.getExtendedKeyCode() == keys[3]){
+			x0 = 100;
 			
 		}
 	}
@@ -81,25 +80,22 @@ public class Stick implements KeyListener {
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		//if w pressed
-		if (arg0.getExtendedKeyCode() == 87){
-			System.out.println("up");
-			this.setY(0);
+		
+		//if w or up pressed
+		if (arg0.getExtendedKeyCode() == keys[0]){
+			y1 =0;
 		}
-		//if s pressed
-		else if (arg0.getExtendedKeyCode() ==83){
-			System.out.println("down");
-			this.setY(0);
+		//if s or down pressed
+		else if (arg0.getExtendedKeyCode() ==keys[1]){
+			y0=0;
 		}
-		//if a pressed
-		if (arg0.getExtendedKeyCode() ==65){
-			System.out.println("left");
-			this.setX(0);
+		//if a or left pressed
+		if (arg0.getExtendedKeyCode() ==keys[2]){
+			x1=0;
 		}
-		//if d pressed
-		else if (arg0.getExtendedKeyCode() == 68){
-			System.out.println("right");
-			this.setX(0);
+		//if d or right pressed
+		else if (arg0.getExtendedKeyCode() == keys[3]){
+			x0 = 0;
 		}
 	}
 

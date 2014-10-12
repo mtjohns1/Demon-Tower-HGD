@@ -16,9 +16,15 @@ public class Control {
 	private Stick _move;
 	private Stick _shoot;
 	
+	private int[] movementList = {87,83,65,68};
+	private int[] shootList = {38,40,37,39};
+	
+	/**
+	 * initilizes keyboard using wasd and arrow keys
+	 */
 	public Control(){
-		_move = new Stick();
-		_shoot = new Stick();
+		_move = new Stick(movementList);
+		_shoot = new Stick(shootList);
 	}
 	
 	/**
