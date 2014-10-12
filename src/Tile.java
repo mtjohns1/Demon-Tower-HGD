@@ -2,7 +2,7 @@
  * 
  * A class for individual tiles
  * @author Jacob Charles
- * @author Brett Miller
+ * @author Bret Miller
  */
 
 import javax.swing.*;
