@@ -18,14 +18,14 @@ public class Screen {
 		final Game game = new Game();
 		final Control controls = new Control();
 		JFrame frame = new JFrame();
-		
+
 		//adds key listeners for movement and shooting
 		frame.addKeyListener(controls.getMove());
 		frame.addKeyListener(controls.getShoot());
-		
+
 		frame.add(game);
 		frame.setSize(600,480);
-		
+
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		while(true){
@@ -41,7 +41,7 @@ public class Screen {
 					e.printStackTrace();
 				}
 				game.sprites.clear();
-				
+
 			}
 			while(game.getCY() < 470){
 				game.setCY(game.getCY()+1);
@@ -55,7 +55,7 @@ public class Screen {
 					e.printStackTrace();
 				}
 				game.sprites.clear();
-				
+
 			}
 			while(game.getCX() > 10){
 				game.setCX(game.getCX()-1);
@@ -83,8 +83,9 @@ public class Screen {
 				}
 				game.sprites.clear();
 			}
+		}
 
-		
+
 	}
 
 
