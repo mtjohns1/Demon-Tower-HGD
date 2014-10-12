@@ -13,7 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.ImageObserver;
+import java.awt.image.*;
 import java.io.*;
 
 public class Game extends JPanel {
@@ -24,8 +24,10 @@ public class Game extends JPanel {
 	private int circley;
 	
 	private Image testImage;
+	private Image hero;
 	private ImageObserver observer;
-
+	
+	private Sprite testSprite;
 
 	//private JButton exit = new JButton("Exit Button");
 	
@@ -42,9 +44,9 @@ public class Game extends JPanel {
 		
 		//I'm getting this from stackoverflow, so if its not what
 		//we're using for image loading please tell me -Thomas
-		ClassLoader load = Thread.currentThread().getContextClassLoader();
+		//ClassLoader load = Thread.currentThread().getContextClassLoader();
 	
-		InputStream input = load.getResourceAsStream("generic_Evil_creature_small.jpg");
+		File input = new File("src/generic_Evil_creature_small.jpg");
 	
 		try {
 			testImage =  ImageIO.read(input);
@@ -53,7 +55,16 @@ public class Game extends JPanel {
 			e.printStackTrace();
 		}
 		
+		File Hero = new File("src/hero dude and sword.png");
 		
+		try {
+			hero =  ImageIO.read(Hero);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		 testSprite = new Sprite(100, 100, 36, 36, 0, 0, 1, testImage);
 	}
 	
 	
@@ -67,7 +78,18 @@ public class Game extends JPanel {
 		//g.drawOval( this.circlex, this.circley ,10,10);
 		
 		g.drawImage(testImage, this.circlex, this.circley, observer);
+		try {
+			testSprite.draw(g);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			if(testSprite == null){
+				System.out.println("testSprite is null");
+			}
+		}
 		
+		//g.setColor(Color.red);
+		//g.fillRect(0, 0, getWidth(), getHeight());
 		repaint();
 	}
 
