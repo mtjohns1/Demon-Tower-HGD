@@ -30,7 +30,7 @@ public class Tile {
 		_x = x;
 		_y = y;
 	}
-	
+
 	/**
 	 * @return y coordinate of the top edge
 	 */

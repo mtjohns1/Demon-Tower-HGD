@@ -243,6 +243,35 @@ public abstract class Mobile {
 		return _z;
 	}
 	
+	
+	/**
+	 * @param y: new y value of the top edge
+	 */
+	public void setTop(int y) {
+		_y = y+_h/2; 
+	}
+	
+	/**
+	 * @param y: new y value of the bottom edge
+	 */
+	public void setBottom(int y) {
+		_y = y-_h/2;
+	}
+	
+	/**
+	 * @param y: new x value of the left edge
+	 */
+	public void setLeft(int x) {
+		_x = x+_w/2;
+	}
+	
+	/**
+	 * @param y: new x value of the right edge
+	 */
+	public void setRight(int x) {
+		_x = x-_w/2;
+	}
+	
 	/**
 	 * @return y coordinate of the top edge after movement
 	 */
