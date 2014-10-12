@@ -59,5 +59,15 @@ public class Room {
 		return floor[y][x];
 	}
 	
+	public ArrayList<Tile> getRange(Tile start, Tile end) //Function to return a range of tiles
+	{
+		ArrayList<Tile> range = new ArrayList<Tile>(); //ArrayList that stores all tiles in the range
+		
+		
+		
+		
+		return range;
+	}
+	
 
 }
