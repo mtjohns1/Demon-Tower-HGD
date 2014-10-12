@@ -62,7 +62,7 @@ public class Room {
 	public ArrayList<Tile> getRange(int x_1, int y_1, int x_2, int y_2) //Function to return a range of tiles
 	{
 		ArrayList<Tile> range = new ArrayList<Tile>(); //ArrayList that stores all tiles in the range
-		
+
 		if(x_1 > x_2 || y_1 > y_2)
 		{
 			return range; //returns an empty set. Means the inputs are messed up
