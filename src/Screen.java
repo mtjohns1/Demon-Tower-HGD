@@ -33,55 +33,57 @@ public class Screen {
 				game.setCX(game.getCX()+1);
 				game.sprites.add(new Sprite(game.getCX(),game.getCY(),60, 75,0,0,2,game.getTestImage()));
 				game.sprites.add(new Sprite(100+(game.getCX()/2),100+(game.getCY()/2),36, 36,0,0,1,game.getHero()));
-				frame.repaint();
+				//frame.repaint();
 				try {
 					Thread.sleep((long)1000/60);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				game.sprites.clear();
-
+				//game.sprites.clear();
+				game.redraw();
 			}
 			while(game.getCY() < 470){
 				game.setCY(game.getCY()+1);
 				game.sprites.add(new Sprite(game.getCX(),game.getCY(),60, 75,0,0,2,game.getTestImage()));
 				game.sprites.add(new Sprite(100+(game.getCX()/2),100+(game.getCY()/2),36, 36,0,0,1,game.getHero()));
-				frame.repaint();
+				//frame.repaint();
 				try {
 					Thread.sleep((long)1000/60);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				game.sprites.clear();
-
+				//game.sprites.clear();
+				game.redraw();
 			}
 			while(game.getCX() > 10){
 				game.setCX(game.getCX()-1);
 				game.sprites.add(new Sprite(game.getCX(),game.getCY(),60, 75,0,0,2,game.getTestImage()));
 				game.sprites.add(new Sprite(100+(game.getCX()/2),100+(game.getCY()/2),36, 36,0,0,1,game.getHero()));
-				frame.repaint();
+				//frame.repaint();
 				try {
 					Thread.sleep((long)1000/60);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				game.sprites.clear();
+				//game.sprites.clear();
+				game.redraw();
 			}
 			while(game.getCY() > 10){
 				game.setCY(game.getCY()-1);
 				game.sprites.add(new Sprite(game.getCX(),game.getCY(),60, 75,0,0,2,game.getTestImage()));
 				game.sprites.add(new Sprite(100+(game.getCX()/2),100+(game.getCY()/2),36, 36,0,0,1,game.getHero()));
-				frame.repaint();
+				//frame.repaint();
 				try {
 					Thread.sleep((long)1000/60);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				game.sprites.clear();
+				//game.sprites.clear();
+				game.redraw();
 			}
 		}
 
