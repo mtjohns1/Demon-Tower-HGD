@@ -12,4 +12,8 @@ import java.io.*;
 
 public class Bullet extends Mobile {
 
+	public Bullet(Room home) {
+		super(home);
+	}
+
 }

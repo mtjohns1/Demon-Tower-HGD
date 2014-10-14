@@ -12,4 +12,8 @@ import java.io.*;
 
 public class Enemy extends Actor {
 
+	public Enemy(Room home) {
+		super(home);
+	}
+
 }

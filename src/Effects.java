@@ -12,4 +12,8 @@ import java.io.*;
 
 public class Effects extends Mobile {
 
+	public Effects(Room home) {
+		super(home);
+	}
+
 }

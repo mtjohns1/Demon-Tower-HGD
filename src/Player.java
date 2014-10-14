@@ -17,19 +17,14 @@ public class Player extends Actor {
 	private Control _c;
 
 	/**
-	 * Public no-argument constructor
-	 */
-	public Player() {
-		super();
-		_c = new Control();
-	}
-
-	/**
 	 * @param start: the room the player starts in
 	 */
 	public Player(Room start) {
 		super(start);
 		_c = new Control();
+		setW(36);
+		setH(36);
+		setD(32);
 	}
 
 	/**

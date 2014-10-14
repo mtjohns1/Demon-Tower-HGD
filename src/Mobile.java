@@ -28,14 +28,10 @@ public abstract class Mobile {
 	public Mobile(Room home) {
 		_dead = false;
 		_home = home;
-	}
-	
-	/**
-	 * Public no-argument constructor, for easy use
-	 */
-	public Mobile() {
-		_dead = false;
-		_home = null;
+		
+		_vx = 0;
+		_vy = 0;
+		_vz = 0;
 	}
 
 	/**
