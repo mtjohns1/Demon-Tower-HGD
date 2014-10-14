@@ -100,7 +100,7 @@ public class Player extends Actor {
 	 */
 	public void  draw(List<Sprite> l)
 	{
-		Sprite s = new Sprite(getLeft(), getTop(), getW(), getH(), 0, 0, 0, null);
+		Sprite s = new Sprite(getLeft(), getTop(), getW(), getH(), 0, 0, 0, 2);
 		l.add(s);
 	}
 }

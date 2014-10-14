@@ -37,6 +37,11 @@ public class Room {
 				{
 					floor[i][j].setType("w");
 				}
+				else
+				{
+					floor[i][j].setType("");
+				}
+				}
 			}
 		}
 
@@ -127,14 +132,17 @@ public class Room {
 	public void  draw(List<Sprite> l)
 	{
 		//loop through the ground tiles
-		for (int x = 0; x < 20; x++) {
-			for (int y = 0; y < 15; y++) {
+		for (int x = 0; x < 20; x++)
+		{
+			for (int y = 0; y < 15; y++)
+			{
 				getTile(x, y).draw(l);
 			}
 		}
 		
 		//loop through the mobiles
-		for (int i = 0; i < list.size(); i++) {
+		for (int i = 0; i < list.size(); i++)
+		{
 			list.get(i).draw(l);
 		}
 	}

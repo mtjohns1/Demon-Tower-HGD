@@ -87,7 +87,8 @@ public class Tile {
 	 */
 	public void  draw(List<Sprite> l)
 	{
-		Sprite s = new Sprite(getLeft(), getTop(), 32, 32, 0, 0, 0, null);
+		Sprite s = new Sprite(getLeft(), getTop(), 32, 32, 0, 0, 0, 0);
+		if (getType().contains("w")) s = new Sprite(getLeft(), getTop(), 32, 32, 0, 0, 0, 1);
 		l.add(s);
 	}
 	
