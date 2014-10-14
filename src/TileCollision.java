@@ -25,25 +25,25 @@ public class TileCollision {
 		_t = t;
 
 		//x axis collisions
-		if ( (m.getNextTop() > t.getBottom()) && (m.getNextBottom() < t.getTop()) ) { //y aligned
+		if ( (m.getNextTop() < t.getBottom()) && (m.getNextBottom() > t.getTop()) ) { //y aligned
 			//a moving left
-			if (m.getLeft() <= t.getRight() && m.getNextLeft() > t.getRight()) {
+			if (m.getLeft() >= t.getRight() && m.getNextLeft() < t.getRight()) {
 				_xAxis = -1;
 			}
 			//a moving right
-			if (m.getRight() >= t.getLeft() && m.getNextRight() < t.getLeft()) {
+			if (m.getRight() <= t.getLeft() && m.getNextRight() > t.getLeft()) {
 				_xAxis = 1;
 			}
 		}
 
 		//y axis collisions
-		if ( (m.getNextLeft() > t.getRight()) && (m.getNextRight() < t.getLeft()) ) {//x aligned
+		if ( (m.getNextLeft() < t.getRight()) && (m.getNextRight() > t.getLeft()) ) {//x aligned
 			//a moving up
-			if (m.getTop() <= t.getBottom() && m.getNextTop() > t.getBottom()) {
+			if (m.getTop() >= t.getBottom() && m.getNextTop() < t.getBottom()) {
 				_yAxis = -1;
 			}
 			//a moving down
-			if (m.getBottom() >= t.getTop() && m.getNextBottom() < t.getTop()) {
+			if (m.getBottom() <= t.getTop() && m.getNextBottom() > t.getTop()) {
 				_yAxis = 1;
 			}
 		}

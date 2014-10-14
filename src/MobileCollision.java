@@ -26,27 +26,27 @@ public class MobileCollision {
 		_b = b;
 
 		//x axis collisions
-		if ( (a.getNextTop() > b.getNextBottom()) && (a.getNextBottom() < b.getNextTop()) //y aligned
-				&& (a.getNextFront() > b.getNextBack()) && (a.getNextBack() < b.getNextFront()) ) { //z aligned
+		if ( (a.getNextTop() < b.getNextBottom()) && (a.getNextBottom() > b.getNextTop()) //y aligned
+				&& (a.getNextFront() < b.getNextBack()) && (a.getNextBack() > b.getNextFront()) ) { //z aligned
 			//a moving left or b moving right
-			if (a.getLeft() <= b.getRight() && a.getNextLeft() > b.getNextRight()) {
+			if (a.getLeft() >= b.getRight() && a.getNextLeft() < b.getNextRight()) {
 				_xAxis = -1;
 			}
 			//a moving right or b moving left
-			if (a.getRight() >= b.getLeft() && a.getNextRight() < b.getNextLeft()) {
+			if (a.getRight() <= b.getLeft() && a.getNextRight() > b.getNextLeft()) {
 				_xAxis = 1;
 			}
 		}
 
 		//y axis collisions
-		if ( (a.getNextLeft() > b.getNextRight()) && (a.getNextRight() < b.getNextLeft()) //x aligned
-				&& (a.getNextFront() > b.getNextBack()) && (a.getNextBack() < b.getNextFront()) ) { //z aligned
+		if ( (a.getNextLeft() < b.getNextRight()) && (a.getNextRight() > b.getNextLeft()) //x aligned
+				&& (a.getNextFront() < b.getNextBack()) && (a.getNextBack() > b.getNextFront()) ) { //z aligned
 			//a moving up or b moving down
-			if (a.getTop() <= b.getBottom() && a.getNextTop() > b.getNextBottom()) {
+			if (a.getTop() >= b.getBottom() && a.getNextTop() < b.getNextBottom()) {
 				_yAxis = -1;
 			}
 			//a moving down or b moving up
-			if (a.getBottom() >= b.getTop() && a.getNextBottom() < b.getNextTop()) {
+			if (a.getBottom() <= b.getTop() && a.getNextBottom() > b.getNextTop()) {
 				_yAxis = 1;
 			}
 		}

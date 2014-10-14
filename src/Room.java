@@ -21,35 +21,35 @@ public class Room {
 	Tile floor[][] = new Tile[15][20];
 	ArrayList<Mobile> list = new ArrayList<Mobile>();
 
-	
+
 	/**
 	 * Creates a new blank room with walls surrounding it.
 	 */
 	public Room() //creates a blank room
 	{
-		for(int i = 0; i < 15; i++)
+		for(int x = 0; x < 20; x++)
 		{
-			for(int j = 0; j < 20; j++)
+			for(int y = 0; y < 15; y++)
 			{
-				floor[i][j] = new Tile(this, i, j);
+				floor[y][x] = new Tile(this, x, y);
 
-				if(i == 0 || j == 0 || i == 14 || j == 19)
+				if(x == 0 || y == 0 || y == 14 || x == 19)
 				{
-					floor[i][j].setType("w");
+					floor[y][x].setType("w");
 				}
 				else
 				{
-					floor[i][j].setType("");
+					floor[y][x].setType("");
 				}
 			}
 		}
 
 	}
 
-/**
- * 
- * @param e: A mobile object to be added to an ArrayList
- */
+	/**
+	 * 
+	 * @param e: A mobile object to be added to an ArrayList
+	 */
 	public void addMobile(Mobile e)//add a mobile actor to a room
 	{
 		this.list.add(e);
@@ -93,42 +93,60 @@ public class Room {
 	{
 		return floor[y][x];
 	}
-	
-/**
- * 
- * @param x_1 = the x coordinate for the first tile.
- * @param y_1 = the y coordinate for the first tile.
- * @param x_2 = the x coordinate for the second tile.
- * @param y_2 = the y coordinate for the second tile.
- * @return an ArrayList of Tile(s) starting at the coordinates of the first tile and ending, and including, 
- *  the coordinates for the second tile.
- */
+
+	/**
+	 * 
+	 * @param x_1 = the x coordinate for the first tile.
+	 * @param y_1 = the y coordinate for the first tile.
+	 * @param x_2 = the x coordinate for the second tile.
+	 * @param y_2 = the y coordinate for the second tile.
+	 * @return an ArrayList of Tile(s) starting at the coordinates of the first tile and ending, and including, 
+	 *  the coordinates for the second tile.
+	 */
 	public ArrayList<Tile> getRange(int x_1, int y_1, int x_2, int y_2) //Function to return a range of tiles
 	{
 		ArrayList<Tile> range = new ArrayList<Tile>(); //ArrayList that stores all tiles in the range
 
+		if (x_1 < 0) x_1 = 0;
+		if (x_2 > 19) x_2 = 19;
+		if (y_1 < 0) y_1 = 0;
+		if (y_2 > 14) y_2 = 14;
+
 		if(x_1 > x_2 || y_1 > y_2)
 		{
+			//System.out.println("No tiles in range!");
 			return range; //returns an empty set. Means the inputs are messed up
 		}
 
-		for(int i = x_1; i <= x_2; i += 1)
+		for(int x = x_1; x <= x_2; x++)
 		{
-			for(int j = y_1; j <= y_2; j += 1)
+			for(int y = y_1; y <= y_2; y++)
 			{
-				range.add(this.floor[j][i]);
+				range.add(floor[y][x]);
 			}
 		}
 
+		//System.out.println("Number of tiles in range: " + range.size());
 		return range;
 	}
-	
+
+	/**
+	 * Update all room contents
+	 */
+	public void update() {
+		//loop through the mobiles
+		for (int i = 0; i < list.size(); i++)
+		{
+			list.get(i).update();
+		}
+	}
+
 	/**
 	 * Generate the room's content sprites for this frame
 	 * 
 	 * @param l: the list of sprites to add to
 	 */
-	public void  draw(List<Sprite> l)
+	public void draw(List<Sprite> l)
 	{
 		//loop through the ground tiles
 		for (int x = 0; x < 20; x++)
@@ -138,7 +156,7 @@ public class Room {
 				getTile(x, y).draw(l);
 			}
 		}
-		
+
 		//loop through the mobiles
 		for (int i = 0; i < list.size(); i++)
 		{

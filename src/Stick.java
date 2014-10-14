@@ -90,7 +90,7 @@ public class Stick implements KeyListener, MouseInputListener {
 		// TODO Auto-generated method stub
 		
 		//if w or up pressed
-		System.out.println(arg0.getExtendedKeyCode());
+		//System.out.println(arg0.getExtendedKeyCode());
 		if (arg0.getExtendedKeyCode() == keys[0]){
 			y1 = -100;
 		}
@@ -106,7 +106,6 @@ public class Stick implements KeyListener, MouseInputListener {
 		//if d or right pressed
 		else if (arg0.getExtendedKeyCode() == keys[3]){
 			x0 = 100;
-			
 		}
 	}
 
@@ -116,22 +115,22 @@ public class Stick implements KeyListener, MouseInputListener {
 		
 		//if w or up pressed
 		if (arg0.getExtendedKeyCode() == keys[0]){
-			y1 =0;
+			y1 = 0;
 		}
 		//if s or down pressed
 		else if (arg0.getExtendedKeyCode() ==keys[1]){
-			y0=0;
+			y0 = 0;
 		}
 		//if a or left pressed
 		if (arg0.getExtendedKeyCode() ==keys[2]){
-			x1=0;
+			x1 = 0;
 		}
 		//if d or right pressed
 		else if (arg0.getExtendedKeyCode() == keys[3]){
 			x0 = 0;
 		}
 	}
-
+	
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub

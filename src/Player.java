@@ -19,9 +19,9 @@ public class Player extends Actor {
 	/**
 	 * @param start: the room the player starts in
 	 */
-	public Player(Room start) {
+	public Player(Room start, Control c) {
 		super(start);
-		_c = new Control();
+		_c = c;
 		setW(36);
 		setH(36);
 		setD(32);

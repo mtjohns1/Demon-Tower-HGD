@@ -74,7 +74,7 @@ public class Game extends JPanel {
 	}
 
 
-	
+
 	public ArrayList<Sprite> getSprites() {
 		return sprites;
 	}
@@ -89,9 +89,9 @@ public class Game extends JPanel {
 
 	public void redraw(){
 		Image backBuffer = createImage(640,480);
-		
+
 		Graphics g = backBuffer.getGraphics();
-		
+
 		g.setColor(Color.black);
 		g.fillRect(0, 0, getWidth(), getHeight());
 
@@ -104,7 +104,7 @@ public class Game extends JPanel {
 		}
 		sprites.clear();
 		getGraphics().drawImage(backBuffer, 0, 0, null);
-		
+
 	}
 
 	public void setCX(int x){

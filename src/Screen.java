@@ -29,17 +29,31 @@ public class Screen {
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		while(true){
-			while(game.getCX() < 590){
+
+		Room r = new Room();
+		Player p = new Player(r, controls);
+		p.setTop(100);
+		p.setLeft(100);
+		Timer t = new Timer(18);
+		Sprite.load();
+
+		while(true) {
+			t.startLoop();
+			r.update();
+			r.draw(game.getSprites());
+			game.redraw();
+			t.endLoop();
+
+			/*while(game.getCX() < 590){
 				game.setCX(game.getCX()+1);
 
 				ArrayList<Sprite> adder = game.getSprites();
 				adder.add(new Sprite(game.getCX(),game.getCY(),60, 75,0,0,2,game.getTestImage()));
 				adder.add(new Sprite(100+(game.getCX()/2),100+(game.getCY()/2),36, 36,0,0,1,game.getHero()));
 				game.setSprites(adder);
-				
-				
-				
+
+
+
 				//frame.repaint();
 				try {
 					Thread.sleep((long)1000/60);
@@ -54,12 +68,12 @@ public class Screen {
 				game.setCY(game.getCY()+1);
 				//game.sprites.add(new Sprite(game.getCX(),game.getCY(),60, 75,0,0,2,game.getTestImage()));
 				//game.sprites.add(new Sprite(100+(game.getCX()/2),100+(game.getCY()/2),36, 36,0,0,1,game.getHero()));
-				
+
 				ArrayList<Sprite> adder = game.getSprites();
 				adder.add(new Sprite(game.getCX(),game.getCY(),60, 75,0,0,2,game.getTestImage()));
 				adder.add(new Sprite(100+(game.getCX()/2),100+(game.getCY()/2),36, 36,0,0,1,game.getHero()));
 				game.setSprites(adder);
-				
+
 				//frame.repaint();
 				try {
 					Thread.sleep((long)1000/60);
@@ -103,7 +117,7 @@ public class Screen {
 				}
 				//game.sprites.clear();
 				game.redraw();
-			}
+			}*/
 		}
 
 

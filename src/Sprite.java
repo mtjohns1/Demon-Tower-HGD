@@ -69,7 +69,7 @@ public class Sprite {
 	}
 	
 	public void draw(Graphics g){
-		g.drawImage(img, X, Y, X+Width-1, Y+Height-1, SpriteX, SpriteY, SpriteX+Width-1, SpriteY+Height-1, observer);
+		g.drawImage(img, X, Y, X+Width, Y+Height, SpriteX, SpriteY, SpriteX+Width, SpriteY+Height, observer);
 		
 	}
 	

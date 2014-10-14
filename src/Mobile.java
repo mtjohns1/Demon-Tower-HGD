@@ -28,10 +28,14 @@ public abstract class Mobile {
 	public Mobile(Room home) {
 		_dead = false;
 		_home = home;
-		
+
 		_vx = 0;
 		_vy = 0;
 		_vz = 0;
+		
+		if (_home != null) {
+			_home.addMobile(this);
+		}
 	}
 
 	/**
