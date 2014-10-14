@@ -10,9 +10,11 @@
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.imageio.ImageIO;
+
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Room {
 
@@ -115,6 +117,26 @@ public class Room {
 		}
 
 		return range;
+	}
+	
+	/**
+	 * Generate the room's content sprites for this frame
+	 * 
+	 * @param l: the list of sprites to add to
+	 */
+	public void  draw(List<Sprite> l)
+	{
+		//loop through the ground tiles
+		for (int x = 0; x < 20; x++) {
+			for (int y = 0; y < 15; y++) {
+				getTile(x, y).draw(l);
+			}
+		}
+		
+		//loop through the mobiles
+		for (int i = 0; i < list.size(); i++) {
+			list.get(i).draw(l);
+		}
 	}
 
 

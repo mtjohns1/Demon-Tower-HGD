@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 
 import java.awt.*;
 import java.io.*;
+import java.util.List;
 
 public class Tile {
 
@@ -77,6 +78,17 @@ public class Tile {
 	public void setType(String s)
 	{
 		this._tile_type = s;
+	}
+	
+	/**
+	 * Generate the tile's sprite for this frame
+	 * 
+	 * @param l: the list of sprites to add to
+	 */
+	public void  draw(List<Sprite> l)
+	{
+		Sprite s = new Sprite(getLeft(), getTop(), 32, 32, 0, 0, 0, null);
+		l.add(s);
 	}
 	
 }

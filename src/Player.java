@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 
 import java.awt.*;
 import java.io.*;
+import java.util.List;
 
 public class Player extends Actor {
 
@@ -98,13 +99,13 @@ public class Player extends Actor {
 	}
 
 	/**
-	 * Draw the player to the screen
+	 * Generate the player's sprite for this frame
 	 * 
-	 * @param g: graphics object to use for drawing
+	 * @param l: the list of sprites to add to
 	 */
-	public void draw(Graphics g)
+	public void  draw(List<Sprite> l)
 	{
-		g.setColor(Color.GREEN); //green for the player!
-		g.drawOval(getLeft(), getTop(), getW(), getH()); //draw oval in hitbox
+		Sprite s = new Sprite(getLeft(), getTop(), getW(), getH(), 0, 0, 0, null);
+		l.add(s);
 	}
 }

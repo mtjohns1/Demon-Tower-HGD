@@ -10,6 +10,7 @@ import javax.swing.event.*;
 import javax.imageio.ImageIO;
 
 import java.awt.*;
+import java.util.List;
 import java.io.*;
 import java.util.*;
 
@@ -67,7 +68,7 @@ public abstract class Mobile {
 	 * 
 	 * @param g: graphics object to use for drawing
 	 */
-	public void draw(Graphics g)
+	public void draw(List<Sprite> l)
 	{
 		//TODO: Make a generic drawing function here
 	}
