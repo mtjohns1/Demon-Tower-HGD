@@ -31,7 +31,7 @@ public class Game extends JPanel {
 
 	private Sprite testSprite;
 
-	public ArrayList<Sprite> sprites = new ArrayList<Sprite>();
+	private ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 
 	//private JButton exit = new JButton("Exit Button");
 
@@ -40,7 +40,7 @@ public class Game extends JPanel {
 
 	public Game(){
 		//box.add(exit);
-		final int WIDTH = 600;
+		final int WIDTH = 640;
 		final int HEIGHT = 480; 
 
 		this.circlex = 10;
@@ -75,6 +75,18 @@ public class Game extends JPanel {
 
 
 	
+	public ArrayList<Sprite> getSprites() {
+		return sprites;
+	}
+
+
+
+	public void setSprites(ArrayList<Sprite> sprites) {
+		this.sprites = sprites;
+	}
+
+
+
 	public void redraw(){
 		Image backBuffer = createImage(640,480);
 		
