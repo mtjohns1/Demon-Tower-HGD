@@ -22,8 +22,8 @@ public class Player extends Actor {
 	public Player(Room start, Control c) {
 		super(start);
 		_c = c;
-		setW(36);
-		setH(36);
+		setW(32);
+		setH(32);
 		setD(32);
 	}
 

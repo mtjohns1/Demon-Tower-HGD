@@ -44,7 +44,6 @@ public class RoomCollision {
 		for (Tile q : _r.getRange(l, t, r, b)) {
 			_c.add(new TileCollision(_m, q));
 		}
-		//System.out.println("Number of tiles hit: " + _c.size());
 	}
 
 	/**

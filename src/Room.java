@@ -33,7 +33,7 @@ public class Room {
 			{
 				floor[y][x] = new Tile(this, x, y);
 
-				if(x == 0 || y == 0 || y == 14 || x == 19)
+				if(x == 0 || y == 0 || y == 14 || x == 19 || Math.random()*10 < 1)
 				{
 					floor[y][x].setType("w");
 				}
@@ -114,7 +114,7 @@ public class Room {
 
 		if(x_1 > x_2 || y_1 > y_2)
 		{
-			//System.out.println("No tiles in range!");
+			//TODO: Remove!
 			return range; //returns an empty set. Means the inputs are messed up
 		}
 
@@ -125,8 +125,6 @@ public class Room {
 				range.add(floor[y][x]);
 			}
 		}
-
-		//System.out.println("Number of tiles in range: " + range.size());
 		return range;
 	}
 

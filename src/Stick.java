@@ -90,7 +90,6 @@ public class Stick implements KeyListener, MouseInputListener {
 		// TODO Auto-generated method stub
 		
 		//if w or up pressed
-		//System.out.println(arg0.getExtendedKeyCode());
 		if (arg0.getExtendedKeyCode() == keys[0]){
 			y1 = -100;
 		}
