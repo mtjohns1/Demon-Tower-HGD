@@ -41,7 +41,6 @@ public class Room {
 				{
 					floor[i][j].setType("");
 				}
-				}
 			}
 		}
 
