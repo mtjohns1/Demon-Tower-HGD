@@ -13,7 +13,7 @@ import javax.imageio.ImageIO;
 
 
 public class Sprite {
-	private int X,Y,Width,Height,SpriteX,SpriteY,Layer, index;
+	private int X,Y,Width,Height,SpriteX,SpriteY,Layer; 
 	
 	private static Image picture[];
 
@@ -25,7 +25,7 @@ public class Sprite {
 		X = x; Y = y; Width = width; Height = height; SpriteX = spriteX; SpriteY = spriteY; Layer = layer; img = image;
 	}
 	public Sprite(int x,int y,int width,int height,int spriteX, int spriteY, int layer, int Index){
-		X = x; Y = y; Width = width; Height = height; SpriteX = spriteX; SpriteY = spriteY; Layer = layer; index = Index;
+		X = x; Y = y; Width = width; Height = height; SpriteX = spriteX; SpriteY = spriteY; Layer = layer;img = picture[Index];
 	}
 	
 	
