@@ -40,6 +40,15 @@ public class Control {
 	}
 	
 	/**
+	 * Initialize the control listeners
+	 * 
+	 * @param frame the frame to listen through
+	 */
+	public void init(JFrame frame) {
+		frame.addKeyListener(wsad);
+		frame.addKeyListener(arrow);
+	}
+	/**
 	 * starter for keyboard
 	 * 
 	 * @param Stick keyboard

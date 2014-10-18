@@ -21,8 +21,7 @@ public class Screen {
 		JFrame frame = new JFrame();
 
 		//adds key listeners for movement and shooting
-		frame.addKeyListener(controls.getMove());
-		frame.addKeyListener(controls.getShoot());
+		controls.init(frame);
 
 		frame.add(game);
 		frame.setSize(640,480);
