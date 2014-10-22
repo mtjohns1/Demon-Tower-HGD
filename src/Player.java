@@ -54,40 +54,8 @@ public class Player extends Actor {
 		//TODO: fire bullets
 		//TODO: change weapons
 
-		//moving left
-		if (getNextLeft()/32 < getLeft()/32) {
-			for (Tile t : getHome().getRange(getNextLeft()/32, getTop()/32, getNextLeft()/32, getBottom()/32)) {
-				tileCollision(t, "left");
-			}
-		}
-		//moving right
-		if (getNextRight()/32 > getRight()/32) {
-			for (Tile t : getHome().getRange(getNextRight()/32, getTop()/32, getNextRight()/32, getBottom()/32)) {
-				tileCollision(t, "right");
-			}
-		}
-		
-		//now update x position
-		xMove();
-		
-		//moving up
-		if (getNextTop()/32 < getTop()/32) {
-			for (Tile t : getHome().getRange(getLeft()/32, getNextTop()/32, getRight()/32, getNextTop()/32)) {
-				tileCollision(t, "up");
-			}
-		}
-		//moving down
-		if (getNextBottom()/32 > getBottom()/32) {
-			for (Tile t : getHome().getRange(getLeft()/32, getNextBottom()/32, getRight()/32, getNextBottom()/32)) {
-				tileCollision(t, "down");
-			}
-		}
-		
-		//now update y position
-		yMove();
-		
-		//no tiles in z, just update it
-		zMove();
+		//update position, checking collisions along the way
+		move();
 
 		//TODO: check for death
 		//TODO: check bounding / room change

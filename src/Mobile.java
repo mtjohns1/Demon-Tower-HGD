@@ -21,7 +21,7 @@ public abstract class Mobile {
 	private int _w, _h, _d; //dimensions
 	private Room _home; //room the object is in
 	private boolean _dead; //dead state
-	
+
 	/**
 	 * @param home: the room the object is inside
 	 */
@@ -32,7 +32,7 @@ public abstract class Mobile {
 		_vx = 0;
 		_vy = 0;
 		_vz = 0;
-		
+
 		if (_home != null) {
 			_home.addMobile(this);
 		}
@@ -48,40 +48,88 @@ public abstract class Mobile {
 	}
 
 	/**
-	 * Apply the mobile object's velocity to its position
+	 * Update position, ignoring tile collisions
 	 */
-	public void move() {
+	public void flyMove() {
 		_x += _vx;
 		_y += _vy;
 		_z += _vz;
 	}
-	
+
+	/**
+	 * Update position, accounting for tile collisions
+	 */
+	public void move() {
+		//moving left
+		if (getNextLeft()/32 < getLeft()/32) {
+			for (Tile t : getHome().getRange(getNextLeft()/32, getTop()/32, getNextLeft()/32, getBottom()/32)) {
+				tileCollision(t, "left");
+			}
+		}
+		//moving right
+		else if (getNextRight()/32 > getRight()/32) {
+			for (Tile t : getHome().getRange(getNextRight()/32, getTop()/32, getNextRight()/32, getBottom()/32)) {
+				tileCollision(t, "right");
+			}
+		}
+
+		//now update x position
+		xMove();
+
+		//moving up
+		if (getNextTop()/32 < getTop()/32) {
+			for (Tile t : getHome().getRange(getLeft()/32, getNextTop()/32, getRight()/32, getNextTop()/32)) {
+				tileCollision(t, "up");
+			}
+		}
+		//moving down
+		else if (getNextBottom()/32 > getBottom()/32) {
+			for (Tile t : getHome().getRange(getLeft()/32, getNextBottom()/32, getRight()/32, getNextBottom()/32)) {
+				tileCollision(t, "down");
+			}
+		}
+
+		//now update y and z position
+		yMove();
+		zMove();
+	}
+
 	/**
 	 * Apply just the mobile object's x velocity to its position
 	 */
 	public void xMove() {
 		_x += _vx;
 	}
-	
+
 	/**
 	 * Apply just the mobile object's y velocity to its position
 	 */
 	public void yMove() {
 		_y += _vy;
 	}
-	
+
 	/**
 	 * Apply just the mobile object's z velocity to its position
 	 */
 	public void zMove() {
 		_z += _vz;
 	}
-	
+
 	/**
 	 * Tell the object to take its actions this frame
 	 */
 	public void update() {
-		//TODO: Probably make this an abstract!
+		//TODO: Probably make this abstract!
+	}
+
+	/**
+	 * Manage collisions with a tile
+	 * 
+	 * @param t: the Tile object collided with
+	 * @param dir: the direction of the collision
+	 */
+	public void tileCollision(Tile t, String dir) {
+		//TODO: Probably make this abstract!
 	}
 	
 	/**
@@ -93,21 +141,21 @@ public abstract class Mobile {
 	{
 		//TODO: Make a generic drawing function here
 	}
-	
+
 	/**
 	 * @return true if the object is dead
 	 */
 	public boolean getDead() {
 		return _dead;
 	}
-	
+
 	/**
 	 * Kills the object, deactivating most functions
 	 */
 	public void setDead() {
 		_dead = true;
 	}
-	
+
 	/**
 	 * @return the room the object lives in
 	 */
@@ -120,7 +168,7 @@ public abstract class Mobile {
 	public void setHome(Room home) {
 		this._home = home;
 	}
-	
+
 	/**
 	 * @return the x coordinate
 	 */
@@ -229,7 +277,7 @@ public abstract class Mobile {
 	public void setD(int d) {
 		this._d = d;
 	}
-	
+
 	/**
 	 * @return y coordinate of the top edge
 	 */
@@ -266,36 +314,36 @@ public abstract class Mobile {
 	public int getBack() {
 		return _z;
 	}
-	
-	
+
+
 	/**
 	 * @param y: new y value of the top edge
 	 */
 	public void setTop(int y) {
 		_y = y+_h/2; 
 	}
-	
+
 	/**
 	 * @param y: new y value of the bottom edge
 	 */
 	public void setBottom(int y) {
 		_y = y-_h/2;
 	}
-	
+
 	/**
 	 * @param y: new x value of the left edge
 	 */
 	public void setLeft(int x) {
 		_x = x+_w/2;
 	}
-	
+
 	/**
 	 * @param y: new x value of the right edge
 	 */
 	public void setRight(int x) {
 		_x = x-_w/2;
 	}
-	
+
 	/**
 	 * @return y coordinate of the top edge after movement
 	 */
