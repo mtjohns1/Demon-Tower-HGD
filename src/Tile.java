@@ -42,7 +42,7 @@ public class Tile {
 	 * @return y coordinate of the bottom edge
 	 */
 	public int getBottom() {
-		return _y*32+32;
+		return _y*32+31;
 	}
 	/**
 	 * @return x coordinate of the left edge
@@ -54,7 +54,7 @@ public class Tile {
 	 * @return x coordinate of the right edge
 	 */
 	public int getRight() {
-		return _x*32+32;
+		return _x*32+31;
 	}
 	
 	/**

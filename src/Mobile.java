@@ -57,6 +57,27 @@ public abstract class Mobile {
 	}
 	
 	/**
+	 * Apply just the mobile object's x velocity to its position
+	 */
+	public void xMove() {
+		_x += _vx;
+	}
+	
+	/**
+	 * Apply just the mobile object's y velocity to its position
+	 */
+	public void yMove() {
+		_y += _vy;
+	}
+	
+	/**
+	 * Apply just the mobile object's z velocity to its position
+	 */
+	public void zMove() {
+		_z += _vz;
+	}
+	
+	/**
 	 * Tell the object to take its actions this frame
 	 */
 	public void update() {

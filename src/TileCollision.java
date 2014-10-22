@@ -11,6 +11,8 @@ public class TileCollision {
 	private int _xAxis;
 	private int _yAxis;
 
+	private boolean _x, _y;
+	
 	private Mobile _m;
 	private Tile _t;
 
@@ -23,27 +25,66 @@ public class TileCollision {
 	public TileCollision (Mobile m, Tile t) {
 		_m = m;
 		_t = t;
+		_x = true;
+		_y = true;
+		_updateX();
+		_updateY();
+	}
 
+	/**
+	 * Generate a collision record between a Mobile object and the room along fixed axis
+	 * 
+	 * @param m the object recording collisions
+	 * @param r the room being collided with
+	 * @param x false ignores the x axis
+	 * @param y false ignores the y axis
+	 */
+	public TileCollision (Mobile m, Tile t, boolean x, boolean y) {
+		_m = m;
+		_t = t;
+		_x = x;
+		_y = y;
+		update();
+	}
+
+	/**
+	 * Update the collisions for the current positions
+	 */
+	public void update()
+	{
+		if (_x) _updateX();
+		if (_y) _updateY();
+	}
+	
+	/**
+	 * Update collisions horizontal between the two objects
+	 */
+	private void _updateX() {
 		//x axis collisions
-		if ( (m.getNextTop() < t.getBottom()) && (m.getNextBottom() > t.getTop()) ) { //y aligned
+		if ( (_m.getTop() < _t.getBottom()) && (_m.getBottom() > _t.getTop()) ) { //y aligned
 			//a moving left
-			if (m.getLeft() >= t.getRight() && m.getNextLeft() < t.getRight()) {
+			if (_m.getLeft() >= _t.getRight() && _m.getNextLeft() < _t.getRight()) {
 				_xAxis = -1;
 			}
 			//a moving right
-			if (m.getRight() <= t.getLeft() && m.getNextRight() > t.getLeft()) {
+			if (_m.getRight() <= _t.getLeft() && _m.getNextRight() > _t.getLeft()) {
 				_xAxis = 1;
 			}
 		}
-
+	}
+	
+	/**
+	 * Update collisions vertical between the two objects
+	 */
+	private void _updateY() {
 		//y axis collisions
-		if ( (m.getNextLeft() < t.getRight()) && (m.getNextRight() > t.getLeft()) ) {//x aligned
+		if ( (_m.getLeft() < _t.getRight()) && (_m.getRight() > _t.getLeft()) ) {//x aligned
 			//a moving up
-			if (m.getTop() >= t.getBottom() && m.getNextTop() < t.getBottom()) {
+			if (_m.getTop() >= _t.getBottom() && _m.getNextTop() < _t.getBottom()) {
 				_yAxis = -1;
 			}
 			//a moving down
-			if (m.getBottom() <= t.getTop() && m.getNextBottom() > t.getTop()) {
+			if (_m.getBottom() <= _t.getTop() && _m.getNextBottom() > _t.getTop()) {
 				_yAxis = 1;
 			}
 		}
@@ -55,7 +96,7 @@ public class TileCollision {
 	public boolean getCollision() {
 		return (_xAxis != 0)||(_yAxis != 0);
 	}
-	
+
 	/**
 	 * @return the object of the collision
 	 */

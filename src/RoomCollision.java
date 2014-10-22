@@ -36,13 +36,37 @@ public class RoomCollision {
 		_r = m.getHome(); //calculate the room from the object's home
 		_c = new ArrayList<TileCollision>(); //array to store the impending collisions
 
-		int l = _min(_m.getLeft(), _m.getNextLeft())/32;
-		int t = _min(_m.getTop(), _m.getNextTop())/32;
-		int r = _max(_m.getRight(), _m.getNextRight())/32;
-		int b = _max(_m.getBottom(), _m.getNextBottom())/32;
+		//set bounding box
+		int l = _m.getLeft()/32;
+		int t = _m.getTop()/32;
+		int r = _m.getRight()/32;
+		int b = _m.getBottom()/32;
+		
+		//"frontier" column and row
+		int nx = _m.getX()/32, ny = _m.getY()/32;
 
-		for (Tile q : _r.getRange(l, t, r, b)) {
-			_c.add(new TileCollision(_m, q));
+		//determine "frontier" cells
+		if (_m.getVx() > 0) {
+			nx = r+1;
+		}
+		else if (_m.getVx() < 0) {
+			nx = l-1;
+		}
+		if (_m.getVy() > 0) {
+			ny = b+1;
+		}
+		else if (_m.getVy() < 0) {
+			ny = t-1;
+		}
+
+		//find new horizontal cells
+		for (Tile q : _r.getRange(nx-1, t-1, nx+1, b+1)) {
+			_c.add(new TileCollision(_m, q, true, false));
+		}
+
+		//find new vertical cells
+		for (Tile q : _r.getRange(l-1, ny-1, r+1, ny+1)) {
+			_c.add(new TileCollision(_m, q, false, true));
 		}
 	}
 
