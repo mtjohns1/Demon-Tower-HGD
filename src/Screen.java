@@ -22,12 +22,19 @@ public class Screen {
 
 		//adds key listeners for movement and shooting
 		controls.init(frame);
-
+		
+		
+		//game.setPreferredSize(new Dimension(640, 480));
 		frame.add(game);
+		
+		//frame.pack();
 		frame.setSize(640,480);
-
+		frame.setSize(640+frame.getInsets().left+frame.getInsets().right,480+frame.getInsets().top+frame.getInsets().bottom);
+		System.out.println();
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+		frame.setResizable(false);
 
 		Room r = new Room();
 		Player p = new Player(r, controls);
