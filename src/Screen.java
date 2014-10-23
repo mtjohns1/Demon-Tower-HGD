@@ -26,11 +26,13 @@ public class Screen {
 		
 		//game.setPreferredSize(new Dimension(640, 480));
 		frame.add(game);
+		frame.pack();
+		Insets i = frame.getInsets();
 		
-		//frame.pack();
-		frame.setSize(640,480);
-		frame.setSize(640+frame.getInsets().left+frame.getInsets().right,480+frame.getInsets().top+frame.getInsets().bottom);
-		System.out.println();
+		//
+		frame.setSize(new Dimension(i.left + i.right + 640,i.bottom + i.top +  480));
+		//frame.setSize(640+640-(int)frame.getContentPane().getSize().getWidth(),480+480-(int)frame.getContentPane().getSize().getHeight());
+		
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
