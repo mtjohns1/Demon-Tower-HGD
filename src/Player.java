@@ -61,12 +61,7 @@ public class Player extends Actor {
 		//TODO: check bounding / room change
 	}
 
-	/**
-	 * Manage collisions with a tile
-	 * 
-	 * @param t: the Tile object collided with
-	 * @param dir: the direction of the collision
-	 */
+	@Override
 	public void tileCollision(Tile t, String dir) {
 		//solid wall collisions
 		if (t.getType().contains("w")) {

@@ -21,6 +21,8 @@ public abstract class Mobile {
 	private int _w, _h, _d; //dimensions
 	private Room _home; //room the object is in
 	private boolean _dead; //dead state
+	//TODO: Direction variable?
+	//TODO: Animation variables?
 
 	/**
 	 * @param home: the room the object is inside
@@ -49,9 +51,9 @@ public abstract class Mobile {
 	}
 
 	/**
-	 * Get the Tile the mobile object currently occupies
+	 * Get the Tiles the mobile object currently occupies
 	 * 
-	 * @return a reference to the current Tile
+	 * @return a list of the current Tiles
 	 */
 	public ArrayList<Tile> floor() {
 		return _home.getRange(getLeft()/32, getTop()/32, getRight()/32, getBottom()/32);
