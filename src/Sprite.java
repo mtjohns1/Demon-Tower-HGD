@@ -8,6 +8,7 @@ import java.awt.image.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
@@ -16,10 +17,14 @@ public class Sprite {
 	private int X,Y,Width,Height,SpriteX,SpriteY,Layer; 
 	
 	private static Image picture[];
+	private static HashMap<String, Image> pics = new HashMap<String, Image>();
 
+	
+	
 	private Image img;
 	
 	private ImageObserver observer;
+	//private ImageEnum id;
 	
 	public Sprite(int x,int y,int width,int height,int spriteX, int spriteY, int layer,Image image){
 		X = x; Y = y; Width = width; Height = height; SpriteX = spriteX; SpriteY = spriteY; Layer = layer; img = image;
@@ -27,10 +32,13 @@ public class Sprite {
 	public Sprite(int x,int y,int width,int height,int spriteX, int spriteY, int layer, int Index){
 		X = x; Y = y; Width = width; Height = height; SpriteX = spriteX; SpriteY = spriteY; Layer = layer;img = picture[Index];
 	}
-	
+	public Sprite(int x,int y,int width,int height,int spriteX, int spriteY, int layer, String ImgName){
+		X = x; Y = y; Width = width; Height = height; SpriteX = spriteX; SpriteY = spriteY; Layer = layer;img = pics.get(ImgName);
+	}
 	
 	public static void load() {
 		picture = new Image[4];
+		//System.out.println(ImageEnum.valueOf("tempWall").getValue());
 		
 		File Floor = new File("src/tempBackground.png");
 		Image floor = null;
@@ -40,7 +48,7 @@ public class Sprite {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		pics.put("tempFloor", floor);
 		
 		
 		picture[0] = floor;
@@ -54,8 +62,10 @@ public class Sprite {
 			e.printStackTrace();
 		}
 		
-		picture[1] = wall;
+		pics.put("tempWall", wall);
 		
+		picture[1] = wall;
+
 		File Hero = new File("src/hero dude and sword.png");
 		Image hero = null;
 		try {
@@ -64,6 +74,8 @@ public class Sprite {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		pics.put("hero", hero);
 		
 		picture[2] = hero;
 		
@@ -75,6 +87,8 @@ public class Sprite {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		pics.put("enemy", enemy);
 		
 		picture[3] = enemy;
 	}
