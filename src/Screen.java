@@ -25,18 +25,23 @@ public class Screen {
 		
 		
 		//game.setPreferredSize(new Dimension(640, 480));
-		frame.add(game);
-		frame.pack();
-		Insets i = frame.getInsets();
 		
+		frame.add(game);
+		frame.getContentPane().setPreferredSize(new Dimension(640,480));
+		frame.setResizable(false);
+		frame.setVisible(true);
+		frame.pack();
+		//Insets i = frame.getInsets();
+		//System.out.println(i.left+" "+i.right);
+		//System.out.println(i.top+" "+i.bottom);
 		//
-		frame.setSize(new Dimension(i.left + i.right + 640,i.bottom + i.top +  480));
+		//frame.setSize(new Dimension(i.left + i.right + 640,i.bottom + i.top +  480));
 		//frame.setSize(640+640-(int)frame.getContentPane().getSize().getWidth(),480+480-(int)frame.getContentPane().getSize().getHeight());
 		
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
-		frame.setResizable(false);
+		
+		
 
 		Room r = new Room();
 		Player p = new Player(r, controls);
