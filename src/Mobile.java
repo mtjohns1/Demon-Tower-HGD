@@ -133,13 +133,67 @@ public abstract class Mobile {
 	}
 	
 	/**
+	 * Check if this object is currently overlapping another
+	 * 
+	 * @param m the other object
+	 * 
+	 * @return true if this and m intersect
+	 */
+	private boolean _overlap(Mobile m) {
+		if ( (getTop() < m.getBottom()) && (getBottom() > m.getTop()) //y aligned
+				&& (getFront() < m.getBack()) && (getBack() > m.getFront()) //z aligned
+				&& (getLeft() < m.getRight()) && (getRight() > m.getLeft()) ) { //x aligned 
+			return true;
+		}
+		else return false;
+	}
+	
+	/**
+	 * Check if this object will overlap another after moving
+	 * 
+	 * @param m the other object
+	 * 
+	 * @return true if this and m will intersect
+	 */
+	private boolean _willOverlap(Mobile m) {
+		if ( (getNextTop() < m.getNextBottom()) && (getNextBottom() > m.getNextTop()) //y aligned
+				&& (getNextFront() < m.getNextBack()) && (getNextBack() > m.getNextFront()) //z aligned
+				&& (getNextLeft() < m.getNextRight()) && (getNextRight() > m.getNextLeft()) ) { //x aligned
+			return true;
+		}
+		else return false;
+	}
+	
+	/**
+	 * React to collisions with another object
+	 * 
+	 * @param m
+	 * @param overlap
+	 * @param nextOverlap
+	 */
+	public void collide (Mobile m, boolean overlap, boolean nextOverlap) {
+		//TODO: Probably make this abstract!
+	}
+	
+	/**
+	 * Check collisions against another object
+	 * 
+	 * @param m the other object
+	 */
+	public void checkCollision (Mobile m) {
+		if (_overlap(m) || _willOverlap(m)) {
+			collide(m, _overlap(m), _willOverlap(m));
+		}
+	}
+	
+	/**
 	 * Draw the object to the screen
 	 * 
 	 * @param g: graphics object to use for drawing
 	 */
 	public void draw(List<Sprite> l)
 	{
-		//TODO: Make a generic drawing function here
+		//TODO: Probably make this abstract!
 	}
 
 	/**
