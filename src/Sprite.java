@@ -30,7 +30,7 @@ public class Sprite {
 	
 	
 	public static void load() {
-		picture = new Image[3];
+		picture = new Image[4];
 		
 		File Floor = new File("src/tempBackground.png");
 		Image floor = null;
@@ -66,6 +66,17 @@ public class Sprite {
 		}
 		
 		picture[2] = hero;
+		
+		File Enemy = new File("src/generic_Evil_creature_small.jpg");
+		Image enemy = null;
+		try {
+			enemy =  ImageIO.read(Enemy);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		picture[3] = enemy;
 	}
 	
 	public void draw(Graphics g){
