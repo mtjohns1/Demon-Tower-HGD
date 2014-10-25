@@ -23,19 +23,19 @@ public class Actor extends Mobile {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * @return the actor's maximum HP
 	 */
-	public int getMaxHP() {
+	public int getMaxHp() {
 		return _hpMax;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * @param maxHp the new maximum HP
 	 */
-	protected void setMaxHP( int maxHp) {
+	protected void setMaxHp(int maxHp) {
 		_hpMax = maxHp;
+		if (_hpMax < 0) _hpMax = 0;
+		if (_hp > _hpMax) _hp = _hpMax;
 	}
 	
 	/**
@@ -43,6 +43,16 @@ public class Actor extends Mobile {
 	 */
 	public int getHp() {
 		return _hp;
+	}
+	
+	/**
+	 * @param hp the new HP value
+	 */
+	protected void setHp(int hp) {
+		_hp = hp;
+		if (_hp > _hpMax) _hp = _hpMax;
+		if (_hp < 0) _hp = 0;
+		
 	}
 	
 	/**
