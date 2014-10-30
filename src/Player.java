@@ -50,14 +50,22 @@ public class Player extends Actor {
 
 		//TODO: collide with other objects?
 
-		//TODO: fire bullets
 		//TODO: change weapons
+		
+		//fire bullets
+		dx = _c.getShoot().getX();
+		dy = _c.getShoot().getY();
+		if (Math.abs(dx) > 10 || Math.abs(dy) > 10) {
+			//getHome().addMobile(new BulletBasic(this, dx, dy));
+			//TODO: Also add "melee bullet"
+			System.out.println("Woosh woosh");
+			//TODO: Implement fire rate control
+			//TODO: Implement stamina
+		}
+		
 
 		//update position, checking collisions along the way
 		move();
-
-		//TODO: check for death
-		//TODO: check bounding / room change
 	}
 
 	@Override

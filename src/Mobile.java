@@ -143,8 +143,8 @@ public abstract class Mobile {
 	 * @param d the deceleration divisor
 	 */
 	public void decelerate(int d) {
-		_vx *= d;
-		_vy *= d;
+		_vx /= d;
+		_vy /= d;
 	}
 	
 	/**

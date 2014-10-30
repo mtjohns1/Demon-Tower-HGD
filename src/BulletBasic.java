@@ -25,5 +25,6 @@ public class BulletBasic extends Bullet{
 		
 		setDamage(1); //deals 1 damage
 		accelerate(3); //max speed of 3 in each direction
+		decelerate(100); //remove the 1-100 range from controls
 	}
 }

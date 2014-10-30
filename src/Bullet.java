@@ -27,13 +27,18 @@ public class Bullet extends Mobile {
 	public Bullet(Mobile owner, int xAxis, int yAxis) {
 		super(owner.getHome());
 		
+		//direction input as speed if unspecified
 		setVx(xAxis);
-		setVy(yAxis); //direct input as speed if unspecified
+		setVy(yAxis);
+		
+		//overlapping centers
+		setX(owner.getX());
+		setY(owner.getX());
+		setZ(owner.getZ());
 		
 		_owner = owner;
 		_life = Integer.MAX_VALUE; //infinite range if unspecified
 		_damage = 0; //no damage if unspecified
-		//TODO: set default velocity by owner's aim?
 	}
 	
 	/**
