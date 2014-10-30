@@ -128,6 +128,26 @@ public abstract class Mobile {
 	}
 
 	/**
+	 * Multiply vx and vy by a value
+	 * 
+	 * @param a the acceleration multiplier
+	 */
+	public void accelerate(int a) {
+		_vx *= a;
+		_vy *= a;
+	}
+	
+	/**
+	 * Divide vx and vy by a value
+	 * 
+	 * @param d the deceleration divisor
+	 */
+	public void decelerate(int d) {
+		_vx *= d;
+		_vy *= d;
+	}
+	
+	/**
 	 * Tell the object to take its actions this frame
 	 */
 	public void update() {
@@ -179,22 +199,23 @@ public abstract class Mobile {
 	/**
 	 * React to collisions with another object
 	 * 
-	 * @param m
-	 * @param overlap
-	 * @param nextOverlap
+	 * @param m the other object to collide with
+	 * @param overlap are they overlapping now?
+	 * @param nextOverlap will they overlap after moving?
 	 */
 	public void collide (Mobile m, boolean overlap, boolean nextOverlap) {
 		//TODO: Probably make this abstract!
 	}
 	
 	/**
-	 * Check collisions against another object
+	 * Check collisions against another object, call collide() for both
 	 * 
 	 * @param m the other object
 	 */
 	public void checkCollision (Mobile m) {
 		if (_overlap(m) || _willOverlap(m)) {
 			collide(m, _overlap(m), _willOverlap(m));
+			m.collide(this, _overlap(m), _willOverlap(m));
 		}
 	}
 	

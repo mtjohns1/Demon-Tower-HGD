@@ -46,8 +46,7 @@ public class Player extends Actor {
 			setVy(getVy()-5);
 
 		//apply deceleration
-		setVx(getVx()/2);
-		setVy(getVy()/2);
+		decelerate(2);
 
 		//TODO: collide with other objects?
 

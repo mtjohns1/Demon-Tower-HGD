@@ -1,44 +1,29 @@
 /**
  * basic bullet, travels straight stops at walls and does basic damage.
  * @author Matthew_J
+ * @author Jacob Charles
  *
  */
 public class BulletBasic extends Bullet{
 
-	public BulletBasic(Room home,Mobile shooter) {
-		super(home,shooter);
-
+	/**
+	 * Standard public constructor
+	 *  
+	 * @param owner the object creating the bullet
+	 * @param xAxis the initial x velocity of the bullet
+	 * @param yAxis the initial y velocity of the bullet
+	 */
+	public BulletBasic(Mobile owner, int xAxis, int yAxis) {
+		super(owner, xAxis, yAxis);
+		
+		//set default dimensions
 		setW(10);
 		setH(10);
 		setD(32);
+		
+		//no range limit, for now
+		
+		setDamage(1); //deals 1 damage
+		accelerate(3); //max speed of 3 in each direction
 	}
-
-	
-
-	/**
-	 * Manage collisions with a tile
-	 * 
-	 * @param t: the Tile object collided with
-	 * @param dir: the direction of the collision
-	 */
-	public void tileCollision(Tile t, String dir) {
-		if (t.getType().contains("w")) {
-			setHealth(0);
-		}
-	}
-	
-	public void actorCollision(Actor a){
-	
-		//if (a.getClass().isInstance(player)){ player.setHealth(player.getHealth() -2)}
-	
-	}
-	
-	/**
-	 * Function to determine how long the bullet lasts.
-	 * call on each frame
-	 */
-	public void lifeSpan(){
-		setHealth(getHealth() -1); 
-	}
-	
 }
