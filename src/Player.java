@@ -15,6 +15,8 @@ import java.util.List;
 public class Player extends Actor {
 
 	private Control _c;
+	private int _stamina; //effectively ammo
+	private int _fireRate; //delay before firing another bullet
 
 	/**
 	 * @param start: the room the player starts in
@@ -55,17 +57,17 @@ public class Player extends Actor {
 		//fire bullets
 		dx = _c.getShoot().getX();
 		dy = _c.getShoot().getY();
-		if (Math.abs(dx) > 10 || Math.abs(dy) > 10) {
-			//getHome().addMobile(new BulletBasic(this, dx, dy));
+		if (_fireRate <= 0 && (Math.abs(dx) > 10 || Math.abs(dy) > 10)) {
+			getHome().addMobile(new BulletBasic(this, dx, dy));
 			//TODO: Also add "melee bullet"
-			System.out.println("Woosh woosh");
-			//TODO: Implement fire rate control
+			_fireRate = 12; //six frames spacing for now, will be weapon-dependent later
 			//TODO: Implement stamina
 		}
-		
 
 		//update position, checking collisions along the way
 		move();
+		
+		_fireRate--;
 	}
 
 	@Override
@@ -98,7 +100,7 @@ public class Player extends Actor {
 	 */
 	public void  draw(List<Sprite> list)
 	{
-		Sprite s = new Sprite(getLeft()-2, getTop()-2, getW()+4, getH()+4, 0, 0, 0, 2);
+		Sprite s = new Sprite(getLeft()-2, getTop()-2, getW()+4, getH()+4, 0, 0, 0, "hero");
 		list.add(s);
 	}
 }

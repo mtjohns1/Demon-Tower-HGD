@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 
 import java.awt.*;
 import java.io.*;
+import java.util.List;
 
 public class Bullet extends Mobile {
 
@@ -33,7 +34,7 @@ public class Bullet extends Mobile {
 		
 		//overlapping centers
 		setX(owner.getX());
-		setY(owner.getX());
+		setY(owner.getY());
 		setZ(owner.getZ());
 		
 		_owner = owner;
@@ -120,5 +121,12 @@ public class Bullet extends Mobile {
 		//do damage
 		a.takeDamage(_damage);
 		setLife(0); //vanish
+	}
+	
+	@Override
+	public void  draw(List<Sprite> list)
+	{
+		Sprite s = new Sprite(getLeft(), getTop(), getW(), getH(), 0, 0, 0, "tempWall");
+		list.add(s);
 	}
 }
