@@ -115,12 +115,18 @@ public class Bullet extends Mobile {
 	
 	@Override
 	public void collide(Mobile m, boolean overlap, boolean nextOverlap) {
-		if (!(m instanceof Actor)) return; //ignore non-actors
+		//non-actors and your owner are ignored
+		if (!(m instanceof Actor) || m == _owner)
+			return;
 		
-		Actor a = (Actor)m; //cast for convenience
+		//cast for convenience
+		Actor a = (Actor)m;
+		
 		//do damage
 		a.takeDamage(_damage);
-		setLife(0); //vanish
+		
+		//vanish
+		setLife(0);
 	}
 	
 	@Override
