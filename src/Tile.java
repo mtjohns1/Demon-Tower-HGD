@@ -87,8 +87,8 @@ public class Tile {
 	 */
 	public void  draw(List<Sprite> l)
 	{
-		Sprite s = new Sprite(getLeft(), getTop(), 32, 32, 0, 0, 0, 0);
-		if (getType().contains("w")) s = new Sprite(getLeft(), getTop(), 32, 32, 0, 0, 0, 1);
+		Sprite s = new Sprite(getLeft(), getTop(), 32, 32, 0, 0, 0, "tempFloor");
+		if (getType().contains("w")) s = new Sprite(getLeft(), getTop(), 32, 32, 0, 0, 0, "tempWall");
 		l.add(s);
 	}
 	
