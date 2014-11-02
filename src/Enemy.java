@@ -55,16 +55,6 @@ public class Enemy extends Actor {
 	}
 	
 	/**
-	 * Manage collisions with a tile
-	 * 
-	 * @param t: the Tile object collided with
-	 * @param dir: the direction of the collision
-	 */
-	public void tileCollision(Tile t, String dir) {
-		
-	}
-	
-	/**
 	 * call on each frame to update.
 	 */
 	public void update(){
