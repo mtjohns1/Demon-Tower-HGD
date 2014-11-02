@@ -93,6 +93,23 @@ public class Sprite {
 		picture[3] = enemy;
 	}
 	
+	public void addGraphic(String fileName, String spriteName){
+		File toAdd = new File(fileName);
+		Image Adding = null;
+		
+		try {
+			Adding =  ImageIO.read(toAdd);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		pics.put(spriteName, Adding);
+		
+	}
+
+	
+	
 	public void draw(Graphics g){
 		g.drawImage(img, X, Y, X+Width, Y+Height, SpriteX, SpriteY, SpriteX+Width, SpriteY+Height, observer);
 		

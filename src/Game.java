@@ -16,6 +16,7 @@ import java.awt.event.KeyListener;
 import java.awt.image.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 
 public class Game extends JPanel {
@@ -95,7 +96,7 @@ public class Game extends JPanel {
 		g.setColor(Color.black);
 		g.fillRect(0, 0, getWidth(), getHeight());
 
-
+		Collections.sort(sprites, new SpriteComparitor());
 		if(!sprites.isEmpty()){
 			for(int c = 0; c < sprites.size(); c++){
 				sprites.get(c).draw(g);
@@ -106,7 +107,8 @@ public class Game extends JPanel {
 		getGraphics().drawImage(backBuffer, 0, 0, null);
 
 	}
-
+	
+	
 	public void setCX(int x){
 		this.circlex = x;
 
