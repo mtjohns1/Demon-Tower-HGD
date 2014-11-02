@@ -10,18 +10,20 @@ import javax.imageio.ImageIO;
  * @author Matthew_J
  *
  */
-public class EnemyChaser extends Enemy{
+public class EnemySinGhost extends Enemy{
 
 	private Player player;
 	private int attack;
-	
-	public EnemyChaser(Room home) {
+	private int xCounter, yCounter =0;
+	public EnemySinGhost(Room home) {
 		super(home);
 		
-		this.setX(100);
-		this.setY(100);
+		this.setX(300);
+		this.setY(300);
 		
 		attack = 5;
+
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -90,22 +92,7 @@ public class EnemyChaser extends Enemy{
 	 */	
 	public void tileCollision(Tile t, String dir) {
 		if (t.getType().contains("w")) {
-			if (dir.equals("right")) {
-				setRight(t.getLeft()-1);
-				setVx(0);
-			}
-			if (dir.equals("left")) {
-				setLeft(t.getRight()+1);
-				setVx(0);
-			}
-			if (dir.equals("down")) {
-				setBottom(t.getTop()-1);
-				setVy(0);
-			}
-			if (dir.equals("up")) {
-				setTop(t.getBottom()+1);
-				setVy(0);
-			}
+			
 		}
 		
 	}
@@ -144,5 +131,4 @@ public class EnemyChaser extends Enemy{
 			
 		}
 	}
-	
 }
