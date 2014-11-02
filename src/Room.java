@@ -163,7 +163,7 @@ public class Room {
 		for (int i = 0; i < list.size(); i++) {
 			list.get(i).move();
 			//check if they died
-			if (list.get(i).getDead()) {
+			if (list.get(i).isDead()) {
 				list.remove(i);
 				i--;
 			}

@@ -94,7 +94,7 @@ public class Bullet extends Mobile {
 	@Override
 	public void update() {
 		//remove if dead
-		if (_life <= 0 || getDead()) {
+		if (_life <= 0 || isDead()) {
 			setDead();
 			return;
 		}

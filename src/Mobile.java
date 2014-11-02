@@ -21,6 +21,7 @@ public abstract class Mobile {
 	private int _w, _h, _d; //dimensions
 	private Room _home; //room the object is in
 	private boolean _dead; //dead state
+	private boolean _collide; //does it have collisions
 	//TODO: Direction variable?
 	//TODO: Animation variables?
 
@@ -236,7 +237,7 @@ public abstract class Mobile {
 	/**
 	 * @return true if the object is dead
 	 */
-	public boolean getDead() {
+	public boolean isDead() {
 		return _dead;
 	}
 
