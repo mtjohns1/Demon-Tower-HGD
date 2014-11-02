@@ -21,7 +21,8 @@ public abstract class Mobile {
 	private int _w, _h, _d; //dimensions
 	private Room _home; //room the object is in
 	private boolean _dead; //dead state
-	private boolean _collide; //does it have collisions
+	private boolean _collide; //does it hit objects
+	private boolean _fly; //does it hit walls
 	//TODO: Direction variable?
 	//TODO: Animation variables?
 
@@ -32,6 +33,8 @@ public abstract class Mobile {
 	 */
 	public Mobile(Room home) {
 		_dead = false;
+		_collide = true;
+		_fly = false;
 		_home = home;
 
 		_vx = 0;
@@ -70,9 +73,16 @@ public abstract class Mobile {
 	}
 
 	/**
-	 * Update position, accounting for tile collisions
+	 * Update position, calls tileCollision for each new tile touched
+	 * Ignores tiles if doesFly() returns true
 	 */
 	public void move() {
+		//flying objects skip collisions
+		if (doesFly()) {
+			flyMove();
+			return;
+		}
+		
 		//moving left
 		if (getNextLeft()/32 < getLeft()/32) {
 			for (Tile t : getHome().getRange(getNextLeft()/32, getTop()/32, getNextLeft()/32, getBottom()/32)) {
@@ -214,10 +224,15 @@ public abstract class Mobile {
 	
 	/**
 	 * Check collisions against another object, call collide() for both
+	 * Does nothing if either object's doesCollid() returns false
 	 * 
 	 * @param m the other object
 	 */
 	public void checkCollision (Mobile m) {
+		//skip collisions if either is intangible
+		if (!doesCollide() || !m.doesCollide())
+			return;
+		
 		if (_overlap(m) || _willOverlap(m)) {
 			collide(m, _overlap(m), _willOverlap(m));
 			m.collide(this, _overlap(m), _willOverlap(m));
@@ -246,6 +261,34 @@ public abstract class Mobile {
 	 */
 	public void setDead() {
 		_dead = true;
+	}
+	
+	/**
+	 * @return true if the object collides
+	 */
+	public boolean doesCollide() {
+		return _collide;
+	}
+
+	/**
+	 * If true, makes the object collide with others
+	 */
+	public void setCollide(boolean c) {
+		_collide = c;
+	}
+	
+	/**
+	 * @return true if the object collides
+	 */
+	public boolean doesFly() {
+		return _fly;
+	}
+
+	/**
+	 * If true, makes the object collide with others
+	 */
+	public void setFly(boolean f) {
+		_fly = f;
 	}
 
 	/**

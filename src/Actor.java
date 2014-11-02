@@ -34,7 +34,7 @@ public class Actor extends Mobile {
 	 */
 	protected void setMaxHp(int maxHp) {
 		_hpMax = maxHp;
-		if (_hpMax < 0) _hpMax = 0;
+		if (_hpMax <= 0) {_hpMax = 0; setDead();} //special death
 		if (_hp > _hpMax) _hp = _hpMax;
 	}
 	
@@ -51,7 +51,10 @@ public class Actor extends Mobile {
 	protected void setHp(int hp) {
 		_hp = hp;
 		if (_hp > _hpMax) _hp = _hpMax;
-		if (_hp < 0) _hp = 0;
+		if (_hp <= 0) {
+			_hp = 0; //avoid overkill
+			setDead();
+		}
 		
 	}
 	
@@ -65,8 +68,10 @@ public class Actor extends Mobile {
 	public int takeDamage(int damage) {
 		_hp -= damage;
 		
-		if (_hp < 0) _hp = 0; //avoid overkill
-		
+		if (_hp <= 0) {
+			_hp = 0; //avoid overkill
+			setDead();
+		}
 		return damage; //not all versions will take full damage
 	}
 	
@@ -80,7 +85,7 @@ public class Actor extends Mobile {
 	public int heal(int healing) {
 		_hp += healing;
 		
-		if (_hp > _hpMax) _hp = _hpMax; //avoid overheal
+		if (_hp > _hpMax) _hp = _hpMax; //avoid over-heal
 		
 		return healing; //not all versions will heal fully
 	}
