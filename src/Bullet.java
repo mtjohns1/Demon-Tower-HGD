@@ -31,6 +31,7 @@ public class Bullet extends Mobile {
 		//direction input as speed if unspecified
 		setVx(xAxis);
 		setVy(yAxis);
+		decelerate(100); //set range between -1 and 1
 		
 		//overlapping centers
 		setX(owner.getX());

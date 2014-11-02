@@ -16,8 +16,8 @@ import java.util.*;
 
 public abstract class Mobile {
 
-	private int _x, _y, _z; //position in 3D space
-	private int _vx, _vy, _vz; //3D velocities
+	private double _x, _y, _z; //position in 3D space
+	private double _vx, _vy, _vz; //3D velocities
 	private int _w, _h, _d; //dimensions
 	private Room _home; //room the object is in
 	private boolean _dead; //dead state
@@ -132,9 +132,11 @@ public abstract class Mobile {
 	 * 
 	 * @param a the acceleration multiplier
 	 */
-	public void accelerate(int a) {
-		_vx *= a;
-		_vy *= a;
+	public void accelerate(double a) {
+		//_vx *= a;
+		//_vy *= a;
+		setVx(_vx*a);
+		setVy(_vy*a);
 	}
 	
 	/**
@@ -142,9 +144,11 @@ public abstract class Mobile {
 	 * 
 	 * @param d the deceleration divisor
 	 */
-	public void decelerate(int d) {
-		_vx /= d;
-		_vy /= d;
+	public void decelerate(double d) {
+		//_vx /= d;
+		//_vy /= d;
+		setVx(_vx/d);
+		setVy(_vy/d);
 	}
 	
 	/**
@@ -260,7 +264,7 @@ public abstract class Mobile {
 	 * @return the x coordinate
 	 */
 	public int getX() {
-		return _x;
+		return (int) _x;
 	}
 	/**
 	 * @param x: the new x coordinate
@@ -272,7 +276,7 @@ public abstract class Mobile {
 	 * @return the y coordinate
 	 */
 	public int getY() {
-		return _y;
+		return (int) _y;
 	}
 	/**
 	 * @param y: the new y coordinate
@@ -284,7 +288,7 @@ public abstract class Mobile {
 	 * @return the z coordinate
 	 */
 	public int getZ() {
-		return _z;
+		return (int) _z;
 	}
 	/**
 	 * @param z: the new z coordinate
@@ -295,38 +299,44 @@ public abstract class Mobile {
 	/**
 	 * @return the x velocity
 	 */
-	public int getVx() {
+	public double getVx() {
 		return _vx;
 	}
 	/**
 	 * @param vx: the new x velocity
 	 */
-	public void setVx(int vx) {
+	public void setVx(double vx) {
 		this._vx = vx;
+		if (Math.abs(_vx) < 0.1)
+			this._vx = 0;
 	}
 	/**
 	 * @return the y velocity
 	 */
-	public int getVy() {
+	public double getVy() {
 		return _vy;
 	}
 	/**
 	 * @param vy: the new y velocity
 	 */
-	public void setVy(int vy) {
+	public void setVy(double vy) {
 		this._vy = vy;
+		if (Math.abs(_vy) < 0.1)
+			this._vy = 0;
 	}
 	/**
 	 * @return the z velocity
 	 */
-	public int getVz() {
+	public double getVz() {
 		return _vz;
 	}
 	/**
 	 * @param vz: the new z velocity
 	 */
-	public void setVz(int vz) {
+	public void setVz(double vz) {
 		this._vz = vz;
+		if (Math.abs(_vz) < 0.1)
+			this._vz = 0;
 	}
 	/**
 	 * @return the width (in x)
@@ -369,37 +379,37 @@ public abstract class Mobile {
 	 * @return y coordinate of the top edge
 	 */
 	public int getTop() {
-		return _y-_h/2;
+		return (int) (_y-_h/2);
 	}
 	/**
 	 * @return y coordinate of the bottom edge
 	 */
 	public int getBottom() {
-		return _y+_h/2;
+		return (int) (_y+_h/2);
 	}
 	/**
 	 * @return x coordinate of the left edge
 	 */
 	public int getLeft() {
-		return _x-_w/2;
+		return (int) (_x-_w/2);
 	}
 	/**
 	 * @return x coordinate of the right edge
 	 */
 	public int getRight() {
-		return _x+_w/2;
+		return (int) (_x+_w/2);
 	}
 	/**
 	 * @return z coordinate of the front edge (screen-facing)
 	 */
 	public int getFront() {
-		return _z-_d;
+		return (int) (_z-_d);
 	}
 	/**
 	 * @return z coordinate of the back edge (ground-facing)
 	 */
 	public int getBack() {
-		return _z;
+		return (int) _z;
 	}
 
 
@@ -435,36 +445,36 @@ public abstract class Mobile {
 	 * @return y coordinate of the top edge after movement
 	 */
 	public int getNextTop() {
-		return _y-_h/2+_vy;
+		return (int) (_y-_h/2+_vy);
 	}
 	/**
 	 * @return y coordinate of the bottom edge after movement
 	 */
 	public int getNextBottom() {
-		return _y+_h/2+_vy;
+		return (int) (_y+_h/2+_vy);
 	}
 	/**
 	 * @return x coordinate of the left edge after movement
 	 */
 	public int getNextLeft() {
-		return _x-_w/2+_vx;
+		return (int) (_x-_w/2+_vx);
 	}
 	/**
 	 * @return x coordinate of the right edge after movement
 	 */
 	public int getNextRight() {
-		return _x+_w/2+_vx;
+		return (int) (_x+_w/2+_vx);
 	}
 	/**
 	 * @return z coordinate of the front edge (screen-facing) after movement
 	 */
 	public int getNextFront() {
-		return _z-_d+_vz;
+		return (int) (_z-_d+_vz);
 	}
 	/**
 	 * @return z coordinate of the back edge (ground-facing) after movement
 	 */
 	public int getNextBack() {
-		return _z+_vz;
+		return (int) (_z+_vz);
 	}
 }

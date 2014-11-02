@@ -57,7 +57,7 @@ public class Player extends Actor {
 		if (_fireRate <= 0 && (Math.abs(dx) > 10 || Math.abs(dy) > 10)) {
 			getHome().addMobile(new BulletBasic(this, dx, dy));
 			//TODO: Also add "melee bullet"
-			_fireRate = 12; //six frames spacing for now, will be weapon-dependent later
+			_fireRate = 12; //twelve frames spacing for now, will be weapon-dependent later
 			//TODO: Implement stamina
 		}
 		
