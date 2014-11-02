@@ -240,12 +240,18 @@ public abstract class Mobile {
 	}
 	
 	/**
+	 * Make last-minute changes before being removed
+	 */
+	public void onDeath() {
+		//TODO: Probably make this abstract!
+	}
+	
+	/**
 	 * Draw the object to the screen
 	 * 
 	 * @param g: graphics object to use for drawing
 	 */
-	public void draw(List<Sprite> l)
-	{
+	public void draw(List<Sprite> l) {
 		//TODO: Probably make this abstract!
 	}
 

@@ -164,6 +164,7 @@ public class Room {
 			list.get(i).move();
 			//check if they died
 			if (list.get(i).isDead()) {
+				list.get(i).onDeath(); //let it make it's last modifications
 				list.remove(i);
 				i--;
 			}
