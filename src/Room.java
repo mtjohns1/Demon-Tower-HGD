@@ -20,8 +20,9 @@ public class Room {
 
 	Tile floor[][] = new Tile[15][20];
 	ArrayList<Mobile> list = new ArrayList<Mobile>();
+	Player player = null;
 
-
+	
 	/**
 	 * Creates a new blank room with walls surrounding it.
 	 */
@@ -43,8 +44,24 @@ public class Room {
 				}
 			}
 		}
+		
+		generateBadguys();
 
 	}
+	
+	public void generateBadguys(){
+		EnemyChaser enemy = new EnemyChaser(this);
+	}
+	
+	public Player getPlayer(){
+		return this.player;
+	}
+	
+	public void setPlayer(Player p){
+		this.player = p;
+	}
+	
+	
 
 	/**
 	 * 

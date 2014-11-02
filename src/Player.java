@@ -27,6 +27,7 @@ public class Player extends Actor {
 		setW(28);
 		setH(28);
 		setD(32);
+		this.getHome().setPlayer(this);
 	}
 
 	/**
@@ -84,6 +85,12 @@ public class Player extends Actor {
 				setVy(0);
 			}
 		}
+	}
+	
+	public void setHome(Room home) {
+		getHome().setPlayer(null);
+		super.setHome(home);
+		getHome().setPlayer(this);
 	}
 
 	/**

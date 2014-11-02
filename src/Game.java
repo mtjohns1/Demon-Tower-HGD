@@ -25,6 +25,8 @@ public class Game extends JPanel {
 	private ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 	private Control controls;
 
+	Floor floor = new Floor();
+	
 	public Game(Control c){
 		//box.add(exit);
 		final int WIDTH = 640;

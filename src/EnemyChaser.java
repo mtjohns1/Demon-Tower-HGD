@@ -17,10 +17,13 @@ public class EnemyChaser extends Enemy{
 	
 	public EnemyChaser(Room home) {
 		super(home);
-		
-		this.setX(100);
-		this.setY(100);
-		
+		this.setMaxHp(20);
+
+		this.setHp(20);
+		this.setX(200);
+		this.setY(200);
+
+		System.out.println(this.getHp());
 		attack = 5;
 	}
 
@@ -31,11 +34,11 @@ public class EnemyChaser extends Enemy{
 	public void enemyAI(){
 
 		if(player == null){
-			Mobile temp = this.getHome().getList().get(0);
-			if(temp != null){
-				player = (Player) this.getHome().getList().get(0);
+			player = this.getHome().getPlayer();
+			if(player == null){
+				return;
 			}
-			else return;
+				
 		}
 		
 		//finds how for enemy is from player
@@ -56,7 +59,7 @@ public class EnemyChaser extends Enemy{
 			yMove = 5 * ySign;
 		}
 		else if (yDif == 0){
-			xMove =5 * xSign;
+			xMove = 5 * xSign;
 		}
 		else if (Math.abs(xDif) > Math.abs(yDif)){
 			xMove = 4 * xSign;
@@ -115,7 +118,10 @@ public class EnemyChaser extends Enemy{
 	 */
 	public void update(){
 		enemyAI();
-		move();
+		if(this.getHp() <= 0){
+			this.setDead();
+		}
+			
 	}
 	
 	/**
@@ -139,7 +145,7 @@ public class EnemyChaser extends Enemy{
 		Actor a = (Actor)m;
 		//do damage
 		if(a instanceof Player && !(overlap))
-			a.takeDamage(attack);
+			//a.takeDamage(attack);
 		if((a instanceof Enemy)){
 			
 		}
