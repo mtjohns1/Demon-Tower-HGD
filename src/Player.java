@@ -49,10 +49,6 @@ public class Player extends Actor {
 
 		//apply deceleration
 		decelerate(2);
-
-		//TODO: collide with other objects?
-
-		//TODO: change weapons
 		
 		//fire bullets
 		dx = _c.getShoot().getX();
@@ -63,9 +59,6 @@ public class Player extends Actor {
 			_fireRate = 12; //six frames spacing for now, will be weapon-dependent later
 			//TODO: Implement stamina
 		}
-
-		//update position, checking collisions along the way
-		move();
 		
 		_fireRate--;
 	}

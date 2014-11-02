@@ -132,10 +132,24 @@ public class Room {
 	 * Update all room contents
 	 */
 	public void update() {
-		//loop through the mobiles
-		for (int i = 0; i < list.size(); i++)
-		{
+		//loop through the mobiles, get their updates
+		for (int i = 0; i < list.size(); i++) {
 			list.get(i).update();
+		}
+		//check collisions between all mobiles
+		for (int x = 0; x < list.size(); x++) {
+			for (int y = x+1; y < list.size(); y++) {
+				list.get(x).checkCollision(list.get(y));
+			}
+		}
+		//loop through the mobiles, move them and remove dead ones
+		for (int i = 0; i < list.size(); i++) {
+			list.get(i).move();
+			//check if they died
+			if (list.get(i).getDead()) {
+				list.remove(i);
+				i--;
+			}
 		}
 	}
 
