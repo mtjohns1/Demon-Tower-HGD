@@ -98,9 +98,6 @@ public class Bullet extends Mobile {
 			return;
 		}
 		
-		//update position and check collisions
-		move();
-		
 		//update life time
 		_life--;
 	}

@@ -148,7 +148,7 @@ public abstract class Mobile {
 	}
 	
 	/**
-	 * Tell the object to take its actions this frame
+	 * Tell the object to decide its actions this frame
 	 */
 	public void update() {
 		//TODO: Probably make this abstract!
