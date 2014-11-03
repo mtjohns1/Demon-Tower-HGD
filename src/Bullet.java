@@ -17,7 +17,7 @@ public class Bullet extends Mobile {
 	private int _life;
 	private int _damage;
 	private Mobile _owner;
-	
+
 	/**
 	 * Public constructor
 	 * 
@@ -27,22 +27,22 @@ public class Bullet extends Mobile {
 	 */
 	public Bullet(Mobile owner, int xAxis, int yAxis) {
 		super(owner.getHome());
-		
+
 		//direction input as speed if unspecified
 		setVx(xAxis);
 		setVy(yAxis);
 		decelerate(100); //set range between -1 and 1
-		
+
 		//overlapping centers
 		setX(owner.getX());
 		setY(owner.getY());
 		setZ(owner.getZ());
-		
+
 		_owner = owner;
 		_life = Integer.MAX_VALUE; //infinite range if unspecified
 		_damage = 0; //no damage if unspecified
 	}
-	
+
 	/**
 	 * 
 	 * @param owner set who owns the bullet
@@ -58,7 +58,7 @@ public class Bullet extends Mobile {
 	public Mobile getOwner(){
 		return _owner;
 	}
-	
+
 	/**
 	 * 
 	 * @param life set bullet life to this value (in frames)
@@ -66,7 +66,7 @@ public class Bullet extends Mobile {
 	public void setLife(int life){
 		_life = life;
 	}
-	
+
 	/**
 	 *
 	 * @return  remaining life of bullet (in frames)
@@ -74,7 +74,7 @@ public class Bullet extends Mobile {
 	public int getLife(){
 		return _life;
 	}
-	
+
 	/**
 	 * 
 	 * @param damage set bullet damage to this value
@@ -82,7 +82,7 @@ public class Bullet extends Mobile {
 	public void setDamage(int damage){
 		_damage = damage;
 	}
-	
+
 	/**
 	 *
 	 * @return  damage value of the bullet 
@@ -90,19 +90,24 @@ public class Bullet extends Mobile {
 	public int getDamage(){
 		return _damage;
 	}
-	
+
 	@Override
 	public void update() {
-		//remove if dead
-		if (_life <= 0 || isDead()) {
-			setDead();
-			return;
-		}
-		
+
 		//update life time
 		_life--;
 	}
-	
+
+	@Override
+	public void move() {		
+		//not a super move, just the default move
+		super.move();
+		//update life, then remove if dead
+		_life--;
+		if (_life <= 0)
+			setDead();
+	}
+
 	@Override
 	public void tileCollision(Tile t, String dir) {
 		//break on walls
@@ -110,23 +115,23 @@ public class Bullet extends Mobile {
 			setLife(0);
 		}
 	}
-	
+
 	@Override
 	public void collide(Mobile m, boolean overlap, boolean nextOverlap) {
 		//non-actors and your owner are ignored
 		if (!(m instanceof Actor) || m == _owner)
 			return;
-		
+
 		//cast for convenience
 		Actor a = (Actor)m;
-		
+
 		//do damage
 		a.takeDamage(_damage);
-		
+
 		//vanish
 		setLife(0);
 	}
-	
+
 	@Override
 	public void  draw(List<Sprite> list)
 	{

@@ -24,6 +24,6 @@ public class BulletBasic extends Bullet{
 		//no range limit, for now
 		
 		setDamage(1); //deals 1 damage
-		accelerate(3); //max speed of 3 in each direction
+		accelerate(3.75); //max speed of 3 in each direction
 	}
 }
