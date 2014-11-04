@@ -17,17 +17,35 @@ public class BulletBasicMelee extends Bullet{
 		super(owner, xAxis, yAxis);
 		
 		//set default dimensions
-		setW(15);
-		setH(15);
+		setW(28);
+		setH(28);
 		setD(32);
 		
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 16; i++)
 		{xMove(); yMove();}
 		
 		//Linger for just a few frames
-		setLife(4);
+		setLife(1);
 		
 		setDamage(5); //deals 5 damage
 		accelerate(0); //doesn't move
+	}
+	
+	@Override
+	public void tileCollision(Tile t, String dir) {
+		//Do nothing, ignore walls/etc
+	}
+
+	@Override
+	public void collide(Mobile m, boolean overlap, boolean nextOverlap) {
+		//non-actors and your owner are ignored
+		if (!(m instanceof Actor) || m == getOwner())
+			return;
+		//cast for convenience
+		Actor a = (Actor)m;
+		//do damage
+		a.takeDamage(getDamage());
+		
+		//doesn't vanish!
 	}
 }

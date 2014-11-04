@@ -76,6 +76,21 @@ public abstract class Actor extends Mobile {
 	}
 	
 	/**
+	 * Inflict damage to the actor (with additional effects)
+	 * 
+	 * @param dmg the details of the damage
+	 * 
+	 * @return <1 if damage is resisted, >1 if damage is boosted 
+	 */
+	public int takeDamage(Damage dmg) {
+		takeDamage(dmg.getDamage());
+		setVx(getVx()+dmg.getVx());
+		setVy(getVy()+dmg.getVy());
+		//TODO: Implement hitstun?
+		return 1;
+	}
+	
+	/**
 	 * Heal the actor
 	 * 
 	 * @param healing amount to restore

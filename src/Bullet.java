@@ -101,7 +101,7 @@ public abstract class Bullet extends Mobile {
 
 	@Override
 	public void move() {		
-		//not a super move, just the default move
+		//not a super move, just the default move from the superclass
 		super.move();
 		//update life, then remove if dead
 		_life--;
