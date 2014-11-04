@@ -16,7 +16,9 @@ public class Player extends Actor {
 
 	private Control _c;
 	private int _stamina; //effectively ammo
+	private int _staminaMax = 100; //maximum "ammo
 	private int _fireRate; //delay before firing another bullet
+	private Weapon wep = new WeaponBasic(); //TODO: Make into an array, add swapping!
 
 	/**
 	 * @param start: the room the player starts in
@@ -28,11 +30,13 @@ public class Player extends Actor {
 		setH(28);
 		setD(32);
 		this.getHome().setPlayer(this);
+		
+		//initialize local values
+		_fireRate = 0;
+		_stamina = _staminaMax;
 	}
 
-	/**
-	 * Tell the player to take its actions this frame
-	 */
+	@Override
 	public void update() {
 		//read input
 		int dx = _c.getMove().getX();
@@ -54,16 +58,29 @@ public class Player extends Actor {
 		//fire bullets
 		dx = _c.getShoot().getX();
 		dy = _c.getShoot().getY();
-		if (_fireRate <= 0 && (Math.abs(dx) > 10 || Math.abs(dy) > 10)) {
-			getHome().addMobile(new BulletBasic(this, dx, dy));
-			//TODO: Also add "melee bullet"
-			_fireRate = 12; //twelve frames spacing for now, will be weapon-dependent later
-			//TODO: Implement stamina
+		if (_fireRate <= 0 && _stamina > 0 && (Math.abs(dx) > 10 || Math.abs(dy) > 10)) {
+			wep.fire(getHome(), this, dx, dy);
 		}
-		
+		else if (_stamina < _staminaMax)
+			_stamina++;
+
 		_fireRate--;
 	}
 
+	/**
+	 * @param t Time before another shot can be fired
+	 */
+	public void setFireDelay(int t) {
+		_fireRate = t;
+	}
+	
+	/**
+	 * @param s the amount of stamina consumed
+	 */
+	public void useStamina(int s) {
+		_stamina -= s;
+	}
+	
 	@Override
 	public void tileCollision(Tile t, String dir) {
 		//solid wall collisions
@@ -87,18 +104,15 @@ public class Player extends Actor {
 		}
 	}
 	
+	@Override
 	public void setHome(Room home) {
 		getHome().setPlayer(null);
 		super.setHome(home);
 		getHome().setPlayer(this);
 	}
 
-	/**
-	 * Generate the player's sprite for this frame
-	 * 
-	 * @param list: the list of sprites to add to
-	 */
-	public void  draw(List<Sprite> list)
+	@Override
+	public void draw(List<Sprite> list)
 	{
 		Sprite s = new Sprite(getLeft()-2, getTop()-2, getW()+4, getH()+4, 0, 0, 0, "hero");
 		list.add(s);

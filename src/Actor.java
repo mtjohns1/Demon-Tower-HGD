@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.*;
 
-public class Actor extends Mobile {	
+public abstract class Actor extends Mobile {	
 	
 	private int _hp, _hpMax;
 	

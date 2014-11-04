@@ -12,7 +12,7 @@ import java.awt.*;
 import java.io.*;
 import java.util.List;
 
-public class Bullet extends Mobile {
+public abstract class Bullet extends Mobile {
 
 	private int _life;
 	private int _damage;
@@ -21,7 +21,7 @@ public class Bullet extends Mobile {
 	/**
 	 * Public constructor
 	 * 
-	 * @param owner the object that created the bullet
+	 * @param owner the object that created/owns the bullet
 	 * @param xAxis the initial x velocity of the bullet
 	 * @param yAxis the initial y velocity of the bullet
 	 */
@@ -33,9 +33,9 @@ public class Bullet extends Mobile {
 		setVy(yAxis);
 		decelerate(100); //set range between -1 and 1
 
-		//overlapping centers
-		setX(owner.getX());
-		setY(owner.getY());
+		//spawn just out from the center
+		setX(owner.getX()+xAxis/20);
+		setY(owner.getY()+yAxis/20);
 		setZ(owner.getZ());
 
 		_owner = owner;
@@ -43,8 +43,9 @@ public class Bullet extends Mobile {
 		_damage = 0; //no damage if unspecified
 	}
 
+	//TODO: Add specific method / parameter for specifying an offset from the player 
+	
 	/**
-	 * 
 	 * @param owner set who owns the bullet
 	 */
 	public void setOwner(Mobile owner){
@@ -133,7 +134,7 @@ public class Bullet extends Mobile {
 	}
 
 	@Override
-	public void  draw(List<Sprite> list)
+	public void draw(List<Sprite> list)
 	{
 		Sprite s = new Sprite(getLeft(), getTop(), getW(), getH(), 0, 0, 0, "tempWall");
 		list.add(s);

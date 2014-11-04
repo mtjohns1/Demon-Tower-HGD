@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.*;
 
-public class Enemy extends Actor {
+public abstract class Enemy extends Actor {
 	
 	public Enemy(Room home) {
 		super(home);

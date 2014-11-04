@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.*;
 
-public class Effects extends Mobile {
+public abstract class Effects extends Mobile {
 
 	public Effects(Room home) {
 		super(home);

@@ -165,9 +165,7 @@ public abstract class Mobile {
 	/**
 	 * Tell the object to decide its actions this frame
 	 */
-	public void update() {
-		//TODO: Probably make this abstract!
-	}
+	public abstract void update();
 
 	/**
 	 * Manage collisions with a tile
@@ -175,9 +173,7 @@ public abstract class Mobile {
 	 * @param t: the Tile object collided with
 	 * @param dir: the direction of the collision
 	 */
-	public void tileCollision(Tile t, String dir) {
-		//TODO: Probably make this abstract!
-	}
+	public abstract void tileCollision(Tile t, String dir);
 	
 	/**
 	 * Check if this object is currently overlapping another
@@ -251,9 +247,7 @@ public abstract class Mobile {
 	 * 
 	 * @param g: graphics object to use for drawing
 	 */
-	public void draw(List<Sprite> l) {
-		//TODO: Probably make this abstract!
-	}
+	public abstract void draw(List<Sprite> l);
 
 	/**
 	 * @return true if the object is dead
