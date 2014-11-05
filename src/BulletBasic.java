@@ -14,7 +14,7 @@ public class BulletBasic extends Bullet{
 	 * @param yAxis the initial y velocity of the bullet
 	 */
 	public BulletBasic(Mobile owner, int xAxis, int yAxis) {
-		super(owner, xAxis, yAxis);
+		super(owner, xAxis, yAxis, 8);
 		
 		//set default dimensions
 		setW(10);
@@ -24,6 +24,6 @@ public class BulletBasic extends Bullet{
 		//no range limit, for now
 		
 		setDamage(1); //deals 1 damage
-		accelerate(3.75); //max speed of 3 in each direction
+		accelerate(5); //max speed
 	}
 }

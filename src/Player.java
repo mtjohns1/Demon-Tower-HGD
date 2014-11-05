@@ -43,27 +43,31 @@ public class Player extends Actor {
 		int dy = _c.getMove().getY();
 
 		//apply acceleration
-		if (dx > 10)
-			setVx(getVx()+5);
-		else if (dx < -10)
-			setVx(getVx()-5);
-		if (dy > 10)
-			setVy(getVy()+5);
-		else if (dy < -10)
-			setVy(getVy()-5);
-
+		if (Math.abs(dx) > 10 || Math.abs(dy) > 10) {
+			Direction dir = new Direction(dx, dy);
+			setVx(getVx()+dir.getX()*5);
+			setVy(getVy()+dir.getY()*5);
+		}
+		
 		//apply deceleration
 		decelerate(2);
-		
+
 		//fire bullets
 		dx = _c.getShoot().getX();
 		dy = _c.getShoot().getY();
-		if (_fireRate <= 0 && _stamina > 0 && (Math.abs(dx) > 10 || Math.abs(dy) > 10)) {
+		if (_fireRate < 0 && _stamina > 0 && (Math.abs(dx) > 10 || Math.abs(dy) > 10)) {
 			wep.fire(getHome(), this, dx, dy);
 		}
-		else if (_stamina < _staminaMax)
+		//recover stamina while not firing
+		else if (_fireRate < 0)
 			_stamina++;
 
+		//cap maximum stamina
+		if (_stamina > _staminaMax) {
+			_stamina = _staminaMax;
+		}
+		
+		//count down to next shot
 		_fireRate--;
 	}
 

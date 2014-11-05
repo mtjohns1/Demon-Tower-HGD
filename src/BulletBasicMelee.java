@@ -14,15 +14,12 @@ public class BulletBasicMelee extends Bullet{
 	 * @param yAxis the initial y velocity of the bullet
 	 */
 	public BulletBasicMelee(Mobile owner, int xAxis, int yAxis) {
-		super(owner, xAxis, yAxis);
+		super(owner, xAxis, yAxis, 24);
 		
-		//set default dimensions
+		//set dimensions
 		setW(28);
 		setH(28);
 		setD(32);
-		
-		for (int i = 0; i < 16; i++)
-		{xMove(); yMove();}
 		
 		//Linger for just a few frames
 		setLife(1);

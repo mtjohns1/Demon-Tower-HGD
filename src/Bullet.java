@@ -25,17 +25,17 @@ public abstract class Bullet extends Mobile {
 	 * @param xAxis the initial x velocity of the bullet
 	 * @param yAxis the initial y velocity of the bullet
 	 */
-	public Bullet(Mobile owner, int xAxis, int yAxis) {
+	public Bullet(Mobile owner, int xAxis, int yAxis, int offset) {
 		super(owner.getHome());
 
 		//direction input as speed if unspecified
-		setVx(xAxis);
-		setVy(yAxis);
-		decelerate(100); //set range between -1 and 1
+		Direction dir = new Direction(xAxis, yAxis);
+		setVx(dir.getX());
+		setVy(dir.getY());
 
 		//spawn just out from the center
-		setX(owner.getX()+xAxis/20);
-		setY(owner.getY()+yAxis/20);
+		setX(owner.getX()+(int)(dir.getX()*offset));
+		setY(owner.getY()+(int)(dir.getY()*offset));
 		setZ(owner.getZ());
 
 		_owner = owner;
