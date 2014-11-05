@@ -10,12 +10,13 @@ public class WeaponBasic extends Weapon {
 	 * Public constructor
 	 */
 	public WeaponBasic() {
-		super(23, 8);
+		super(23, 8, "Test Weapon");
 	}
 	
 	@Override
-	public void fire(Room r, Player p, int xAxis, int yAxis) {
+	public void fire(Player p, int xAxis, int yAxis) {
 		_spend(p);
+		Room r = p.getHome();
 		r.addMobile(new BulletBasicMelee(p, xAxis, yAxis));
 		r.addMobile(new BulletBasic(p, xAxis, yAxis));
 	}

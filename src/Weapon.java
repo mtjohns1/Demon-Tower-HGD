@@ -7,6 +7,7 @@
 public abstract class Weapon {
 	private int _cost;
 	private int _rate;
+	private String _name;
 	
 	/**
 	 * Basic constructor others feed from
@@ -14,9 +15,10 @@ public abstract class Weapon {
 	 * @param c the MP cost of firing a shot
 	 * @param r the number of frames between shots
 	 */
-	public Weapon(int c, int r) {
+	public Weapon(int c, int r, String name) {
 		_cost = c;
 		_rate = r;
+		_name = name;
 	}
 	
 	/**
@@ -29,5 +31,19 @@ public abstract class Weapon {
 		p.useStamina(_cost);
 	}
 	
-	public abstract void fire(Room r, Player p, int xAxis, int yAxis);
+	/**
+	 * Fire in a direction
+	 * 
+	 * @param p the player wielding the weapon
+	 * @param xAxis the x direction of fire
+	 * @param yAxis the y direction of fire
+	 */
+	public abstract void fire(Player p, int xAxis, int yAxis);
+	
+	/**
+	 * @return the weapon's name
+	 */
+	public String getName() {
+		return _name;
+	}
 }

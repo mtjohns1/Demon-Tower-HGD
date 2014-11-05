@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 
 import java.awt.*;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player extends Actor {
@@ -18,7 +19,8 @@ public class Player extends Actor {
 	private int _stamina; //effectively ammo
 	private int _staminaMax = 100; //maximum "ammo
 	private int _fireRate; //delay before firing another bullet
-	private Weapon wep = new WeaponBasic(); //TODO: Make into an array, add swapping!
+	private int _equip; //which weapon you currently have equipped
+	private ArrayList<Weapon> _wep = new ArrayList<Weapon>(); //array of weapons you can use
 
 	/**
 	 * @param start: the room the player starts in
@@ -30,6 +32,10 @@ public class Player extends Actor {
 		setH(28);
 		setD(32);
 		this.getHome().setPlayer(this);
+		
+		//add default weapon
+		_wep.add(new WeaponBasic());
+		_equip = 0;
 		
 		//initialize local values
 		_fireRate = 0;
@@ -56,7 +62,7 @@ public class Player extends Actor {
 		dx = _c.getShoot().getX();
 		dy = _c.getShoot().getY();
 		if (_fireRate < 0 && _stamina > 0 && (Math.abs(dx) > 10 || Math.abs(dy) > 10)) {
-			wep.fire(getHome(), this, dx, dy);
+			_wep.get(_equip).fire(this, dx, dy);
 		}
 		//recover stamina while not firing
 		else if (_fireRate < 0)
@@ -83,6 +89,27 @@ public class Player extends Actor {
 	 */
 	public void useStamina(int s) {
 		_stamina -= s;
+	}
+	
+	/**
+	 * @return the index of the currently equipped weapon
+	 */
+	public int getEquip() {
+		return _equip;
+	}
+	
+	/**
+	 * @return the list of weapons the player has
+	 */
+	public ArrayList<Weapon> getWeapons() {
+		return _wep;
+	}
+	
+	/**
+	 * @param w the weapon to add to the player's collection
+	 */
+	public void addWeapon(Weapon w) {
+		_wep.add(w);
 	}
 	
 	@Override
