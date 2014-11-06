@@ -42,6 +42,7 @@ public class BulletBasicMelee extends Bullet{
 		Actor a = (Actor)m;
 		//do damage
 		a.takeDamage(getDamage());
+		//TODO: Generate damage object instead
 		
 		//doesn't vanish!
 	}

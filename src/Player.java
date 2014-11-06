@@ -53,11 +53,13 @@ public class Player extends Actor {
 			Direction dir = new Direction(dx, dy);
 			setVx(getVx()+dir.getX()*5);
 			setVy(getVy()+dir.getY()*5);
-		}
-		
-		//apply deceleration
-		decelerate(2);
+		}		
+		//apply friction
+		accelerate(0.5);
 
+		//TODO: if (_c.weaponchangeright) cycleWeaponRight();
+		//TODO: if (_c.weaponchangeleft) cycleWeaponLeft();
+		
 		//fire bullets
 		dx = _c.getShoot().getX();
 		dy = _c.getShoot().getY();
@@ -110,6 +112,28 @@ public class Player extends Actor {
 	 */
 	public void addWeapon(Weapon w) {
 		_wep.add(w);
+	}
+	
+	/**
+	 * Cycle equipped weapons to the left
+	 * 
+	 * @return the new equipped weapon
+	 */
+	public int cycleWeaponLeft() {
+		_equip--;
+		if (_equip < 0) _equip = _wep.size()-1;
+		return getEquip();
+	}
+	
+	/**
+	 * Cycle equipped weapons to the right
+	 * 
+	 * @return the new equipped weapon
+	 */
+	public int cycleWeaponRight() {
+		_equip++;
+		if (_equip >= _wep.size()) _equip = 0;
+		return getEquip();
 	}
 	
 	@Override

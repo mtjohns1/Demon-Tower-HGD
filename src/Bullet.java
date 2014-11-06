@@ -128,6 +128,7 @@ public abstract class Bullet extends Mobile {
 
 		//do damage
 		a.takeDamage(_damage);
+		//TODO: Generate damage object instead
 
 		//vanish
 		setLife(0);
