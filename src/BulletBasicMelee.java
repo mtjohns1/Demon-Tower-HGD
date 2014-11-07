@@ -1,10 +1,9 @@
 /**
- * basic bullet, travels straight stops at walls and does basic damage.
- * @author Matthew_J
+ * basic bullet melee bullet, doesn't move and vanishes after a single frame
  * @author Jacob Charles
  *
  */
-public class BulletBasicMelee extends Bullet{
+public class BulletBasicMelee extends BulletMelee{
 
 	/**
 	 * Standard public constructor
@@ -14,7 +13,7 @@ public class BulletBasicMelee extends Bullet{
 	 * @param yAxis the initial y velocity of the bullet
 	 */
 	public BulletBasicMelee(Mobile owner, int xAxis, int yAxis) {
-		super(owner, xAxis, yAxis, 24);
+		super(owner, xAxis, yAxis, 16);
 		
 		//set dimensions
 		setW(28);
@@ -23,27 +22,9 @@ public class BulletBasicMelee extends Bullet{
 		
 		//Linger for just a few frames
 		setLife(1);
-		
-		setDamage(5); //deals 5 damage
-		accelerate(0); //doesn't move
-	}
-	
-	@Override
-	public void tileCollision(Tile t, String dir) {
-		//Do nothing, ignore walls/etc
-	}
-
-	@Override
-	public void collide(Mobile m, boolean overlap, boolean nextOverlap) {
-		//non-actors and your owner are ignored
-		if (!(m instanceof Actor) || m == getOwner())
-			return;
-		//cast for convenience
-		Actor a = (Actor)m;
-		//do damage
-		a.takeDamage(getDamage());
-		//TODO: Generate damage object instead
-		
-		//doesn't vanish!
+		//get direction again
+		Direction dir = new Direction(xAxis, yAxis);
+		setDamage(2); //deals slightly boosted damage
+		setKnockback(dir.getX()*5, dir.getY()*5); //force back a lot
 	}
 }

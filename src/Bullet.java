@@ -16,6 +16,7 @@ public abstract class Bullet extends Mobile {
 
 	private int _life;
 	private int _damage;
+	private double _kvx,_kvy;
 	private Mobile _owner;
 
 	/**
@@ -24,6 +25,7 @@ public abstract class Bullet extends Mobile {
 	 * @param owner the object that created/owns the bullet
 	 * @param xAxis the initial x velocity of the bullet
 	 * @param yAxis the initial y velocity of the bullet
+	 * @param offset the distance from the owner it spawns
 	 */
 	public Bullet(Mobile owner, int xAxis, int yAxis, int offset) {
 		super(owner.getHome());
@@ -33,7 +35,7 @@ public abstract class Bullet extends Mobile {
 		setVx(dir.getX());
 		setVy(dir.getY());
 
-		//spawn just out from the center
+		//spawn offset from the center
 		setX(owner.getX()+(int)(dir.getX()*offset));
 		setY(owner.getY()+(int)(dir.getY()*offset));
 		setZ(owner.getZ());
@@ -41,6 +43,7 @@ public abstract class Bullet extends Mobile {
 		_owner = owner;
 		_life = Integer.MAX_VALUE; //infinite range if unspecified
 		_damage = 0; //no damage if unspecified
+		_kvx = _kvy = 0; //no knockback if unspecified
 	}
 
 	//TODO: Add specific method / parameter for specifying an offset from the player 
@@ -86,12 +89,38 @@ public abstract class Bullet extends Mobile {
 
 	/**
 	 *
-	 * @return  damage value of the bullet 
+	 * @return damage value of the bullet 
 	 */
 	public int getDamage(){
 		return _damage;
 	}
 
+	/**
+	 * 
+	 * @param kvx new horizontal knockback of the bullet
+	 * @param kvy new vertical knockback of the bullet
+	 */
+	public void setKnockback(double kvx, double kvy) {
+		_kvx = kvx;
+		_kvy = kvy;
+	}
+	
+	/**
+	 * 
+	 * @return the horizontal knockback
+	 */
+	public double getKnockbackX() {
+		return _kvx;
+	}
+	
+	/**
+	 * 
+	 * @return the vertical knockback
+	 */
+	public double getKnockbackY() {
+		return _kvy;
+	}
+	
 	@Override
 	public void update() {
 
@@ -127,8 +156,8 @@ public abstract class Bullet extends Mobile {
 		Actor a = (Actor)m;
 
 		//do damage
-		a.takeDamage(_damage);
-		//TODO: Generate damage object instead
+		//a.takeDamage(_damage);
+		a.takeDamage(new Damage(getDamage(), getKnockbackX(), getKnockbackY()));
 
 		//vanish
 		setLife(0);

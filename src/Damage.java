@@ -5,7 +5,7 @@
  */
 public class Damage {
 	private int _damage; //HP loss
-	private int _fx, _fy; //knockback / force
+	private double _fx, _fy; //knockback / force
 	private int _stun; //hitstun
 	//TODO: Figure out what all properties are needed, and how to organize?
 	
@@ -16,7 +16,7 @@ public class Damage {
 		_stun = 0;
 	}
 	
-	public Damage(int dmg, int vx, int vy) {
+	public Damage(int dmg, double vx, double vy) {
 		_damage = dmg;
 		_fx = vx;
 		_fy = vy;
@@ -30,7 +30,7 @@ public class Damage {
 		_stun = stun;
 	}
 	
-	public Damage(int dmg, int vx, int vy, int stun) {
+	public Damage(int dmg, double vx, double vy, int stun) {
 		_damage = dmg;
 		_fx = vx;
 		_fy = vy;
@@ -47,14 +47,14 @@ public class Damage {
 	/**
 	 * @return horizontal velocity (knockback)
 	 */
-	public int getVx() {
+	public double getVx() {
 		return _fx;
 	}
 	
 	/**
 	 * @return vertical velocity (knockback)
 	 */
-	public int getVy() {
+	public double getVy() {
 		return _fy;
 	}
 	
