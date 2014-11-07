@@ -14,6 +14,7 @@ import java.io.*;
 public abstract class Actor extends Mobile {	
 	
 	private int _hp, _hpMax;
+	private int _stun = 0, _mercy = 0;
 	
 	/**
 	 * @param home: the room the object is inside
@@ -83,10 +84,13 @@ public abstract class Actor extends Mobile {
 	 * @return <1 if damage is resisted, >1 if damage is boosted 
 	 */
 	public int takeDamage(Damage dmg) {
+		
+		if (isMercy()) return 0; //no damage under mercy invincibility
+		
 		takeDamage(dmg.getDamage());
 		setVx(getVx()+dmg.getVx());
 		setVy(getVy()+dmg.getVy());
-		//TODO: Implement hitstun?
+		stun(dmg.getStun());
 		return 1;
 	}
 	
@@ -103,5 +107,51 @@ public abstract class Actor extends Mobile {
 		if (_hp > _hpMax) _hp = _hpMax; //avoid over-heal
 		
 		return healing; //not all versions will heal fully
+	}
+	
+	/**
+	 * Stun the actor for a number of frames
+	 * 
+	 * @param time the duration of the stun
+	 */
+	public void stun(int time) {
+		_stun += time;
+	}
+	
+	/**
+	 * remove stun conditions from the actor
+	 */
+	public void endStun() {
+		_stun = 0;
+	}
+	
+	/**
+	 * @return true if the actor is stunned
+	 */
+	public boolean isStunned() {
+		return (_stun > 0);
+	}
+	
+	/**
+	 * Provide mercy invincibility for a number of frames
+	 * 
+	 * @param time the duration of the stun
+	 */
+	public void mercy(int time) {
+		_stun += time;
+	}
+	
+	/**
+	 * remove mercy conditions from the actor
+	 */
+	public void endMercy() {
+		_stun = 0;
+	}
+	
+	/**
+	 * @return true if the actor is in mercy state
+	 */
+	public boolean isMercy() {
+		return (_stun > 0);
 	}
 }
