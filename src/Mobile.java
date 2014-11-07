@@ -144,8 +144,6 @@ public abstract class Mobile {
 	 * @param a the acceleration multiplier
 	 */
 	public void accelerate(double a) {
-		//_vx *= a;
-		//_vy *= a;
 		setVx(_vx*a);
 		setVy(_vy*a);
 	}
@@ -156,8 +154,6 @@ public abstract class Mobile {
 	 * @param d the deceleration divisor
 	 */
 	public void decelerate(double d) {
-		//_vx /= d;
-		//_vy /= d;
 		setVx(_vx/d);
 		setVy(_vy/d);
 	}

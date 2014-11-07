@@ -32,6 +32,6 @@ public class BulletMelee extends Bullet{
 		//cast for convenience
 		Actor a = (Actor)m;
 		//do damage
-		a.takeDamage(new Damage(getDamage(), getKnockbackX(), getKnockbackY()));
+		a.takeDamage(new Damage(getDamage(), getKnockbackX(), getKnockbackY(), getStun()));
 	}
 }

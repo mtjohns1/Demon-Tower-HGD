@@ -17,6 +17,7 @@ public abstract class Bullet extends Mobile {
 	private int _life;
 	private int _damage;
 	private double _kvx,_kvy;
+	private int _stun;
 	private Mobile _owner;
 
 	/**
@@ -44,6 +45,7 @@ public abstract class Bullet extends Mobile {
 		_life = Integer.MAX_VALUE; //infinite range if unspecified
 		_damage = 0; //no damage if unspecified
 		_kvx = _kvy = 0; //no knockback if unspecified
+		_stun = 0; //no stun effect if unspecified
 	}
 
 	//TODO: Add specific method / parameter for specifying an offset from the player 
@@ -56,7 +58,6 @@ public abstract class Bullet extends Mobile {
 	}
 
 	/**
-	 * 
 	 * @return the person who shot/owns the bullet
 	 */
 	public Mobile getOwner(){
@@ -64,7 +65,6 @@ public abstract class Bullet extends Mobile {
 	}
 
 	/**
-	 * 
 	 * @param life set bullet life to this value (in frames)
 	 */
 	public void setLife(int life){
@@ -72,7 +72,6 @@ public abstract class Bullet extends Mobile {
 	}
 
 	/**
-	 *
 	 * @return  remaining life of bullet (in frames)
 	 */
 	public int getLife(){
@@ -80,7 +79,6 @@ public abstract class Bullet extends Mobile {
 	}
 
 	/**
-	 * 
 	 * @param damage set bullet damage to this value
 	 */
 	public void setDamage(int damage){
@@ -88,7 +86,6 @@ public abstract class Bullet extends Mobile {
 	}
 
 	/**
-	 *
 	 * @return damage value of the bullet 
 	 */
 	public int getDamage(){
@@ -96,7 +93,6 @@ public abstract class Bullet extends Mobile {
 	}
 
 	/**
-	 * 
 	 * @param kvx new horizontal knockback of the bullet
 	 * @param kvy new vertical knockback of the bullet
 	 */
@@ -106,7 +102,6 @@ public abstract class Bullet extends Mobile {
 	}
 	
 	/**
-	 * 
 	 * @return the horizontal knockback
 	 */
 	public double getKnockbackX() {
@@ -114,20 +109,26 @@ public abstract class Bullet extends Mobile {
 	}
 	
 	/**
-	 * 
 	 * @return the vertical knockback
 	 */
 	public double getKnockbackY() {
 		return _kvy;
 	}
-	
-	@Override
-	public void update() {
 
-		//update life time
-		_life--;
+	/**
+	 * @param stun new stun duration of the bullet
+	 */
+	public void setStun(int stun) {
+		_stun = stun;
 	}
-
+	
+	/**
+	 * @return stun time of the bullet 
+	 */
+	public int getStun(){
+		return _stun;
+	}
+	
 	@Override
 	public void move() {		
 		//not a super move, just the default move from the superclass
@@ -136,6 +137,11 @@ public abstract class Bullet extends Mobile {
 		_life--;
 		if (_life <= 0)
 			setDead();
+	}
+	
+	@Override
+	public void update() {
+		//Blank method by default, most bullets won't use it
 	}
 
 	@Override
@@ -149,15 +155,14 @@ public abstract class Bullet extends Mobile {
 	@Override
 	public void collide(Mobile m, boolean overlap, boolean nextOverlap) {
 		//non-actors and your owner are ignored
-		if (!(m instanceof Actor) || m == _owner)
+		if (!(m instanceof Actor) || m == getOwner())
 			return;
 
 		//cast for convenience
 		Actor a = (Actor)m;
 
 		//do damage
-		//a.takeDamage(_damage);
-		a.takeDamage(new Damage(getDamage(), getKnockbackX(), getKnockbackY()));
+		a.takeDamage(new Damage(getDamage(), getKnockbackX(), getKnockbackY(), getStun()));
 
 		//vanish
 		setLife(0);
