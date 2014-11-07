@@ -1,5 +1,5 @@
 /**
- * basic bullet melee bullet, doesn't move and vanishes after a single frame
+ * basic melee bullet, minor knockback and boosted damage
  * @author Jacob Charles
  *
  */

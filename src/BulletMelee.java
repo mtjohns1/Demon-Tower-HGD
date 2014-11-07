@@ -1,5 +1,5 @@
 /**
- * basic bullet melee bullet, doesn't move and vanishes after a single frame
+ * default melee bullet, doesn't move and vanishes after a single frame
  * @author Jacob Charles
  *
  */
