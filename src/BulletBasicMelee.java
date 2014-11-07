@@ -20,8 +20,6 @@ public class BulletBasicMelee extends BulletMelee{
 		setH(28);
 		setD(32);
 		
-		//Linger for just a few frames
-		setLife(1);
 		//get direction again
 		Direction dir = new Direction(xAxis, yAxis);
 		setDamage(2); //deals slightly boosted damage
