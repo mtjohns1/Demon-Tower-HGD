@@ -6,25 +6,24 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 /**
- * This enemy chases player using shortest path, regardless of obsticals
+ * This enemy stand stills and shoots the player
  * @author Matthew_J
  *
  */
-public class EnemyChaser extends Enemy{
+public class EnemyTower extends Enemy{
 
 	private Player player;
-	private int attack, speed;
+	private Weapon wep;
+	private int weaponCoolDown =0;
 	
-	public EnemyChaser(Room home) {
+	public EnemyTower(Room home) {
 		super(home);
 		this.setMaxHp(20);
 
 		this.setHp(5);
 		this.setX(500);
 		this.setY(300);
-
-		attack = 5;
-		speed=4;
+		wep = new WeaponBasic();
 	}
 
 	/**
@@ -32,7 +31,11 @@ public class EnemyChaser extends Enemy{
 	 * @param player
 	 */
 	public void enemyAI(){
-
+		if (weaponCoolDown ==20){
+			weaponCoolDown =0;
+			return;
+		}
+		weaponCoolDown +=1;
 		if(player == null){
 			player = this.getHome().getPlayer();
 			if(player == null){
@@ -56,30 +59,19 @@ public class EnemyChaser extends Enemy{
 		
 		//logic for how to move
 		if(xDif == 0){
-			yMove = speed * ySign;
+			
 		}
 		else if (yDif == 0){
-			xMove = speed * xSign;
+			
 		}
 		else if (Math.abs(xDif) > Math.abs(yDif)){
-			xMove = speed/2 * xSign;
-			yMove = speed/3 * ySign;
+			
 		}
 		else if (Math.abs(xDif) < Math.abs(yDif)){
-			yMove = speed/2 * ySign;
-			xMove = speed/3 * xSign;
+			
 		}
 		else {
-			yMove =speed/2 * ySign;
-			xMove =speed/2 * xSign;
 		}
-		//apply acceleration
-		setVx(getVx()+xMove);
-		setVy(getVy()+yMove);
-		
-		//apply deceleration
-		setVx(getVx()/2);
-		setVy(getVy()/2);
 
 	}
 	
@@ -144,10 +136,6 @@ public class EnemyChaser extends Enemy{
 		Actor a = (Actor)m;
 		//do damage
 		if(a instanceof Player && !(overlap))
-			//a.takeDamage(attack);
-			setVx(-getVx());
-			setVy(-getVy());
-			//a.takeDamage(attack);
 		if((a instanceof Enemy)){
 			
 		}
