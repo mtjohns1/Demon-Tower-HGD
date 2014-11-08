@@ -20,7 +20,7 @@ public class StickMenu implements KeyListener {
 
 	
 	
-	private boolean escape,_q,_e,select =false;
+	private boolean escape,select =false;
 	
 	//empty for testing
 	public StickMenu (){
@@ -29,8 +29,7 @@ public class StickMenu implements KeyListener {
 	
 	/**
 	 * 
-	 * @return horizontal position of the stick
-	 * also returns relative mouse position
+	 * @return true if escape hit
 	 */
 	public boolean escape() {
 		//gets x if stick is mouse
@@ -41,24 +40,11 @@ public class StickMenu implements KeyListener {
 
 	/**
 	 * 
-	 * @return vertical position of the stick
-	 * also returns relative mouse position
+	 * @return true if enter hit
 	 */
 	public boolean select() {
 		//gets y if stick is mouse
 		return select;
-	}
-	
-	/**
-	 * gives mouse location relative to screen
-	 * @return mouseAxis list with 0 = x position 1 = y position
-	 */
-	public boolean cycleLeft(){
-		return _q;
-	}
-	
-	public boolean cycleRight(){
-		return _e;
 	}
 	
 
@@ -74,14 +60,6 @@ public class StickMenu implements KeyListener {
 			select = true;
 		}
 		
-		//if a or left pressed
-		if (arg0.getExtendedKeyCode() == 81){
-			_q =true;
-		}
-		//if d or right pressed
-		else if (arg0.getExtendedKeyCode() == 69){
-			_e = true;
-		}
 	}
 
 	@Override
@@ -97,14 +75,6 @@ public class StickMenu implements KeyListener {
 			select = false;
 		}
 		
-		//if a or left pressed
-		if (arg0.getExtendedKeyCode() == 81){
-			_q =false;
-		}
-		//if d or right pressed
-		else if (arg0.getExtendedKeyCode() == 69){
-			_e = false;
-		}
 	}
 	
 	@Override

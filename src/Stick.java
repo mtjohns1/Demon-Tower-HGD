@@ -18,7 +18,7 @@ import java.awt.event.MouseEvent;
 
 public class Stick implements KeyListener, MouseInputListener {
 
-	
+	private boolean _q,_e =false;
 	
 	private int x0, x1, y0, y1;
 	private int[] mouseAxis = {-1,1};
@@ -85,6 +85,21 @@ public class Stick implements KeyListener, MouseInputListener {
 		return mouseAxis;
 	}
 
+	/**
+	 * 
+	 * @return true if q is hit
+	 */
+	public boolean cycleLeft(){
+		return _q;
+	}
+	/**
+	 * 
+	 * @return true if e is hit
+	 */
+	public boolean cycleRight(){
+		return _e;
+	}
+	
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
@@ -105,6 +120,15 @@ public class Stick implements KeyListener, MouseInputListener {
 		//if d or right pressed
 		else if (arg0.getExtendedKeyCode() == keys[3]){
 			x0 = 100;
+		}
+
+		//if a or left pressed
+		if (arg0.getExtendedKeyCode() == 81){
+			_q =true;
+		}
+		//if d or right pressed
+		else if (arg0.getExtendedKeyCode() == 69){
+			_e = true;
 		}
 	}
 
@@ -127,6 +151,16 @@ public class Stick implements KeyListener, MouseInputListener {
 		//if d or right pressed
 		else if (arg0.getExtendedKeyCode() == keys[3]){
 			x0 = 0;
+		}
+		
+
+		//if a or left pressed
+		if (arg0.getExtendedKeyCode() == 81){
+			_q =false;
+		}
+		//if d or right pressed
+		else if (arg0.getExtendedKeyCode() == 69){
+			_e = false;
 		}
 	}
 	

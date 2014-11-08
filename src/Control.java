@@ -90,6 +90,14 @@ public class Control {
 		this._shoot = shoot;
 	}	
 	
+	public void setMenu(StickMenu menu ){
+		_menu = menu;
+	}
+	
+	public StickMenu getMenu(){
+		return _menu;
+	}
+	
 	/**
 	 * 
 	 * @param playerObject player object to set mouse listener to
