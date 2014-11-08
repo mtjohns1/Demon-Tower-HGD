@@ -5,7 +5,7 @@
  */
 public class Direction {
 
-	private double _x, _y;
+	private double _x, _y, _d;
 	
 	/**
 	 * Take two components and create a vector in the same direction with a length of 1
@@ -14,9 +14,9 @@ public class Direction {
 	 * @param y original y component
 	 */
 	public Direction(double x, double y) {
-		double d = Math.sqrt(x*x+y*y);
-		_x = x/d;
-		_y = y/d;
+		_d = Math.sqrt(x*x+y*y);
+		_x = x/_d;
+		_y = y/_d;
 	}
 	
 	/**
@@ -31,5 +31,12 @@ public class Direction {
 	 */
 	public double getY() {
 		return _y;
+	}
+	
+	/**
+	 * @return the original length of the vector, pre-normalization
+	 */
+	public double getLength() {
+		return _d;
 	}
 }

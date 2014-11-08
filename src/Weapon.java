@@ -1,5 +1,5 @@
 /**
- * A base class for managing different weapons via object
+ * A base class for managing the player's different weapons via object
  * 
  * @author Jacob Charles
  */

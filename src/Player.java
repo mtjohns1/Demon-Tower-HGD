@@ -21,6 +21,7 @@ public class Player extends Actor {
 	private int _fireRate; //delay before firing another bullet
 	private int _equip; //which weapon you currently have equipped
 	private ArrayList<Weapon> _wep = new ArrayList<Weapon>(); //array of weapons you can use
+	private boolean _debounce = false; //prevent repeated input from held keys
 
 	/**
 	 * @param start: the room the player starts in
@@ -32,12 +33,16 @@ public class Player extends Actor {
 		setH(28);
 		setD(32);
 		this.getHome().setPlayer(this);
-		
+
+		//hitpoints!
+		setMaxHp(10);
+		setHp(10);
+
 		//add default weapon
 		_wep.add(new WeaponBasic());
 		_wep.add(new WeaponGrapple()); //grappling hook test TODO: remove, add via level
 		_equip = 0;
-		
+
 		//initialize local values
 		_fireRate = 0;
 		_stamina = _staminaMax;
@@ -48,7 +53,7 @@ public class Player extends Actor {
 		//read input
 		int dx = _c.getMove().getX();
 		int dy = _c.getMove().getY();
-
+		if (isStunned()) {dx = 0; dy = 0;}
 		//apply acceleration
 		if (Math.abs(dx) > 10 || Math.abs(dy) > 10) {
 			Direction dir = new Direction(dx, dy);
@@ -58,12 +63,19 @@ public class Player extends Actor {
 		//apply friction
 		accelerate(0.5);
 
-		//TODO: if (_c.weaponchangeright) cycleWeaponRight();
-		//TODO: if (_c.weaponchangeleft) cycleWeaponLeft();
-		
+		//change weapons
+		if (isStunned()) {_debounce = true;}
+		if (!_debounce)
+		{
+			if (_c.getShoot().cycleRight()) cycleWeaponRight();
+			if (_c.getShoot().cycleLeft()) cycleWeaponLeft();
+		}
+		_debounce = (_c.getShoot().cycleRight() || _c.getShoot().cycleLeft());
+
 		//fire bullets
 		dx = _c.getShoot().getX();
 		dy = _c.getShoot().getY();
+		if (isStunned()) {dx = 0; dy = 0;}
 		if (_fireRate < 0 && _stamina > 0 && (Math.abs(dx) > 10 || Math.abs(dy) > 10)) {
 			_wep.get(_equip).fire(this, dx, dy);
 		}
@@ -75,9 +87,16 @@ public class Player extends Actor {
 		if (_stamina > _staminaMax) {
 			_stamina = _staminaMax;
 		}
-		
+
 		//count down to next shot
 		_fireRate--;
+	}
+	
+	@Override
+	public int takeDamage(Damage dmg) {
+		int result = super.takeDamage(dmg);
+		if (result >= 1) mercy(35); //apply mercy invincibility
+		return result;
 	}
 
 	/**
@@ -86,35 +105,35 @@ public class Player extends Actor {
 	public void setFireDelay(int t) {
 		_fireRate = t;
 	}
-	
+
 	/**
 	 * @param s the amount of stamina consumed
 	 */
 	public void useStamina(int s) {
 		_stamina -= s;
 	}
-	
+
 	/**
 	 * @return the index of the currently equipped weapon
 	 */
 	public int getEquip() {
 		return _equip;
 	}
-	
+
 	/**
 	 * @return the list of weapons the player has
 	 */
 	public ArrayList<Weapon> getWeapons() {
 		return _wep;
 	}
-	
+
 	/**
 	 * @param w the weapon to add to the player's collection
 	 */
 	public void addWeapon(Weapon w) {
 		_wep.add(w);
 	}
-	
+
 	/**
 	 * Cycle equipped weapons to the left
 	 * 
@@ -125,7 +144,7 @@ public class Player extends Actor {
 		if (_equip < 0) _equip = _wep.size()-1;
 		return getEquip();
 	}
-	
+
 	/**
 	 * Cycle equipped weapons to the right
 	 * 
@@ -136,7 +155,7 @@ public class Player extends Actor {
 		if (_equip >= _wep.size()) _equip = 0;
 		return getEquip();
 	}
-	
+
 	@Override
 	public void tileCollision(Tile t, String dir) {
 		//solid wall collisions
@@ -159,7 +178,7 @@ public class Player extends Actor {
 			}
 		}
 	}
-	
+
 	@Override
 	public void setHome(Room home) {
 		getHome().setPlayer(null);
