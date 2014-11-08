@@ -61,6 +61,31 @@ public class Room {
 		this.player = p;
 	}
 
+	/**
+	 * @return y coordinate of the top edge
+	 */
+	public int getTop() {
+		return 0;
+	}
+	/**
+	 * @return y coordinate of the bottom edge
+	 */
+	public int getBottom() {
+		return height-1;
+	}
+	/**
+	 * @return x coordinate of the left edge
+	 */
+	public int getLeft() {
+		return 0;
+	}
+	/**
+	 * @return x coordinate of the right edge
+	 */
+	public int getRight() {
+		return width-1;
+	}
+	
 	public String getEast()
 	{
 		if(player != null && this.player.getRight() > 600)

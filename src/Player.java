@@ -88,6 +88,8 @@ public class Player extends Actor {
 			_stamina = _staminaMax;
 		}
 
+		//TODO: Add z-coordinate physics
+		
 		//count down to next shot
 		_fireRate--;
 	}
