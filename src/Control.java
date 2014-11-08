@@ -15,10 +15,13 @@ public class Control {
 
 	private Stick _move;
 	private Stick _shoot;
+	private StickMenu _menu;
 	
 	private Stick wsad;
 	private Stick arrow;
 	private Stick mouse;
+	
+	
 	//wsad, arrows, joysticks, etc as well
 	
 	private Mobile player = null;
@@ -35,6 +38,7 @@ public class Control {
 		arrow = new Stick(arrowList);
 		mouse = new Stick(player);
 		
+		_menu = new StickMenu();
 		_move = wsad;
 		_shoot = arrow;
 	}
@@ -47,6 +51,7 @@ public class Control {
 	public void init(JFrame frame) {
 		frame.addKeyListener(wsad);
 		frame.addKeyListener(arrow);
+		frame.addKeyListener(_menu);
 	}
 	/**
 	 * starter for keyboard
