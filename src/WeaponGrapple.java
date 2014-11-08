@@ -17,7 +17,6 @@ public class WeaponGrapple extends Weapon {
 	public void fire(Player p, int xAxis, int yAxis) {
 		_spend(p);
 		Room r = p.getHome();
-		r.addMobile(new BulletBasicMelee(p, xAxis, yAxis));
 		r.addMobile(new BulletGrapple(p, xAxis, yAxis));
 	}
 }
