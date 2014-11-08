@@ -40,11 +40,11 @@ public abstract class Mobile {
 		_vx = 0;
 		_vy = 0;
 		_vz = 0;
-		
+
 		_x = 0;
 		_y = 0;
 		_z = 0;
-		
+
 		_w = 0;
 		_h = 0;
 		_d = 0;
@@ -74,15 +74,8 @@ public abstract class Mobile {
 
 	/**
 	 * Update position, calls tileCollision for each new tile touched
-	 * Ignores tiles if doesFly() returns true
 	 */
-	public void move() {
-		//flying objects skip collisions
-		if (doesFly()) {
-			flyMove();
-			return;
-		}
-		
+	public void landMove() {
 		//moving left
 		if (getNextLeft()/32 < getLeft()/32) {
 			for (Tile t : getHome().getRange(getNextLeft()/32, getTop()/32, getNextLeft()/32, getBottom()/32)) {
@@ -118,6 +111,19 @@ public abstract class Mobile {
 	}
 
 	/**
+	 * Update position, calls tileCollision for each new tile touched
+	 * Ignores tiles if doesFly() returns true
+	 */
+	public void move() {
+		//flying objects skip collisions
+		if (doesFly()) {
+			flyMove();
+			return;
+		}
+		else landMove();
+	}
+
+	/**
 	 * Apply just the mobile object's x velocity to its position
 	 */
 	public void xMove() {
@@ -147,7 +153,7 @@ public abstract class Mobile {
 		setVx(_vx*a);
 		setVy(_vy*a);
 	}
-	
+
 	/**
 	 * Divide vx and vy by a value
 	 * 
@@ -157,7 +163,7 @@ public abstract class Mobile {
 		setVx(_vx/d);
 		setVy(_vy/d);
 	}
-	
+
 	/**
 	 * Tell the object to decide its actions this frame
 	 */
@@ -170,7 +176,7 @@ public abstract class Mobile {
 	 * @param dir: the direction of the collision
 	 */
 	public abstract void tileCollision(Tile t, String dir);
-	
+
 	/**
 	 * Check if this object is currently overlapping another
 	 * 
@@ -186,7 +192,7 @@ public abstract class Mobile {
 		}
 		else return false;
 	}
-	
+
 	/**
 	 * Check if this object will overlap another after moving
 	 * 
@@ -202,7 +208,7 @@ public abstract class Mobile {
 		}
 		else return false;
 	}
-	
+
 	/**
 	 * React to collisions with another object
 	 * 
@@ -213,7 +219,7 @@ public abstract class Mobile {
 	public void collide (Mobile m, boolean overlap, boolean nextOverlap) {
 		//TODO: Probably make this abstract!
 	}
-	
+
 	/**
 	 * Check collisions against another object, call collide() for both
 	 * Does nothing if either object's doesCollid() returns false
@@ -224,20 +230,20 @@ public abstract class Mobile {
 		//skip collisions if either is intangible
 		if (!doesCollide() || !m.doesCollide())
 			return;
-		
+
 		if (_overlap(m) || _willOverlap(m)) {
 			collide(m, _overlap(m), _willOverlap(m));
 			m.collide(this, _overlap(m), _willOverlap(m));
 		}
 	}
-	
+
 	/**
 	 * Make last-minute changes before being removed
 	 */
 	public void onDeath() {
 		//TODO: Probably make this abstract!
 	}
-	
+
 	/**
 	 * Draw the object to the screen
 	 * 
@@ -258,7 +264,7 @@ public abstract class Mobile {
 	public void setDead() {
 		_dead = true;
 	}
-	
+
 	/**
 	 * @return true if the object collides
 	 */
@@ -272,7 +278,7 @@ public abstract class Mobile {
 	public void setCollide(boolean c) {
 		_collide = c;
 	}
-	
+
 	/**
 	 * @return true if the object collides
 	 */

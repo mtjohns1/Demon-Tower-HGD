@@ -23,6 +23,13 @@ public abstract class Actor extends Mobile {
 		super(home);
 	}
 	
+	@Override
+	public void move() {
+		super.move();
+		if (isStunned()) stun(-1);
+		if (hasMercy()) mercy(-1);
+	}
+	
 	/**
 	 * @return the actor's maximum HP
 	 */
@@ -85,7 +92,7 @@ public abstract class Actor extends Mobile {
 	 */
 	public int takeDamage(Damage dmg) {
 		
-		if (isMercy()) return 0; //no damage under mercy invincibility
+		if (hasMercy()) return 0; //no damage under mercy invincibility
 		
 		takeDamage(dmg.getDamage());
 		setVx(getVx()+dmg.getVx());
@@ -151,7 +158,7 @@ public abstract class Actor extends Mobile {
 	/**
 	 * @return true if the actor is in mercy state
 	 */
-	public boolean isMercy() {
+	public boolean hasMercy() {
 		return (_stun > 0);
 	}
 }

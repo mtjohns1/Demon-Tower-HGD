@@ -10,7 +10,7 @@ public class WeaponGrapple extends Weapon {
 	 * Public constructor
 	 */
 	public WeaponGrapple() {
-		super(45, 35, "Grappling Hook");
+		super(0, 35, "Grappling Hook");
 	}
 	
 	@Override

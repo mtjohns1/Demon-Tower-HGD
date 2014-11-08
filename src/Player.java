@@ -53,7 +53,7 @@ public class Player extends Actor {
 		//read input
 		int dx = _c.getMove().getX();
 		int dy = _c.getMove().getY();
-
+		if (isStunned()) {dx = 0; dy = 0;}
 		//apply acceleration
 		if (Math.abs(dx) > 10 || Math.abs(dy) > 10) {
 			Direction dir = new Direction(dx, dy);
@@ -64,6 +64,7 @@ public class Player extends Actor {
 		accelerate(0.5);
 
 		//change weapons
+		if (isStunned()) {_debounce = true;}
 		if (!_debounce)
 		{
 			if (_c.getShoot().cycleRight()) cycleWeaponRight();
@@ -74,6 +75,7 @@ public class Player extends Actor {
 		//fire bullets
 		dx = _c.getShoot().getX();
 		dy = _c.getShoot().getY();
+		if (isStunned()) {dx = 0; dy = 0;}
 		if (_fireRate < 0 && _stamina > 0 && (Math.abs(dx) > 10 || Math.abs(dy) > 10)) {
 			_wep.get(_equip).fire(this, dx, dy);
 		}
@@ -88,6 +90,13 @@ public class Player extends Actor {
 
 		//count down to next shot
 		_fireRate--;
+	}
+	
+	@Override
+	public int takeDamage(Damage dmg) {
+		int result = super.takeDamage(dmg);
+		if (result >= 1) mercy(35); //apply mercy invincibility
+		return result;
 	}
 
 	/**
