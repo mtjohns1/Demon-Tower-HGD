@@ -24,8 +24,11 @@ public class Game extends JPanel {
 	//private ImageObserver observer;
 	private ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 	private Control controls;
-
-	Floor floor = new Floor();
+	int mapX;
+	int mapY;
+	int mapZ;
+	Room currentRoom = new Room();
+	Floor f = new Floor();
 	
 	public Game(Control c){
 		//box.add(exit);
@@ -36,12 +39,10 @@ public class Game extends JPanel {
 		this.controls = c;
 	}
 
-
 	public void run() {
 		//build important objects
 		Room r = new Room();
 		Player p = new Player(r, controls);
-		
 		//create a timer
 		Timer t = new Timer(18);
 		
@@ -53,12 +54,24 @@ public class Game extends JPanel {
 		while(true) {
 			t.startLoop();
 			r.update();
-			r.draw(getSprites());
+			if(r.getEast().equals("east"))
+			{
+				mapX += 1;
+				//f.getEast();
+				Room newR = f.get(mapX, mapY); 
+				//p.setHome(newR);
+				newR.addMobile(p);
+				p.setTop(100);
+				p.setLeft(100);
+				//TODO: Migrate player to newR
+				r = newR;
+			}
+			r.draw(getSprites());	
 			redraw();
 			t.endLoop();
 		}
 	}
-
+	
 	public ArrayList<Sprite> getSprites() {
 		return sprites;
 	}

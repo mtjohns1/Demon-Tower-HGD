@@ -18,10 +18,10 @@ import java.util.List;
 
 public class Room {
 
-	Tile floor[][] = new Tile[15][20];
+	Tile tiles[][] = new Tile[15][20];
 	ArrayList<Mobile> list = new ArrayList<Mobile>();
 	Player player = null;
-
+	int width = 640, height = 480;
 	
 	/**
 	 * Creates a new blank room with walls surrounding it.
@@ -32,15 +32,15 @@ public class Room {
 		{
 			for(int y = 0; y < 15; y++)
 			{
-				floor[y][x] = new Tile(this, x, y);
+				tiles[y][x] = new Tile(this, x, y);
 
 				if(x == 0 || y == 0 || y == 14 || x == 19 || Math.random()*10 < 1)
 				{
-					floor[y][x].setType("w");
+					tiles[y][x].setType("w");
 				}
 				else
 				{
-					floor[y][x].setType("");
+					tiles[y][x].setType("");
 				}
 			}
 		}
@@ -60,6 +60,19 @@ public class Room {
 	public void setPlayer(Player p){
 		this.player = p;
 	}
+
+	public String getEast()
+	{
+		if(player != null && this.player.getRight() > 600)
+		{
+			//this.list.clear();
+			return "east";
+			
+		}
+		else {
+			return "no change";
+		}
+	}
 	
 	
 
@@ -69,6 +82,7 @@ public class Room {
 	 */
 	public void addMobile(Mobile e)//add a mobile actor to a room
 	{
+		e.setHome(this);
 		this.list.add(e);
 	}
 
@@ -80,7 +94,7 @@ public class Room {
 	 */
 	public void addTileChange(String s, int x, int y) //add a specific 'thing' to a tile
 	{
-		floor[y][x].setType(s);
+		tiles[y][x].setType(s);
 	}
 
 	/**
@@ -108,7 +122,7 @@ public class Room {
 	 */
 	public Tile getTile(int x, int y)
 	{
-		return floor[y][x];
+		return tiles[y][x];
 	}
 
 	/**
@@ -139,7 +153,7 @@ public class Room {
 		{
 			for(int y = y_1; y <= y_2; y++)
 			{
-				range.add(floor[y][x]);
+				range.add(tiles[y][x]);
 			}
 		}
 		return range;
