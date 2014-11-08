@@ -33,6 +33,10 @@ public class Player extends Actor {
 		setD(32);
 		this.getHome().setPlayer(this);
 		
+		//hitpoints!
+		setMaxHp(10);
+		setHp(10);
+		
 		//add default weapon
 		_wep.add(new WeaponBasic());
 		_wep.add(new WeaponGrapple()); //grappling hook test TODO: remove, add via level
