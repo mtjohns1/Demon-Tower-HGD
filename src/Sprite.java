@@ -14,7 +14,8 @@ import javax.imageio.ImageIO;
 
 
 public class Sprite {
-	private int X,Y,Width,Height,SpriteX,SpriteY,Layer; 
+	private int X,Y,Width,Height,SpriteX,SpriteY;
+	private double Layer;
 	
 	private static Image picture[];
 	private static HashMap<String, Image> pics = new HashMap<String, Image>();
@@ -26,16 +27,19 @@ public class Sprite {
 	private ImageObserver observer;
 	//private ImageEnum id;
 	
-	public Sprite(int x,int y,int width,int height,int spriteX, int spriteY, int layer,Image image){
+	public Sprite(int x,int y,int width,int height,int spriteX, int spriteY, double layer,Image image){
 		X = x; Y = y; Width = width; Height = height; SpriteX = spriteX; SpriteY = spriteY; Layer = layer; img = image;
 	}
-	public Sprite(int x,int y,int width,int height,int spriteX, int spriteY, int layer, int Index){
+	public Sprite(int x,int y,int width,int height,int spriteX, int spriteY, double layer, int Index){
 		X = x; Y = y; Width = width; Height = height; SpriteX = spriteX; SpriteY = spriteY; Layer = layer;img = picture[Index];
 	}
-	public Sprite(int x,int y,int width,int height,int spriteX, int spriteY, int layer, String ImgName){
+	public Sprite(int x,int y,int width,int height,int spriteX, int spriteY, double layer, String ImgName){
 		X = x; Y = y; Width = width; Height = height; SpriteX = spriteX; SpriteY = spriteY; Layer = layer;img = pics.get(ImgName);
 	}
 	
+	/**
+	 * Load the standard images into the sprite list
+	 */
 	public static void load() {
 		picture = new Image[4];
 		//System.out.println(ImageEnum.valueOf("tempWall").getValue());
@@ -93,7 +97,12 @@ public class Sprite {
 		picture[3] = enemy;
 	}
 	
-	public void addGraphic(String fileName, String spriteName){
+	/**
+	 * Load a new image into the sprite list
+	 * @param fileName the name of the image file
+	 * @param spriteName the name of the storage image
+	 */
+	public static void addGraphic(String fileName, String spriteName){
 		File toAdd = new File(fileName);
 		Image Adding = null;
 		
@@ -109,10 +118,13 @@ public class Sprite {
 	}
 
 	
-	
+	/**
+	 * Draw the sprite 
+	 * 
+	 * @param g the graphics object to draw with
+	 */
 	public void draw(Graphics g){
 		g.drawImage(img, X, Y, X+Width, Y+Height, SpriteX, SpriteY, SpriteX+Width, SpriteY+Height, observer);
-		
 	}
 	
 	public int getX() {
@@ -139,7 +151,7 @@ public class Sprite {
 		return SpriteY;
 	}
 
-	public int getLayer() {
+	public double getLayer() {
 		return Layer;
 	}
 

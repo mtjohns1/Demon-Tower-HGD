@@ -23,13 +23,21 @@ public abstract class Mobile {
 	private boolean _dead; //dead state
 	private boolean _collide; //does it hit objects
 	private boolean _fly; //does it hit walls
-	//TODO: Direction variable?
-	//TODO: Animation variables?
+	private int _ticks; //personal timer
+
+	private int _frame; //frame number
+	private int _dir; //0-3, used for animations
+	private int _animation; //animation number
+	private String _spriteSheet; //text index of sprite sheet
+
+	private int _spriteW, _spriteH; //sprite dimensions
+	private int _spriteX, _spriteY; //sprite offset (0,0 means centers align)
+	private boolean _spriteDir; //if false, sprite does not relate to direction
 
 	/**
 	 * @param home: the room the object is inside
 	 * 
-	 * FOR ALL IMPLEMENTATIONS, REMEMBER TO SET H, W, and D!
+	 * FOR ALL EXTENSIONS, REMEMBER TO SET H, W, and D!
 	 */
 	public Mobile(Room home) {
 		_dead = false;
@@ -48,6 +56,11 @@ public abstract class Mobile {
 		_w = 0;
 		_h = 0;
 		_d = 0;
+
+		_ticks = 0;
+		_dir = -1;
+		_frame = 0;
+		_animation = 0;
 
 		if (_home != null) {
 			_home.addMobile(this);
@@ -121,6 +134,7 @@ public abstract class Mobile {
 			return;
 		}
 		else landMove();
+		_ticks++; //update internal timer on movement
 	}
 
 	/**
@@ -244,12 +258,29 @@ public abstract class Mobile {
 		//TODO: Probably make this abstract!
 	}
 
+	public double calculateLayer() {
+		return 0; //TODO: Use y and z to find distance from screen
+	}
+	
 	/**
 	 * Draw the object to the screen
 	 * 
 	 * @param g: graphics object to use for drawing
 	 */
-	public abstract void draw(List<Sprite> l);
+	//public abstract void draw(List<Sprite> l);
+	public void draw(List<Sprite> l) {
+		//calculate resultant drawing position
+		int drawX = getX()+getSpriteX()-getSpriteW()/2;
+		int drawY = getY()+getSpriteY()-getSpriteH()/2;
+		//calculate frame position on spritesheet
+		int frameX = getFrame()*getSpriteW();
+		int frameY = getAnim()*getSpriteH();
+		if (getSpriteDir())
+			frameY = frameY*4+getDirInt()*getSpriteH();
+		//generate the resulting sprite
+		Sprite s = new Sprite(drawX, drawY, getSpriteW(), getSpriteH(), frameX, frameY, calculateLayer(), getSpriteSheet());
+		l.add(s);
+	}
 
 	/**
 	 * @return true if the object is dead
@@ -522,5 +553,140 @@ public abstract class Mobile {
 	 */
 	public int getNextBack() {
 		return (int) (_z+_vz);
+	}
+
+	/**
+	 * @return the number of frames the object has been updated on
+	 */
+	public int getTicks() {
+		return _ticks;
+	}
+
+	/**
+	 * @param d new facing direction in string format
+	 */
+	public void setDir(String d) {
+		if (d.equalsIgnoreCase("up")) _dir = 0;
+		else if (d.equalsIgnoreCase("right")) _dir = 1;
+		else if (d.equalsIgnoreCase("down")) _dir = 2;
+		else if (d.equalsIgnoreCase("left")) _dir = 3;
+	}
+	/**
+	 * @param f the new animation frame index
+	 */
+	public void setFrame(int f) {
+		_frame = f;
+	}
+	/**
+	 * @param a new animation index
+	 */
+	public void setAnim(int a) {
+		_animation = a;
+	}
+	/**
+	 * @param s the name of the new sprite sheet
+	 */
+	public void setSpriteSheet(String s) {
+		_spriteSheet = s;
+	}
+
+	/**
+	 * @return current facing direction
+	 */
+	public String getDir() {
+		switch (_dir)
+		{
+		case 0: return "up";
+		case 1: return "right";
+		case 2: return "down";
+		case 3: return "left";
+		default: return "ERROR";
+		}
+	}
+	/**
+	 * @return current facing direction
+	 */
+	public int getDirInt() {
+		return _dir;
+	}
+	/**
+	 * @return current animation frame
+	 */
+	public int getFrame() {
+		return _frame;
+	}
+	/**
+	 * @return current animation index
+	 */
+	public int getAnim() {
+		return _animation;
+	}
+	/**
+	 * @return the name of the current sprite sheet
+	 */
+	public String getSpriteSheet() {
+		return _spriteSheet;
+	}
+
+	/**
+	 * @param w the width of the sprite to use
+	 */
+	public void setSpriteW(int w) {
+		_spriteW = w;
+	}
+	/**
+	 * @param h the height of the sprite to use
+	 */
+	public void setSpriteH(int h) {
+		_spriteH = h;
+	}
+	/**
+	 * @param x the sprite's X offset from object center
+	 */
+	public void setSpriteX(int x) {
+		_spriteX = x;
+	}
+	/**
+	 * @param y the sprite's Y offset from object center
+	 */
+	public void setSpriteY(int y) {
+		_spriteY = y;
+	}
+	/**
+	 * @param d true if the sprite changes with direction
+	 */
+	public void setSpriteDir(boolean d) {
+		_spriteDir = d;
+	}
+
+	/**
+	 * @return the width of the sprite used
+	 */
+	public int getSpriteW() {
+		return _spriteW;
+	}
+	/**
+	 * @return the height of the sprite used
+	 */
+	public int getSpriteH() {
+		return _spriteH;
+	}
+	/**
+	 * @return the sprite's X offset from object center
+	 */
+	public int getSpriteX() {
+		return _spriteX;
+	}
+	/**
+	 * @return the sprite's Y offset from object center
+	 */
+	public int getSpriteY() {
+		return _spriteY;
+	}
+	/**
+	 * @return true if the sprite changes with direction
+	 */
+	public boolean getSpriteDir() {
+		return _spriteDir;
 	}
 }

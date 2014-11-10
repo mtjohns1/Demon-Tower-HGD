@@ -21,6 +21,7 @@ public abstract class Actor extends Mobile {
 	 */
 	public Actor(Room home) {
 		super(home);
+		setDir("down");
 	}
 	
 	@Override

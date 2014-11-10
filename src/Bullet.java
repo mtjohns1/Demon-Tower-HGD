@@ -47,8 +47,6 @@ public abstract class Bullet extends Mobile {
 		_kvx = _kvy = 0; //no knockback if unspecified
 		_stun = 0; //no stun effect if unspecified
 	}
-
-	//TODO: Add specific method / parameter for specifying an offset from the player 
 	
 	/**
 	 * @param owner set who owns the bullet
