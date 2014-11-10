@@ -17,7 +17,8 @@ public class Tile {
 
 	private Room _home;
 	private int _x, _y;
-	private String _tile_type;
+	private String _tileType;
+	private String _tileSet;
 	
 	/**
 	 * Initialize a tile within a room
@@ -69,7 +70,7 @@ public class Tile {
 	 */
 	public String getType()
 	{
-		return _tile_type;
+		return _tileType;
 	}
 	
 	/**
@@ -77,9 +78,32 @@ public class Tile {
 	 */
 	public void setType(String s)
 	{
-		this._tile_type = s;
+		this._tileType = s;
 	}
 	
+	/**
+	 * @param s the name of the new tile set
+	 */
+	public void setTileSet(String s) {
+		_tileSet = s;
+	}
+	
+	/**
+	 * @return the name of the current tile set
+	 */
+	public String getTileSet() {
+		return _tileSet;
+	}
+	
+	/**
+	 * @param height the height of the tile's top face
+	 * @return the tile's layer. Exact values are irrelevant. Higher value = closer to screen.
+	 */
+	public double calculateLayer(int height) {
+		int screenMax = 480*2; //highest visible face- maximum return value is 0
+		return (getBottom()+height-screenMax)-0.01; //reduce layer slightly to ensure it draws below
+	}
+
 	/**
 	 * Generate the tile's sprite for this frame
 	 * 
@@ -87,8 +111,9 @@ public class Tile {
 	 */
 	public void  draw(List<Sprite> l)
 	{
-		Sprite s = new Sprite(getLeft(), getTop(), 32, 32, 0, 0, 0, "tempFloor");
-		if (getType().contains("w")) s = new Sprite(getLeft(), getTop(), 32, 32, 0, 0, 0, "tempWall");
+		//TODO: Make this read from a single tileset, using the types to determine frame within 
+		Sprite s = new Sprite(getLeft(), getTop(), 32, 32, 0, 0, calculateLayer(0), "tempFloor");
+		if (getType().contains("w")) s = new Sprite(getLeft(), getTop(), 32, 32, 0, 0, calculateLayer(32), "tempWall");
 		l.add(s);
 	}
 	

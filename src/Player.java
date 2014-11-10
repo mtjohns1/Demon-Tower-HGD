@@ -191,7 +191,7 @@ public class Player extends Actor {
 	@Override
 	public void draw(List<Sprite> list)
 	{
-		Sprite s = new Sprite(getLeft()-2, getTop()-2, getW()+4, getH()+4, 0, 0, 0, "hero");
+		Sprite s = new Sprite(getLeft()-2, getTop()-2, getW()+4, getH()+4, 0, 0, calculateLayer(), "hero");
 		list.add(s);
 	}
 }

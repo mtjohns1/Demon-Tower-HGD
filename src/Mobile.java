@@ -258,9 +258,15 @@ public abstract class Mobile {
 		//TODO: Probably make this abstract!
 	}
 
+	/**
+	 * @return the object's layer. Exact values are irrelevant. Higher value = closer to screen.
+	 */
 	public double calculateLayer() {
-		return 0; //TODO: Use y and z to find distance from screen
+		int screenMax = 480*2; //highest visible face- maximum return value is 0
+		return  (_y+_h/2)+(_z+_d)-screenMax;
 	}
+	
+	//TODO: Add layer-calculators for arbitrary points and for shadows
 	
 	/**
 	 * Draw the object to the screen
@@ -271,15 +277,16 @@ public abstract class Mobile {
 	public void draw(List<Sprite> l) {
 		//calculate resultant drawing position
 		int drawX = getX()+getSpriteX()-getSpriteW()/2;
-		int drawY = getY()+getSpriteY()-getSpriteH()/2;
-		//calculate frame position on spritesheet
+		int drawY = getY()+getSpriteY()-getSpriteH()/2-getZ();
+		//calculate frame position on sprite sheet
 		int frameX = getFrame()*getSpriteW();
 		int frameY = getAnim()*getSpriteH();
-		if (getSpriteDir())
+		if (getSpriteDir()) //adjust for directions as well
 			frameY = frameY*4+getDirInt()*getSpriteH();
 		//generate the resulting sprite
 		Sprite s = new Sprite(drawX, drawY, getSpriteW(), getSpriteH(), frameX, frameY, calculateLayer(), getSpriteSheet());
 		l.add(s);
+		//TODO: Add shadows
 	}
 
 	/**
@@ -480,7 +487,7 @@ public abstract class Mobile {
 	 * @return z coordinate of the front edge (screen-facing)
 	 */
 	public int getFront() {
-		return (int) (_z-_d);
+		return (int) (_z+_d);
 	}
 	/**
 	 * @return z coordinate of the back edge (ground-facing)
