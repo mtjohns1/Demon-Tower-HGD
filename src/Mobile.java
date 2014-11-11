@@ -266,7 +266,15 @@ public abstract class Mobile {
 		return  (_y+_h/2)+(_z+_d)-screenMax;
 	}
 	
-	//TODO: Add layer-calculators for arbitrary points and for shadows
+	/**
+	 * @return the object's shadow's layer.  Exact values are irrelevant. Higher value = closer to screen.
+	 */
+	public double calculateShadowLayer() {
+		int screenMax = 480*2; //highest visible face- maximum return value is 0
+		return  (_y+_h/2)+0.01-screenMax; //nudge up slightly to avoid overlapping the ground
+	}
+	
+	//TODO: Add layer-calculators for arbitrary points away from the Mobile?
 	
 	/**
 	 * Draw the object to the screen
