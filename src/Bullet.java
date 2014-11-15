@@ -169,7 +169,7 @@ public abstract class Bullet extends Mobile {
 	@Override
 	public void draw(List<Sprite> list)
 	{
-		Sprite s = new Sprite(getLeft(), getTop(), getW(), getH(), 0, 0, 0, "tempWall");
+		Sprite s = new Sprite(getLeft(), getTop(), getW(), getH(), 0, 0, calculateLayer(), "tempWall");
 		list.add(s);
 	}
 }

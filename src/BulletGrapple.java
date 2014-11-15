@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  * experimental grappling hook bullet
  * @author Jacob Charles
@@ -78,6 +80,28 @@ public class BulletGrapple extends Bullet{
 		if (m != getOwner() || _reelIn)
 		{
 			setLife(0);
+		}
+	}
+	
+	@Override
+	public void draw(List<Sprite> list)
+	{
+		//bullet body
+		super.draw(list);
+		
+		//chain bits
+		for (int i = 1; i < 5; i++) {			
+			//calculate the chain
+			int x = ( getX()*i + getOwner().getX()*(5-i) )/5;
+			int y = ( getY()*i + getOwner().getY()*(5-i) )/5;
+			
+			//drawing position and layer
+			int top = y-(getH()/2)+2;
+			int left = x-(getW()/2)+2;
+			double layer = Mobile.calculateLayer(y, getZ(), getH()-4, getD());
+			
+			Sprite s = new Sprite(left, top, getW()-4, getH()-4, 0, 0, layer, "tempWall");
+			list.add(s);
 		}
 	}
 }
