@@ -274,7 +274,20 @@ public abstract class Mobile {
 		return  (_y+_h/2)+0.01-screenMax; //nudge up slightly to avoid overlapping the ground
 	}
 	
-	//TODO: Add layer-calculators for arbitrary points away from the Mobile?
+	/**
+	 * Determine the rendering layer of given position and size. X / width are irrelevant to calculation
+	 * 
+	 * @param y y position
+	 * @param z z position
+	 * @param h height
+	 * @param d depth
+	 * 
+	 * @return a specified point's layer. Exact values are irrelevant. Higher value = closer to screen.
+	 */
+	public static double calculateLayer(int y, int z, int h, int d) {
+		int screenMax = 480*2; //highest visible face- maximum return value is 0
+		return  (y+h/2)+(z+d)-screenMax;
+	}
 	
 	/**
 	 * Draw the object to the screen
