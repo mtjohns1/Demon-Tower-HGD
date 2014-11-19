@@ -188,10 +188,33 @@ public class Player extends Actor {
 		getHome().setPlayer(this);
 	}
 
+	/**
+	 * Draw HUD information about the player
+	 * 
+	 * @param list the list to add sprites to
+	 * @param y the top edge of the HUD area, assumed to be 32 pixels high
+	 */
+	public void drawHUD(List<Sprite> list, int y) {
+		for (int i = 0; i < getMaxHp()/2; i++) {
+			//full heart
+			Sprite s = new Sprite(32+i*32, y, 32, 32, 0, 0, 0, "hearts");
+			//half heart
+			if (getHp() == i*2+1) {
+				s = new Sprite(32+i*32, y, 32, 32, 32, 0, 0, "hearts");
+			}
+			//empty heart
+			if (getHp() <= i*2) {
+				s = new Sprite(32+i*32, y, 32, 32, 64, 0, 0, "hearts");
+			}
+			list.add(s);
+		}
+	}
+	
 	@Override
 	public void draw(List<Sprite> list)
 	{
 		Sprite s = new Sprite(getLeft()-2, getTop()-2, getW()+4, getH()+4, 0, 0, calculateLayer(), "hero");
 		list.add(s);
+		drawHUD(list, 448);
 	}
 }

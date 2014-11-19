@@ -95,6 +95,8 @@ public class Sprite {
 		pics.put("enemy", enemy);
 		
 		picture[3] = enemy;
+		
+		addGraphic("src/hearts.png", "hearts");
 	}
 	
 	/**
