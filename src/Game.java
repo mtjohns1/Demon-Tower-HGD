@@ -54,18 +54,71 @@ public class Game extends JPanel {
 		while(true) {
 			t.startLoop();
 			r.update();
-			if(r.getEast().equals("east"))
+			if(r.getDirection().equals("east") )
 			{
-				mapX += 1;
-				//f.getEast();
+				if(mapX == 3)
+					mapX = 0;
+				else
+					mapX += 1;
 				Room newR = f.get(mapX, mapY); 
-				//p.setHome(newR);
 				newR.addMobile(p);
-				p.setTop(100);
-				p.setLeft(100);
+				p.setTop(205);
+				p.setLeft(5);
 				//TODO: Migrate player to newR
 				r = newR;
+				System.out.println("mapX: " + mapX);
+				System.out.println("mapY: " + mapY);
 			}
+			
+			else if(r.getDirection().equals("west") )
+			{
+				if(mapX == 0)
+					mapX = 3;
+				else
+					mapX -= 1;
+				Room newR = f.get(mapX, mapY); 
+				newR.addMobile(p);
+				p.setTop(205);
+				p.setRight(635);
+				//TODO: Migrate player to newR
+				r = newR;
+				System.out.println("mapX: " + mapX);
+				System.out.println("mapY: " + mapY);
+			}
+			
+			else if(r.getDirection().equals("north") )
+			{
+				if(mapY == 0)
+					mapY = 3;
+				else
+					mapY -= 1;
+				Room newR = f.get(mapX, mapY); 
+				newR.addMobile(p);
+				p.setBottom(440);
+				p.setLeft(300);
+				//TODO: Migrate player to newR
+				r = newR;
+				System.out.println("mapX: " + mapX);
+				System.out.println("mapY: " + mapY);
+			}
+			//bug in collision.
+			else if(r.getDirection().equals("south") )
+			{
+				if(mapY == 3)
+					mapY = 0;
+				else
+					mapY += 1;
+				Room newR = f.get(mapX, mapY); 
+				newR.addMobile(p);
+				p.setTop(205);
+				p.setLeft(200);
+				//TODO: Migrate player to newR
+				r = newR;
+				System.out.println("mapX: " + mapX);
+				System.out.println("mapY: " + mapY);
+			}
+			
+			
 			r.draw(getSprites());	
 			redraw();
 			t.endLoop();

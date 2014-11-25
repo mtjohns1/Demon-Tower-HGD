@@ -30,11 +30,11 @@ public class Room {
 	{
 		for(int x = 0; x < 20; x++)
 		{
-			for(int y = 0; y < 15; y++)
+			for(int y = 0; y < 14; y++)
 			{
 				tiles[y][x] = new Tile(this, x, y);
 
-				if(x == 0 || y == 0 || y == 14 || x == 19 || Math.random()*10 < 1)
+				if(x == 0 || y == 0 || y == 13 || x == 19 || Math.random()*10 < 1)
 				{
 					tiles[y][x].setType("w");
 				}
@@ -46,6 +46,20 @@ public class Room {
 		}
 		
 		generateBadguys();
+		
+		
+		//creates openings in the room on each side
+		tiles[0][9].setType("");
+		tiles[0][10].setType("");
+		
+		tiles[6][0].setType("");
+		tiles[7][0].setType("");
+		
+		tiles[13][9].setType("");
+		tiles[13][10].setType("");
+		
+		tiles[6][19].setType("");
+		tiles[7][19].setType("");
 
 	}
 	
@@ -86,13 +100,26 @@ public class Room {
 		return width-1;
 	}
 	
-	public String getEast()
+	public String getDirection()
 	{
-		if(player != null && this.player.getRight() > 600)
+		if(player != null && this.player.getRight() > 640)
 		{
-			//this.list.clear();
 			return "east";
-			
+		}
+		
+		else if(player != null && this.player.getLeft() < 0)
+		{
+			return "west";
+		}
+		
+		else if(player != null && this.player.getTop() < 0)
+		{
+			return "north";
+		}
+		
+		else if(player != null && this.player.getBottom() > 470)
+		{
+			return "south";
 		}
 		else {
 			return "no change";
@@ -220,7 +247,7 @@ public class Room {
 		//loop through the ground tiles
 		for (int x = 0; x < 20; x++)
 		{
-			for (int y = 0; y < 15; y++)
+			for (int y = 0; y < 14; y++)
 			{
 				getTile(x, y).draw(l);
 			}

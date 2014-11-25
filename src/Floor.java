@@ -16,12 +16,12 @@ import java.io.*;
 public class Floor {
 
 	
-	Room rooms[][] = new Room[2][2];
+	Room rooms[][] = new Room[4][4];
 	
 	public Floor(){
 		
-		for(int y = 0; y < 2; y++){
-			for(int x = 0; x < 2; x++){
+		for(int y = 0; y < 4; y++){
+			for(int x = 0; x < 4; x++){
 				rooms[y][x] = new Room();
 			}
 		}
