@@ -21,7 +21,7 @@ public class Room {
 	Tile tiles[][] = new Tile[15][20];
 	ArrayList<Mobile> list = new ArrayList<Mobile>();
 	Player player = null;
-	int width = 640, height = 480;
+	int width = 640, height = 448;
 	
 	/**
 	 * Creates a new blank room with walls surrounding it.
