@@ -197,14 +197,14 @@ public class Player extends Actor {
 	public void drawHUD(List<Sprite> list, int y) {
 		for (int i = 0; i < getMaxHp()/2; i++) {
 			//full heart
-			Sprite s = new Sprite(32+i*32, y, 32, 32, 0, 0, 0, "hearts");
+			Sprite s = new Sprite(i*16, y, 32, 32, 0, 0, 0, "hearts");
 			//half heart
 			if (getHp() == i*2+1) {
-				s = new Sprite(32+i*32, y, 32, 32, 32, 0, 0, "hearts");
+				s = new Sprite(i*16, y, 32, 32, 32, 0, 0, "hearts");
 			}
 			//empty heart
 			if (getHp() <= i*2) {
-				s = new Sprite(32+i*32, y, 32, 32, 64, 0, 0, "hearts");
+				s = new Sprite(i*16, y, 32, 32, 64, 0, 0, "hearts");
 			}
 			list.add(s);
 		}

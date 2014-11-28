@@ -133,7 +133,7 @@ public abstract class Bullet extends Mobile {
 		super.move();
 		//update life, then remove if dead
 		_life--;
-		if (_life <= 0)
+		if (_life <= 0 || isOffScreen())
 			setDead();
 	}
 	

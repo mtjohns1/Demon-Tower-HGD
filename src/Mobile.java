@@ -311,6 +311,24 @@ public abstract class Mobile {
 	}
 
 	/**
+	 * @return true if the object is partially offscreen
+	 */
+	public boolean isOverBounds() {
+		Room h = getHome();
+		return (getLeft() < h.getLeft() || getRight() > h.getRight()
+				|| getTop() < h.getTop() || getBottom() > h.getBottom());
+	}
+	
+	/**
+	 * @return true if the object is fully offscreen
+	 */
+	public boolean isOffScreen() {
+		Room h = getHome();
+		return (getRight() < h.getLeft() || getLeft() > h.getRight()
+				|| getBottom() < h.getTop() || getTop() > h.getBottom());
+	}
+	
+	/**
 	 * @return true if the object is dead
 	 */
 	public boolean isDead() {
