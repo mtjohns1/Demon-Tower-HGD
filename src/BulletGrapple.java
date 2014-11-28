@@ -23,7 +23,7 @@ public class BulletGrapple extends Bullet{
 		setH(10);
 		setD(32);
 
-		//last just under two seconds
+		//last just under one second
 		setLife(30);
 
 		setDamage(1); //deals 1 damage
