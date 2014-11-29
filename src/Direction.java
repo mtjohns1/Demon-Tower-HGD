@@ -15,8 +15,11 @@ public class Direction {
 	 */
 	public Direction(double x, double y) {
 		_d = Math.sqrt(x*x+y*y);
-		_x = x/_d;
-		_y = y/_d;
+		_x = x;
+		_y = y;
+		if (_d == 0) return; //avoid divide-by-zero case!
+		_x /= _d;
+		_y /= _d;
 	}
 	
 	/**
