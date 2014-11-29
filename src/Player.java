@@ -41,6 +41,7 @@ public class Player extends Actor {
 		//add default weapon
 		_wep.add(new WeaponBasic());
 		_wep.add(new WeaponGrapple()); //grappling hook test TODO: remove, add via level
+		//_wep.add(new WeaponElectric()); //lightning weapon test TODO: remove, add via level
 		_equip = 0;
 
 		//initialize local values
@@ -101,6 +102,13 @@ public class Player extends Actor {
 		return result;
 	}
 
+	/**
+	 * @return the controller attached to the player
+	 */
+	public Control getControls() {
+		return _c;
+	}
+	
 	/**
 	 * @param t Time before another shot can be fired
 	 */
