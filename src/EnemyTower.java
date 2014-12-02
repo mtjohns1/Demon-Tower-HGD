@@ -1,3 +1,4 @@
+
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +14,7 @@ import javax.imageio.ImageIO;
 public class EnemyTower extends Enemy{
 
 	private Player player;
-	private Weapon wep;
+	private BulletFireBall attack;
 	private int weaponCoolDown =0;
 	
 	public EnemyTower(Room home) {
@@ -21,9 +22,9 @@ public class EnemyTower extends Enemy{
 		this.setMaxHp(20);
 
 		this.setHp(5);
-		this.setX(500);
+		this.setX(300);
 		this.setY(300);
-		wep = new WeaponBasic();
+		player = home.getPlayer();
 	}
 
 	/**
@@ -31,48 +32,24 @@ public class EnemyTower extends Enemy{
 	 * @param player
 	 */
 	public void enemyAI(){
-		if (weaponCoolDown ==20){
-			weaponCoolDown =0;
+
+		weaponCoolDown +=1;
+		if (weaponCoolDown < 50){
 			return;
 		}
-		weaponCoolDown +=1;
-		if(player == null){
-			player = this.getHome().getPlayer();
-			if(player == null){
-				return;
-			}
-				
-		}
-		
+
+		weaponCoolDown = 0;
 		//finds how for enemy is from player
-		int xDif = this.getX() - player.getX();
-		int yDif = this.getY() - player.getY();
-		
-		int yMove = 0;
-		int xMove = 0;
+		int xDif = this.getX() - this.getHome().getPlayer().getX();
+		int yDif = this.getY() - this.getHome().getPlayer().getY();
 		
 		//finds direction of x and y
-		int xSign =1;
-		int ySign =1;
-		if (xDif > 0) xSign =-1;
-		if (yDif > 0) ySign =-1;
+		xDif = xDif*-1;
+		yDif = yDif*-1;
 		
 		//logic for how to move
-		if(xDif == 0){
-			
-		}
-		else if (yDif == 0){
-			
-		}
-		else if (Math.abs(xDif) > Math.abs(yDif)){
-			
-		}
-		else if (Math.abs(xDif) < Math.abs(yDif)){
-			
-		}
-		else {
-		}
-
+		attack = new BulletFireBall(this,xDif,yDif);
+		
 	}
 	
 
@@ -112,7 +89,6 @@ public class EnemyTower extends Enemy{
 		if(this.getHp() <= 0){
 			this.setDead();
 		}
-			
 	}
 	
 	/**
@@ -131,7 +107,7 @@ public class EnemyTower extends Enemy{
 		//non-actors and your owner are ignored
 		if (!(m instanceof Actor) )
 			return;
-		
+		System.out.println("inside");
 		//cast for convenience
 		Actor a = (Actor)m;
 		//do damage
