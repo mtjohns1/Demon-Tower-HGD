@@ -41,6 +41,8 @@ public class BulletGrapple extends Bullet{
 			Mobile owner = getOwner();
 			Direction dir = new Direction(getX()-owner.getX(), getY()-owner.getY());
 			double reelSpeed = 6;
+			owner.setBack(1);
+			owner.setVz(0.2);
 			owner.setVx(owner.getVx()+dir.getX()*reelSpeed);
 			owner.setVy(owner.getVy()+dir.getY()*reelSpeed);
 		}

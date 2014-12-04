@@ -22,6 +22,7 @@ public class Player extends Actor {
 	private int _equip; //which weapon you currently have equipped
 	private ArrayList<Weapon> _wep = new ArrayList<Weapon>(); //array of weapons you can use
 	private boolean _debounce = false; //prevent repeated input from held keys
+	private int _lastX, _lastY; //position to reset to in case of pit-falling
 
 	/**
 	 * @param start: the room the player starts in
@@ -63,6 +64,9 @@ public class Player extends Actor {
 		}		
 		//apply friction
 		accelerate(0.5);
+		
+		//apply gravity (z direction)
+		setVz(getVz()-0.1);
 
 		//change weapons
 		if (isStunned()) {_debounce = true;}
@@ -88,11 +92,19 @@ public class Player extends Actor {
 		if (_stamina > _staminaMax) {
 			_stamina = _staminaMax;
 		}
-
-		//TODO: Add z-coordinate physics
 		
 		//count down to next shot
 		_fireRate--;
+	}
+	
+	@Override
+	public void move() {
+		super.move();
+		//z-control and collision
+		if (getBack() < 0.001) {
+			setBack(0);
+			setVz(0);
+		}
 	}
 	
 	@Override
@@ -168,8 +180,8 @@ public class Player extends Actor {
 
 	@Override
 	public void tileCollision(Tile t, String dir) {
-		//solid wall collisions
-		if (t.getType().contains("w")) {
+		//solid wall collisions / grounded pit collisions
+		if (t.getType().contains("w") || (t.getType().contains("p") && this.getBack() < 0.001)) {
 			if (dir.equals("right")) {
 				setRight(t.getLeft()-1);
 				setVx(0);

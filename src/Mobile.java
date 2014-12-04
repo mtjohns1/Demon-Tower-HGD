@@ -551,19 +551,33 @@ public abstract class Mobile {
 	}
 
 	/**
-	 * @param y: new x value of the left edge
+	 * @param x: new x value of the left edge
 	 */
 	public void setLeft(int x) {
 		_x = x+_w/2;
 	}
 
 	/**
-	 * @param y: new x value of the right edge
+	 * @param x: new x value of the right edge
 	 */
 	public void setRight(int x) {
 		_x = x-_w/2;
 	}
 
+	/**
+	 * @param z: new x value of the front edge
+	 */
+	public void setFront(int z) {
+		_z = z+_d;
+	}
+	
+	/**
+	 * @param z: new z value of the back edge
+	 */
+	public void setBack(int z) {
+		_z = z;
+	}
+	
 	/**
 	 * @return y coordinate of the top edge after movement
 	 */

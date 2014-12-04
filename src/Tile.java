@@ -114,6 +114,7 @@ public class Tile {
 		//TODO: Make this read from a single tileset, using the types to determine frame within 
 		Sprite s = new Sprite(getLeft(), getTop(), 32, 32, 0, 0, calculateLayer(0), "tempFloor");
 		if (getType().contains("w")) s = new Sprite(getLeft(), getTop(), 32, 32, 0, 0, calculateLayer(32), "tempWall");
+		if (getType().contains("p")) return; //pits don't have a sprite, skip for now!
 		l.add(s);
 	}
 	
