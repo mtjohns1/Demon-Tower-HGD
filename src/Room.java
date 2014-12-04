@@ -62,6 +62,15 @@ public class Room {
 		tiles[7][19].setType("");
 
 	}
+	//This will be used for re-creating an old room
+	public Room(Tile[][] t){
+		tiles = t;
+		generateBadguys();
+	}
+	
+	public Tile[][] getTiles(){
+		return tiles;
+	}
 	
 	public void generateBadguys(){
 		EnemyChaser enemy = new EnemyChaser(this);

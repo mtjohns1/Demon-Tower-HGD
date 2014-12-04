@@ -30,6 +30,8 @@ public class Floor {
 	}
 	
 	public Room get(int x, int y){
+		Tile tile[][] = rooms[y][x].getTiles();
+		rooms[y][x] = new Room(tile);
 		return rooms[y][x];
 		
 	}
