@@ -96,6 +96,7 @@ public class Sprite {
 		
 		picture[3] = enemy;
 		
+		addGraphic("src/hero sword.png", "swords");
 		addGraphic("src/hearts.png", "hearts");
 	}
 	

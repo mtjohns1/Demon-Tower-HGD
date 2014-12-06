@@ -10,7 +10,7 @@ public class WeaponBasic extends Weapon {
 	 * Public constructor
 	 */
 	public WeaponBasic() {
-		super(0, 8, "Test Weapon");
+		super(0, 16, "Test Weapon", 0);
 	}
 	
 	@Override

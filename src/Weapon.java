@@ -7,6 +7,7 @@
 public abstract class Weapon {
 	private int _cost;
 	private int _rate;
+	private int _icon;
 	private String _name;
 	
 	/**
@@ -15,10 +16,11 @@ public abstract class Weapon {
 	 * @param c the MP cost of firing a shot
 	 * @param r the number of frames between shots
 	 */
-	public Weapon(int c, int r, String name) {
+	public Weapon(int c, int r, String name, int i) {
 		_cost = c;
 		_rate = r;
 		_name = name;
+		_icon = i;
 	}
 	
 	/**
@@ -45,5 +47,12 @@ public abstract class Weapon {
 	 */
 	public String getName() {
 		return _name;
+	}
+	
+	/**
+	 * @return the sword icon for the weapon
+	 */
+	public int getIcon() {
+		return _icon;
 	}
 }
