@@ -22,7 +22,18 @@ public class Floor {
 		
 		for(int y = 0; y < 4; y++){
 			for(int x = 0; x < 4; x++){
-				rooms[y][x] = new Room();
+				if(x == 0){
+					rooms[y][x] = new Room();
+				}
+				if(x == 3){
+					rooms[y][x] = new Room();
+				}
+				if(y == 0){ //top is blocked off
+					rooms[y][x] = new Room();
+				}
+				if(y == 3){
+					rooms[y][x] = new Room();
+				}
 			}
 		}
 		

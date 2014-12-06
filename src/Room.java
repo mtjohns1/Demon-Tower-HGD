@@ -45,33 +45,56 @@ public class Room {
 			}
 		}
 		
-		generateBadguys();
+		
 		
 		
 		//creates openings in the room on each side
-		tiles[0][9].setType("");
-		tiles[0][10].setType("");
-		
-		tiles[6][0].setType("");
-		tiles[7][0].setType("");
-		
-		tiles[13][9].setType("");
-		tiles[13][10].setType("");
-		
-		tiles[6][19].setType("");
-		tiles[7][19].setType("");
-
+		/*
+		if(keycode != 0){
+			tiles[0][9].setType("");
+			tiles[0][10].setType("");
+		}
+		if(keycode != 1){
+			tiles[6][0].setType("");
+			tiles[7][0].setType("");
+		}
+		if(keycode != 2){
+			tiles[13][9].setType("");
+			tiles[13][10].setType("");
+		}
+		if(keycode != 3){
+			tiles[6][19].setType("");
+			tiles[7][19].setType("");
+		}
+		*/
+		generateBadguys();
 	}
 	//This will be used for re-creating an old room
 	public Room(Tile[][] t){
 		tiles = t;
 		generateBadguys();
 	}
+	//This constructor is for generating rooms on an edge
 	
 	public Tile[][] getTiles(){
 		return tiles;
 	}
+	public void openSouth(){
+		tiles[0][9].setType("");
+		tiles[0][10].setType("");
+	}
 	
+	public void openNorth(){
+		
+	}
+	
+	public void openWest(){
+		
+	}
+	
+	public void openEast(){
+		
+	}
 	public void generateBadguys(){
 		EnemyChaser enemy = new EnemyChaser(this);
 	}

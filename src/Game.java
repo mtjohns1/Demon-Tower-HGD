@@ -54,67 +54,75 @@ public class Game extends JPanel {
 		while(true) {
 			t.startLoop();
 			r.update();
-			if(r.getDirection().equals("east") )
-			{
-				if(mapX == 3)
-					mapX = 0;
-				else
-					mapX += 1;
-				Room newR = f.get(mapX, mapY); 
-				newR.addMobile(p);
-				p.setTop(205);
-				p.setLeft(5);
-				//TODO: Migrate player to newR
-				r = newR;
-			}
-			
-			else if(r.getDirection().equals("west") )
-			{
-				if(mapX == 0)
-					mapX = 3;
-				else
-					mapX -= 1;
-				Room newR = f.get(mapX, mapY); 
-				newR.addMobile(p);
-				p.setTop(205);
-				p.setRight(635);
-				//TODO: Migrate player to newR
-				r = newR;
-			}
-			
-			else if(r.getDirection().equals("north") )
-			{
-				if(mapY == 0)
-					mapY = 3;
-				else
-					mapY -= 1;
-				Room newR = f.get(mapX, mapY); 
-				newR.addMobile(p);
-				p.setBottom(440);
-				p.setLeft(300);
-				//TODO: Migrate player to newR
-				r = newR;
-			}
-			//bug in collision.
-			else if(r.getDirection().equals("south") )
-			{
-				if(mapY == 3)
-					mapY = 0;
-				else
-					mapY += 1;
-				Room newR = f.get(mapX, mapY); 
-				newR.addMobile(p);
-				p.setTop(35);
-				p.setLeft(300);
-				//TODO: Migrate player to newR
-				r = newR;
-			}
+			RoomDesign();
 			
 			
 			r.draw(getSprites());	
 			redraw();
 			t.endLoop();
 		}
+	}
+	
+	public void RoomDesign(){
+		Room r = new Room();
+		Player p = new Player(r, controls);
+		
+		if(r.getDirection().equals("east") )
+		{
+			if(mapX == 3)
+				mapX = 0;
+			else
+				mapX += 1;
+			Room newR = f.get(mapX, mapY); 
+			newR.addMobile(p);
+			p.setTop(205);
+			p.setLeft(5);
+			//TODO: Migrate player to newR
+			r = newR;
+		}
+		
+		else if(r.getDirection().equals("west") )
+		{
+			if(mapX == 0)
+				mapX = 3;
+			else
+				mapX -= 1;
+			Room newR = f.get(mapX, mapY); 
+			newR.addMobile(p);
+			p.setTop(205);
+			p.setRight(635);
+			//TODO: Migrate player to newR
+			r = newR;
+		}
+		
+		else if(r.getDirection().equals("north") )
+		{
+			if(mapY == 0)
+				mapY = 3;
+			else
+				mapY -= 1;
+			Room newR = f.get(mapX, mapY); 
+			newR.addMobile(p);
+			p.setBottom(440);
+			p.setLeft(300);
+			//TODO: Migrate player to newR
+			r = newR;
+		}
+		//bug in collision.
+		else if(r.getDirection().equals("south") )
+		{
+			if(mapY == 3)
+				mapY = 0;
+			else
+				mapY += 1;
+			Room newR = f.get(mapX, mapY); 
+			newR.addMobile(p);
+			p.setTop(35);
+			p.setLeft(300);
+			//TODO: Migrate player to newR
+			r = newR;
+		}
+		
 	}
 	
 	public ArrayList<Sprite> getSprites() {
