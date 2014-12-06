@@ -55,6 +55,7 @@ private int highlighted;
 		}		
 		sprites.add(button2);
 		
+		
 
 	}
 	
