@@ -73,9 +73,12 @@ public class EnemyChaser extends Enemy{
 			yMove =speed/2 * ySign;
 			xMove =speed/2 * xSign;
 		}
+		
 		//apply acceleration
-		setVx(getVx()+xMove);
-		setVy(getVy()+yMove);
+		if (!isStunned()) {
+			setVx(getVx()+xMove);
+			setVy(getVy()+yMove);
+		}
 
 		//apply deceleration
 		setVx(getVx()/2);
