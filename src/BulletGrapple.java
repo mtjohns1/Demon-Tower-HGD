@@ -24,10 +24,10 @@ public class BulletGrapple extends Bullet{
 		setD(32);
 
 		//last just under one second
-		setLife(25);
+		setLife(20);
 
 		setDamage(1); //deals 1 damage
-		accelerate(20); //max speed
+		accelerate(30); //max speed
 		setKnockback(-getVx()/5, -getVy()/5); //reverse knockback
 		setStun(15); //stuns for 15 frames
 		//not reeling yet
@@ -40,7 +40,7 @@ public class BulletGrapple extends Bullet{
 		if (_reelIn) {
 			Mobile owner = getOwner();
 			Direction dir = new Direction(getX()-owner.getX(), getY()-owner.getY());
-			double reelSpeed = 4.8;
+			double reelSpeed = 8.5;
 			owner.setBack(1);
 			owner.setVz(0.2);
 			owner.setVx(owner.getVx()+dir.getX()*reelSpeed);
@@ -55,7 +55,7 @@ public class BulletGrapple extends Bullet{
 			setVx(0);
 			setVy(0); //stop moving
 			_reelIn = true;
-			setLife(40); //set to reel in for just under 1 second
+			setLife(30); //set to reel in for just under 1 second
 			//stick to the wall
 			if (dir.equals("right")) setRight(t.getLeft()-1);
 			if (dir.equals("left")) setLeft(t.getRight()+1);
