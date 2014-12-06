@@ -26,10 +26,10 @@ public class BulletGrapple extends Bullet{
 		//last just under one second
 		setLife(20);
 
-		setDamage(1); //deals 1 damage
+		setDamage(2); //deals 1 damage
 		accelerate(30); //max speed
-		setKnockback(-getVx()/5, -getVy()/5); //reverse knockback
-		setStun(15); //stuns for 15 frames
+		setKnockback(-getVx(), -getVy()); //reverse knockback
+		setStun(45); //stuns for 15 frames
 		//not reeling yet
 		_reelIn = false;
 	}
