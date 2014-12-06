@@ -23,9 +23,12 @@ public class Floor {
 		for(int y = 0; y < 4; y++){
 			for(int x = 0; x < 4; x++){
 				if(x == 0 && y == 0)
-					rooms[y][x] = new Room(true);
+					rooms[y][x] = new Room(1);
 				else if(x == 1 && y == 2){
-					rooms[y][x] = new Room(false);
+					rooms[y][x] = new Room(2);
+				}
+				else if(x == 1 && y == 1){
+					rooms[y][x] = new Room(3);
 				}
 				else
 					rooms[y][x] = new Room();

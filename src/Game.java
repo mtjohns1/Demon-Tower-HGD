@@ -46,7 +46,7 @@ public class Game extends JPanel {
 
 	public void run() {
 		//build important objects
-		Room r = new Room(true);
+		Room r = new Room(1);
 		Player p = new Player(r, controls);
 		//create a timer
 		Timer t = new Timer(18);
