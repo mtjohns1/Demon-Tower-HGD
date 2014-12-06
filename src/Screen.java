@@ -17,25 +17,28 @@ public class Screen {
 	public static void startup(){
 		//load images on the front end
 		Sprite.load();
-		
+
+		Control controls = new Control(); //create controls
+		Game game = new Game(controls); //initialize a game
+		JFrame frame = new JFrame(); //create the jframe
+		controls.init(frame); //add listeners
+
+		frame.add(game);
+		frame.getContentPane().setPreferredSize(new Dimension(640,480));
+		frame.setResizable(false);
+		frame.setVisible(true);
+		frame.pack();
+
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		//loop until System.Exit()
 		while (true)
 		{
-			final Control controls = new Control(); //create controls
-			final Game game = new Game(controls); //initialize a game
-			JFrame frame = new JFrame(); //create the jframe
-			controls.init(frame); //add listeners
-			
-			frame.add(game);
-			frame.getContentPane().setPreferredSize(new Dimension(640,480));
-			frame.setResizable(false);
-			frame.setVisible(true);
-			frame.pack();
-
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 			//run the game
 			game.run();
+			frame.remove(game);
+			game = new Game(controls);
+			frame.add(game);
 		}
 	}
 
