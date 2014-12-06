@@ -146,20 +146,20 @@ public abstract class Actor extends Mobile {
 	 * @param time the duration of the stun
 	 */
 	public void mercy(int time) {
-		_stun += time;
+		_mercy += time;
 	}
 	
 	/**
 	 * remove mercy conditions from the actor
 	 */
 	public void endMercy() {
-		_stun = 0;
+		_mercy = 0;
 	}
 	
 	/**
 	 * @return true if the actor is in mercy state
 	 */
 	public boolean hasMercy() {
-		return (_stun > 0);
+		return (_mercy > 0);
 	}
 }
