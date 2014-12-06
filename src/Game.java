@@ -81,6 +81,10 @@ public class Game extends JPanel {
 			else{
 				pressed = false;
 			}
+			if(p.isDead() && menu.isEmpty()){
+				menu.add(new GameOverMenu(this.controls, this));
+				paused = true;
+			}
 			for(int i = 0; i < menu.size(); i++){//for(Menu m : menu.){
 				Menu m = menu.get(i);
 				if (m.isDead()){
