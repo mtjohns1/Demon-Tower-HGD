@@ -101,8 +101,8 @@ public class Room {
 	}
 	
 	public void openEast(){
-		tiles[13][9].setType("");
-		tiles[13][10].setType("");
+		tiles[6][19].setType("");
+		tiles[7][19].setType("");
 	}
 	public void generateBadguys(){
 		EnemyChaser enemy = new EnemyChaser(this);

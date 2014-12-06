@@ -28,12 +28,29 @@ public class Floor {
 					rooms[y][x] = new Room();
 			}
 		}
-		
 		for(int i = 0; i < 3; i++){
 			rooms[i][0].openSouth();
+			rooms[i + 1][0].openNorth();
 			rooms[i][2].openSouth();
+			rooms[i + 1][2].openNorth();
 			rooms[i][3].openSouth();
 		}
+		
+		for(int i = 0; i < 3; i++){
+			rooms[0][i].openEast();
+			rooms[3][i].openEast();
+			rooms[0][i + 1].openWest();
+			rooms[3][i + 1].openWest();
+		}
+		rooms[1][1].openSouth();
+		
+		rooms[1][2].openEast();
+		rooms[3][2].openEast();
+		
+		rooms[2][1].openNorth();
+		rooms[2][1].openSouth();
+		
+		rooms[3][1].openNorth();
 		
 		
 		
