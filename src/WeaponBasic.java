@@ -16,8 +16,7 @@ public class WeaponBasic extends Weapon {
 	@Override
 	public void fire(Player p, int xAxis, int yAxis) {
 		_spend(p);
-		Room r = p.getHome();
-		r.addMobile(new BulletBasicMelee(p, xAxis, yAxis));
-		r.addMobile(new BulletBasic(p, xAxis, yAxis));
+		new BulletBasicMelee(p, xAxis, yAxis);
+		new BulletBasic(p, xAxis, yAxis);
 	}
 }

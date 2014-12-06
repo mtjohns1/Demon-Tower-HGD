@@ -80,7 +80,9 @@ public class Player extends Actor {
 		//fire bullets
 		dx = _c.getShoot().getX();
 		dy = _c.getShoot().getY();
-		if (isStunned()) {dx = 0; dy = 0;}
+		
+		if (isStunned()) {dx = 0; dy = 0;} //nullify input while stunned
+		
 		if (_fireRate < 0 && _stamina > 0 && (Math.abs(dx) > 10 || Math.abs(dy) > 10)) {
 			_wep.get(_equip).fire(this, dx, dy);
 		}
@@ -203,7 +205,7 @@ public class Player extends Actor {
 
 	@Override
 	public void setHome(Room home) {
-		getHome().setPlayer(null);
+		//getHome().setPlayer(null);
 		super.setHome(home);
 		getHome().setPlayer(this);
 	}
