@@ -10,14 +10,14 @@
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.imageio.ImageIO;
-
+import java.util.Random;
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Room {
-
+	Random r = new Random();
 	Tile tiles[][] = new Tile[15][20];
 	ArrayList<Mobile> list = new ArrayList<Mobile>();
 	Player player = null;
@@ -44,6 +44,13 @@ public class Room {
 				}
 			}
 		}
+		int a = r.nextInt(101);
+		if(a <= 33)
+			tiles = this.interestingRoom(tiles);
+		else if(a <= 66)
+			tiles = this.fourSquareRoom(tiles);
+		else
+			tiles = this.threeSquareRoom(tiles);
 		generateBadguys();
 	}
 
@@ -78,6 +85,7 @@ public class Room {
 			tiles[2][7].setType("p");
 			for(int i = 8; i < 13; i++)
 				tiles[2][i].setType("p");
+			
 			tiles[1][12].setType("p");
 			
 		}
@@ -109,6 +117,72 @@ public class Room {
 			tiles[9][i].setType("w");
 			tiles[10][i].setType("w");
 		}
+		
+		return tiles;
+	}
+	
+	public Tile[][] threeSquareRoom(Tile[][] t){
+		Tile tiles[][] = t;
+		for(int i = 3; i < 6; i++){
+			tiles[i][3].setType("w");
+			tiles[i][4].setType("w");
+			
+			tiles[i][8].setType("w");
+			tiles[i][9].setType("w");
+			tiles[i][10].setType("w");
+			tiles[i][11].setType("w");
+			
+			tiles[i][15].setType("w");
+			tiles[i][16].setType("w");
+		}
+		
+		for(int i = 5; i < 15; i++){
+			tiles[8][i].setType("w");
+			tiles[9][i].setType("w");
+			tiles[10][i].setType("w");
+		}
+		
+		return tiles;
+	}
+	
+	public Tile[][] interestingRoom(Tile[][] t){
+		for(int i = 3; i < 5; i++){
+			tiles[2][i].setType("w");
+			tiles[3][i].setType("w");
+			
+			tiles[6][i].setType("w");
+			tiles[7][i].setType("w");
+			
+			tiles[10][i].setType("w");
+			tiles[11][i].setType("w");
+			//
+			tiles[2][i + 12].setType("w");
+			tiles[3][i + 12].setType("w");
+			
+			tiles[6][i + 12].setType("w");
+			tiles[7][i + 12].setType("w");
+			
+			tiles[10][i + 12].setType("w");
+			tiles[11][i + 12].setType("w");	
+		}
+		
+		for(int i = 7; i < 13; i+=5){
+			tiles[3][i].setType("w");
+			tiles[4][i].setType("w");
+			tiles[5][i].setType("w");
+			tiles[8][i].setType("w");
+			tiles[9][i].setType("w");
+			tiles[10][i].setType("w");
+		}
+		
+		tiles[3][10].setType("w");
+		tiles[3][11].setType("w");
+		tiles[5][8].setType("w");
+		tiles[5][9].setType("w");
+		tiles[8][10].setType("w");
+		tiles[8][11].setType("w");
+		tiles[10][8].setType("w");
+		tiles[10][9].setType("w");
 		
 		return tiles;
 	}
