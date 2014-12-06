@@ -64,7 +64,7 @@ public class Player extends Actor {
 		}
 		//apply friction
 		accelerate(0.475);
-		
+
 		//apply gravity (z direction)
 		setVz(getVz()-0.1);
 
@@ -77,13 +77,14 @@ public class Player extends Actor {
 		}
 		_debounce = (_c.getShoot().cycleRight() || _c.getShoot().cycleLeft());
 
-		//fire bullets
+		//get bullet input
 		dx = _c.getShoot().getX();
 		dy = _c.getShoot().getY();
-		
+
 		if (isStunned()) {dx = 0; dy = 0;} //nullify input while stunned
-		
-		if (_fireRate < 0 && _stamina > 0 && (Math.abs(dx) > 10 || Math.abs(dy) > 10)) {
+
+		//fire, but only if a variety of conditions are met (including having a weapon!
+		if (getWeapons().size() > 0 && _fireRate < 0 && _stamina > 0 && (Math.abs(dx) > 10 || Math.abs(dy) > 10)) {
 			_wep.get(_equip).fire(this, dx, dy);
 		}
 		//recover stamina while not firing
@@ -94,11 +95,11 @@ public class Player extends Actor {
 		if (_stamina > _staminaMax) {
 			_stamina = _staminaMax;
 		}
-		
+
 		//count down to next shot
 		_fireRate--;
 	}
-	
+
 	@Override
 	public void move() {
 		super.move();
@@ -108,7 +109,7 @@ public class Player extends Actor {
 			setVz(0);
 		}
 	}
-	
+
 	@Override
 	public int takeDamage(Damage dmg) {
 		int result = super.takeDamage(dmg);
@@ -122,7 +123,7 @@ public class Player extends Actor {
 	public Control getControls() {
 		return _c;
 	}
-	
+
 	/**
 	 * @param t Time before another shot can be fired
 	 */
@@ -166,6 +167,7 @@ public class Player extends Actor {
 	public int cycleWeaponLeft() {
 		_equip--;
 		if (_equip < 0) _equip = _wep.size()-1;
+		if (_equip < 0) _equip = 0; //protection case for not having any weapons
 		return getEquip();
 	}
 
@@ -206,14 +208,14 @@ public class Player extends Actor {
 	@Override
 	public void collide(Mobile m, boolean overlap, boolean nextOverlap) {
 		super.collide(m, overlap, nextOverlap);
-		
+
 		//generic powerup 
 		if (m instanceof Powerup)
 		{
 			((Powerup)m).getCollected(this);
 		}
 	}
-	
+
 	@Override
 	public void setHome(Room home) {
 		//getHome().setPlayer(null);
@@ -241,11 +243,14 @@ public class Player extends Actor {
 			}
 			list.add(s);
 		}
-		int swordIcon = getWeapons().get(getEquip()).getIcon();
-		Sprite s = new Sprite(4, y, 32, 32, swordIcon*32, 0, 0, "swords");
-		list.add(s);
+		if (getWeapons().size() > 0)
+		{
+			int swordIcon = getWeapons().get(getEquip()).getIcon();
+			Sprite s = new Sprite(4, y, 32, 32, swordIcon*32, 0, 0, "swords");
+			list.add(s);
+		}
 	}
-	
+
 	@Override
 	public void draw(List<Sprite> list)
 	{
