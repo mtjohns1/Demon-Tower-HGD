@@ -252,7 +252,24 @@ public class EnemyBossFire extends Enemy{
 			this.setDead();
 		}
 	}
-
+	
+	public void drawHUD(List<Sprite> list, int y) {
+		//draw health
+		for (int i = 0; i < getMaxHp()/2; i++) {
+			//full heart
+			Sprite s = new Sprite(610-i*16, y, 32, 32, 0, 0, 0, "hearts");
+			//half heart
+			if (getHp() == i*2+1) {
+				s = new Sprite(610-i*16, y, 32, 32, 32, 0, 0, "hearts");
+			}
+			//empty heart
+			if (getHp() <= i*2) {
+				s = new Sprite(610-i*16, y, 32, 32, 64, 0, 0, "hearts");
+			}
+			list.add(s);
+		}
+	}
+	
 	/**
 	 * Generate the player's sprite for this frame
 	 * 
@@ -262,6 +279,7 @@ public class EnemyBossFire extends Enemy{
 	{
 		Sprite s = new Sprite(getLeft()-2, getTop()-2, getW()+4, getH()+4, 0, 0, 0, "enemy");
 		list.add(s);
+		drawHUD(list, 448);
 	}
 
 
