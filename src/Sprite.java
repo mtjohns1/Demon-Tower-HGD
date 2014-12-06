@@ -98,6 +98,7 @@ public class Sprite {
 		
 		addGraphic("src/hero sword.png", "swords");
 		addGraphic("src/hearts.png", "hearts");
+		addGraphic("src/TempExplosion.png", "explosion");
 	}
 	
 	/**

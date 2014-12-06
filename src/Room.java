@@ -34,7 +34,7 @@ public class Room {
 			{
 				tiles[y][x] = new Tile(this, x, y);
 
-				if(x == 0 || y == 0 || y == 13 || x == 19 || Math.random()*10 < 1)
+				if(x == 0 || y == 0 || y == 13 || x == 19 /*|| Math.random()*10 < 1*/)
 				{
 					tiles[y][x].setType("w");
 				}
@@ -44,7 +44,6 @@ public class Room {
 				}
 			}
 		}
-
 		generateBadguys();
 	}
 
@@ -56,7 +55,7 @@ public class Room {
 			{
 				tiles[y][x] = new Tile(this, x, y);
 
-				if(x == 0 || y == 0 || y == 13 || x == 19 || Math.random()*10 < 1)
+				if(x == 0 || y == 0 || y == 13 || x == 19 /*|| Math.random()*10 < 1*/)
 				{
 					tiles[y][x].setType("w");
 				}
@@ -90,7 +89,31 @@ public class Room {
 		tiles = t;
 		generateBadguys();
 	}
-	//This constructor is for generating rooms on an edge
+	
+	public Tile[][] fourSquareRoom(Tile[][] t){
+		Tile tiles[][] = t;
+		for(int i = 3; i < 7; i++){
+			tiles[3][i + 10].setType("w");
+			tiles[4][i + 10].setType("w");
+			tiles[5][i + 10].setType("w");
+			
+			tiles[3][i].setType("w");
+			tiles[4][i].setType("w");
+			tiles[5][i].setType("w");
+			
+			tiles[8][i + 10].setType("w");
+			tiles[9][i + 10].setType("w");
+			tiles[10][i + 10].setType("w");
+			
+			tiles[8][i].setType("w");
+			tiles[9][i].setType("w");
+			tiles[10][i].setType("w");
+		}
+		
+		return tiles;
+	}
+	
+	
 
 	public Tile[][] getTiles(){
 		return tiles;
