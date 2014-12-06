@@ -36,8 +36,8 @@ public class Player extends Actor {
 		this.getHome().setPlayer(this);
 
 		//hitpoints!
-		setMaxHp(10);
-		setHp(10);
+		setMaxHp(8);
+		setHp(getMaxHp());
 
 		//add default weapon
 		_wep.add(new WeaponBasic());
@@ -59,11 +59,11 @@ public class Player extends Actor {
 		//apply acceleration
 		if (Math.abs(dx) > 10 || Math.abs(dy) > 10) {
 			Direction dir = new Direction(dx, dy);
-			setVx(getVx()+dir.getX()*5);
-			setVy(getVy()+dir.getY()*5);
-		}		
+			setVx(getVx()+dir.getX()*3);
+			setVy(getVy()+dir.getY()*3);
+		}
 		//apply friction
-		accelerate(0.5);
+		accelerate(0.475);
 		
 		//apply gravity (z direction)
 		setVz(getVz()-0.1);
@@ -217,17 +217,20 @@ public class Player extends Actor {
 	public void drawHUD(List<Sprite> list, int y) {
 		for (int i = 0; i < getMaxHp()/2; i++) {
 			//full heart
-			Sprite s = new Sprite(i*16, y, 32, 32, 0, 0, 0, "hearts");
+			Sprite s = new Sprite(44+i*16, y, 32, 32, 0, 0, 0, "hearts");
 			//half heart
 			if (getHp() == i*2+1) {
-				s = new Sprite(i*16, y, 32, 32, 32, 0, 0, "hearts");
+				s = new Sprite(44+i*16, y, 32, 32, 32, 0, 0, "hearts");
 			}
 			//empty heart
 			if (getHp() <= i*2) {
-				s = new Sprite(i*16, y, 32, 32, 64, 0, 0, "hearts");
+				s = new Sprite(44+i*16, y, 32, 32, 64, 0, 0, "hearts");
 			}
 			list.add(s);
 		}
+		int swordIcon = getWeapons().get(getEquip()).getIcon();
+		Sprite s = new Sprite(4, y, 32, 32, swordIcon*32, 0, 0, "swords");
+		list.add(s);
 	}
 	
 	@Override

@@ -24,7 +24,7 @@ public class BulletGrapple extends Bullet{
 		setD(32);
 
 		//last just under one second
-		setLife(30);
+		setLife(25);
 
 		setDamage(1); //deals 1 damage
 		accelerate(20); //max speed
@@ -40,7 +40,7 @@ public class BulletGrapple extends Bullet{
 		if (_reelIn) {
 			Mobile owner = getOwner();
 			Direction dir = new Direction(getX()-owner.getX(), getY()-owner.getY());
-			double reelSpeed = 6;
+			double reelSpeed = 4.8;
 			owner.setBack(1);
 			owner.setVz(0.2);
 			owner.setVx(owner.getVx()+dir.getX()*reelSpeed);
@@ -55,7 +55,7 @@ public class BulletGrapple extends Bullet{
 			setVx(0);
 			setVy(0); //stop moving
 			_reelIn = true;
-			setLife(30); //set to reel in for just under 1 second
+			setLife(40); //set to reel in for just under 1 second
 			//stick to the wall
 			if (dir.equals("right")) setRight(t.getLeft()-1);
 			if (dir.equals("left")) setLeft(t.getRight()+1);
