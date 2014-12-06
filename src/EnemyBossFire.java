@@ -222,7 +222,7 @@ public class EnemyBossFire extends Enemy{
 	 * @param dir: the direction of the collision
 	 */	
 	public void tileCollision(Tile t, String dir) {
-		if (t.getType().contains("w")) {
+		if (t.getType().contains("w") || t.getType().contains("p")) {
 			if (dir.equals("right")) {
 				setRight(t.getLeft()-1);
 				setVx(0);

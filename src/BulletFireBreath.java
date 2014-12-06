@@ -23,9 +23,9 @@ public class BulletFireBreath extends Bullet{
 		setD(32);
 
 		//no range limit, for now
-		super.setLife(50);
+		super.setLife(125);
 		setDamage(1); //deals 1 damage
-		accelerate(5); //max speed of 3 in each direction
+		accelerate(4); //max speed of 3 in each direction
 	}
 
 

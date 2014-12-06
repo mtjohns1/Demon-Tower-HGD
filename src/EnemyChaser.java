@@ -15,7 +15,7 @@ public class EnemyChaser extends Enemy{
 	private Player player;
 	private Bullet attack;
 	private int speed;
-	
+
 	public EnemyChaser(Room home) {
 		super(home);
 		this.setMaxHp(20);
@@ -24,7 +24,7 @@ public class EnemyChaser extends Enemy{
 		this.setX(500);
 		this.setY(300);
 
-		speed=4;
+		speed=3;
 	}
 
 	/**
@@ -38,22 +38,22 @@ public class EnemyChaser extends Enemy{
 			if(player == null){
 				return;
 			}
-				
+
 		}
-		
+
 		//finds how for enemy is from player
 		int xDif = this.getX() - player.getX();
 		int yDif = this.getY() - player.getY();
-		
+
 		int yMove = 0;
 		int xMove = 0;
-		
+
 		//finds direction of x and y
 		int xSign =1;
 		int ySign =1;
 		if (xDif > 0) xSign =-1;
 		if (yDif > 0) ySign =-1;
-		
+
 		//logic for how to move
 		if(xDif == 0){
 			yMove = speed * ySign;
@@ -76,13 +76,13 @@ public class EnemyChaser extends Enemy{
 		//apply acceleration
 		setVx(getVx()+xMove);
 		setVy(getVy()+yMove);
-		
+
 		//apply deceleration
 		setVx(getVx()/2);
 		setVy(getVy()/2);
 
 	}
-	
+
 
 	/**
 	 * Manage collisions with a tile
@@ -91,7 +91,7 @@ public class EnemyChaser extends Enemy{
 	 * @param dir: the direction of the collision
 	 */	
 	public void tileCollision(Tile t, String dir) {
-		if (t.getType().contains("w")) {
+		if (t.getType().contains("w") || t.getType().contains("p")) {
 			if (dir.equals("right")) {
 				setRight(t.getLeft()-1);
 				setVx(0);
@@ -109,9 +109,9 @@ public class EnemyChaser extends Enemy{
 				setVy(0);
 			}
 		}
-		
+
 	}
-	
+
 	/**
 	 * call on each frame to update.
 	 */
@@ -120,9 +120,9 @@ public class EnemyChaser extends Enemy{
 		if(this.getHp() <= 0){
 			this.setDead();
 		}
-			
+
 	}
-	
+
 	/**
 	 * Generate the player's sprite for this frame
 	 * 
@@ -133,23 +133,23 @@ public class EnemyChaser extends Enemy{
 		Sprite s = new Sprite(getLeft()-2, getTop()-2, getW()+4, getH()+4, 0, 0, 0, "enemy");
 		list.add(s);
 	}
-	
-	
+
+
 	public void collide(Mobile m, boolean overlap, boolean nextOverlap) {
 		//non-actors and your owner are ignored
 		if (!(m instanceof Actor) )
 			return;
-		
+
 		//cast for convenience
 		Actor a = (Actor)m;
 		//do damage
 		if(a instanceof Player && !(overlap))
 			attack = new BulletBasicMelee(this, (int)getVx(),(int)getVy());
-			setVx(-getVx());
-			setVy(-getVy());
+		setVx(-getVx());
+		setVy(-getVy());
 		if((a instanceof Enemy)){
-			
+
 		}
 	}
-	
+
 }

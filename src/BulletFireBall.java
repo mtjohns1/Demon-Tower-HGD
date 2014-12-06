@@ -22,7 +22,7 @@ public class BulletFireBall extends Bullet{
 		//no range limit, for now
 		
 		setDamage(4); //deals 1 damage
-		accelerate(4); //max speed of 3 in each direction
+		accelerate(2); //max speed of 3 in each direction
 	}
 
 	public void onDeath() {

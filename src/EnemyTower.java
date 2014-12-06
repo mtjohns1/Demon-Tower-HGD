@@ -98,7 +98,7 @@ public class EnemyTower extends Enemy{
 	 */
 	public void  draw(List<Sprite> list)
 	{
-		Sprite s = new Sprite(getLeft()-2, getTop()-2, getW()+4, getH()+4, 0, 0, 0, "enemy");
+		Sprite s = new Sprite(getLeft()-2, getTop()-2, getW()+4, getH()+4, 0, 0, 0, "enemyTower");
 		list.add(s);
 	}
 	
