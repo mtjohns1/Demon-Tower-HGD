@@ -17,9 +17,11 @@ public class EnemyBossFire extends Enemy{
 	private int weaponCoolDown =0;
 	private int moveCoolDown =0;
 	private int attackType =0;
-	private int attackOffset =-5;
+	private int attackOffset =-160;
 	private int attackCountDown =0;
-	
+	private int speed =40;
+	private int incrementer =20;
+
 	/**
 	 * creates a fire boss, it shoots fireballs, firebreath, and explosive steps.
 	 * @param home Pass room boss exists in
@@ -27,38 +29,39 @@ public class EnemyBossFire extends Enemy{
 	public EnemyBossFire(Room home) {
 		super(home);
 		this.setMaxHp(20);
-		
-		this.setHp(20);
-		
-		
+
+		this.setHp(200);
+
+		setW(64);
+		setH(64);
+		setD(32);
+
+
 		this.setX(300);
 		this.setY(300);
 		player = home.getPlayer();
 	}
 
 	/**
-	 * AI for enemy behavior. Chases player using shortest path, regardless of obsticals
+	 * AI for enemy behavior. 
 	 * @param player
 	 */
 	public void enemyAI(){
-		/* attempt at Firebreath behavior code
-		 * 
-		 * 
-		
-		if (attackType == 2 || attackCountDown != 5){
+		//if fire breath then keep going until it is done
+		if (attackType == 2 && attackCountDown != 5){
 			attackFireBreath();
 			return;
 		}
 		attackCountDown =0;
 		attackType =0;
-		*/
-		
-		//slows down player movement. creates explosions on each step.
+
+
+		//slows down movement. creates explosions on each step.
 		moveCoolDown +=1;
-		if (moveCoolDown == 60){
+		if (moveCoolDown == 100){
 			moveCoolDown = 0;
 			mover();
-			attack = new BulletExplosion(this,1,1);
+
 			return;
 		}
 		this.setVx(0);
@@ -68,7 +71,7 @@ public class EnemyBossFire extends Enemy{
 			return;
 		}
 		double random = Math.random()*10;
-		if (random > 3.0){
+		if (random > 5.0){
 			attackFireBall();
 			attackType =1;
 		}
@@ -77,38 +80,37 @@ public class EnemyBossFire extends Enemy{
 			attackFireBreath();
 		}
 		weaponCoolDown = 0;
-		
-		
-		
+
+
+
 	}
-	
+
 	/**
-	 * Logic for movement, called to set vx and vy
+	 * Logic for movement, called to set vx and vy and create explosive step
 	 */
 	public void mover(){
-		int speed =20;
 
 		if(player == null){
 			player = this.getHome().getPlayer();
 			if(player == null){
 				return;
 			}
-				
+
 		}
-		
+
 		//finds how for enemy is from player
 		int xDif = this.getX() - player.getX();
 		int yDif = this.getY() - player.getY();
-		
+
 		int yMove = 0;
 		int xMove = 0;
-		
+
 		//finds direction of x and y
 		int xSign =1;
 		int ySign =1;
 		if (xDif > 0) xSign =-1;
 		if (yDif > 0) ySign =-1;
-		
+
 		//logic for how to move
 		if(xDif == 0){ //player up or down from enemy
 			yMove = speed * ySign;
@@ -128,16 +130,19 @@ public class EnemyBossFire extends Enemy{
 			yMove =speed/2 * ySign;
 			xMove =speed/2 * xSign;
 		}
+		//creates explosion on step
+		attack = new BulletExplosion(this,1,1);
+
 		//apply acceleration
 		setVx(getVx()+xMove);
 		setVy(getVy()+yMove);
-		
+
 		//apply deceleration
 		setVx(getVx()/2);
 		setVy(getVy()/2);
 
 	}
-	
+
 	/**
 	 * logic for how to attack with firebreath
 	 */
@@ -147,20 +152,51 @@ public class EnemyBossFire extends Enemy{
 		//finds how for enemy is from player
 		int xDif = this.getX() - this.getHome().getPlayer().getX();
 		int yDif = this.getY() - this.getHome().getPlayer().getY();
-		
+
 		//finds direction of x and y
 		xDif = xDif*-1;
 		yDif = yDif*-1;
-		if(xDif ==0){
-			yOffset = attackOffset;
+
+		int xSign =1;
+		int ySign =1;
+		if (xDif > 0) xSign =-1;
+		if (yDif > 0) ySign =-1;
+
+		//logic for how to find offset
+		if(xDif == 0){ //player up or down from enemy
+			xOffset = attackOffset * ySign;
 		}
-		if(yDif ==0){
-			yOffset = attackOffset;
+		else if (yDif == 0){//player left or right
+			yOffset = attackOffset * xSign;
 		}
-		attackCountDown +=1;
-		//logic for how to move
-		attack = new BulletFireBreath(this,xDif,yDif);
-		
+		else if (Math.abs(xDif) > Math.abs(yDif)){ //player more up or down then left or right
+			yOffset = attackOffset/2 * xSign;
+			xOffset = attackOffset/3 * ySign;
+		}
+		else if (Math.abs(xDif) < Math.abs(yDif)){//more left/right then up/down
+			xOffset = attackOffset/2 * ySign;
+			yOffset = attackOffset/3 * xSign;
+		}
+		else {//player perfect 45 degree angle
+			xOffset =attackOffset/2 * ySign;
+			yOffset =attackOffset/2 * xSign;
+		}
+
+		//creates wave for attack and increments counter for attack life span
+		attackOffset += incrementer;
+		if(attackOffset ==160){
+			attackCountDown +=1;
+			incrementer =-20;
+		}
+		else if(attackOffset ==-160){
+			attackCountDown +=1;
+			incrementer =20;
+		}
+		//adds a random nature to fire breath
+		xOffset += Math.random()*80*xSign;
+		yOffset += Math.random()*80*ySign;
+
+		attack = new BulletFireBreath(this,xDif+(xOffset),yDif+(yOffset));
 	}
 	/**
 	 * logic for how to attack with fireball
@@ -169,15 +205,15 @@ public class EnemyBossFire extends Enemy{
 		//finds how for enemy is from player
 		int xDif = this.getX() - this.getHome().getPlayer().getX();
 		int yDif = this.getY() - this.getHome().getPlayer().getY();
-		
+
 		//finds direction of x and y
 		xDif = xDif*-1;
 		yDif = yDif*-1;
-		
+
 		//logic for how to move
 		attack = new BulletFireBall(this,xDif,yDif);
 	}
-	
+
 
 	/**
 	 * Manage collisions with a tile
@@ -204,9 +240,9 @@ public class EnemyBossFire extends Enemy{
 				setVy(0);
 			}
 		}
-		
+
 	}
-	
+
 	/**
 	 * call on each frame to update.
 	 */
@@ -216,7 +252,7 @@ public class EnemyBossFire extends Enemy{
 			this.setDead();
 		}
 	}
-	
+
 	/**
 	 * Generate the player's sprite for this frame
 	 * 
@@ -227,19 +263,19 @@ public class EnemyBossFire extends Enemy{
 		Sprite s = new Sprite(getLeft()-2, getTop()-2, getW()+4, getH()+4, 0, 0, 0, "enemy");
 		list.add(s);
 	}
-	
-	
+
+
 	public void collide(Mobile m, boolean overlap, boolean nextOverlap) {
 		//non-actors and your owner are ignored
 		if (!(m instanceof Actor) )
 			return;
-		
+
 		//cast for convenience
 		Actor a = (Actor)m;
 		//do damage
 		if(a instanceof Player && !(overlap))
-		if((a instanceof Enemy)){
-			
-		}
+			if((a instanceof Enemy)){
+
+			}
 	}
 }

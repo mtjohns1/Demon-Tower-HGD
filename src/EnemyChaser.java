@@ -13,7 +13,8 @@ import javax.imageio.ImageIO;
 public class EnemyChaser extends Enemy{
 
 	private Player player;
-	private int attack, speed;
+	private Bullet attack;
+	private int speed;
 	
 	public EnemyChaser(Room home) {
 		super(home);
@@ -23,7 +24,6 @@ public class EnemyChaser extends Enemy{
 		this.setX(500);
 		this.setY(300);
 
-		attack = 5;
 		speed=4;
 	}
 
@@ -144,10 +144,9 @@ public class EnemyChaser extends Enemy{
 		Actor a = (Actor)m;
 		//do damage
 		if(a instanceof Player && !(overlap))
-			//a.takeDamage(attack);
+			attack = new BulletBasicMelee(this, (int)getVx(),(int)getVy());
 			setVx(-getVx());
 			setVy(-getVy());
-			//a.takeDamage(attack);
 		if((a instanceof Enemy)){
 			
 		}
