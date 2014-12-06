@@ -51,11 +51,12 @@ public class Game extends JPanel {
 		p.setLeft(100);
 		
 		//main loop (it never ends!)
-		boolean paused = false;
+		boolean paused = true;
 		boolean pressed = false;
 		
 		PauseMenu.menuInit();
-		ArrayList<PauseMenu> menu = new ArrayList<PauseMenu>();
+		ArrayList<Menu> menu = new ArrayList<Menu>();
+		menu.add(new StartMenu(this.controls));
 		
 		while(true) {
 			if(this.controls.getMenu().escape()){
