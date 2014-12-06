@@ -66,8 +66,6 @@ public class Game extends JPanel {
 				p.setLeft(5);
 				//TODO: Migrate player to newR
 				r = newR;
-				System.out.println("mapX: " + mapX);
-				System.out.println("mapY: " + mapY);
 			}
 			
 			else if(r.getDirection().equals("west") )
@@ -82,8 +80,6 @@ public class Game extends JPanel {
 				p.setRight(635);
 				//TODO: Migrate player to newR
 				r = newR;
-				System.out.println("mapX: " + mapX);
-				System.out.println("mapY: " + mapY);
 			}
 			
 			else if(r.getDirection().equals("north") )
@@ -98,8 +94,6 @@ public class Game extends JPanel {
 				p.setLeft(300);
 				//TODO: Migrate player to newR
 				r = newR;
-				System.out.println("mapX: " + mapX);
-				System.out.println("mapY: " + mapY);
 			}
 			//bug in collision.
 			else if(r.getDirection().equals("south") )
@@ -110,12 +104,10 @@ public class Game extends JPanel {
 					mapY += 1;
 				Room newR = f.get(mapX, mapY); 
 				newR.addMobile(p);
-				p.setTop(205);
-				p.setLeft(200);
+				p.setTop(35);
+				p.setLeft(300);
 				//TODO: Migrate player to newR
 				r = newR;
-				System.out.println("mapX: " + mapX);
-				System.out.println("mapY: " + mapY);
 			}
 			
 			
