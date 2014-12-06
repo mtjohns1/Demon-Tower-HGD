@@ -28,13 +28,13 @@ public class PauseMenu extends Menu {
 	}
 
 	public static void menuInit(){
-		Sprite.addGraphic("src/TempMenuWindow.png", "menu");
-		Sprite.addGraphic("src/TempResumeButton.png","resume");
-		Sprite.addGraphic("src/TempResumeButtonHighlight.png","resumeH");
-		Sprite.addGraphic("src/TempResumeButtonPressed.png","resumeP");
-		Sprite.addGraphic("src/TemExitButton.png","exit");
-		Sprite.addGraphic("src/TemExitButtonHighlight.png","exitH");
-		Sprite.addGraphic("src/TemExitButtonPressed.png","exitP");
+		Sprite.addGraphic("src/tempMenuWindow.png", "menu");
+		Sprite.addGraphic("src/tempResumeButton.png","resume");
+		Sprite.addGraphic("src/tempResumeButtonHighlight.png","resumeH");
+		Sprite.addGraphic("src/tempResumeButtonPressed.png","resumeP");
+		Sprite.addGraphic("src/temExitButton.png","exit");
+		Sprite.addGraphic("src/temExitButtonHighlight.png","exitH");
+		Sprite.addGraphic("src/temExitButtonPressed.png","exitP");
 	}
 
 	public void drawMenu(ArrayList<Sprite> sprites) {
