@@ -24,6 +24,8 @@ public class Floor {
 			for(int x = 0; x < 4; x++){
 				if(x == 0 && y == 0)
 					rooms[y][x] = new Room(true);
+				else if(x == 1 && y == 2)
+					rooms[y][x] = new Room(false);
 				else
 					rooms[y][x] = new Room();
 			}

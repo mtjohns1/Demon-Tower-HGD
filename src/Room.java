@@ -22,7 +22,7 @@ public class Room {
 	ArrayList<Mobile> list = new ArrayList<Mobile>();
 	Player player = null;
 	int width = 640, height = 448;
-	
+
 	/**
 	 * Creates a new blank room with walls surrounding it.
 	 */
@@ -44,10 +44,10 @@ public class Room {
 				}
 			}
 		}
-		
+
 		generateBadguys();
 	}
-	
+
 	public Room(boolean start) //creates the starting room
 	{
 		for(int x = 0; x < 20; x++)
@@ -66,13 +66,23 @@ public class Room {
 				}
 			}
 		}
+		if(start == true){
+			tiles[13][9].setType("");
+			tiles[13][10].setType("");
+
+			tiles[6][19].setType("");
+			tiles[7][19].setType("");
+		}
 		
-		tiles[13][9].setType("");
-		tiles[13][10].setType("");
-		
-		tiles[6][19].setType("");
-		tiles[7][19].setType("");
-		
+		else if(start == false){
+			tiles[1][7].setType("p");
+			tiles[2][7].setType("p");
+			for(int i = 8; i < 13; i++)
+				tiles[2][i].setType("p");
+			tiles[1][12].setType("p");
+			
+		}
+
 		generateBadguys();
 	}
 	//This will be used for re-creating an old room
@@ -81,7 +91,7 @@ public class Room {
 		generateBadguys();
 	}
 	//This constructor is for generating rooms on an edge
-	
+
 	public Tile[][] getTiles(){
 		return tiles;
 	}
@@ -89,17 +99,17 @@ public class Room {
 		tiles[13][9].setType("");
 		tiles[13][10].setType("");
 	}
-	
+
 	public void openNorth(){
 		tiles[0][9].setType("");
 		tiles[0][10].setType("");
 	}
-	
+
 	public void openWest(){
 		tiles[6][0].setType("");
 		tiles[7][0].setType("");
 	}
-	
+
 	public void openEast(){
 		tiles[6][19].setType("");
 		tiles[7][19].setType("");
@@ -107,11 +117,11 @@ public class Room {
 	public void generateBadguys(){
 		EnemyChaser enemy = new EnemyChaser(this);
 	}
-	
+
 	public Player getPlayer(){
 		return this.player;
 	}
-	
+
 	public void setPlayer(Player p){
 		this.player = p;
 	}
@@ -140,24 +150,24 @@ public class Room {
 	public int getRight() {
 		return width-1;
 	}
-	
+
 	public String getDirection()
 	{
 		if(player != null && this.player.getRight() > 640)
 		{
 			return "east";
 		}
-		
+
 		else if(player != null && this.player.getLeft() < 0)
 		{
 			return "west";
 		}
-		
+
 		else if(player != null && this.player.getTop() < 0)
 		{
 			return "north";
 		}
-		
+
 		else if(player != null && this.player.getBottom() > 470)
 		{
 			return "south";
@@ -166,8 +176,8 @@ public class Room {
 			return "no change";
 		}
 	}
-	
-	
+
+
 
 	/**
 	 * 
