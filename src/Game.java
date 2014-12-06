@@ -89,7 +89,7 @@ public class Game extends JPanel {
 			if(paused == false){
 				t.startLoop();
 				r.update();
-				RoomDesign();
+				r = RoomDesign(r, p);
 				r.draw(getSprites());
 				redraw();
 				t.endLoop();
@@ -115,9 +115,9 @@ public class Game extends JPanel {
 		}
 	}
 	
-	public void RoomDesign(){
-		Room r = new Room();
-		Player p = new Player(r, controls);
+	public Room RoomDesign(Room n, Player c){
+		Room r = n;
+		Player p = c;
 		
 		if(r.getDirection().equals("east") )
 		{
@@ -174,6 +174,8 @@ public class Game extends JPanel {
 			//TODO: Migrate player to newR
 			r = newR;
 		}
+		
+		return r;
 		
 	}
 	

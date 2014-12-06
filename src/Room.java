@@ -45,28 +45,34 @@ public class Room {
 			}
 		}
 		
+		generateBadguys();
+	}
+	
+	public Room(boolean start) //creates the starting room
+	{
+		for(int x = 0; x < 20; x++)
+		{
+			for(int y = 0; y < 14; y++)
+			{
+				tiles[y][x] = new Tile(this, x, y);
+
+				if(x == 0 || y == 0 || y == 13 || x == 19 || Math.random()*10 < 1)
+				{
+					tiles[y][x].setType("w");
+				}
+				else
+				{
+					tiles[y][x].setType("");
+				}
+			}
+		}
 		
+		tiles[13][9].setType("");
+		tiles[13][10].setType("");
 		
+		tiles[6][19].setType("");
+		tiles[7][19].setType("");
 		
-		//creates openings in the room on each side
-		/*
-		if(keycode != 0){
-			tiles[0][9].setType("");
-			tiles[0][10].setType("");
-		}
-		if(keycode != 1){
-			tiles[6][0].setType("");
-			tiles[7][0].setType("");
-		}
-		if(keycode != 2){
-			tiles[13][9].setType("");
-			tiles[13][10].setType("");
-		}
-		if(keycode != 3){
-			tiles[6][19].setType("");
-			tiles[7][19].setType("");
-		}
-		*/
 		generateBadguys();
 	}
 	//This will be used for re-creating an old room
@@ -80,20 +86,23 @@ public class Room {
 		return tiles;
 	}
 	public void openSouth(){
+		tiles[13][9].setType("");
+		tiles[13][10].setType("");
+	}
+	
+	public void openNorth(){
 		tiles[0][9].setType("");
 		tiles[0][10].setType("");
 	}
 	
-	public void openNorth(){
-		
-	}
-	
 	public void openWest(){
-		
+		tiles[6][0].setType("");
+		tiles[7][0].setType("");
 	}
 	
 	public void openEast(){
-		
+		tiles[13][9].setType("");
+		tiles[13][10].setType("");
 	}
 	public void generateBadguys(){
 		EnemyChaser enemy = new EnemyChaser(this);

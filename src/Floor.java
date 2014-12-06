@@ -22,20 +22,19 @@ public class Floor {
 		
 		for(int y = 0; y < 4; y++){
 			for(int x = 0; x < 4; x++){
-				if(x == 0){
+				if(x == 0 && y == 0)
+					rooms[y][x] = new Room(true);
+				else
 					rooms[y][x] = new Room();
-				}
-				if(x == 3){
-					rooms[y][x] = new Room();
-				}
-				if(y == 0){ //top is blocked off
-					rooms[y][x] = new Room();
-				}
-				if(y == 3){
-					rooms[y][x] = new Room();
-				}
 			}
 		}
+		
+		for(int i = 0; i < 3; i++){
+			rooms[i][0].openSouth();
+			rooms[i][2].openSouth();
+			rooms[i][3].openSouth();
+		}
+		
 		
 		
 	}
