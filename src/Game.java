@@ -51,15 +51,67 @@ public class Game extends JPanel {
 		p.setLeft(100);
 		
 		//main loop (it never ends!)
+		boolean paused = false;
+		boolean pressed = false;
+		
+		PauseMenu.menuInit();
+		ArrayList<PauseMenu> menu = new ArrayList<PauseMenu>();
+		
 		while(true) {
-			t.startLoop();
-			r.update();
-			RoomDesign();
+			if(this.controls.getMenu().escape()){
+				if (pressed == false){
+					pressed = true;
+					
+					if(menu.isEmpty()){	
+						menu.add(new PauseMenu(this.controls));
+						paused = true;
+					}
+					else{
+						//to add check to see if menu is start menu
+						//menu.remove(menu.size()-1);
+					}					
+				}
+			}
+			else{
+				pressed = false;
+			}
+			for(int i = 0; i < menu.size(); i++){//for(Menu m : menu.){
+				Menu m = menu.get(i);
+				if (m.isDead()){
+					menu.remove(m);
+				}
+			}
+			if(menu.isEmpty()){
+				paused = false;
+			}
 			
 			
-			r.draw(getSprites());	
-			redraw();
-			t.endLoop();
+			if(paused == false){
+				t.startLoop();
+				r.update();
+				RoomDesign();
+				r.draw(getSprites());
+				redraw();
+				t.endLoop();
+			}else{
+				
+				t.startLoop();
+				
+				r.draw(getSprites());
+				menu.get(menu.size()-1).update();
+				menu.get(menu.size()-1).drawMenu(getSprites());
+				
+				redraw();
+				t.endLoop();
+			}
+		//	t.startLoop();
+			//r.update();
+			//RoomDesign();
+			
+			
+			//r.draw(getSprites());	
+			//redraw();
+			//t.endLoop();
 		}
 	}
 	
