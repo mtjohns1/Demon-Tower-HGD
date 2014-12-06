@@ -204,6 +204,17 @@ public class Player extends Actor {
 	}
 
 	@Override
+	public void collide(Mobile m, boolean overlap, boolean nextOverlap) {
+		super.collide(m, overlap, nextOverlap);
+		
+		//generic powerup 
+		if (m instanceof Powerup)
+		{
+			((Powerup)m).getCollected(this);
+		}
+	}
+	
+	@Override
 	public void setHome(Room home) {
 		//getHome().setPlayer(null);
 		super.setHome(home);
