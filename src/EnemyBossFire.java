@@ -38,7 +38,7 @@ public class EnemyBossFire extends Enemy{
 
 
 		this.setX(300);
-		this.setY(300);
+		this.setY(200);
 		player = home.getPlayer();
 	}
 

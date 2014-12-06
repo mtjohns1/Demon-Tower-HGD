@@ -15,11 +15,11 @@ import java.io.*;
 
 public class Floor {
 
-	
+
 	Room rooms[][] = new Room[4][4];
-	
+
 	public Floor(){
-		
+
 		for(int y = 0; y < 4; y++){
 			for(int x = 0; x < 4; x++){
 				if(x == 0 && y == 0)
@@ -41,7 +41,7 @@ public class Floor {
 			rooms[i + 1][2].openNorth();
 			rooms[i][3].openSouth();
 		}
-		
+
 		for(int i = 0; i < 3; i++){
 			rooms[0][i].openEast();
 			rooms[3][i].openEast();
@@ -49,33 +49,35 @@ public class Floor {
 			rooms[3][i + 1].openWest();
 		}
 		rooms[1][1].openSouth();
-		
+
 		rooms[1][2].openEast();
 		rooms[3][2].openEast();
-		
+
 		rooms[2][1].openNorth();
 		rooms[2][1].openSouth();
-		
+
 		rooms[3][1].openNorth();
-		
-		
-		
+
+
+
 	}
-	
+
 	public Room get(int x, int y){
 		Tile tile[][] = rooms[y][x].getTiles();
-		rooms[y][x] = new Room(tile);
+		int[] a = rooms[y][x].enemyholder;
+		int type = rooms[y][x].type;
+		rooms[y][x] = new Room(tile, a, type);
 		return rooms[y][x];
-		
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
 
 }

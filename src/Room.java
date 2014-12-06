@@ -17,11 +17,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Room {
+	int[] enemyholder = {1};
 	Random r = new Random();
 	Tile tiles[][] = new Tile[15][20];
+	Enemy enemies[] = null;
 	ArrayList<Mobile> list = new ArrayList<Mobile>();
 	Player player = null;
 	int width = 640, height = 448;
+	int type = 0;
 
 	/**
 	 * Creates a new blank room with walls surrounding it.
@@ -45,16 +48,15 @@ public class Room {
 			}
 		}		
 		
-		
 		int a = r.nextInt(101);
-		if(a <= 33)
-			tiles = this.interestingRoom(tiles);
-		else if(a <= 66)
+	//	if(a <= 33)
+	//		tiles = this.interestingRoom(tiles);
+		/*else */if(a <= 66)
 			tiles = this.fourSquareRoom(tiles);
 		else
 			tiles = this.threeSquareRoom(tiles);
 			
-		generateBadguys();
+		generateBadguys(enemyholder);
 	}
 
 	public Room(int start) //creates the starting room
@@ -93,19 +95,27 @@ public class Room {
 			
 		}
 		else if(start == 3){
+			enemyholder[0] = 3;
 			this.bossRoom();
 		}
-
-		generateBadguys();
+		
+		generateBadguys(enemyholder);
 	}
 	//This will be used for re-creating an old room
-	public Room(Tile[][] t){
+	public Room(Tile[][] t, int[] a, int roomType){
 		tiles = t;
-		generateBadguys();
+		type = roomType;
+		enemyholder = a;
+		generateBadguys(enemyholder);
+	}
+	
+	public void enemySpawner(int type){
+		
 	}
 	
 	public Tile[][] fourSquareRoom(Tile[][] t){
 		Tile tiles[][] = t;
+		type = 1;
 		for(int i = 3; i < 7; i++){
 			tiles[3][i + 10].setType("w");
 			tiles[4][i + 10].setType("w");
@@ -122,6 +132,10 @@ public class Room {
 			tiles[8][i].setType("w");
 			tiles[9][i].setType("w");
 			tiles[10][i].setType("w");
+			int[] a = {1,1,1};
+			
+			
+			
 		}
 		
 		return tiles;
@@ -129,6 +143,7 @@ public class Room {
 	
 	public Tile[][] threeSquareRoom(Tile[][] t){
 		Tile tiles[][] = t;
+		type = 2;
 		for(int i = 3; i < 6; i++){
 			tiles[i][3].setType("w");
 			tiles[i][4].setType("w");
@@ -143,7 +158,7 @@ public class Room {
 		}
 		
 		for(int i = 5; i < 15; i++){
-			tiles[8][i].setType("w");
+			tiles[8][i].setType("w");int[] a = {1,1,1};
 			tiles[9][i].setType("w");
 			tiles[10][i].setType("w");
 		}
@@ -152,6 +167,7 @@ public class Room {
 	}
 	
 	public Tile[][] interestingRoom(Tile[][] t){
+		type = 3;
 		for(int i = 3; i < 5; i++){
 			tiles[2][i].setType("w");
 			tiles[3][i].setType("w");
@@ -194,7 +210,7 @@ public class Room {
 	}
 	
 	public Tile[][] bossRoom(){
-		
+		type = 4;
 		for(int i = 1; i < 4; i++)
 		{
 			for(int j = 1; j < 6; j++)
@@ -258,8 +274,27 @@ public class Room {
 		tiles[6][19].setType("");
 		tiles[7][19].setType("");
 	}
-	public void generateBadguys(){
-		EnemyChaser enemy = new EnemyChaser(this);
+	
+	/**
+	 * 
+	 * @param a array of ints
+	 * 	1 = enemy chaser
+	 * 	2 = enemy tower
+	 * 	3 = Fire boss
+	 */
+	public void generateBadguys(int[] a){
+		enemies = new Enemy[a.length];
+		for(int i = 0; i < a.length; i++){
+			if(a[i] == 1){
+				enemies[i] = new EnemyChaser(this);
+			}
+			if(a[i] == 2){
+				enemies[i] = new EnemyTower(this);
+			}
+			if(a[i] == 3){
+				enemies[i] = new EnemyBossFire(this);
+			}
+		}
 	}
 
 	public Player getPlayer(){
