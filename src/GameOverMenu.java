@@ -23,13 +23,13 @@ private int highlighted;
 	}
 	
 	public static void menuInit(){
-		Sprite.addGraphic("src/tempGameOverMenu.png", "gameOver");
-		Sprite.addGraphic("src/temExitButton.png","exit");
-		Sprite.addGraphic("src/temExitButtonHighlight.png","exitH");
-		Sprite.addGraphic("src/temExitButtonPressed.png","exitP");
-		Sprite.addGraphic("src/tempReturnButton.png", "returnButton");
-		Sprite.addGraphic("src/tempReturnButtonHighlighted.png", "returnButtonH");
-		Sprite.addGraphic("src/tempReturnButtonPressed.png","returnButtonP");
+		Sprite.addGraphic("tempGameOverMenu.png", "gameOver");
+		Sprite.addGraphic("temExitButton.png","exit");
+		Sprite.addGraphic("temExitButtonHighlight.png","exitH");
+		Sprite.addGraphic("temExitButtonPressed.png","exitP");
+		Sprite.addGraphic("tempReturnButton.png", "returnButton");
+		Sprite.addGraphic("tempReturnButtonHighlighted.png", "returnButtonH");
+		Sprite.addGraphic("tempReturnButtonPressed.png","returnButtonP");
 	}
 	
 	public void drawMenu(ArrayList<Sprite> sprites) {

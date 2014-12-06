@@ -44,7 +44,7 @@ public class Sprite {
 		picture = new Image[4];
 		//System.out.println(ImageEnum.valueOf("tempWall").getValue());
 		
-		File Floor = new File("src/tempBackground.png");
+		File Floor = new File("tempBackground.png");
 		Image floor = null;
 		try {
 			floor =  ImageIO.read(Floor);
@@ -57,7 +57,7 @@ public class Sprite {
 		
 		picture[0] = floor;
 		
-		File Wall = new File("src/tempWall.png");
+		File Wall = new File("tempWall.png");
 		Image wall = null;
 		try {
 			wall =  ImageIO.read(Wall);
@@ -70,7 +70,7 @@ public class Sprite {
 		
 		picture[1] = wall;
 
-		File Hero = new File("src/hero dude and sword.png");
+		File Hero = new File("hero dude and sword.png");
 		Image hero = null;
 		try {
 			hero =  ImageIO.read(Hero);
@@ -83,7 +83,7 @@ public class Sprite {
 		
 		picture[2] = hero;
 		
-		File Enemy = new File("src/generic_Evil_creature_small.jpg");
+		File Enemy = new File("generic_Evil_creature_small.jpg");
 		Image enemy = null;
 		try {
 			enemy =  ImageIO.read(Enemy);
@@ -96,10 +96,10 @@ public class Sprite {
 		
 		picture[3] = enemy;
 		
-		addGraphic("src/hero sword.png", "swords");
-		addGraphic("src/hearts.png", "hearts");
-		addGraphic("src/TempExplosion.png", "explosion");
-		addGraphic("src/enemyTower.jpg", "enemyTower");
+		addGraphic("hero sword.png", "swords");
+		addGraphic("hearts.png", "hearts");
+		addGraphic("TempExplosion.png", "explosion");
+		addGraphic("enemyTower.jpg", "enemyTower");
 	}
 	
 	/**

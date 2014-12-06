@@ -29,16 +29,16 @@ public class PauseMenu extends Menu {
 	}
 
 	public static void menuInit(){
-		Sprite.addGraphic("src/tempMenuWindow.png", "menu");
-		Sprite.addGraphic("src/tempResumeButton.png","resume");
-		Sprite.addGraphic("src/tempResumeButtonHighlight.png","resumeH");
-		Sprite.addGraphic("src/tempResumeButtonPressed.png","resumeP");
-		Sprite.addGraphic("src/temExitButton.png","exit");
-		Sprite.addGraphic("src/temExitButtonHighlight.png","exitH");
-		Sprite.addGraphic("src/temExitButtonPressed.png","exitP");
-		Sprite.addGraphic("src/tempReturnButton.png", "returnButton");
-		Sprite.addGraphic("src/tempReturnButtonHighlighted.png", "returnButtonH");
-		Sprite.addGraphic("src/tempReturnButtonPressed.png","returnButtonP");
+		Sprite.addGraphic("tempMenuWindow.png", "menu");
+		Sprite.addGraphic("tempResumeButton.png","resume");
+		Sprite.addGraphic("tempResumeButtonHighlight.png","resumeH");
+		Sprite.addGraphic("tempResumeButtonPressed.png","resumeP");
+		Sprite.addGraphic("temExitButton.png","exit");
+		Sprite.addGraphic("temExitButtonHighlight.png","exitH");
+		Sprite.addGraphic("temExitButtonPressed.png","exitP");
+		Sprite.addGraphic("tempReturnButton.png", "returnButton");
+		Sprite.addGraphic("tempReturnButtonHighlighted.png", "returnButtonH");
+		Sprite.addGraphic("tempReturnButtonPressed.png","returnButtonP");
 
 	}
 

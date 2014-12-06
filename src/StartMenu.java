@@ -22,13 +22,13 @@ private int highlighted;
 	}
 	
 	public static void menuInit(){
-		Sprite.addGraphic("src/tempStartMenu.png", "startMenu");
-		Sprite.addGraphic("src/tempStartButton.png", "startButton");
-		Sprite.addGraphic("src/tempStartButtonHighlighted.png", "startButtonH");
-		Sprite.addGraphic("src/tempStartButtonPressed.png", "startButtonP");
-		Sprite.addGraphic("src/tempQuitButton.png", "quitButton");
-		Sprite.addGraphic("src/tempQuitButtonHighlighted.png", "quitButtonH");
-		Sprite.addGraphic("src/tempQuitButtonPressed.png", "quitButtonP");
+		Sprite.addGraphic("tempStartMenu.png", "startMenu");
+		Sprite.addGraphic("tempStartButton.png", "startButton");
+		Sprite.addGraphic("tempStartButtonHighlighted.png", "startButtonH");
+		Sprite.addGraphic("tempStartButtonPressed.png", "startButtonP");
+		Sprite.addGraphic("tempQuitButton.png", "quitButton");
+		Sprite.addGraphic("tempQuitButtonHighlighted.png", "quitButtonH");
+		Sprite.addGraphic("tempQuitButtonPressed.png", "quitButtonP");
 	}
 	
 	public void drawMenu(ArrayList<Sprite> sprites) {
