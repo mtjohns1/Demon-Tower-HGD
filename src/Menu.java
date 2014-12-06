@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 
 import java.awt.*;
 import java.io.*;
+import java.util.ArrayList;
 
 public class Menu {
 private int highlighted;
@@ -25,6 +26,16 @@ private int highlighted;
 	
 	//overide to load graphics, any other initialization
 	public static void menuInit(){
+		
+	}
+
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void drawMenu(ArrayList<Sprite> sprites) {
+		// TODO Auto-generated method stub
 		
 	}
 }

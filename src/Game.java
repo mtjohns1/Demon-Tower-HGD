@@ -24,6 +24,11 @@ public class Game extends JPanel {
 	//private ImageObserver observer;
 	private ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 	private Control controls;
+	private boolean reset = false;
+	
+
+
+
 	int mapX;
 	int mapY;
 	int mapZ;
@@ -51,11 +56,12 @@ public class Game extends JPanel {
 		p.setLeft(100);
 		
 		//main loop (it never ends!)
-		boolean paused = false;
+		boolean paused = true;
 		boolean pressed = false;
 		
 		PauseMenu.menuInit();
-		ArrayList<PauseMenu> menu = new ArrayList<PauseMenu>();
+		ArrayList<Menu> menu = new ArrayList<Menu>();
+		menu.add(new StartMenu(this.controls));
 		
 		while(true) {
 			if(this.controls.getMenu().escape()){
@@ -63,7 +69,7 @@ public class Game extends JPanel {
 					pressed = true;
 					
 					if(menu.isEmpty()){	
-						menu.add(new PauseMenu(this.controls));
+						menu.add(new PauseMenu(this.controls, this));
 						paused = true;
 					}
 					else{
@@ -104,6 +110,10 @@ public class Game extends JPanel {
 				redraw();
 				t.endLoop();
 			}
+			
+			if(reset)
+				break;
+			
 		//	t.startLoop();
 			//r.update();
 			//RoomDesign();
@@ -209,5 +219,12 @@ public class Game extends JPanel {
 		sprites.clear();
 		getGraphics().drawImage(backBuffer, 0, 0, null);
 
+	}
+	public boolean isReset() {
+		return reset;
+	}
+
+	public void setReset(boolean reset) {
+		this.reset = reset;
 	}
 }

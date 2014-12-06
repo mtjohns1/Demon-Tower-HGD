@@ -13,7 +13,7 @@ public class PauseMenu extends Menu {
 	private boolean select = false;
 	private boolean pause = true;
 	private boolean isDead = false;
-	
+	private Game _game;
 	public boolean isDead() {
 		return isDead;
 	}
@@ -21,10 +21,11 @@ public class PauseMenu extends Menu {
 	
 
 	Control c;
-	public PauseMenu(Control c){
+	public PauseMenu(Control c, Game game){
 		this.highlighted = 0;
 		this.c = c;
 		this.menuInit();
+		_game = game;
 	}
 
 	public static void menuInit(){
@@ -88,7 +89,7 @@ public class PauseMenu extends Menu {
 			if(highlighted == 0)
 				isDead = true;
 			if(highlighted == 1)
-				System.exit(0);
+				_game.setReset(true);
 		}
 		if(c.getMenu().escape() && pause == false){
 			pause = true;
