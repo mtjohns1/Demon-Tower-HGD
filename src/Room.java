@@ -332,22 +332,22 @@ public class Room {
 
 	public String getDirection()
 	{
-		if(player != null && this.player.getRight() > 640)
+		if(player != null && this.player.getRight() > getRight())
 		{
 			return "east";
 		}
 
-		else if(player != null && this.player.getLeft() < 0)
+		else if(player != null && this.player.getLeft() < getLeft())
 		{
 			return "west";
 		}
 
-		else if(player != null && this.player.getTop() < 0)
+		else if(player != null && this.player.getTop() < getTop())
 		{
 			return "north";
 		}
 
-		else if(player != null && this.player.getBottom() > 470)
+		else if(player != null && this.player.getBottom() > getBottom())
 		{
 			return "south";
 		}
