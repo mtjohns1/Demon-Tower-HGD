@@ -99,6 +99,27 @@ public class Room {
 			this.bossRoom();
 		}
 		
+		else if(start == 4){
+			for(int i = 4; i < 8; i++){
+				tiles[5][i].setType("w");
+				tiles[8][i].setType("w");
+				tiles[5][i + 8].setType("w");
+				tiles[8][i + 8].setType("w");
+			}
+			
+			for(int i = 7; i < 13; i++){
+				tiles[4][i].setType("w");
+				tiles[9][i].setType("w");
+			}
+			
+			for(int i = 3; i < 6; i++){
+				tiles[i][4].setType("w");
+				tiles[i][15].setType("w");
+				tiles[i + 5][4].setType("w");
+				tiles[i + 5][15].setType("w");
+			}
+		}
+		
 		generateBadguys(enemyholder);
 	}
 	//This will be used for re-creating an old room

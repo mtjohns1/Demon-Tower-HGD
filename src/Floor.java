@@ -30,6 +30,8 @@ public class Floor {
 				else if(x == 1 && y == 1){
 					rooms[y][x] = new Room(3);
 				}
+				else if(x == 3 && y == 2)
+					rooms[y][x] = new Room(4);
 				else
 					rooms[y][x] = new Room();
 			}
@@ -49,7 +51,7 @@ public class Floor {
 			rooms[3][i + 1].openWest();
 		}
 		rooms[1][1].openSouth();
-
+		rooms[3][3].openNorth();
 		rooms[1][2].openEast();
 		rooms[3][2].openEast();
 
@@ -57,7 +59,8 @@ public class Floor {
 		rooms[2][1].openSouth();
 
 		rooms[3][1].openNorth();
-
+		rooms[1][3].openNorth();
+		rooms[2][3].openNorth();
 
 
 	}
