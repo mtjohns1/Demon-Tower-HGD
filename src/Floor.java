@@ -23,19 +23,22 @@ public class Floor {
 		for(int y = 0; y < 4; y++){
 			for(int x = 0; x < 4; x++){
 				if(x == 0 && y == 0)
-					rooms[y][x] = new Room(1);
+					rooms[y][x] = new Room(1); //This is for the starting room
 				else if(x == 1 && y == 2){
-					rooms[y][x] = new Room(2);
+					rooms[y][x] = new Room(2); //This is for the room prior to the boss room
 				}
 				else if(x == 1 && y == 1){
-					rooms[y][x] = new Room(3);
+					rooms[y][x] = new Room(3); //This is for the boss room
 				}
 				else if(x == 3 && y == 2)
-					rooms[y][x] = new Room(4);
+					rooms[y][x] = new Room(4); //This is for the grappling hook room
 				else
-					rooms[y][x] = new Room();
+					rooms[y][x] = new Room(); //This is for random rooms
 			}
 		}
+		
+		//The code below opens sections of the map as needed. Some areas have multiple entry
+		//points while others have only one way. The boss room, for example, only has 1 entry point.
 		for(int i = 0; i < 3; i++){
 			rooms[i][0].openSouth();
 			rooms[i + 1][0].openNorth();
