@@ -255,15 +255,15 @@ public class EnemyBossFire extends Enemy{
 	
 	public void drawHUD(List<Sprite> list, int y) {
 		//draw health
-		for (int i = 0; i < getMaxHp()/10; i++) {
+		for (int i = 0; i < getMaxHp()/4; i++) {
 			//full heart
 			Sprite s = new Sprite(610-i*16, y, 32, 32, 0, 0, 0, "hearts");
 			//half heart
-			if (getHp() <= i*10+5 && getHp() > i*10) {
+			if (getHp() <= i*4+2 && getHp() > i*10) {
 				s = new Sprite(610-i*16, y, 32, 32, 32, 0, 0, "hearts");
 			}
 			//empty heart
-			if (getHp() <= i*10) {
+			if (getHp() <= i*4) {
 				s = new Sprite(610-i*16, y, 32, 32, 64, 0, 0, "hearts");
 			}
 			list.add(s);
