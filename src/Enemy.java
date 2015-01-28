@@ -21,4 +21,13 @@ public abstract class Enemy extends Actor {
 		setD(32);
 	}
 	
+	@Override
+	public void onDeath()
+	{
+		//base 1/3 chance of spawning hearts
+		if (Math.random() < 0.34) {
+			new PowerupHeart(getHome(), getX(), getY());
+		}
+	}
+	
 }
