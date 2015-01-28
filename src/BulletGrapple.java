@@ -7,6 +7,8 @@ import java.util.List;
  */
 public class BulletGrapple extends Bullet{
 
+	//TODO: Make shot appear to return if it misses!
+	
 	private boolean _reelIn; 
 	/**
 	 * Standard public constructor
@@ -28,8 +30,8 @@ public class BulletGrapple extends Bullet{
 
 		setDamage(2); //deals 1 damage
 		accelerate(30); //max speed
-		setKnockback(-getVx(), -getVy()); //reverse knockback
-		setStun(45); //stuns for 15 frames
+		setKnockback(getVx()/3, getVy()/3); //normal knockback
+		setStun(30); //stuns for 15 frames
 		//not reeling yet
 		_reelIn = false;
 	}
