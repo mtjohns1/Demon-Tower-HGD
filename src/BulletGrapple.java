@@ -8,8 +8,9 @@ import java.util.List;
 public class BulletGrapple extends Bullet{
 
 	//TODO: Make shot appear to return if it misses!
-	
+	public static final int LINKS = 8;
 	private boolean _reelIn; 
+	
 	/**
 	 * Standard public constructor
 	 *  
@@ -67,6 +68,12 @@ public class BulletGrapple extends Bullet{
 	}
 
 	@Override
+	public void onDeath() {
+		//spawn a grapple return effect
+		new EffectGrappleReturn(getOwner(), getX(), getY(), 0, 0);
+	}
+	
+	@Override
 	public void collide(Mobile m, boolean overlap, boolean nextOverlap) {
 		//non-actors and your owner are ignored
 		if (!(m instanceof Actor))
@@ -94,10 +101,10 @@ public class BulletGrapple extends Bullet{
 		super.draw(list);
 		
 		//chain bits
-		for (int i = 1; i < 5; i++) {			
+		for (int i = 1; i < LINKS; i++) {			
 			//calculate the chain
-			int x = ( getX()*i + getOwner().getX()*(5-i) )/5;
-			int y = ( getY()*i + getOwner().getY()*(5-i) )/5;
+			int x = ( getX()*i + getOwner().getX()*(LINKS-i) )/LINKS;
+			int y = ( getY()*i + getOwner().getY()*(LINKS-i) )/LINKS;
 			
 			//drawing position and layer
 			int top = y-(getH()/2)+2;
