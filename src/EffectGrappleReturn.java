@@ -31,9 +31,9 @@ public class EffectGrappleReturn extends Effects {
 		//set direction
 		Direction recall = new Direction(_owner.getX()-getX(), _owner.getY()-getY());
 		//apply direction
-		setVx(getVx()+recall.getX()*30);
-		setVy(getVy()+recall.getY()*30);
-		accelerate(0.5); //regulate speed
+		setVx(getVx()+recall.getX()*22);
+		setVy(getVy()+recall.getY()*22);
+		accelerate(0.6); //regulate speed
 		//vanish up close, it's done reeling in
 		if (recall.getLength() < 32)
 		{

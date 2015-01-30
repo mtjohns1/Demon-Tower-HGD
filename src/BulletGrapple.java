@@ -29,10 +29,10 @@ public class BulletGrapple extends Bullet{
 		//last just under one second
 		setLife(20);
 
-		setDamage(2); //deals 1 damage
-		accelerate(30); //max speed
+		setDamage(1);
+		accelerate(22); //max speed
 		setKnockback(getVx()/3, getVy()/3); //normal knockback
-		setStun(30); //stuns for 15 frames
+		setStun(25); //stuns for 15 frames
 		//not reeling yet
 		_reelIn = false;
 	}
@@ -70,7 +70,7 @@ public class BulletGrapple extends Bullet{
 	@Override
 	public void onDeath() {
 		//spawn a grapple return effect
-		new EffectGrappleReturn(getOwner(), getX(), getY(), 0, 0);
+		new EffectGrappleReturn(getOwner(), getX(), getY(), getVx(), getVy());
 	}
 	
 	@Override
@@ -86,6 +86,7 @@ public class BulletGrapple extends Bullet{
 		if (m != getOwner() && !_reelIn)
 		{
 			a.takeDamage(new Damage(getDamage(), getKnockbackX(), getKnockbackY(), getStun()));
+			accelerate(0.25);
 		}
 		//vanish
 		if (m != getOwner() || _reelIn)
