@@ -45,6 +45,9 @@ public class PauseMenu extends Menu {
 		Sprite.addGraphic("tempReturnButton.png", "returnButton");
 		Sprite.addGraphic("tempReturnButtonHighlighted.png", "returnButtonH");
 		Sprite.addGraphic("tempReturnButtonPressed.png","returnButtonP");
+		Sprite.addGraphic("tempOptionsButton.png", "options");
+		Sprite.addGraphic("tempOptionsButtonHighlight.png", "optionsH");
+		Sprite.addGraphic("tempOptionsButtonPressed.png", "optionsP");
 
 	}
 
@@ -62,24 +65,33 @@ public class PauseMenu extends Menu {
 			}
 		}		
 		sprites.add(button1);
-		Sprite button2 = new Sprite(75, 175,200, 40, 0, 0, 1001, "returnButton");;
-		if(highlighted ==1){
+		Sprite button2 = new Sprite(75, 225,200, 40, 0, 0, 1001, "returnButton");;
+		if(highlighted ==2){
 			if(select){
-				button2 = new Sprite(75, 175,200, 40, 0, 0, 1001, "returnButtonP");
+				button2 = new Sprite(75, 225,200, 40, 0, 0, 1001, "returnButtonP");
 			}else{
-				button2 = new Sprite(75, 175,200, 40, 0, 0, 1001, "returnButtonH");
+				button2 = new Sprite(75, 225,200, 40, 0, 0, 1001, "returnButtonH");
 			}
 		}		
 		sprites.add(button2);
-		Sprite button3 = new Sprite(75, 225, 200, 40, 0, 0, 1001, "exit");
-		if(highlighted ==2){
+		Sprite button3 = new Sprite(75, 275, 200, 40, 0, 0, 1001, "exit");
+		if(highlighted ==3){
 			if(select){
-				button3 = new Sprite(75, 225, 200, 40, 0, 0, 1001, "exitP");
+				button3 = new Sprite(75, 275, 200, 40, 0, 0, 1001, "exitP");
 			}else{
-				button3 = new Sprite(75, 225, 200, 40, 0, 0, 1001, "exitH");
+				button3 = new Sprite(75, 275, 200, 40, 0, 0, 1001, "exitH");
 			}
 		}		
 		sprites.add(button3);
+		Sprite button4 = new Sprite(75, 175, 200, 40, 0, 0, 1001, "options");
+		if(highlighted ==1){
+			if(select){
+				button4 = new Sprite(75, 175, 200, 40, 0, 0, 1001, "optionsP");
+			}else{
+				button4 = new Sprite(75, 175, 200, 40, 0, 0, 1001, "optionsH");
+			}
+		}		
+		sprites.add(button4);
 		
 
 	}
@@ -93,9 +105,9 @@ public class PauseMenu extends Menu {
 				updown= -1;
 			move = true;
 			
-			highlighted = (highlighted + updown)%3;
+			highlighted = (highlighted + updown)%4;
 			if (highlighted < 0)
-				highlighted = 3 + highlighted;
+				highlighted = 4 + highlighted;
 		}
 		else if(c.getShoot().getY() == 0 && move == true){
 			move = false;
@@ -107,10 +119,17 @@ public class PauseMenu extends Menu {
 			select = false;
 			if(highlighted == 0)
 				isDead = true;
-			if(highlighted == 1)
-				_game.setReset(true);
 			if(highlighted == 2)
+				_game.setReset(true);
+			if(highlighted == 3)
 				System.exit(0);
+			if(highlighted == 1){
+				ArrayList<Menu> temp = _game.getMenu();
+				temp.add(new OptionsMenu(c, _game));
+				_game.setMenu(temp);
+			}
+				
+			
 		}
 		if(c.getMenu().escape() && pause == false){
 			pause = true;

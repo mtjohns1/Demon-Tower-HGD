@@ -36,8 +36,16 @@ public class Game extends JPanel {
 	private Control controls;
 	private boolean reset = false;
 	private boolean win = false;
+	private ArrayList<Menu> menu = new ArrayList<Menu>();
 
 
+	public ArrayList<Menu> getMenu() {
+		return menu;
+	}
+
+	public void setMenu(ArrayList<Menu> menu) {
+		this.menu = menu;
+	}
 
 	public boolean getWin() {
 		return win;
@@ -78,7 +86,7 @@ public class Game extends JPanel {
 		boolean pressed = false;
 		
 		PauseMenu.menuInit();
-		ArrayList<Menu> menu = new ArrayList<Menu>();
+		
 		menu.add(new StartMenu(this.controls));
 		
 		while(true) {
