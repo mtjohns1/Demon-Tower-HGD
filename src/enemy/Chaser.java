@@ -26,13 +26,13 @@ public class Chaser extends Enemy{
 	private Bullet attack;
 	private int speed;
 
-	public Chaser(Room home) {
+	public Chaser(Room home, int x, int y) {
 		super(home);
 		this.setMaxHp(20);
 
 		this.setHp(5);
-		this.setX(500);
-		this.setY(300);
+		this.setX(x);
+		this.setY(y);
 
 		speed=3;
 	}
