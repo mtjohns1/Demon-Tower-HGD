@@ -56,6 +56,7 @@ public class Grapple extends Bullet{
 			if (owner.getBack() < 1)
 			{
 				owner.setBack(1);
+				owner.setVz(0);
 			}
 			owner.setVx(owner.getVx()+dir.getX()*reelSpeed);
 			owner.setVy(owner.getVy()+dir.getY()*reelSpeed);
@@ -71,7 +72,7 @@ public class Grapple extends Bullet{
 			_reelIn = true;
 			//pull up the owner
 			getOwner().setBack(1);
-			getOwner().setVz(1.6);
+			getOwner().setVz(2.5);
 			setLife(30); //set to reel in for just under 1 second
 			//stick to the wall
 			if (dir.equals("right")) setRight(t.getLeft()-1);

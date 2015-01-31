@@ -5,6 +5,8 @@ package mobile;
  *
  */
 
+import game.Game;
+
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.imageio.ImageIO;
@@ -28,8 +30,6 @@ import java.util.List;
 public class Player extends Actor {
 
 	private Control _c;
-	private int _stamina; //effectively ammo
-	private int _staminaMax = 100; //maximum "ammo
 	private int _equip; //which weapon you currently have equipped
 	private ArrayList<Weapon> _wep = new ArrayList<Weapon>(); //array of weapons you can use
 	private boolean _debounce = false; //prevent repeated input from held keys
@@ -58,7 +58,7 @@ public class Player extends Actor {
 
 		//initialize local values
 		setFireDelay(0);
-		_stamina = _staminaMax;
+		//_stamina = _staminaMax;
 	}
 
 	@Override
@@ -66,6 +66,29 @@ public class Player extends Actor {
 		//read input
 		int dx = _c.getMove().getX();
 		int dy = _c.getMove().getY();
+
+		//feet on the ground here!
+		if (getBack() <= 0)
+		{
+			Tile t = getHome().getTile(getX()/32, getY()/32);
+			/*pit logic here!*/
+			if (t.getType().contains("p")) {
+				takeDamage(2);
+				setX(_lastX*32+16);
+				setY(_lastY*32+16);
+				setVz(-16);
+				setBack(getBottom()+480);
+				stun(32+getBottom()/16);
+				mercy(35+getBottom()/16);
+			}
+			//update last position
+			else {
+				_lastX = getX()/32; //was there a tile size constant?
+				_lastY = getY()/32; //was there a tile size constant?
+			}
+			//TODO: Implement other standing-ground tiles too!
+		}
+
 		if (isStunned()) {dx = 0; dy = 0;}
 		//apply acceleration
 		if (Math.abs(dx) > 10 || Math.abs(dy) > 10) {
@@ -77,7 +100,7 @@ public class Player extends Actor {
 		accelerate(0.475);
 
 		//apply gravity (z direction)
-		setVz(getVz()-0.1);
+		setVz(getVz()-0.15);
 
 		//change weapons
 		if (isStunned()) {_debounce = true;}
@@ -95,16 +118,8 @@ public class Player extends Actor {
 		if (isStunned()) {dx = 0; dy = 0;} //nullify input while stunned
 
 		//fire, but only if a variety of conditions are met (including having a weapon!
-		if (getWeapons().size() > 0 && getFireDelay() <= 0 && _stamina > 0 && (Math.abs(dx) > 10 || Math.abs(dy) > 10)) {
+		if (getWeapons().size() > 0 && getFireDelay() <= 0 && /*_stamina > 0 &&*/ (Math.abs(dx) > 10 || Math.abs(dy) > 10)) {
 			_wep.get(_equip).fire(this, dx, dy);
-		}
-		//recover stamina while not firing
-		else if (getFireDelay() < 0)
-			_stamina++;
-
-		//cap maximum stamina
-		if (_stamina > _staminaMax) {
-			_stamina = _staminaMax;
 		}
 
 		//count down to next shot
@@ -117,7 +132,9 @@ public class Player extends Actor {
 		//z-control and collision
 		if (getBack() < 0.001) {
 			setBack(0);
-			setVz(0);
+			//don't keep falling when on the ground
+			if (getVz() < 0)
+				setVz(0);
 		}
 	}
 
@@ -139,7 +156,7 @@ public class Player extends Actor {
 	 * @param s the amount of stamina consumed
 	 */
 	public void useStamina(int s) {
-		_stamina -= s;
+		//_stamina -= s;
 	}
 
 	/**
@@ -189,7 +206,7 @@ public class Player extends Actor {
 	@Override
 	public void tileCollision(Tile t, String dir) {
 		//solid wall collisions / grounded pit collisions
-		if (t.getType().contains("w") || (t.getType().contains("p") && this.getBack() < 0.001)) {
+		if (t.getType().contains("w") /*|| (t.getType().contains("p") && this.getBack() < 0.001)*/) {
 			if (dir.equals("right")) {
 				setRight(t.getLeft()-1);
 				setVx(0);
