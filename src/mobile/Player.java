@@ -275,8 +275,9 @@ public class Player extends Actor {
 	@Override
 	public void draw(List<Sprite> list)
 	{
+		drawHUD(list, 448);
+		if ((getMercy()/5) % 2 > 0) return;
 		Sprite s = new Sprite(getLeft()-2, getTop()-2-getBack(), getW()+4, getH()+4, 0, 0, calculateLayer(), "hero");
 		list.add(s);
-		drawHUD(list, 448);
 	}
 }

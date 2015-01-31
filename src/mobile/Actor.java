@@ -162,6 +162,13 @@ public abstract class Actor extends Mobile {
 	}
 	
 	/**
+	 * @return the number of frames the actor is stunned for
+	 */
+	public int getStun() {
+		return _stun;
+	}
+	
+	/**
 	 * Provide mercy invincibility for a number of frames
 	 * 
 	 * @param time the duration of the stun
@@ -182,5 +189,12 @@ public abstract class Actor extends Mobile {
 	 */
 	public boolean hasMercy() {
 		return (_mercy > 0);
+	}
+	
+	/**
+	 * @return the number of frames the actor is invulnerable for
+	 */
+	public int getMercy() {
+		return _mercy;
 	}
 }
