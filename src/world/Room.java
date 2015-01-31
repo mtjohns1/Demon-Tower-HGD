@@ -35,6 +35,7 @@ public class Room {
 	Player player = null;
 	int width = 640, height = 448;
 	int type = 0;
+	int a = 0;
 
 	/**
 	 * Creates a new blank room with walls surrounding it.
@@ -57,15 +58,17 @@ public class Room {
 				}
 			}
 		}		
-		
-		int a = r.nextInt(101);
-	//	if(a <= 33)
-	//		tiles = this.interestingRoom(tiles);
-		/*else */if(a <= 66)
+
+		a = r.nextInt(4); 
+		if(a == 0)
+			tiles = this.layoutFour(tiles);
+		else if(a == 1)
+			tiles = this.interestingRoom(tiles);
+		else if(a == 2)
 			tiles = this.fourSquareRoom(tiles);
-		else
+		else if(a == 3)
 			tiles = this.threeSquareRoom(tiles);
-			
+		 	
 		generateBadguys(enemyholder);
 	}
 
@@ -94,21 +97,21 @@ public class Room {
 			tiles[6][19].setType("");
 			tiles[7][19].setType("");
 		}
-		
+
 		else if(start == 2){
 			tiles[1][7].setType("p");
 			tiles[2][7].setType("p");
 			for(int i = 8; i < 13; i++)
 				tiles[2][i].setType("p");
-			
+
 			tiles[1][12].setType("p");
-			
+
 		}
 		else if(start == 3){
 			enemyholder[0] = 3;
 			this.bossRoom();
 		}
-		
+
 		else if(start == 4){
 			for(int i = 4; i < 8; i++){
 				tiles[5][i].setType("w");
@@ -116,12 +119,12 @@ public class Room {
 				tiles[5][i + 8].setType("w");
 				tiles[8][i + 8].setType("w");
 			}
-			
+
 			for(int i = 7; i < 13; i++){
 				tiles[4][i].setType("w");
 				tiles[9][i].setType("w");
 			}
-			
+
 			for(int i = 3; i < 6; i++){
 				tiles[i][4].setType("w");
 				tiles[i][15].setType("w");
@@ -129,7 +132,7 @@ public class Room {
 				tiles[i + 5][15].setType("w");
 			}
 		}
-		
+
 		generateBadguys(enemyholder);
 	}
 	//This will be used for re-creating an old room
@@ -139,11 +142,11 @@ public class Room {
 		enemyholder = a;
 		generateBadguys(enemyholder);
 	}
-	
+
 	public void enemySpawner(int type){
-		
+
 	}
-	
+
 	public Tile[][] fourSquareRoom(Tile[][] t){
 		Tile tiles[][] = t;
 		type = 1;
@@ -151,74 +154,74 @@ public class Room {
 			tiles[3][i + 10].setType("w");
 			tiles[4][i + 10].setType("w");
 			tiles[5][i + 10].setType("w");
-			
+
 			tiles[3][i].setType("w");
 			tiles[4][i].setType("w");
 			tiles[5][i].setType("w");
-			
+
 			tiles[8][i + 10].setType("w");
 			tiles[9][i + 10].setType("w");
 			tiles[10][i + 10].setType("w");
-			
+
 			tiles[8][i].setType("w");
 			tiles[9][i].setType("w");
 			tiles[10][i].setType("w");
 			int[] a = {1,1,1};
-			
-			
-			
+
+
+
 		}
-		
+
 		return tiles;
 	}
-	
+
 	public Tile[][] threeSquareRoom(Tile[][] t){
 		Tile tiles[][] = t;
 		type = 2;
 		for(int i = 3; i < 6; i++){
 			tiles[i][3].setType("w");
 			tiles[i][4].setType("w");
-			
+
 			tiles[i][8].setType("w");
 			tiles[i][9].setType("w");
 			tiles[i][10].setType("w");
 			tiles[i][11].setType("w");
-			
+
 			tiles[i][15].setType("w");
 			tiles[i][16].setType("w");
 		}
-		
+
 		for(int i = 5; i < 15; i++){
 			tiles[8][i].setType("w");int[] a = {1,1,1};
 			tiles[9][i].setType("w");
 			tiles[10][i].setType("w");
 		}
-		
+
 		return tiles;
 	}
-	
+
 	public Tile[][] interestingRoom(Tile[][] t){
 		type = 3;
 		for(int i = 3; i < 5; i++){
 			tiles[2][i].setType("w");
 			tiles[3][i].setType("w");
-			
+
 			tiles[6][i].setType("w");
 			tiles[7][i].setType("w");
-			
+
 			tiles[10][i].setType("w");
 			tiles[11][i].setType("w");
 			//
 			tiles[2][i + 12].setType("w");
 			tiles[3][i + 12].setType("w");
-			
+
 			tiles[6][i + 12].setType("w");
 			tiles[7][i + 12].setType("w");
-			
+
 			tiles[10][i + 12].setType("w");
 			tiles[11][i + 12].setType("w");	
 		}
-		
+
 		for(int i = 7; i < 13; i+=5){
 			tiles[3][i].setType("w");
 			tiles[4][i].setType("w");
@@ -227,7 +230,7 @@ public class Room {
 			tiles[9][i].setType("w");
 			tiles[10][i].setType("w");
 		}
-		
+
 		tiles[3][10].setType("w");
 		tiles[3][11].setType("w");
 		tiles[5][8].setType("w");
@@ -236,10 +239,50 @@ public class Room {
 		tiles[8][11].setType("w");
 		tiles[10][8].setType("w");
 		tiles[10][9].setType("w");
-		
+
 		return tiles;
 	}
-	
+
+	public Tile[][] layoutFour(Tile[][] t){
+		type = 5;
+		a = r.nextInt(2);
+		if(a == 0){
+			for(int i = 3; i < 17; i++){
+				tiles[3][i].setType("w");
+				tiles[10][i].setType("w");
+			}	//adds two lines farther apart side to side
+			a = r.nextInt(2);
+			if(a == 0){
+				for(int i = 4; i < 8;i++){
+					tiles[i][5].setType("w");
+					tiles[i][14].setType("w");
+				}	//adds to lines up and down
+			}
+			else{
+				for(int i = 4; i < 8;i++){
+					tiles[i][5].setType("p");
+					tiles[i][14].setType("p");
+				}//adds pit lines
+				
+				for(int i = 8; i < 12; i++){
+					tiles[7][i].setType("p");
+					tiles[8][i].setType("p");
+					tiles[9][i].setType("p");
+				}	//adds a large pit in the middle	
+			}
+		}	//first major layout
+
+
+		else if(a == 1){
+			for(int i = 3; i < 17; i++){
+				tiles[4][i].setType("w");
+				tiles[9][i].setType("w");
+			}//adds to lines closer together side to side
+		}	//second major layout
+		return tiles;
+	}
+
+
 	public Tile[][] bossRoom(){
 		type = 4;
 		for(int i = 1; i < 4; i++)
@@ -248,40 +291,40 @@ public class Room {
 			{
 				tiles[i][j].setType("w");
 			}
-			
+
 			for(int j = 14; j < 20; j++)
 			{
 				tiles[i][j].setType("w");
 			}
 		}
-		
+
 		tiles[2][6].setType("w");
 		tiles[2][7].setType("w");
 		tiles[2][13].setType("w");
 		tiles[2][14].setType("w");
-		
+
 		tiles[10][2].setType("w");
 		tiles[11][3].setType("w");
 		tiles[10][17].setType("w");
 		tiles[11][16].setType("w");
-		
+
 		tiles[6][2].setType("w");
 		tiles[5][3].setType("w");
 		tiles[6][17].setType("w");
 		tiles[5][16].setType("w");
-		
+
 		for(int i = 8; i < 12; i++)
 			tiles[10][i].setType("w");
-		
+
 		tiles[11][6].setType("w");
 		tiles[11][13].setType("w");
 		tiles[12][6].setType("w");
 		tiles[12][13].setType("w");
-		
+
 		return tiles;
 	}
-	
-	
+
+
 
 	public Tile[][] getTiles(){
 		return tiles;
@@ -305,7 +348,7 @@ public class Room {
 		tiles[6][19].setType("");
 		tiles[7][19].setType("");
 	}
-	
+
 	/**
 	 * 
 	 * @param a array of ints
