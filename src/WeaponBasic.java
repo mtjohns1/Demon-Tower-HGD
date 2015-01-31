@@ -14,9 +14,9 @@ public class WeaponBasic extends Weapon {
 	}
 	
 	@Override
-	public void fire(Player p, int xAxis, int yAxis) {
-		_spend(p);
-		new BulletBasicMelee(p, xAxis, yAxis);
-		new BulletBasic(p, xAxis, yAxis);
+	public void fire(Actor a, int xAxis, int yAxis) {
+		_spend(a);
+		new BulletBasicMelee(a, xAxis, yAxis);
+		new BulletBasic(a, xAxis, yAxis);
 	}
 }

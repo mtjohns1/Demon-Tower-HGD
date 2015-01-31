@@ -5,7 +5,7 @@
  */
 
 public abstract class Weapon {
-	private int _cost;
+	private int _cost; //TODO: Dummy out eventually?
 	private int _rate;
 	private int _icon;
 	private String _name;
@@ -28,9 +28,9 @@ public abstract class Weapon {
 	 * 
 	 * @param p Player using the weapon
 	 */
-	protected void _spend(Player p) {
-		p.setFireDelay(_rate);
-		p.useStamina(_cost);
+	protected void _spend(Actor a) {
+		a.setFireDelay(_rate);
+		//a.useStamina(_cost); //TODO: Re-implement if needed
 	}
 	
 	/**
@@ -40,7 +40,7 @@ public abstract class Weapon {
 	 * @param xAxis the x direction of fire
 	 * @param yAxis the y direction of fire
 	 */
-	public abstract void fire(Player p, int xAxis, int yAxis);
+	public abstract void fire(Actor a, int xAxis, int yAxis);
 	
 	/**
 	 * @return the weapon's name

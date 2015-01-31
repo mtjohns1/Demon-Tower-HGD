@@ -18,7 +18,6 @@ public class Player extends Actor {
 	private Control _c;
 	private int _stamina; //effectively ammo
 	private int _staminaMax = 100; //maximum "ammo
-	private int _fireRate; //delay before firing another bullet
 	private int _equip; //which weapon you currently have equipped
 	private ArrayList<Weapon> _wep = new ArrayList<Weapon>(); //array of weapons you can use
 	private boolean _debounce = false; //prevent repeated input from held keys
@@ -46,7 +45,7 @@ public class Player extends Actor {
 		_equip = 0;
 
 		//initialize local values
-		_fireRate = 0;
+		setFireDelay(0);
 		_stamina = _staminaMax;
 	}
 
@@ -84,11 +83,11 @@ public class Player extends Actor {
 		if (isStunned()) {dx = 0; dy = 0;} //nullify input while stunned
 
 		//fire, but only if a variety of conditions are met (including having a weapon!
-		if (getWeapons().size() > 0 && _fireRate < 0 && _stamina > 0 && (Math.abs(dx) > 10 || Math.abs(dy) > 10)) {
+		if (getWeapons().size() > 0 && getFireDelay() <= 0 && _stamina > 0 && (Math.abs(dx) > 10 || Math.abs(dy) > 10)) {
 			_wep.get(_equip).fire(this, dx, dy);
 		}
 		//recover stamina while not firing
-		else if (_fireRate < 0)
+		else if (getFireDelay() < 0)
 			_stamina++;
 
 		//cap maximum stamina
@@ -97,7 +96,7 @@ public class Player extends Actor {
 		}
 
 		//count down to next shot
-		_fireRate--;
+		setFireDelay(getFireDelay()-1);
 	}
 
 	@Override
@@ -122,13 +121,6 @@ public class Player extends Actor {
 	 */
 	public Control getControls() {
 		return _c;
-	}
-
-	/**
-	 * @param t Time before another shot can be fired
-	 */
-	public void setFireDelay(int t) {
-		_fireRate = t;
 	}
 
 	/**

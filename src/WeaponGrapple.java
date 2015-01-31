@@ -14,8 +14,8 @@ public class WeaponGrapple extends Weapon {
 	}
 	
 	@Override
-	public void fire(Player p, int xAxis, int yAxis) {
-		_spend(p);
-		new BulletGrapple(p, xAxis, yAxis);
+	public void fire(Actor a, int xAxis, int yAxis) {
+		_spend(a);
+		new BulletGrapple(a, xAxis, yAxis);
 	}
 }

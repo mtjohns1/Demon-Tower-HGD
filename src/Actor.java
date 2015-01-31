@@ -13,8 +13,9 @@ import java.io.*;
 
 public abstract class Actor extends Mobile {	
 	
-	private int _hp, _hpMax;
-	private int _stun = 0, _mercy = 0;
+	private int _hp, _hpMax; //health and max health
+	private int _stun = 0, _mercy = 0; //stunned and invulnerable (mercy) states
+	private int _fireRate; //delay before firing another bullet
 	
 	/**
 	 * @param home: the room the object is inside
@@ -22,6 +23,7 @@ public abstract class Actor extends Mobile {
 	public Actor(Room home) {
 		super(home);
 		setDir("down");
+		setFireDelay(0);
 	}
 	
 	@Override
@@ -65,6 +67,21 @@ public abstract class Actor extends Mobile {
 			setDead();
 		}
 		
+	}
+	
+	/**
+	 * @param t Time (in frames) before another shot can be fired
+	 */
+	public void setFireDelay(int t) {
+		_fireRate = t;
+		if (_fireRate < 0) _fireRate = 0;
+	}
+	
+	/**
+	 * @return Time (in frames) until another shot can be fired
+	 */
+	public int getFireDelay() {
+		return _fireRate;
 	}
 	
 	/**
