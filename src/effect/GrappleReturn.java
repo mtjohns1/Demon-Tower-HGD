@@ -8,11 +8,11 @@ import world.Tile;
 import bullet.Grapple;
 
 
-public class EffectGrappleReturn extends Effects {
+public class GrappleReturn extends Effects {
 	
 	private Mobile _owner;
 	
-	public EffectGrappleReturn(Mobile owner, int x, int y, double vx, double vy) {
+	public GrappleReturn(Mobile owner, int x, int y, double vx, double vy) {
 		super(owner.getHome());
 		
 		//base dimensions
@@ -66,13 +66,14 @@ public class EffectGrappleReturn extends Effects {
 			//calculate the chain
 			int x = ( getX()*i + _owner.getX()*(Grapple.LINKS-i) )/Grapple.LINKS;
 			int y = ( getY()*i + _owner.getY()*(Grapple.LINKS-i) )/Grapple.LINKS;
+			int z = ( getZ()*i + _owner.getZ()*(Grapple.LINKS-i) )/Grapple.LINKS;
 			
 			//drawing position and layer
 			int top = y-(getH()/2)+2;
 			int left = x-(getW()/2)+2;
-			double layer = Mobile.calculateLayer(y, getZ(), getH()-4, getD());
+			double layer = Mobile.calculateLayer(y, z, getH()-4, getD());
 			
-			s = new Sprite(left, top, getW()-4, getH()-4, 0, 0, layer, "tempWall");
+			s = new Sprite(left, top-z, getW()-4, getH()-4, 0, 0, layer, "tempWall");
 			list.add(s);
 		}
 	}

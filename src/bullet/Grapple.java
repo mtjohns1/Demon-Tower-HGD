@@ -7,7 +7,7 @@ import sprite.Sprite;
 import utility.Damage;
 import utility.Direction;
 import world.Tile;
-import effect.EffectGrappleReturn;
+import effect.GrappleReturn;
 
 /**
  * experimental grappling hook bullet
@@ -53,8 +53,10 @@ public class Grapple extends Bullet{
 			Mobile owner = getOwner();
 			Direction dir = new Direction(getX()-owner.getX(), getY()-owner.getY());
 			double reelSpeed = 8.5;
-			owner.setBack(1);
-			owner.setVz(0.2);
+			if (owner.getBack() < 1)
+			{
+				owner.setBack(1);
+			}
 			owner.setVx(owner.getVx()+dir.getX()*reelSpeed);
 			owner.setVy(owner.getVy()+dir.getY()*reelSpeed);
 		}
@@ -67,6 +69,9 @@ public class Grapple extends Bullet{
 			setVx(0);
 			setVy(0); //stop moving
 			_reelIn = true;
+			//pull up the owner
+			getOwner().setBack(1);
+			getOwner().setVz(1.6);
 			setLife(30); //set to reel in for just under 1 second
 			//stick to the wall
 			if (dir.equals("right")) setRight(t.getLeft()-1);
@@ -79,7 +84,7 @@ public class Grapple extends Bullet{
 	@Override
 	public void onDeath() {
 		//spawn a grapple return effect
-		new EffectGrappleReturn(getOwner(), getX(), getY(), getVx(), getVy());
+		new GrappleReturn(getOwner(), getX(), getY(), getVx(), getVy());
 	}
 	
 	@Override
@@ -115,13 +120,14 @@ public class Grapple extends Bullet{
 			//calculate the chain
 			int x = ( getX()*i + getOwner().getX()*(LINKS-i) )/LINKS;
 			int y = ( getY()*i + getOwner().getY()*(LINKS-i) )/LINKS;
+			int z = ( getZ()*i + getOwner().getZ()*(LINKS-i) )/LINKS;
 			
 			//drawing position and layer
 			int top = y-(getH()/2)+2;
 			int left = x-(getW()/2)+2;
-			double layer = Mobile.calculateLayer(y, getZ(), getH()-4, getD());
+			double layer = Mobile.calculateLayer(y, z, getH()-4, getD());
 			
-			Sprite s = new Sprite(left, top, getW()-4, getH()-4, 0, 0, layer, "tempWall");
+			Sprite s = new Sprite(left, top-z, getW()-4, getH()-4, 0, 0, layer, "tempWall");
 			list.add(s);
 		}
 	}
