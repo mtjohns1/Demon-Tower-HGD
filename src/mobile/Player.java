@@ -16,9 +16,7 @@ import powerup.Powerup;
 import sprite.Sprite;
 import utility.Damage;
 import utility.Direction;
-import weapon.Weapon;
-import weapon.HeroSword;
-import weapon.GrapplingHook;
+import weapon.*;
 import world.Room;
 import world.Tile;
 
@@ -53,6 +51,7 @@ public class Player extends Actor {
 		//add default weapon
 		_wep.add(new HeroSword());
 		_wep.add(new GrapplingHook()); //grappling hook test TODO: remove, add via level
+		_wep.add(new BlastSword()); //grappling hook test TODO: remove, add via level
 		//_wep.add(new WeaponElectric()); //lightning weapon test TODO: remove, add via level
 		_equip = 0;
 

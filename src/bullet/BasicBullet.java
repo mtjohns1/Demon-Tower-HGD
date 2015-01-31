@@ -7,7 +7,7 @@ import mobile.Mobile;
  * @author Jacob Charles
  *
  */
-public class Basic extends Bullet{
+public class BasicBullet extends Bullet{
 
 	/**
 	 * Standard public constructor
@@ -16,7 +16,7 @@ public class Basic extends Bullet{
 	 * @param xAxis the initial x velocity of the bullet
 	 * @param yAxis the initial y velocity of the bullet
 	 */
-	public Basic(Mobile owner, int xAxis, int yAxis) {
+	public BasicBullet(Mobile owner, int xAxis, int yAxis) {
 		super(owner, xAxis, yAxis, 8);
 		
 		//set default dimensions

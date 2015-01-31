@@ -15,19 +15,20 @@ public abstract class Weapon {
 	/**
 	 * Basic constructor others feed from
 	 * 
-	 * @param c the MP cost of firing a shot
-	 * @param r the number of frames between shots
+	 * @param reload: the number of frames between shots
+	 * @param name: the text name of the weapon
+	 * @param img: index of the weapon's icon
 	 */
-	public Weapon(int r, String name, int i) {
-		_rate = r;
+	public Weapon(int reload, String name, int img) {
+		_rate = reload;
 		_name = name;
-		_icon = i;
+		_icon = img;
 	}
 	
 	/**
 	 * Deduct the weapon's firing cost from the weapon user's stats
 	 * 
-	 * @param p Player using the weapon
+	 * @param a Actor using the weapon
 	 */
 	protected void _spend(Actor a) {
 		a.setFireDelay(_rate);

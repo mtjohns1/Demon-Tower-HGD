@@ -27,6 +27,6 @@ public class BasicMelee extends Melee{
 		//get direction again
 		Direction dir = new Direction(xAxis, yAxis);
 		setDamage(2); //deals slightly boosted damage
-		setKnockback(dir.getX()*5, dir.getY()*5); //force back a lot
+		setKnockback(dir.getX()*24, dir.getY()*24); //force back a lot
 	}
 }

@@ -1,6 +1,6 @@
 package weapon;
 import mobile.Actor;
-import bullet.Basic;
+import bullet.BasicBullet;
 import bullet.BasicMelee;
 
 /**
@@ -22,6 +22,6 @@ public class HeroSword extends Weapon {
 	public void fire(Actor a, int xAxis, int yAxis) {
 		_spend(a);
 		new BasicMelee(a, xAxis, yAxis);
-		new Basic(a, xAxis, yAxis);
+		new BasicBullet(a, xAxis, yAxis);
 	}
 }
