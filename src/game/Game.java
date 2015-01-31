@@ -14,10 +14,8 @@ import sprite.SpriteComparitor;
 import world.Floor;
 import world.Room;
 import control.Control;
-import menu.GameOverMenu;
+import menu.*;
 import menu.Menu;
-import menu.PauseMenu;
-import menu.StartMenu;
 import mobile.Player;
 
 import java.awt.*;
@@ -37,9 +35,17 @@ public class Game extends JPanel {
 	private ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 	private Control controls;
 	private boolean reset = false;
-	
+	private boolean win = false;
 
 
+
+	public boolean getWin() {
+		return win;
+	}
+
+	public void setWin(boolean win) {
+		this.win = win;
+	}
 
 	int mapX;
 	int mapY;
@@ -92,6 +98,10 @@ public class Game extends JPanel {
 			}
 			else{
 				pressed = false;
+			}
+			if(win && menu.isEmpty()){
+				menu.add(new WinMenu(this.controls, this));
+				paused = true;
 			}
 			if(p.isDead() && menu.isEmpty()){
 				menu.add(new GameOverMenu(this.controls, this));
