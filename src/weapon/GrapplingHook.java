@@ -14,7 +14,7 @@ public class GrapplingHook extends Weapon {
 	 * Public constructor
 	 */
 	public GrapplingHook() {
-		super(0, 50, "Grappling Hook", 1);
+		super(50, "Grappling Hook", 1);
 	}
 	
 	@Override

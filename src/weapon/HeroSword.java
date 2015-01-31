@@ -15,7 +15,7 @@ public class HeroSword extends Weapon {
 	 * Public constructor
 	 */
 	public HeroSword() {
-		super(0, 16, "Test Weapon", 0);
+		super(16, "Test Weapon", 0);
 	}
 	
 	@Override

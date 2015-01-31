@@ -153,13 +153,6 @@ public class Player extends Actor {
 	}
 
 	/**
-	 * @param s the amount of stamina consumed
-	 */
-	public void useStamina(int s) {
-		//_stamina -= s;
-	}
-
-	/**
 	 * @return the index of the currently equipped weapon
 	 */
 	public int getEquip() {

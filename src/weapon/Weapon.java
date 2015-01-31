@@ -8,7 +8,6 @@ import mobile.Actor;
  */
 
 public abstract class Weapon {
-	private int _cost; //TODO: Dummy out eventually?
 	private int _rate;
 	private int _icon;
 	private String _name;
@@ -19,8 +18,7 @@ public abstract class Weapon {
 	 * @param c the MP cost of firing a shot
 	 * @param r the number of frames between shots
 	 */
-	public Weapon(int c, int r, String name, int i) {
-		_cost = c;
+	public Weapon(int r, String name, int i) {
 		_rate = r;
 		_name = name;
 		_icon = i;
@@ -33,7 +31,6 @@ public abstract class Weapon {
 	 */
 	protected void _spend(Actor a) {
 		a.setFireDelay(_rate);
-		//a.useStamina(_cost); //TODO: Re-implement if needed
 	}
 	
 	/**
