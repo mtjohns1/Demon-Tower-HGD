@@ -22,11 +22,12 @@ import java.util.List;
 
 public abstract class Bullet extends Mobile {
 
-	private int _life;
-	private int _damage;
-	private double _kvx,_kvy;
-	private int _stun;
-	private Mobile _owner;
+	private int _life; //remaining frames
+	private int _damage; //power
+	private double _kvx,_kvy; //knockback
+	private int _stun; //stun
+	private Mobile _owner; //origin (don't damage him)
+	private int _breaking; //does it break terrain?
 
 	/**
 	 * Public constructor
@@ -133,6 +134,20 @@ public abstract class Bullet extends Mobile {
 	 */
 	public int getStun(){
 		return _stun;
+	}
+	
+	/**
+	 * @param dmg damage dealt to breakable tiles
+	 */
+	public void setBreaking(int dmg) {
+		_breaking = dmg;
+	}
+	
+	/**
+	 * @return the damage dealt to breakable tiles
+	 */
+	public int getBreaking() {
+		return _breaking;
 	}
 	
 	@Override

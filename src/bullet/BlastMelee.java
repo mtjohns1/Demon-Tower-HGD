@@ -36,6 +36,7 @@ public class BlastMelee extends Melee{
 		Direction dir = new Direction(xAxis, yAxis);
 		setDamage(4); //heavy damage
 		setStun(50); //decent stun
+		setBreaking(10); //annihilate breakable tiles
 	}
 	
 	@Override
