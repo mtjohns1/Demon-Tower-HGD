@@ -55,6 +55,7 @@ public abstract class Bullet extends Mobile {
 		_damage = 0; //no damage if unspecified
 		_kvx = _kvy = 0; //no knockback if unspecified
 		_stun = 0; //no stun effect if unspecified
+		_breaking = 0; //no breaking effect if unspecified
 	}
 	
 	/**
@@ -170,6 +171,10 @@ public abstract class Bullet extends Mobile {
 		//break on walls
 		if (t.getType().contains("w")) {
 			setLife(0);
+		}
+		//optional breaking walls
+		if (getBreaking() > 0 && t.getType().contains(Tile.BREAK)) {
+			//TODO: Actually cause the "break" effect?
 		}
 	}
 

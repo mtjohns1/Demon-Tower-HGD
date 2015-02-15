@@ -19,18 +19,18 @@ import java.util.List;
 public class Tile {
 
 	//key of type flags
-	public static char WALL = 'w';
-	public static char PIT = 'p';
-	public static char BREAK = 'b';
-	public static char WATER = 'a';
-	public static char ICE = 'i';
-	public static char SPIKE = 's';
+	public static String WALL = "w";
+	public static String PIT = "p";
+	public static String BREAK = "b";
+	public static String WATER = "a";
+	public static String ICE = "i";
+	public static String SPIKE = "s";
 	
-	public static char SWITCH = 't';
-	public static char GATE = 'g';
+	public static String SWITCH = "t";
+	public static String GATE = "g";
 	
-	public static char UP = 'u';
-	public static char DOWN = 'd';
+	public static String UP = "u";
+	public static String DOWN = "d";
 	
 	//actual variables
 	private Room _home;

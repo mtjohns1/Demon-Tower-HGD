@@ -28,6 +28,10 @@ public class Melee extends Bullet{
 	@Override
 	public void tileCollision(Tile t, String dir) {
 		//Doesn't react to tile collisions
+		//optional breaking walls
+		if (getBreaking() > 0 && t.getType().contains(Tile.BREAK)) {
+			//TODO: Actually cause the "break" effect?
+		}
 	}
 
 	@Override
