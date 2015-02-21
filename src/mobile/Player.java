@@ -91,12 +91,14 @@ public class Player extends Actor {
 			}
 			
 			/*stair logic here!*/ //TODO: Move into collision logic?
+			//ascend stairs
 			if (t.getType().contains(Tile.UP)&&!_stairDebounce) {
-				//TODO: Go upstairs
+				getHome().setFloorDirection("up");
 				_stairDebounce = true;
 			}
+			//descend stairs
 			else if (t.getType().contains(Tile.DOWN)&&!_stairDebounce) {
-				//TODO: Go downstairs
+				getHome().setFloorDirection("down");
 				_stairDebounce = true;
 			}
 			else {
