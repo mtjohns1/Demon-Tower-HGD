@@ -164,6 +164,13 @@ public class Game extends JPanel {
 		}
 	}
 	
+	public void checkWin(){
+		if(this.whatFloor == 1){
+			//call win fuction
+		}
+	}
+	
+	
 	public Room RoomDesign(Room n, Player c){
 		Room r = n;
 		Player p = c;
@@ -171,7 +178,6 @@ public class Game extends JPanel {
 		
 		if(r.getDirection().equals("east") )
 		{
-			whatFloor = 1;
 			if(mapX == 3)
 				mapX = 0;
 			else
