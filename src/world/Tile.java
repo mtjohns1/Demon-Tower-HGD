@@ -24,7 +24,7 @@ public class Tile {
 	public static String BREAK = "b";
 	public static String WATER = "a";
 	public static String ICE = "i";
-	public static String DAMAGE = "d";
+	public static String SPIKE = "s";
 	
 	public static String SWITCH = "t";
 	public static String GATE = "g";
@@ -119,7 +119,7 @@ public class Tile {
 	public void breakTile() {
 		if (!_tileType.contains("b")) return; //can't break the unbreakable
 		_tileType = _tileType.replace("w", " "); //remove wall
-		_tileType = _tileType.replace("d", " "); //remove damaging
+		_tileType = _tileType.replace("s", " "); //remove damaging
 		_tileType = _tileType.replace("t", " "); //remove switch
 		//break ice with water under it
 		if (_tileType.contains("i"))
