@@ -32,6 +32,8 @@ public class Player extends Actor {
 	private ArrayList<Weapon> _wep = new ArrayList<Weapon>(); //array of weapons you can use
 	private boolean _debounce = false; //prevent repeated input from held keys
 	private int _lastX, _lastY; //position to reset to in case of pit-falling
+	private boolean _stairDebounce = false;
+	private double _traction = 1;
 
 	/**
 	 * @param start: the room the player starts in
@@ -44,7 +46,7 @@ public class Player extends Actor {
 		setD(32);
 		this.getHome().setPlayer(this);
 
-		//hitpoints!
+		//hitpoints! (initial)
 		setMaxHp(8);
 		setHp(getMaxHp());
 
@@ -57,7 +59,6 @@ public class Player extends Actor {
 
 		//initialize local values
 		setFireDelay(0);
-		//_stamina = _staminaMax;
 	}
 
 	@Override
@@ -66,12 +67,15 @@ public class Player extends Actor {
 		int dx = _c.getMove().getX();
 		int dy = _c.getMove().getY();
 
+		//reset traction for now
+		_traction = 1.0;
+		
 		//feet on the ground here!
 		if (getBack() <= 0)
 		{
 			Tile t = getHome().getTile(getX()/32, getY()/32);
 			/*pit logic here!*/
-			if (t.getType().contains("p")) {
+			if (t.getType().contains(Tile.PIT)) {
 				takeDamage(2);
 				setX(_lastX*32+16);
 				setY(_lastY*32+16);
@@ -85,9 +89,34 @@ public class Player extends Actor {
 				_lastX = getX()/32; //was there a tile size constant?
 				_lastY = getY()/32; //was there a tile size constant?
 			}
-			//TODO: Implement other standing-ground tiles too!
+			
+			/*stair logic here!*/ //TODO: Move into collision logic?
+			if (t.getType().contains(Tile.UP)&&!_stairDebounce) {
+				//TODO: Go upstairs
+				_stairDebounce = true;
+			}
+			else if (t.getType().contains(Tile.DOWN)&&!_stairDebounce) {
+				//TODO: Go downstairs
+				_stairDebounce = true;
+			}
+			else {
+				_stairDebounce = false;
+			}
+			
+			/*water/ice friction logic here!*/
+			//ice slips around
+			if (t.getType().contains(Tile.ICE)) {
+				_traction = 0.75;
+			}
+			//water slows you
+			else if (t.getType().contains(Tile.WATER)) {
+				_traction = 2.0;
+			}
+			
+			//TODO: Implement other standing-ground tiles too?
 		}
 
+		//if stunned, nullify inputs
 		if (isStunned()) {dx = 0; dy = 0;}
 		//apply acceleration
 		if (Math.abs(dx) > 10 || Math.abs(dy) > 10) {
@@ -96,7 +125,7 @@ public class Player extends Actor {
 			setVy(getVy()+dir.getY()*3);
 		}
 		//apply friction
-		accelerate(0.475);
+		accelerate(0.475/_traction);
 
 		//apply gravity (z direction)
 		setVz(getVz()-0.15);
