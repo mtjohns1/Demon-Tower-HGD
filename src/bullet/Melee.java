@@ -30,7 +30,8 @@ public class Melee extends Bullet{
 		//Doesn't react to tile collisions
 		//optional breaking walls
 		if (getBreaking() > 0 && t.getType().contains(Tile.BREAK)) {
-			//TODO: Actually cause the "break" effect?
+			t.breakTile();
+			//TODO: Particle effects?
 		}
 	}
 

@@ -24,7 +24,7 @@ public class Tile {
 	public static String BREAK = "b";
 	public static String WATER = "a";
 	public static String ICE = "i";
-	public static String SPIKE = "s";
+	public static String DAMAGE = "d";
 	
 	public static String SWITCH = "t";
 	public static String GATE = "g";
@@ -111,6 +111,19 @@ public class Tile {
 	 */
 	public String getTileSet() {
 		return _tileSet;
+	}
+	
+	/**
+	 * if the tile has the breakable trait, remove certain other traits
+	 */
+	public void breakTile() {
+		if (!_tileType.contains("b")) return; //can't break the unbreakable
+		_tileType = _tileType.replace("w", " "); //remove wall
+		_tileType = _tileType.replace("d", " "); //remove damaging
+		//break ice with water under it
+		if (_tileType.contains("i"))
+			_tileType = _tileType.replace("i", " ");
+		_tileType = _tileType.replace("b", " "); //already broken, no more breaking
 	}
 	
 	/**

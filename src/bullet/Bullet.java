@@ -174,7 +174,8 @@ public abstract class Bullet extends Mobile {
 		}
 		//optional breaking walls
 		if (getBreaking() > 0 && t.getType().contains(Tile.BREAK)) {
-			//TODO: Actually cause the "break" effect?
+			t.breakTile();
+			//TODO: Particle effects?
 		}
 	}
 
