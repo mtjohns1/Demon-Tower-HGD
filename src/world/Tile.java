@@ -122,7 +122,7 @@ public class Tile {
 		_tileType = _tileType.replace("s", " "); //remove damaging
 		_tileType = _tileType.replace("t", " "); //remove switch
 		//break ice with water under it
-		if (_tileType.contains("i"))
+		if (_tileType.contains("a"))
 			_tileType = _tileType.replace("i", " ");
 		_tileType = _tileType.replace("b", " "); //already broken, no more breaking
 	}
