@@ -59,8 +59,7 @@ public class Game extends JPanel {
 	int mapY;
 	int mapZ;
 	Room currentRoom = new Room();
-	Floor f = new Floor();
-	Floor fStorage[] = new Floor[4];
+	Floor f[] = new Floor[4];
 	int whatFloor = 0;
 	
 	
@@ -74,6 +73,10 @@ public class Game extends JPanel {
 	}
 
 	public void run() {
+		
+		for(int i = 0; i < 4; i++){
+			f[i] = new Floor();
+		}
 		//build important objects
 		Room r = new Room(1);
 		Player p = new Player(r, controls);
@@ -168,11 +171,12 @@ public class Game extends JPanel {
 		
 		if(r.getDirection().equals("east") )
 		{
+			whatFloor = 1;
 			if(mapX == 3)
 				mapX = 0;
 			else
 				mapX += 1;
-			Room newR = f.get(mapX, mapY); 
+			Room newR = f[whatFloor].get(mapX, mapY); 
 			newR.addMobile(p);
 			p.setTop(205);
 			p.setLeft(5);
@@ -186,7 +190,7 @@ public class Game extends JPanel {
 				mapX = 3;
 			else
 				mapX -= 1;
-			Room newR = f.get(mapX, mapY); 
+			Room newR = f[whatFloor].get(mapX, mapY); 
 			newR.addMobile(p);
 			p.setTop(205);
 			p.setRight(635);
@@ -200,7 +204,7 @@ public class Game extends JPanel {
 				mapY = 3;
 			else
 				mapY -= 1;
-			Room newR = f.get(mapX, mapY); 
+			Room newR = f[whatFloor].get(mapX, mapY); 
 			newR.addMobile(p);
 			p.setBottom(440);
 			p.setLeft(300);
@@ -214,7 +218,7 @@ public class Game extends JPanel {
 				mapY = 0;
 			else
 				mapY += 1;
-			Room newR = f.get(mapX, mapY); 
+			Room newR = f[whatFloor].get(mapX, mapY); 
 			newR.addMobile(p);
 			p.setTop(35);
 			p.setLeft(300);
@@ -227,11 +231,6 @@ public class Game extends JPanel {
 		
 	}
 	
-	/*public Floor FloorTransition(Player p, Room r){
-		
-		Floor tempF = new Floor();
-		
-	}*/
 	
 	public ArrayList<Sprite> getSprites() {
 		return sprites;
