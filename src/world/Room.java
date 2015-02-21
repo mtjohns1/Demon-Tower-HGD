@@ -36,6 +36,7 @@ public class Room {
 	int width = 640, height = 448;
 	int type = 0;
 	int a = 0;
+	String direction = "no change";
 
 	/**
 	 * Creates a new blank room with walls surrounding it.
@@ -447,7 +448,6 @@ public class Room {
 	}
 
 
-
 	/**
 	 * 
 	 * @param e: A mobile object to be added to an ArrayList
@@ -496,7 +496,14 @@ public class Room {
 	{
 		return tiles[y][x];
 	}
+	
+	public void setFloorDirection(String s){
+		this.direction = s;
+	}
 
+	public String getFloorDirection(String s){
+		return this.direction;
+	}
 	/**
 	 * 
 	 * @param x_1 = the x coordinate for the first tile.

@@ -60,6 +60,9 @@ public class Game extends JPanel {
 	int mapZ;
 	Room currentRoom = new Room();
 	Floor f = new Floor();
+	Floor fStorage[] = new Floor[4];
+	int whatFloor = 0;
+	
 	
 	public Game(Control c){
 		//box.add(exit);
@@ -93,7 +96,6 @@ public class Game extends JPanel {
 			if(this.controls.getMenu().escape()){
 				if (pressed == false){
 					pressed = true;
-					
 					if(menu.isEmpty()){	
 						menu.add(new PauseMenu(this.controls, this));
 						paused = true;
@@ -163,6 +165,7 @@ public class Game extends JPanel {
 		Room r = n;
 		Player p = c;
 		
+		
 		if(r.getDirection().equals("east") )
 		{
 			if(mapX == 3)
@@ -219,9 +222,16 @@ public class Game extends JPanel {
 			r = newR;
 		}
 		
+		
 		return r;
 		
 	}
+	
+	/*public Floor FloorTransition(Player p, Room r){
+		
+		Floor tempF = new Floor();
+		
+	}*/
 	
 	public ArrayList<Sprite> getSprites() {
 		return sprites;

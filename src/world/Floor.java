@@ -18,7 +18,7 @@ public class Floor {
 
 
 	Room rooms[][] = new Room[4][4];
-
+	boolean hasBeenHere = false;
 	public Floor(){
 
 		for(int y = 0; y < 4; y++){
@@ -76,6 +76,14 @@ public class Floor {
 		rooms[y][x] = new Room(tile, a, type);
 		return rooms[y][x];
 
+	}
+	
+	public boolean beenHere(){
+		return this.hasBeenHere;
+	}
+	
+	public void hasBeenHere(){
+		this.hasBeenHere = true;
 	}
 
 
