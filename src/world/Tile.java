@@ -120,6 +120,7 @@ public class Tile {
 		if (!_tileType.contains("b")) return; //can't break the unbreakable
 		_tileType = _tileType.replace("w", " "); //remove wall
 		_tileType = _tileType.replace("d", " "); //remove damaging
+		_tileType = _tileType.replace("t", " "); //remove switch
 		//break ice with water under it
 		if (_tileType.contains("i"))
 			_tileType = _tileType.replace("i", " ");
