@@ -187,6 +187,8 @@ public class Game extends JPanel {
 			else
 				mapX += 1;
 			Room newR = f[whatFloor].get(mapX, mapY); 
+			this.whatFloor = 1;
+			this.setWin(true);
 			newR.addMobile(p);
 			p.setTop(205);
 			p.setLeft(5);
