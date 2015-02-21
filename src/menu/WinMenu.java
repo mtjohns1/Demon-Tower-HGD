@@ -13,7 +13,11 @@ private int highlighted;
 	private boolean select = false;
 	private boolean pause = true;
 	private boolean isDead = false;
+	private boolean enabled = false;
 	private Game _game;
+	
+	private static int offset = 0;
+	private int Y = -480;
 	
 	public boolean isDead() {
 		return isDead;
@@ -65,31 +69,39 @@ private int highlighted;
 
 	}
 	public void update(){
-		if((c.getShoot().getY() >=50 || c.getShoot().getY() <= -50) && move == false){
-			int updown = 0;
-			if(c.getShoot().getY()>=50)
-				updown = 1;
-			if(c.getShoot().getY()<=-50)
-				updown= -1;
-			move = true;
-			
-			highlighted = (highlighted + updown)%2;
-			if (highlighted < 0)
-				highlighted = 2 + highlighted;
+		if(Y!=offset){
+			Y+=10;
+		}else{
+			enabled = true;
 		}
-		else if(c.getShoot().getY() == 0 && move == true){
-			move = false;
-		}
-		if(c.getMenu().select() && select == false){
-			select = true;
-		}
-		else if(!c.getMenu().select() && select == true){
-			select = false;
-			if(highlighted == 0)
-				_game.setReset(true);
-			if(highlighted == 1)
-				System.exit(0);
-			
+		
+		
+		if (enabled) {
+			if ((c.getShoot().getY() >= 50 || c.getShoot().getY() <= -50)
+					&& move == false) {
+				int updown = 0;
+				if (c.getShoot().getY() >= 50)
+					updown = 1;
+				if (c.getShoot().getY() <= -50)
+					updown = -1;
+				move = true;
+
+				highlighted = (highlighted + updown) % 2;
+				if (highlighted < 0)
+					highlighted = 2 + highlighted;
+			} else if (c.getShoot().getY() == 0 && move == true) {
+				move = false;
+			}
+			if (c.getMenu().select() && select == false) {
+				select = true;
+			} else if (!c.getMenu().select() && select == true) {
+				select = false;
+				if (highlighted == 0)
+					_game.setReset(true);
+				if (highlighted == 1)
+					System.exit(0);
+
+			}
 		}
 		
 	

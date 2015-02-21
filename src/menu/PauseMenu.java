@@ -14,17 +14,20 @@ import control.Control;
 
 public class PauseMenu extends Menu {
 	private int highlighted;
-	
+
 	private boolean move = false;
 	private boolean select = false;
 	private boolean pause = true;
 	private boolean isDead = false;
+	private boolean enabled = false;
 	private Game _game;
 	public boolean isDead() {
 		return isDead;
 	}
 
-	
+	private static int offset = 100;
+	private int Y = 480;
+
 
 	Control c;
 	public PauseMenu(Control c, Game game){
@@ -53,83 +56,91 @@ public class PauseMenu extends Menu {
 
 	public void drawMenu(ArrayList<Sprite> sprites) {
 		// TODO Auto-generated method stub
-		
-		Sprite Menu = new Sprite(50, 100, 500, 300, 0, 0, 1000, "menu");
+
+		Sprite Menu = new Sprite(50, Y, 500, 300, 0, 0, 1000, "menu");
 		sprites.add(Menu);
-		Sprite button1 = new Sprite(75, 125,200, 40, 0, 0, 1001, "resume");;
+		Sprite button1 = new Sprite(75, Y+75,200, 40, 0, 0, 1001, "resume");;
 		if(highlighted ==0){
 			if(select){
-				button1 = new Sprite(75, 125,200, 40, 0, 0, 1001, "resumeP");
+				button1 = new Sprite(75, Y+75,200, 40, 0, 0, 1001, "resumeP");
 			}else{
-				button1 = new Sprite(75, 125,200, 40, 0, 0, 1001, "resumeH");
+				button1 = new Sprite(75, Y+75,200, 40, 0, 0, 1001, "resumeH");
 			}
 		}		
 		sprites.add(button1);
-		Sprite button2 = new Sprite(75, 225,200, 40, 0, 0, 1001, "returnButton");;
+		Sprite button2 = new Sprite(75, Y+175,200, 40, 0, 0, 1001, "returnButton");;
 		if(highlighted ==2){
 			if(select){
-				button2 = new Sprite(75, 225,200, 40, 0, 0, 1001, "returnButtonP");
+				button2 = new Sprite(75, Y+175,200, 40, 0, 0, 1001, "returnButtonP");
 			}else{
-				button2 = new Sprite(75, 225,200, 40, 0, 0, 1001, "returnButtonH");
+				button2 = new Sprite(75, Y+175,200, 40, 0, 0, 1001, "returnButtonH");
 			}
 		}		
 		sprites.add(button2);
-		Sprite button3 = new Sprite(75, 275, 200, 40, 0, 0, 1001, "exit");
+		Sprite button3 = new Sprite(75, Y+225, 200, 40, 0, 0, 1001, "exit");
 		if(highlighted ==3){
 			if(select){
-				button3 = new Sprite(75, 275, 200, 40, 0, 0, 1001, "exitP");
+				button3 = new Sprite(75, Y+225, 200, 40, 0, 0, 1001, "exitP");
 			}else{
-				button3 = new Sprite(75, 275, 200, 40, 0, 0, 1001, "exitH");
+				button3 = new Sprite(75, Y+225, 200, 40, 0, 0, 1001, "exitH");
 			}
 		}		
 		sprites.add(button3);
-		Sprite button4 = new Sprite(75, 175, 200, 40, 0, 0, 1001, "options");
+		Sprite button4 = new Sprite(75, Y+125, 200, 40, 0, 0, 1001, "options");
 		if(highlighted ==1){
 			if(select){
-				button4 = new Sprite(75, 175, 200, 40, 0, 0, 1001, "optionsP");
+				button4 = new Sprite(75, Y+125, 200, 40, 0, 0, 1001, "optionsP");
 			}else{
-				button4 = new Sprite(75, 175, 200, 40, 0, 0, 1001, "optionsH");
+				button4 = new Sprite(75, Y+125, 200, 40, 0, 0, 1001, "optionsH");
 			}
 		}		
 		sprites.add(button4);
-		
+
 
 	}
-	
+
 	public void update(){
-		if((c.getShoot().getY() >=50 || c.getShoot().getY() <= -50) && move == false){
-			int updown = 0;
-			if(c.getShoot().getY()>=50)
-				updown = 1;
-			if(c.getShoot().getY()<=-50)
-				updown= -1;
-			move = true;
-			
-			highlighted = (highlighted + updown)%4;
-			if (highlighted < 0)
-				highlighted = 4 + highlighted;
+		if(Y!=offset){
+			Y-=20;
+		}else{
+			enabled = true;
 		}
-		else if(c.getShoot().getY() == 0 && move == true){
-			move = false;
-		}
-		if(c.getMenu().select() && select == false){
-			select = true;
-		}
-		else if(!c.getMenu().select() && select == true){
-			select = false;
-			if(highlighted == 0)
-				isDead = true;
-			if(highlighted == 2)
-				_game.setReset(true);
-			if(highlighted == 3)
-				System.exit(0);
-			if(highlighted == 1){
-				ArrayList<Menu> temp = _game.getMenu();
-				temp.add(new OptionsMenu(c, _game));
-				_game.setMenu(temp);
+		
+		//scroll(Y, offset);
+
+		if (enabled) {
+			if ((c.getShoot().getY() >= 50 || c.getShoot().getY() <= -50)
+					&& move == false) {
+				int updown = 0;
+				if (c.getShoot().getY() >= 50)
+					updown = 1;
+				if (c.getShoot().getY() <= -50)
+					updown = -1;
+				move = true;
+
+				highlighted = (highlighted + updown) % 4;
+				if (highlighted < 0)
+					highlighted = 4 + highlighted;
+			} else if (c.getShoot().getY() == 0 && move == true) {
+				move = false;
 			}
-				
-			
+			if (c.getMenu().select() && select == false) {
+				select = true;
+			} else if (!c.getMenu().select() && select == true) {
+				select = false;
+				if (highlighted == 0)
+					isDead = true;
+				if (highlighted == 2)
+					_game.setReset(true);
+				if (highlighted == 3)
+					System.exit(0);
+				if (highlighted == 1) {
+					ArrayList<Menu> temp = _game.getMenu();
+					temp.add(new OptionsMenu(c, _game));
+					_game.setMenu(temp);
+				}
+
+			}
 		}
 		if(c.getMenu().escape() && pause == false){
 			pause = true;
@@ -138,7 +149,7 @@ public class PauseMenu extends Menu {
 		else if(!c.getMenu().escape() && pause == true){
 			pause = false;
 		}
-	
+
 	}
 
 }

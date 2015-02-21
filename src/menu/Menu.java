@@ -22,6 +22,10 @@ private int highlighted;
 	private boolean select = false;
 	private boolean pause = false;
 	private boolean isDead;
+	private boolean active = false;
+	
+	private int offset = 0;
+	private int Y = 480;
 	
 	public boolean isDead() {
 		return isDead;
@@ -35,10 +39,19 @@ private int highlighted;
 	public void update() {
 		// TODO Auto-generated method stub
 		
+			
+		
 	}
 
 	public void drawMenu(ArrayList<Sprite> sprites) {
 		// TODO Auto-generated method stub
 		
 	}
+	public void scroll(int Y, int offset){
+		if(Y!=offset){
+			Y-=10;
+		}
+	}
+	
 }
+	

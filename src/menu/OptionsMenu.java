@@ -11,8 +11,12 @@ public class OptionsMenu extends Menu{
 	private boolean select = false;
 	private boolean pause = true;
 	private boolean isDead = false;
+	
 	private Game _game;
+	
 	private int highlighted;
+	
+	
 	Control c;
 	
 	public boolean isDead() {
