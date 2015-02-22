@@ -14,7 +14,7 @@ public class BlastSword extends Weapon {
 	 * Public constructor
 	 */
 	public BlastSword() {
-		super(70, "Blast Sword", 0);
+		super(70, "Blast Sword", 2);
 	}
 	
 	@Override
