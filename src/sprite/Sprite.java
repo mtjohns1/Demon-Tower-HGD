@@ -97,9 +97,11 @@ public class Sprite {
 		
 		picture[3] = enemy;
 		
+		
 		addGraphic("hero sword.png", "swords");
 		addGraphic("hearts.png", "hearts");
 		addGraphic("TempExplosion.png", "explosion");
+		addGraphic("bomb.png", "bomb");
 		addGraphic("enemyTower.jpg", "enemyTower");
 	}
 	

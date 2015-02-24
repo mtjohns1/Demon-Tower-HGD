@@ -3,8 +3,10 @@ import java.util.List;
 
 import mobile.Actor;
 import mobile.Mobile;
+import mobile.Player;
 import sprite.Sprite;
 import utility.Damage;
+import utility.Direction;
 import world.Tile;
 
 /**
@@ -36,6 +38,7 @@ public class BossFireExplosion extends Bullet{
 		setVy(0);
 		setDamage(2); //deals 1 damage
 		accelerate(4); //max speed of 3 in each direction
+		this.setOwner(owner);
 	}
 	public void update(){
 		setW(getW()+8);
@@ -55,8 +58,10 @@ public class BossFireExplosion extends Bullet{
 		
 		
 		//do damage
-		a.takeDamage(new Damage(getDamage(), getKnockbackX(), getKnockbackY(), getStun()));
-
+		if (a instanceof Player){
+			Direction push = new Direction(a.getX()-getX(), a.getY()-getY());
+			a.takeDamage(new Damage(getDamage(), push.getX()*28,push.getY()*28, getStun()));
+		}
 		//vanish
 		//setLife(0);
 	}
