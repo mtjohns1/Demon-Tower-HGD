@@ -290,7 +290,7 @@ public class BossFire1 extends Enemy{
 	 */
 	public void  draw(List<Sprite> list)
 	{
-		Sprite s = new Sprite(getLeft()-2, getTop()-2, getW()+4, getH()+4, 0, 0, 0, "enemy");
+		Sprite s = new Sprite(getLeft()-2, getTop()-2, getW()+4, getH()+4, 0, 0, 0, "boss1");
 		list.add(s);
 		drawHUD(list, 448);
 	}
