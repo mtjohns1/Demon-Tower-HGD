@@ -104,7 +104,7 @@ public class Sprite {
 		addGraphic("bomb.png", "bomb");
 		addGraphic("temp_flame_tower.png", "enemyTower"); //new placeholder tower
 		addGraphic("temp_flame_spirit.png", "enemy"); //new placeholder enemy
-		addGraphic("fireboss.png", "boss1"); //new boss placeholder
+		addGraphic("small_fireboss_trans.png", "boss1"); //new boss placeholder
 		addGraphic("beta_wall.png", "newWall"); //new wall placeholder
 		addGraphic("upstairs.png", "upstair"); //stair placeholders
 		addGraphic("downstairs.png", "downstair");
