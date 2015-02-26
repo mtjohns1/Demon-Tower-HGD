@@ -300,7 +300,7 @@ public class Player extends Actor {
 	{
 		drawHUD(list, 448);
 		if ((getMercy()/5) % 2 > 0) return;
-		Sprite s = new Sprite(getLeft()-2, getTop()-2-getBack(), getW()+4, getH()+4, 0, 0, calculateLayer(), "hero");
+		Sprite s = new Sprite(getLeft()-2, getTop()-6-getBack(), getW()+4, getH()+8, 0, 0, calculateLayer(), "hero");
 		list.add(s);
 	}
 }
