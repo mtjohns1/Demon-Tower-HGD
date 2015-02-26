@@ -84,7 +84,7 @@ public class Sprite {
 		
 		picture[2] = hero;
 		
-		File Enemy = new File("generic_Evil_creature_small.jpg");
+		/*File Enemy = new File("generic_Evil_creature_small.jpg");
 		Image enemy = null;
 		try {
 			enemy =  ImageIO.read(Enemy);
@@ -95,14 +95,15 @@ public class Sprite {
 		
 		pics.put("enemy", enemy);
 		
-		picture[3] = enemy;
+		picture[3] = enemy;*/
 		
 		
 		addGraphic("hero sword.png", "swords");
 		addGraphic("hearts.png", "hearts");
 		addGraphic("TempExplosion.png", "explosion");
 		addGraphic("bomb.png", "bomb");
-		addGraphic("enemyTower.jpg", "enemyTower");
+		addGraphic("temp_flame_tower.png", "enemyTower"); //new placeholder tower
+		addGraphic("temp_flame_spirit.png", "enemy"); //new placeholder enemy
 	}
 	
 	/**
