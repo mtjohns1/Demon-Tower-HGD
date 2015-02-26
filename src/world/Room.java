@@ -16,7 +16,7 @@ import mobile.Mobile;
 import mobile.Player;
 import sprite.Sprite;
 import enemy.Enemy;
-import enemy.BossFire;
+import enemy.BossFire1;
 import enemy.Chaser;
 import enemy.Tower;
 
@@ -383,7 +383,7 @@ public class Room {
 				enemies[i] = new Tower(this);
 			}
 			if(a[i] == 3){
-				enemies[i] = new BossFire(this);
+				enemies[i] = new BossFire1(this);
 			}
 		}
 	}
