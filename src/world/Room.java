@@ -15,10 +15,7 @@ import javax.imageio.ImageIO;
 import mobile.Mobile;
 import mobile.Player;
 import sprite.Sprite;
-import enemy.Enemy;
-import enemy.BossFire1;
-import enemy.Chaser;
-import enemy.Tower;
+import enemy.*;
 
 import java.util.Random;
 import java.awt.*;
@@ -27,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Room {
-	int[] enemyholder = {1, 1, 1};
+	int[] enemyholder = {3  };
 	Random r = new Random();
 	Tile tiles[][] = new Tile[15][20];
 	Enemy enemies[] = new Enemy[5];
@@ -383,7 +380,7 @@ public class Room {
 				enemies[i] = new Tower(this);
 			}
 			if(a[i] == 3){
-				enemies[i] = new BossFire1(this);
+				enemies[i] = new BossPlant1(this);
 			}
 		}
 	}
