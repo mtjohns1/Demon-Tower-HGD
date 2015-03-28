@@ -4,6 +4,7 @@ import game.Game;
 import java.util.ArrayList;
 
 import sprite.Sprite;
+import sprite.TransparencySprite;
 import control.Control;
 
 public class WinMenu extends Menu {
@@ -18,7 +19,7 @@ private int highlighted;
 	
 	private static int offset = 0;
 	private int Y = -480;
-	
+	private float fade = 0;
 	public boolean isDead() {
 		return isDead;
 	}
@@ -44,33 +45,36 @@ private int highlighted;
 	public void drawMenu(ArrayList<Sprite> sprites) {
 		// TODO Auto-generated method stub
 		
-		Sprite Menu = new Sprite(0, Y+0, 640, 480, 0, 0, 4000, "tempWinMenu.jpg");
+		TransparencySprite Menu = new TransparencySprite(0, Y+0, 640, 480, 0, 0, 4000, "tempWinMenu.jpg", fade-1);
 		sprites.add(Menu);
 		
-		Sprite button1 = new Sprite(220, Y+320,200, 40, 0, 0, 4001, "tempReturnButton.png");
+
+		TransparencySprite button1 = new TransparencySprite(220, 320,200, 40, 0, 0, 4001, "tempReturnButton.png", fade-1);
 		if(highlighted ==0){
 			if(select){
-				button1 = new Sprite(220, Y+320,200, 40, 0, 0, 4001, "tempReturnButtonPressed.png");
+				button1 = new TransparencySprite(220, 320,200, 40, 0, 0, 4001, "tempReturnButtonPressed.png", fade-1);
 			}else{
-				button1 = new Sprite(220, Y+320,200, 40, 0, 0, 4001, "temExitButtonHighlight.png");
+				button1 = new TransparencySprite(220, 320,200, 40, 0, 0, 4001, "tempReturnButtonHighlighted.png", fade-1);
 			}
 		}		
 		sprites.add(button1);
-		Sprite button2 = new Sprite(220, Y+370, 200, 40, 0, 0, 4001, "temExitButton.png");
+		TransparencySprite button2 = new TransparencySprite(220, 370, 200, 40, 0, 0, 4001, "temExitButton.png", fade-1);
 		if(highlighted ==1){
 			if(select){
-				button2 = new Sprite(220, Y+370, 200, 40, 0, 0, 4001, "temExitButtonPressed.png");
+				button2 = new TransparencySprite(220, 370, 200, 40, 0, 0, 4001, "temExitButtonPressed.png", fade-1);
 			}else{
-				button2 = new Sprite(220, Y+370, 200, 40, 0, 0, 4001, "temExitButtonHighlight.png");
+				button2 = new TransparencySprite(220, 370, 200, 40, 0, 0, 4001, "temExitButtonHighlight.png", fade-1);
 			}
 		}		
 		sprites.add(button2);
+		TransparencySprite blackscreen = new TransparencySprite(0,0,640,480,0,0, 300,"BlackScreen.png",fade);
+		sprites.add(blackscreen);
 		
 
 	}
 	public void update(){
-		if(Y!=offset){
-			Y+=10;
+		if(fade < 2){
+			fade += .05f;
 		}else{
 			enabled = true;
 		}
