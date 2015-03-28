@@ -35,10 +35,10 @@ public class Player extends Actor {
 	private boolean _stairDebounce = false;
 	private double _traction = 1;
 	
-	private boolean _walk; //boolean for walking/firing animation switches
-	private boolean _repeat; //boolean for repeat step/slashes
-	private int _actionTime; //integer for how long since you last switched actions
-	private int _subAnim; //integer frame offset, based on _repeat
+	private boolean _walk = true; //boolean for walking/firing animation switches
+	private boolean _repeat = false; //boolean for repeat step/slashes
+	private int _actionTime = 0; //integer for how long since you last switched actions
+	private int _subAnim = 0; //integer frame offset, based on _repeat
 
 	/**
 	 * @param start: the room the player starts in
