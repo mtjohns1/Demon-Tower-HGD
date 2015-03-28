@@ -46,10 +46,10 @@ public class Bouncer extends Enemy{
 		
 		//handles end of screen
 		if(getRight() > getHome().getRight()){
-			directionX=1;
+			directionX=-1;
 		}
 		else if(getLeft() < getHome().getLeft()){
-			directionX=-1;
+			directionX=1;
 		}
 		else if(getTop() < getHome().getTop()){
 			directionY=1;

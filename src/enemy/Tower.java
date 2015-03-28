@@ -13,6 +13,7 @@ import mobile.Player;
 import sprite.Sprite;
 import world.Room;
 import world.Tile;
+import bullet.BasicBullet;
 import bullet.BossFireBall;
 
 /**
@@ -23,7 +24,7 @@ import bullet.BossFireBall;
 public class Tower extends Enemy{
 
 	private Player player;
-	private BossFireBall attack;
+	private BasicBullet attack;
 	private int weaponCoolDown =0;
 	
 	public Tower(Room home) {
@@ -57,7 +58,7 @@ public class Tower extends Enemy{
 		yDif = yDif*-1;
 		
 		//logic for how to move
-		attack = new BossFireBall(this,xDif,yDif);
+		attack = new BasicBullet(this,xDif,yDif);
 		
 	}
 	
