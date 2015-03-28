@@ -2,10 +2,13 @@ package menu;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
 import game.Game;
+
 import javax.imageio.ImageIO;
 
 import sprite.Sprite;
+import sprite.TransparencySprite;
 import control.Control;
 
 import java.util.ArrayList;
@@ -29,10 +32,11 @@ public class IntroStoryMenu extends Menu{
 	private int Yy = 0;
 	private double X = 0;
 	private int finalcountdown = 0;
+	private float fade;
 
 	Control c;
-	
-	
+
+
 	public boolean isDead() {
 		return isDead;
 	}
@@ -43,7 +47,7 @@ public class IntroStoryMenu extends Menu{
 		//this.menuInit();
 		_game = game;
 	}
-	
+
 	/*public static void menuInit(){
 		Sprite.addGraphic("OpeningPic1.png", "IntroPic2");
 		Sprite.addGraphic("OpeningPic2.png", "IntroPic");
@@ -54,17 +58,17 @@ public class IntroStoryMenu extends Menu{
 	public void drawMenu(ArrayList<Sprite> sprites) {
 		//Sprite Menu = new Sprite(50, Y, 500, 300, 0, 0, 1000, "menu");
 		//sprites.add(Menu);
-		Sprite introP = new Sprite(0,0,640, 240,0,0, 7000,"OpeningPic2.png");
+		TransparencySprite introP = new TransparencySprite(0,0,640, 240,0,0, 7000,"OpeningPic2.png", 1f-fade);
 		sprites.add(introP);
-		Sprite introT = new Sprite(0,240,640,240,0,0+(int)X,9001,"OpeningPicText.png");
+		TransparencySprite introT = new TransparencySprite(0,240,640,240,0,0+(int)X,9001,"OpeningPicText.png", 1f-fade);
 		sprites.add(introT);
-		Sprite introPP = new Sprite(640-Y,0,640,240,0,0,8000,"OpeningPic1.png");
+		TransparencySprite introPP = new TransparencySprite(640-Y,0,640,240,0,0,8000,"OpeningPic1.png",1f-fade);
 		sprites.add(introPP);
-		Sprite introPPP = new Sprite(640-Yy,0,640,240,0,0,8000,"OpeningPic3.png");
+		TransparencySprite introPPP = new TransparencySprite(640-Yy,0,640,240,0,0,8000,"OpeningPic3.png",1f-fade);
 		sprites.add(introPPP);
-	
+
 	}
-	
+
 	public void update(){
 		if(X<480){
 			X+=.5;
@@ -82,10 +86,12 @@ public class IntroStoryMenu extends Menu{
 		if(X == 480){
 			finalcountdown++;
 		}
-		if(finalcountdown == 250){
-			isDead = !isDead;
+		if(finalcountdown >= 200){
+			fade += 1f/30f;
+			if(fade >= 1f)
+				isDead = !isDead;
 		}
-		
+
 		if(c.getMenu().escape() && pause == false){
 			pause = true;
 			isDead = !isDead;
@@ -94,5 +100,5 @@ public class IntroStoryMenu extends Menu{
 			pause = false;
 		}
 	}
-	
+
 }
