@@ -99,6 +99,14 @@ public class IntroStoryMenu extends Menu{
 		else if(!c.getMenu().escape() && pause == true){
 			pause = false;
 		}
+		if (c.getMenu().select() && select == false) {
+			select = true;
+		} else if (!c.getMenu().select() && select == true) {
+			select = false;
+			isDead = !isDead;
+
+		}
+		
 	}
 
 }
