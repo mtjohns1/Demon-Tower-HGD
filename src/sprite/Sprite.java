@@ -35,6 +35,7 @@ public class Sprite {
 		X = x; Y = y; Width = width; Height = height; SpriteX = spriteX; SpriteY = spriteY; Layer = layer;img = picture[Index];
 	}
 	public Sprite(int x,int y,int width,int height,int spriteX, int spriteY, double layer, String ImgName){
+		if (!pics.containsKey(ImgName)) addGraphic(ImgName, ImgName);
 		X = x; Y = y; Width = width; Height = height; SpriteX = spriteX; SpriteY = spriteY; Layer = layer;img = pics.get(ImgName);
 	}
 	
