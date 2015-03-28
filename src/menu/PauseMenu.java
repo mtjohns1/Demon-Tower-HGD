@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 import sprite.Sprite;
+import sprite.TransparencySprite;
 import control.Control;
 
 
@@ -57,7 +58,7 @@ public class PauseMenu extends Menu {
 	public void drawMenu(ArrayList<Sprite> sprites) {
 		// TODO Auto-generated method stub
 
-		Sprite Menu = new Sprite(50, Y, 500, 300, 0, 0, 1000, "tempMenuWindow.png");
+		TransparencySprite Menu = new TransparencySprite(50, Y, 500, 300, 0, 0, 1000, "tempMenuWindow.png",.75f);
 		sprites.add(Menu);
 		Sprite button1 = new Sprite(75, Y+75,200, 40, 0, 0, 1001, "tempResumeButton.png");
 		if(highlighted ==0){
