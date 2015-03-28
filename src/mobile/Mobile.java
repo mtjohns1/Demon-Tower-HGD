@@ -33,7 +33,7 @@ public abstract class Mobile {
 	private int _frame; //frame number
 	private int _dir; //0-3, used for animations
 	private int _animation; //animation number
-	private String _spriteSheet; //filename of sprite sheet
+	private String _spriteSheet = null; //filename of sprite sheet
 
 	private int _spriteW, _spriteH; //sprite dimensions
 	private int _spriteX, _spriteY; //sprite offset (0,0 means centers align)
@@ -307,6 +307,7 @@ public abstract class Mobile {
 	 */
 	//public abstract void draw(List<Sprite> l);
 	public void draw(List<Sprite> l) {
+		if (getSpriteSheet() == null) return; //do nothing if no sprite
 		//calculate resultant drawing position (aligned centers)
 		int drawX = getX()+getSpriteX()-getSpriteW()/2;
 		int drawY = getY()+getSpriteY()-getSpriteH()/2-getZ();

@@ -12,7 +12,7 @@ public class GrappleReturn extends Effects {
 	
 	private Mobile _owner;
 	
-	public GrappleReturn(Mobile owner, int x, int y, double vx, double vy) {
+	public GrappleReturn(Mobile owner, int x, int y, double vx, double vy, String dir) {
 		super(owner.getHome());
 		
 		//base dimensions
@@ -27,6 +27,14 @@ public class GrappleReturn extends Effects {
 		setY(y);
 		setVx(vx);
 		setVy(vy);
+		
+		setDir(dir);
+		
+		//associated sprites
+		setSpriteSheet("vine.png");
+		setSpriteW(32);
+		setSpriteH(32);
+		setSpriteDir(true);
 		
 		//track owner / return target
 		_owner = owner;
@@ -58,8 +66,7 @@ public class GrappleReturn extends Effects {
 	public void draw(List<Sprite> list)
 	{
 		//bullet body
-		Sprite s = new Sprite(getLeft(), getTop(), getW(), getH(), 0, 0, calculateLayer(), "tempWall");
-		list.add(s);
+		super.draw(list);
 		
 		//chain bits
 		for (int i = 1; i < Grapple.LINKS; i++) {			
@@ -69,11 +76,11 @@ public class GrappleReturn extends Effects {
 			int z = ( getZ()*i + _owner.getZ()*(Grapple.LINKS-i) )/Grapple.LINKS;
 			
 			//drawing position and layer
-			int top = y-(getH()/2)+2;
-			int left = x-(getW()/2)+2;
+			int top = y-16;
+			int left = x-16;
 			double layer = Mobile.calculateLayer(y, z, getH()-4, getD());
 			
-			s = new Sprite(left, top-z, getW()-4, getH()-4, 0, 0, layer, "tempWall");
+			Sprite s = new Sprite(left, top-z, 32, 32, 32, getDirInt()*32, layer, "vine.png");
 			list.add(s);
 		}
 	}

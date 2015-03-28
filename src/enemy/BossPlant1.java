@@ -26,9 +26,10 @@ public class BossPlant1 extends Enemy{
 	private Player player;
 	private Bullet attack;
 	private int weaponCoolDown =0;
+	private int plantAttack=0;
 	private int moveCoolDown =0;
 	private int spinActive =0;
-	private int attackOffset =-160;
+	private int superAttack =0;
 	private int attackCountDown =0;
 	private int speed =5;
 	private int spinCoolDown = 0;
@@ -43,7 +44,7 @@ public class BossPlant1 extends Enemy{
 		super(home);
 		this.setMaxHp(20);
 
-		this.setHp(5);
+		this.setHp(20);
 
 		setW(64);
 		setH(64);
@@ -72,24 +73,64 @@ public class BossPlant1 extends Enemy{
 			return;
 		}
 		attackCountDown+=1;
-		if (attackCountDown >100){
+		if (attackCountDown >1000){
 			spin();
 			return;
 		}
 		mover();
-
+		if(superAttack>=100){
+			plant();
+			if(superAttack ==130){
+				superAttack=0;
+			}
+			superAttack+=1;
+			return;
+		}
 		if(weaponCoolDown <100){
-
+			setVz(0);
+			superAttack+=1;
 			weaponCoolDown +=1;
 			return;
 		}
-		weaponCoolDown +=1;
+		
 		weaponCoolDown =0;
-
-		setVz(0);
-
 	}
+	
+	/**
+	 * summon plant attack
+	 */
 
+	void plant(){
+		if (plantAttack ==0){
+			new BossPlantBomb(this, this.getHome().getPlayer().getX()+100, this.getHome().getPlayer().getY(),0);
+			new BossPlantBomb(this, this.getHome().getPlayer().getX()+75, this.getHome().getPlayer().getY()+75,0);
+			new BossPlantBomb(this, this.getHome().getPlayer().getX(), this.getHome().getPlayer().getY()+100,0);
+			new BossPlantBomb(this, this.getHome().getPlayer().getX()-75, this.getHome().getPlayer().getY()+75,0);
+			new BossPlantBomb(this, this.getHome().getPlayer().getX()-100, this.getHome().getPlayer().getY(),0);
+			new BossPlantBomb(this, this.getHome().getPlayer().getX()-75, this.getHome().getPlayer().getY()-75,0);
+			new BossPlantBomb(this, this.getHome().getPlayer().getX(), this.getHome().getPlayer().getY()-100,0);
+			new BossPlantBomb(this, this.getHome().getPlayer().getX()+75, this.getHome().getPlayer().getY()-75,0);
+			plantAttack+=1;
+		}
+		if (plantAttack ==1){
+			new BossPlantBomb(this, this.getHome().getPlayer().getX()+70, this.getHome().getPlayer().getY()+30,0);
+			new BossPlantBomb(this, this.getHome().getPlayer().getX()+70, this.getHome().getPlayer().getY()-30,0);
+			new BossPlantBomb(this, this.getHome().getPlayer().getX()-70, this.getHome().getPlayer().getY()+30,0);
+			new BossPlantBomb(this, this.getHome().getPlayer().getX()-70, this.getHome().getPlayer().getY()-30,0);
+			new BossPlantBomb(this, this.getHome().getPlayer().getX()+30, this.getHome().getPlayer().getY()+70,0);
+			new BossPlantBomb(this, this.getHome().getPlayer().getX()-30, this.getHome().getPlayer().getY()+70,0);
+			new BossPlantBomb(this, this.getHome().getPlayer().getX()+30, this.getHome().getPlayer().getY()-70,0);
+			new BossPlantBomb(this, this.getHome().getPlayer().getX()-30, this.getHome().getPlayer().getY()-70,0);
+			plantAttack+=1;
+		}
+		if(plantAttack ==2&&superAttack==130){
+			new BossPlantBomb(this, this.getHome().getPlayer().getX()-20, this.getHome().getPlayer().getY(),0);
+			new BossPlantBomb(this, this.getHome().getPlayer().getX()+20, this.getHome().getPlayer().getY(),0);
+			new BossPlantBomb(this, this.getHome().getPlayer().getX(), this.getHome().getPlayer().getY()-20,0);
+			new BossPlantBomb(this, this.getHome().getPlayer().getX(), this.getHome().getPlayer().getY()+20,0);
+			plantAttack=0;
+		}
+	}
 	/**
 	 * boss spin attack
 	 * 
@@ -115,6 +156,17 @@ public class BossPlant1 extends Enemy{
 			spinCoolDown =0;
 			attackCountDown =0;
 			spinActive =0;
+		}
+		if(spinCoolDown%50==0){
+			int xDif = this.getX() - this.getHome().getPlayer().getX();
+			int yDif = this.getY() - this.getHome().getPlayer().getY();
+			
+			//finds direction of x and y
+			xDif = xDif*-1;
+			yDif = yDif*-1;
+			
+			//logic for how to move
+			attack = new BasicBullet(this,xDif,yDif);
 		}
 		setVx(getVx()+speed*directionX);
 		setVy(getVy()+speed*directionY);

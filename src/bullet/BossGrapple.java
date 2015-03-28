@@ -83,7 +83,7 @@ public class BossGrapple extends Bullet{
 	@Override
 	public void onDeath() {
 		//spawn a grapple return effect
-		new GrappleReturn(getOwner(), getX(), getY(), getVx(), getVy());
+		new GrappleReturn(getOwner(), getX(), getY(), getVx(), getVy(), getDir());
 	}
 	
 	@Override
