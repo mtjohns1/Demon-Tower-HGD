@@ -11,6 +11,12 @@ public class TransparencySprite extends Sprite{
 			int spriteY, double layer, String ImgName, float trans) {
 		super(x, y, width, height, spriteX, spriteY, layer, ImgName);
 		Trans = trans;
+		if(Trans > 1){
+			Trans = 1;
+		}
+		if(Trans < 0){
+			Trans = 0;
+		}
 		// TODO Auto-generated constructor stub
 	}
 

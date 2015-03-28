@@ -93,8 +93,9 @@ public class Game extends JPanel {
 		
 		PauseMenu.menuInit();
 		
-		menu.add(new StartMenu(this.controls));
+		
 		menu.add(new IntroStoryMenu(this.controls, this));
+		menu.add(new StartMenu(this.controls));
 		
 		while(true) {
 			if(this.controls.getMenu().escape()){
