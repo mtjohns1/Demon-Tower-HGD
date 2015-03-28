@@ -27,7 +27,7 @@ public class Chaser extends Enemy{
 	private int speed;
 
 	public Chaser(Room home, int x, int y) {
-		super(home);
+		super(home,1);
 		this.setMaxHp(20);
 
 		this.setHp(5);

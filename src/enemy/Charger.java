@@ -28,7 +28,7 @@ public class Charger extends Enemy{
 	private int randomMove=0;
 	private double xDir, yDir;
 	public Charger(Room home, int x, int y) {
-		super(home);
+		super(home,4);
 		this.setMaxHp(20);
 
 		this.setHp(2);

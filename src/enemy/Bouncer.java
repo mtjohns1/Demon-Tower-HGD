@@ -26,7 +26,7 @@ public class Bouncer extends Enemy{
 	private int speed;
 
 	public Bouncer(Room home) {
-		super(home);
+		super(home,3);
 		this.setMaxHp(5);
 
 		this.setHp(2);

@@ -17,16 +17,19 @@ import java.awt.*;
 import java.io.*;
 
 public abstract class Enemy extends Actor {
+	private int type;
 	
-	public Enemy(Room home) {
+	public Enemy(Room home, int x) {
 		super(home);
-
+		type = x;
 		//will probably be changed
 		setW(28);
 		setH(28);
 		setD(32);
 	}
-	
+	public int getType(){
+		return type;
+	}
 	@Override
 	public void onDeath()
 	{

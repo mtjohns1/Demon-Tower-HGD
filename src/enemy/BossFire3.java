@@ -52,7 +52,7 @@ public class BossFire3 extends Enemy{
 	 * @param home Pass room boss exists in
 	 */
 	public BossFire3(Room home) {
-		super(home);
+		super(home,12);
 		this.setMaxHp(20);
 
 		this.setHp(10);
@@ -74,7 +74,7 @@ public class BossFire3 extends Enemy{
 	 * @param home Pass room boss exists in
 	 */
 	public BossFire3(Room home,int splitCount, int x,int y) {
-		super(home);
+		super(home,12);
 		this.setMaxHp(20);
 		split= splitCount;
 		this.setHp(10/split);

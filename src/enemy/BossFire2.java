@@ -48,7 +48,7 @@ public class BossFire2 extends Enemy{
 	 * @param home Pass room boss exists in
 	 */
 	public BossFire2(Room home) {
-		super(home);
+		super(home,11);
 		this.setMaxHp(40);
 
 		this.setHp(200);

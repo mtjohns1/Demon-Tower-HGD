@@ -46,7 +46,7 @@ public class BossFinal extends Enemy{
 	 * @param home Pass room boss exists in
 	 */
 	public BossFinal(Room home) {
-		super(home);
+		super(home,50);
 		this.setMaxHp(20);
 
 		this.setHp(10);

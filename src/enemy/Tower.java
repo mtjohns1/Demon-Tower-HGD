@@ -28,7 +28,7 @@ public class Tower extends Enemy{
 	private int weaponCoolDown =0;
 	
 	public Tower(Room home) {
-		super(home);
+		super(home,2);
 		this.setMaxHp(20);
 
 		this.setHp(5);
