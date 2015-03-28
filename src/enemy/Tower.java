@@ -27,13 +27,13 @@ public class Tower extends Enemy{
 	private BasicBullet attack;
 	private int weaponCoolDown =0;
 	
-	public Tower(Room home) {
+	public Tower(Room home, int x, int y) {
 		super(home,2);
 		this.setMaxHp(20);
 
 		this.setHp(5);
-		this.setX(300);
-		this.setY(300);
+		this.setX(x);
+		this.setY(y);
 		player = home.getPlayer();
 	}
 
