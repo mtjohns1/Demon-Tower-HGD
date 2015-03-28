@@ -26,28 +26,28 @@ public class OptionsMenu extends Menu{
 	public OptionsMenu(Control c, Game game){
 		this.highlighted = 0;
 		this.c = c;
-		this.menuInit();
+		//this.menuInit();
 		_game = game;
 	}
 	
-	public static void menuInit(){
+	/*public static void menuInit(){
 		Sprite.addGraphic("tempOptionsWindow.png", "optionsMenu");
 		Sprite.addGraphic("tempResumeButton.png","resume");
 		Sprite.addGraphic("tempResumeButtonHighlight.png","resumeH");
 		Sprite.addGraphic("tempResumeButtonPressed.png","resumeP");
-	}
+	}*/
 	
 	public void drawMenu(ArrayList<Sprite> sprites) {
 		// TODO Auto-generated method stub
 		
-		Sprite Menu = new Sprite(50, 100, 500, 300, 0, 0, 1000, "optionsMenu");
+		Sprite Menu = new Sprite(50, 100, 500, 300, 0, 0, 1000, "tempOptionsWindow.png");
 		sprites.add(Menu);
-		Sprite button1 = new Sprite(75, 125,200, 40, 0, 0, 1001, "resume");;
+		Sprite button1 = new Sprite(75, 125,200, 40, 0, 0, 1001, "tempResumeButton.png");
 		if(highlighted ==0){
 			if(select){
-				button1 = new Sprite(75, 125,200, 40, 0, 0, 1001, "resumeP");
+				button1 = new Sprite(75, 125,200, 40, 0, 0, 1001, "tempResumeButtonPressed.png");
 			}else{
-				button1 = new Sprite(75, 125,200, 40, 0, 0, 1001, "resumeH");
+				button1 = new Sprite(75, 125,200, 40, 0, 0, 1001, "tempResumeButtonHighlight.png");
 			}
 		}		
 		sprites.add(button1);

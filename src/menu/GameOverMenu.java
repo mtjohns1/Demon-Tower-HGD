@@ -45,24 +45,24 @@ private int highlighted;
 	public void drawMenu(ArrayList<Sprite> sprites) {
 		// TODO Auto-generated method stub
 		
-		Sprite Menu = new Sprite(0, Y+0, 640, 480, 0, 0, 4000, "gameOver");
+		Sprite Menu = new Sprite(0, Y+0, 640, 480, 0, 0, 4000, "tempGameOverMenu.png");
 		sprites.add(Menu);
 		
-		Sprite button1 = new Sprite(220, Y+320,200, 40, 0, 0, 4001, "returnButton");;
+		Sprite button1 = new Sprite(220, Y+320,200, 40, 0, 0, 4001, "tempReturnButton.png");
 		if(highlighted ==0){
 			if(select){
-				button1 = new Sprite(220, Y+320,200, 40, 0, 0, 4001, "returnButtonP");
+				button1 = new Sprite(220, Y+320,200, 40, 0, 0, 4001, "tempReturnButtonPressed.png");
 			}else{
-				button1 = new Sprite(220, Y+320,200, 40, 0, 0, 4001, "returnButtonH");
+				button1 = new Sprite(220, Y+320,200, 40, 0, 0, 4001, "tempReturnButtonHighlighted.png");
 			}
 		}		
 		sprites.add(button1);
-		Sprite button2 = new Sprite(220, Y+370, 200, 40, 0, 0, 4001, "exit");
+		Sprite button2 = new Sprite(220, Y+370, 200, 40, 0, 0, 4001, "temExitButton.png");
 		if(highlighted ==1){
 			if(select){
-				button2 = new Sprite(220, Y+370, 200, 40, 0, 0, 4001, "exitP");
+				button2 = new Sprite(220, Y+370, 200, 40, 0, 0, 4001, "temExitButtonPressed.png");
 			}else{
-				button2 = new Sprite(220, Y+370, 200, 40, 0, 0, 4001, "exitH");
+				button2 = new Sprite(220, Y+370, 200, 40, 0, 0, 4001, "temExitButtonHighlight.png");
 			}
 		}		
 		sprites.add(button2);

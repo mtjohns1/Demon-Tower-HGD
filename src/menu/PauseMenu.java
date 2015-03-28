@@ -33,11 +33,11 @@ public class PauseMenu extends Menu {
 	public PauseMenu(Control c, Game game){
 		this.highlighted = 0;
 		this.c = c;
-		this.menuInit();
+		//this.menuInit();
 		_game = game;
 	}
 
-	public static void menuInit(){
+	/*public static void menuInit(){
 		Sprite.addGraphic("tempMenuWindow.png", "menu");
 		Sprite.addGraphic("tempResumeButton.png","resume");
 		Sprite.addGraphic("tempResumeButtonHighlight.png","resumeH");
@@ -52,51 +52,50 @@ public class PauseMenu extends Menu {
 		Sprite.addGraphic("tempOptionsButtonHighlight.png", "optionsH");
 		Sprite.addGraphic("tempOptionsButtonPressed.png", "optionsP");
 
-	}
+	}*/
 
 	public void drawMenu(ArrayList<Sprite> sprites) {
 		// TODO Auto-generated method stub
 
-		Sprite Menu = new Sprite(50, Y, 500, 300, 0, 0, 1000, "menu");
+		Sprite Menu = new Sprite(50, Y, 500, 300, 0, 0, 1000, "tempMenuWindow.png");
 		sprites.add(Menu);
-		Sprite button1 = new Sprite(75, Y+75,200, 40, 0, 0, 1001, "resume");;
+		Sprite button1 = new Sprite(75, Y+75,200, 40, 0, 0, 1001, "tempResumeButton.png");
 		if(highlighted ==0){
 			if(select){
-				button1 = new Sprite(75, Y+75,200, 40, 0, 0, 1001, "resumeP");
+				button1 = new Sprite(75, Y+75,200, 40, 0, 0, 1001, "tempResumeButtonPressed.png");
 			}else{
-				button1 = new Sprite(75, Y+75,200, 40, 0, 0, 1001, "resumeH");
+				button1 = new Sprite(75, Y+75,200, 40, 0, 0, 1001, "tempResumeButtonHighlight.png");
 			}
 		}		
 		sprites.add(button1);
-		Sprite button2 = new Sprite(75, Y+175,200, 40, 0, 0, 1001, "returnButton");;
+		Sprite button2 = new Sprite(75, Y+175,200, 40, 0, 0, 1001, "tempReturnButton.png");
 		if(highlighted ==2){
 			if(select){
-				button2 = new Sprite(75, Y+175,200, 40, 0, 0, 1001, "returnButtonP");
+				button2 = new Sprite(75, Y+175,200, 40, 0, 0, 1001, "tempReturnButtonPressed.png");
 			}else{
-				button2 = new Sprite(75, Y+175,200, 40, 0, 0, 1001, "returnButtonH");
+				button2 = new Sprite(75, Y+175,200, 40, 0, 0, 1001, "tempReturnButtonHighlighted.png");
 			}
 		}		
 		sprites.add(button2);
-		Sprite button3 = new Sprite(75, Y+225, 200, 40, 0, 0, 1001, "exit");
+		Sprite button3 = new Sprite(75, Y+225, 200, 40, 0, 0, 1001, "temExitButton.png");
 		if(highlighted ==3){
 			if(select){
-				button3 = new Sprite(75, Y+225, 200, 40, 0, 0, 1001, "exitP");
+				button3 = new Sprite(75, Y+225, 200, 40, 0, 0, 1001, "temExitButtonPressed.png");
 			}else{
-				button3 = new Sprite(75, Y+225, 200, 40, 0, 0, 1001, "exitH");
+				button3 = new Sprite(75, Y+225, 200, 40, 0, 0, 1001, "temExitButtonHighlight.png");
 			}
 		}		
 		sprites.add(button3);
-		Sprite button4 = new Sprite(75, Y+125, 200, 40, 0, 0, 1001, "options");
+		Sprite button4 = new Sprite(75, Y+125, 200, 40, 0, 0, 1001, "tempOptionsButton.png");
 		if(highlighted ==1){
 			if(select){
-				button4 = new Sprite(75, Y+125, 200, 40, 0, 0, 1001, "optionsP");
+				button4 = new Sprite(75, Y+125, 200, 40, 0, 0, 1001, "tempOptionsButtonPressed.png");
 			}else{
-				button4 = new Sprite(75, Y+125, 200, 40, 0, 0, 1001, "optionsH");
+				button4 = new Sprite(75, Y+125, 200, 40, 0, 0, 1001, "tempOptionsButtonHighlight.png");
 			}
 		}		
 		sprites.add(button4);
-
-
+	
 	}
 
 	public void update(){
@@ -105,7 +104,7 @@ public class PauseMenu extends Menu {
 		}else{
 			enabled = true;
 		}
-		
+
 		//scroll(Y, offset);
 
 		if (enabled) {
@@ -132,8 +131,9 @@ public class PauseMenu extends Menu {
 					isDead = true;
 				if (highlighted == 2)
 					_game.setReset(true);
-				if (highlighted == 3)
+				if (highlighted == 3){
 					System.exit(0);
+									}
 				if (highlighted == 1) {
 					ArrayList<Menu> temp = _game.getMenu();
 					temp.add(new OptionsMenu(c, _game));

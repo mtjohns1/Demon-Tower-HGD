@@ -27,11 +27,11 @@ private int highlighted;
 	public WinMenu(Control c, Game game){
 		this.highlighted = 0;
 		this.c = c;
-		this.menuInit();
+		//this.menuInit();
 		_game = game;
 	}
 	
-	public static void menuInit(){
+	/*public static void menuInit(){
 		Sprite.addGraphic("tempWinMenu.jpg", "win");
 		Sprite.addGraphic("temExitButton.png","exit");
 		Sprite.addGraphic("temExitButtonHighlight.png","exitH");
@@ -39,29 +39,29 @@ private int highlighted;
 		Sprite.addGraphic("tempReturnButton.png", "returnButton");
 		Sprite.addGraphic("tempReturnButtonHighlighted.png", "returnButtonH");
 		Sprite.addGraphic("tempReturnButtonPressed.png","returnButtonP");
-	}
+	}*/
 	
 	public void drawMenu(ArrayList<Sprite> sprites) {
 		// TODO Auto-generated method stub
 		
-		Sprite Menu = new Sprite(0, Y+0, 640, 480, 0, 0, 4000, "win");
+		Sprite Menu = new Sprite(0, Y+0, 640, 480, 0, 0, 4000, "tempWinMenu.jpg");
 		sprites.add(Menu);
 		
-		Sprite button1 = new Sprite(220, Y+320,200, 40, 0, 0, 4001, "returnButton");;
+		Sprite button1 = new Sprite(220, Y+320,200, 40, 0, 0, 4001, "tempReturnButton.png");
 		if(highlighted ==0){
 			if(select){
-				button1 = new Sprite(220, Y+320,200, 40, 0, 0, 4001, "returnButtonP");
+				button1 = new Sprite(220, Y+320,200, 40, 0, 0, 4001, "tempReturnButtonPressed.png");
 			}else{
-				button1 = new Sprite(220, Y+320,200, 40, 0, 0, 4001, "returnButtonH");
+				button1 = new Sprite(220, Y+320,200, 40, 0, 0, 4001, "temExitButtonHighlight.png");
 			}
 		}		
 		sprites.add(button1);
-		Sprite button2 = new Sprite(220, Y+370, 200, 40, 0, 0, 4001, "exit");
+		Sprite button2 = new Sprite(220, Y+370, 200, 40, 0, 0, 4001, "temExitButton.png");
 		if(highlighted ==1){
 			if(select){
-				button2 = new Sprite(220, Y+370, 200, 40, 0, 0, 4001, "exitP");
+				button2 = new Sprite(220, Y+370, 200, 40, 0, 0, 4001, "temExitButtonPressed.png");
 			}else{
-				button2 = new Sprite(220, Y+370, 200, 40, 0, 0, 4001, "exitH");
+				button2 = new Sprite(220, Y+370, 200, 40, 0, 0, 4001, "temExitButtonHighlight.png");
 			}
 		}		
 		sprites.add(button2);
