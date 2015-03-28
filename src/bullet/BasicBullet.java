@@ -24,6 +24,11 @@ public class BasicBullet extends Bullet{
 		setH(10);
 		setD(32);
 		
+		setSpriteSheet("light_bullet.png");
+		setSpriteW(32);
+		setSpriteH(32);
+		setSpriteDir(true);
+		
 		//no range limit, for now
 		
 		setDamage(1); //deals 1 damage

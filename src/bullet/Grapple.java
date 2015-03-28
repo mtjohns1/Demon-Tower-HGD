@@ -16,8 +16,7 @@ import effect.GrappleReturn;
  */
 public class Grapple extends Bullet{
 
-	//TODO: Make shot appear to return if it misses!
-	public static final int LINKS = 8;
+	public static final int LINKS = 5;
 	private boolean _reelIn; 
 	
 	/**
@@ -38,6 +37,11 @@ public class Grapple extends Bullet{
 		//last just under one second
 		setLife(20);
 
+		setSpriteSheet("vine.png");
+		setSpriteW(32);
+		setSpriteH(32);
+		setSpriteDir(true);
+		
 		setDamage(1);
 		accelerate(22); //max speed
 		setKnockback(getVx()/3, getVy()/3); //normal knockback
@@ -85,7 +89,7 @@ public class Grapple extends Bullet{
 	@Override
 	public void onDeath() {
 		//spawn a grapple return effect
-		new GrappleReturn(getOwner(), getX(), getY(), getVx(), getVy());
+		new GrappleReturn(getOwner(), getX(), getY(), getVx(), getVy(), getDir());
 	}
 	
 	@Override
@@ -124,11 +128,11 @@ public class Grapple extends Bullet{
 			int z = ( getZ()*i + getOwner().getZ()*(LINKS-i) )/LINKS;
 			
 			//drawing position and layer
-			int top = y-(getH()/2)+2;
-			int left = x-(getW()/2)+2;
+			int top = y-16;
+			int left = x-16;
 			double layer = Mobile.calculateLayer(y, z, getH()-4, getD());
 			
-			Sprite s = new Sprite(left, top-z, getW()-4, getH()-4, 0, 0, layer, "tempWall");
+			Sprite s = new Sprite(left, top-z, 32, 32, 32, getDirInt()*32, layer, "vine.png");
 			list.add(s);
 		}
 	}

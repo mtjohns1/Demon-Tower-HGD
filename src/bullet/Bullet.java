@@ -50,6 +50,17 @@ public abstract class Bullet extends Mobile {
 		setY(owner.getY()+(int)(dir.getY()*offset));
 		setZ(owner.getZ());
 
+		//specify direction
+		if (Math.abs(yAxis) > Math.abs(xAxis)) {
+			if (yAxis < 0) setDir("up");
+			else setDir("down");
+		}
+		else {
+			
+			if (xAxis < 0) setDir("left");
+			else setDir("right");
+		}
+		
 		_owner = owner;
 		_life = Integer.MAX_VALUE; //infinite range if unspecified
 		_damage = 0; //no damage if unspecified
@@ -198,7 +209,8 @@ public abstract class Bullet extends Mobile {
 	@Override
 	public void draw(List<Sprite> list)
 	{
-		Sprite s = new Sprite(getLeft(), getTop(), getW(), getH(), 0, 0, calculateLayer(), "tempWall");
-		list.add(s);
+		super.draw(list);
+		/*Sprite s = new Sprite(getLeft(), getTop(), getW(), getH(), 0, 0, calculateLayer(), "tempWall");
+		list.add(s);*/
 	}
 }
