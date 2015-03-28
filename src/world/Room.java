@@ -62,13 +62,13 @@ public class Room {
 		}		
 
 		a = r.nextInt(4); 
-		/*if(a == 0)
+		if(a == 0)
 			tiles = this.layoutFour(tiles);
 		else if(a == 1)
 			tiles = this.interestingRoom(tiles);
 		else if(a == 2)
 			tiles = this.fourSquareRoom(tiles);
-		else if(a == 3)*/
+		else if(a == 3)
 			tiles = this.threeSquareRoom(tiles);
 	}
 
@@ -174,6 +174,11 @@ public class Room {
 			tiles[10][i].setType("w");
 		}
 		
+		this.enemies[0] = new Tower(this, 250, 225);
+		this.enemies[1] = new Tower(this, 395, 225);
+		this.enemies[2] = new Chaser(this, 50, 225);
+		this.enemies[3] = new Chaser(this, 595, 225);
+		this.enemies[4] = new Chaser(this, 500, 225);		
 		
 		return tiles;
 	}
@@ -295,6 +300,13 @@ public class Room {
 				tiles[9][i].setType("w");
 			}//adds to lines closer together side to side
 		}	//second major layout
+		
+		this.enemies[0] = new Tower(this, 250, 225);
+		this.enemies[1] = new Tower(this, 395, 225);
+		this.enemies[2] = new Chaser(this, 50, 225);
+		this.enemies[3] = new Chaser(this, 595, 225);
+		this.enemies[4] = new Chaser(this, 500, 225);
+		
 		return tiles;
 	}
 
