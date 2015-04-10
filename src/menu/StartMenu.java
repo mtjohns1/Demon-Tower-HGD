@@ -22,9 +22,9 @@ public class StartMenu extends Menu{
 	public StartMenu(Control c){
 		this.highlighted = 0;
 		this.c = c;
-		this.menuInit();
+		//this.menuInit();
 	}
-
+/*
 	public static void menuInit(){
 		Sprite.addGraphic("tempStartMenu.png", "startMenu");
 		Sprite.addGraphic("tempStartButton.png", "startButton");
@@ -34,27 +34,27 @@ public class StartMenu extends Menu{
 		Sprite.addGraphic("tempQuitButtonHighlighted.png", "quitButtonH");
 		Sprite.addGraphic("tempQuitButtonPressed.png", "quitButtonP");
 	}
-
+*/
 	public void drawMenu(ArrayList<Sprite> sprites) {
 		// TODO Auto-generated method stub
 
-		Sprite Menu = new Sprite(0, 0, 640, 480, 0, 0, 3000, "startMenu");
+		Sprite Menu = new Sprite(0, 0, 640, 480, 0, 0, 3000, "tempStartMenu.png");
 		sprites.add(Menu);
-		Sprite button1 = new Sprite(80, 280, 160, 80, 0, 0, 3001, "startButton");
+		Sprite button1 = new Sprite(80, 280, 160, 80, 0, 0, 3001, "tempStartButton.png");
 		if(highlighted ==0){
 			if(select){
-				button1 = new Sprite(80, 280, 160, 80, 0, 0, 3001, "startButtonP");
+				button1 = new Sprite(80, 280, 160, 80, 0, 0, 3001, "tempStartButtonPressed.png");
 			}else{
-				button1 = new Sprite(80, 280, 160, 80, 0, 0, 3001, "startButtonH");
+				button1 = new Sprite(80, 280, 160, 80, 0, 0, 3001, "tempStartButtonHighlighted.png");
 			}
 		}		
 		sprites.add(button1);
-		Sprite button2 = new Sprite(400, 280, 160, 80, 0, 0, 3001, "quitButton");
+		Sprite button2 = new Sprite(400, 280, 160, 80, 0, 0, 3001, "tempQuitButton.png");
 		if(highlighted ==1){
 			if(select){
-				button2 = new Sprite(400, 280, 160, 80, 0, 0, 3001, "quitButtonP");
+				button2 = new Sprite(400, 280, 160, 80, 0, 0, 3001, "tempQuitButtonPressed.png");
 			}else{
-				button2 = new Sprite(400, 280, 160, 80, 0, 0, 3001, "quitButtonH");
+				button2 = new Sprite(400, 280, 160, 80, 0, 0, 3001, "tempQuitButtonHighlighted.png");
 			}
 		}		
 		sprites.add(button2);

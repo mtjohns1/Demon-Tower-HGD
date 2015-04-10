@@ -24,7 +24,7 @@ public class SinGhost extends Enemy{
 	private int attack;
 	private int xCounter, yCounter =0;
 	public SinGhost(Room home) {
-		super(home);
+		super(home,5);
 		
 		this.setX(300);
 		this.setY(300);

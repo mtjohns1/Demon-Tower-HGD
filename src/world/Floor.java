@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 
 import java.awt.*;
 import java.io.*;
+import enemy.Enemy;
 
 
 
@@ -73,7 +74,8 @@ public class Floor {
 		Tile tile[][] = rooms[y][x].getTiles();
 		int[] a = rooms[y][x].enemyholder;
 		int type = rooms[y][x].type;
-		rooms[y][x] = new Room(tile, a, type);
+		Enemy enemies[] = rooms[y][x].enemies;
+		rooms[y][x] = new Room(tile, a, type, enemies);
 		return rooms[y][x];
 
 	}

@@ -34,18 +34,32 @@ public class Player extends Actor {
 	private int _lastX, _lastY; //position to reset to in case of pit-falling
 	private boolean _stairDebounce = false;
 	private double _traction = 1;
+	
+	private boolean _walk = true; //boolean for walking/firing animation switches
+	private boolean _repeat = false; //boolean for repeat step/slashes
+	private int _actionTime = 0; //integer for how long since you last switched actions
+	private int _subAnim = 0; //integer frame offset, based on _repeat
 
 	/**
 	 * @param start: the room the player starts in
 	 */
 	public Player(Room start, Control c) {
 		super(start);
-		_c = c;
+		_c = c; //map the controller!
 		setW(28);
 		setH(28);
 		setD(32);
 		this.getHome().setPlayer(this);
-
+		
+		setSpriteSheet("hero.png");
+		setSpriteW(64);
+		setSpriteH(64);
+		setSpriteDir(true);
+		setDir("right");
+		setAnim(0);
+		setFrame(0);
+		
+		
 		//hitpoints! (initial)
 		setMaxHp(8);
 		setHp(getMaxHp());
@@ -66,6 +80,9 @@ public class Player extends Actor {
 		//read input
 		int dx = _c.getMove().getX();
 		int dy = _c.getMove().getY();
+		//get bullet input
+		int cx = _c.getShoot().getX();
+		int cy = _c.getShoot().getY();
 
 		//reset traction for now
 		_traction = 1.0;
@@ -120,6 +137,7 @@ public class Player extends Actor {
 
 		//if stunned, nullify inputs
 		if (isStunned()) {dx = 0; dy = 0;}
+		
 		//apply acceleration
 		if (Math.abs(dx) > 10 || Math.abs(dy) > 10) {
 			Direction dir = new Direction(dx, dy);
@@ -128,7 +146,7 @@ public class Player extends Actor {
 		}
 		//apply friction
 		accelerate(0.475/_traction);
-
+		
 		//apply gravity (z direction)
 		setVz(getVz()-0.15);
 
@@ -141,17 +159,76 @@ public class Player extends Actor {
 		}
 		_debounce = (_c.getShoot().cycleRight() || _c.getShoot().cycleLeft());
 
-		//get bullet input
-		dx = _c.getShoot().getX();
-		dy = _c.getShoot().getY();
-
 		if (isStunned()) {dx = 0; dy = 0;} //nullify input while stunned
 
 		//fire, but only if a variety of conditions are met (including having a weapon!
-		if (getWeapons().size() > 0 && getFireDelay() <= 0 && /*_stamina > 0 &&*/ (Math.abs(dx) > 10 || Math.abs(dy) > 10)) {
-			_wep.get(_equip).fire(this, dx, dy);
+		if (getWeapons().size() > 0 && getFireDelay() <= 0 && /*_stamina > 0 &&*/ (Math.abs(cx) > 10 || Math.abs(cy) > 10)) {
+			_wep.get(_equip).fire(this, cx, cy);
+			//switch from walking to firing, toggle repeats
+			_actionTime = 0;
+			_walk = false;
+			_repeat = !_repeat;
 		}
 
+		//change facing direction for movement
+		if (_walk)
+		{
+			if (Math.abs(dy) > Math.abs(dx)) {
+				if (dy < 0) setDir("up");
+				else if (dy > 0) setDir("down");
+			}
+			else if (Math.abs(dx) > Math.abs(dy)) {
+				
+				if (dx < 0) setDir("left");
+				else if (dx > 0) setDir("right");
+			}
+		}
+		//change facing direction for attacks
+		else
+		{
+			if (Math.abs(cy) > Math.abs(cx)) {
+				if (cy < 0) setDir("up");
+				else if (cy > 0) setDir("down");
+			}
+			else if (Math.abs(cx) > Math.abs(cy)) {
+				
+				if (cx < 0) setDir("left");
+				else if (cx > 0) setDir("right");
+			}
+		}
+		
+		//set animation
+		if (_walk) setAnim(0);
+		else setAnim(1);
+		
+		//everyone loves the left/right sweep
+		if (_repeat) _subAnim = 2;
+		else _subAnim = 0;
+		
+		//set frame (shooting)
+		if (!_walk) {
+			
+			//return to just walking
+			if (_actionTime < 5) {
+				setFrame(0+_subAnim);
+			}
+			else {
+				setFrame(1+_subAnim);
+			}
+			if (_actionTime > 25) {
+				_actionTime = 0;
+				_walk = true;
+			}
+			_actionTime++;
+		}
+		//set frame (walking)
+		else {
+			if (Math.abs(dx) < 11 && Math.abs(dy) < 11) _actionTime = 0;
+			if (_actionTime % 20 == 1) _repeat = !_repeat;
+			setFrame( ((_actionTime+1)/10)%2+_subAnim );
+			_actionTime++;
+		}
+		
 		//count down to next shot
 		setFireDelay(getFireDelay()-1);
 	}
@@ -276,21 +353,21 @@ public class Player extends Actor {
 	public void drawHUD(List<Sprite> list, int y) {
 		for (int i = 0; i < getMaxHp()/2; i++) {
 			//full heart
-			Sprite s = new Sprite(44+i*16, y, 32, 32, 0, 0, 0, "hearts");
+			Sprite s = new Sprite(44+i*16, y, 32, 32, 0, 0, 0, "hearts.png");
 			//half heart
 			if (getHp() == i*2+1) {
-				s = new Sprite(44+i*16, y, 32, 32, 32, 0, 0, "hearts");
+				s = new Sprite(44+i*16, y, 32, 32, 32, 0, 0, "hearts.png");
 			}
 			//empty heart
 			if (getHp() <= i*2) {
-				s = new Sprite(44+i*16, y, 32, 32, 64, 0, 0, "hearts");
+				s = new Sprite(44+i*16, y, 32, 32, 64, 0, 0, "hearts.png");
 			}
 			list.add(s);
 		}
 		if (getWeapons().size() > 0)
 		{
 			int swordIcon = getWeapons().get(getEquip()).getIcon();
-			Sprite s = new Sprite(4, y, 32, 32, swordIcon*32, 0, 0, "swords");
+			Sprite s = new Sprite(4, y, 32, 32, swordIcon*32, 0, 0, "hero sword.png");
 			list.add(s);
 		}
 	}
@@ -298,9 +375,11 @@ public class Player extends Actor {
 	@Override
 	public void draw(List<Sprite> list)
 	{
+		if ((getMercy()/5) % 2 == 0) super.draw(list);
 		drawHUD(list, 448);
+		/* drawHUD(list, 448);
 		if ((getMercy()/5) % 2 > 0) return;
 		Sprite s = new Sprite(getLeft()-2, getTop()-6-getBack(), getW()+4, getH()+8, 0, 0, calculateLayer(), "hero");
-		list.add(s);
+		list.add(s); */
 	}
 }

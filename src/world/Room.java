@@ -35,6 +35,7 @@ public class Room {
 	Player player = null;
 	int width = 640, height = 448;
 	int type = 0;
+	int enemyRoom = 0;
 	int a = 0;
 	String direction = "no change";
 
@@ -61,17 +62,14 @@ public class Room {
 		}		
 
 		a = r.nextInt(4); 
-		if(a == 0)
+		/*if(a == 0)
 			tiles = this.layoutFour(tiles);
 		else if(a == 1)
 			tiles = this.interestingRoom(tiles);
 		else if(a == 2)
 			tiles = this.fourSquareRoom(tiles);
-		else if(a == 3)
+		else if(a == 3)*/
 			tiles = this.threeSquareRoom(tiles);
-		 	
-		generateBadguys(enemyholder);
-		
 	}
 
 	public Room(int start) //creates the starting room
@@ -135,15 +133,20 @@ public class Room {
 			}
 		}
 
-		generateBadguys(enemyholder);
+	generateBadguys(1, 100, 100);
 		
 	}
 	//This will be used for re-creating an old room
-	public Room(Tile[][] t, int[] a, int roomType){
+	public Room(Tile[][] t, int[] a, int roomType, Enemy[] enemyTypes){
 		tiles = t;
 		type = roomType;
 		enemyholder = a;
-		//generateBadguys(enemyholder);
+		enemies = enemyTypes;
+		int x = 0;
+		while(x < enemies.length){
+			generateBadguys(enemies[x].getType(), enemies[x].getX(), enemies[x].getY());
+			x = x + 1;
+		}
 	}
 
 	public void enemySpawner(int type){
@@ -171,13 +174,6 @@ public class Room {
 			tiles[10][i].setType("w");
 		}
 		
-		enemies[0] = new Chaser(this, 200, 200);
-		enemies[1] = new Chaser(this, 100, 200);
-		enemies[2] = new Chaser(this, 200, 100);
-		enemies[3] = new Chaser(this, 100, 100);
-		enemies[4] = new Chaser(this, 400, 400);
-
-
 		
 		return tiles;
 	}
@@ -203,11 +199,14 @@ public class Room {
 			tiles[9][i].setType("w");
 			tiles[10][i].setType("w");
 		}
-		enemies[0] = new Chaser(this, 200, 200);
-		enemies[1] = new Chaser(this, 100, 200);
-		enemies[2] = new Chaser(this, 200, 100);
-		enemies[3] = new Chaser(this, 100, 100);
-		enemies[4] = new Chaser(this, 400, 400);
+			this.enemies[0] = new Tower(this, 250, 225);
+			this.enemies[1] = new Tower(this, 395, 225);
+			this.enemies[2] = new Chaser(this, 50, 225);
+			this.enemies[3] = new Chaser(this, 595, 225);
+			this.enemies[4] = new Chaser(this, 500, 225);
+			
+			System.out.println(enemies[0].getX());
+
 		return tiles;
 	}
 
@@ -373,20 +372,18 @@ public class Room {
 	 * 	2 = enemy tower
 	 * 	3 = Fire boss
 	 */
-	public void generateBadguys(int[] a){
-		enemies = new Enemy[a.length];
-		for(int i = 0; i < a.length; i++){
-			if(a[i] == 1){
-				enemies[i] = new Chaser(this, 300, 300);
+	public void generateBadguys(int a, int x, int y){
+			Enemy enemiess;
+			if(a == 1){
+				enemiess = new Chaser(this, x, y);
 			}
-			if(a[i] == 2){
-				enemies[i] = new Tower(this);
+			else if(a == 2){
+				enemiess = new Tower(this, x, y);
 			}
-			if(a[i] == 3){
-				enemies[i] = new BossFire1(this);
+			else if(a == 3){
+				enemiess = new BossFire1(this);
 			}
-		}
-	}
+				}
 
 	public Player getPlayer(){
 		return this.player;

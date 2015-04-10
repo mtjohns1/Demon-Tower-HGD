@@ -33,7 +33,7 @@ public abstract class Mobile {
 	private int _frame; //frame number
 	private int _dir; //0-3, used for animations
 	private int _animation; //animation number
-	private String _spriteSheet; //text index of sprite sheet
+	private String _spriteSheet = null; //filename of sprite sheet
 
 	private int _spriteW, _spriteH; //sprite dimensions
 	private int _spriteX, _spriteY; //sprite offset (0,0 means centers align)
@@ -62,10 +62,16 @@ public abstract class Mobile {
 		_h = 0;
 		_d = 0;
 
+		_spriteW = 0;
+		_spriteH = 0;
+		_spriteX = 0;
+		_spriteY = 0;
+		
 		_ticks = 0;
-		_dir = -1;
+		_dir = 0;
 		_frame = 0;
 		_animation = 0;
+		_spriteDir = false;
 
 		if (_home != null) {
 			_home.addMobile(this);
@@ -301,7 +307,8 @@ public abstract class Mobile {
 	 */
 	//public abstract void draw(List<Sprite> l);
 	public void draw(List<Sprite> l) {
-		//calculate resultant drawing position
+		if (getSpriteSheet() == null) return; //do nothing if no sprite
+		//calculate resultant drawing position (aligned centers)
 		int drawX = getX()+getSpriteX()-getSpriteW()/2;
 		int drawY = getY()+getSpriteY()-getSpriteH()/2-getZ();
 		//calculate frame position on sprite sheet
@@ -632,9 +639,9 @@ public abstract class Mobile {
 	 */
 	public void setDir(String d) {
 		if (d.equalsIgnoreCase("up")) _dir = 0;
-		else if (d.equalsIgnoreCase("right")) _dir = 1;
-		else if (d.equalsIgnoreCase("down")) _dir = 2;
-		else if (d.equalsIgnoreCase("left")) _dir = 3;
+		else if (d.equalsIgnoreCase("left")) _dir = 1;
+		else if (d.equalsIgnoreCase("right")) _dir = 2;
+		else if (d.equalsIgnoreCase("down")) _dir = 3;
 	}
 	/**
 	 * @param f the new animation frame index
@@ -662,9 +669,9 @@ public abstract class Mobile {
 		switch (_dir)
 		{
 		case 0: return "up";
-		case 1: return "right";
-		case 2: return "down";
-		case 3: return "left";
+		case 1: return "left";
+		case 2: return "right";
+		case 3: return "down";
 		default: return "ERROR";
 		}
 	}

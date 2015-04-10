@@ -14,9 +14,10 @@ import effect.GrappleReturn;
  * @author Jacob Charles
  *
  */
-public class Grapple extends Bullet{
+public class BossGrapple extends Bullet{
 
-	public static final int LINKS = 5;
+	//TODO: Make shot appear to return if it misses!
+	public static final int LINKS = 8;
 	private boolean _reelIn; 
 	
 	/**
@@ -26,7 +27,7 @@ public class Grapple extends Bullet{
 	 * @param xAxis the initial x velocity of the bullet
 	 * @param yAxis the initial y velocity of the bullet
 	 */
-	public Grapple(Mobile owner, int xAxis, int yAxis) {
+	public BossGrapple(Mobile owner, int xAxis, int yAxis) {
 		super(owner, xAxis, yAxis, 8);
 
 		//set default dimensions
@@ -37,11 +38,6 @@ public class Grapple extends Bullet{
 		//last just under one second
 		setLife(20);
 
-		setSpriteSheet("vine.png");
-		setSpriteW(32);
-		setSpriteH(32);
-		setSpriteDir(true);
-		
 		setDamage(1);
 		accelerate(22); //max speed
 		setKnockback(getVx()/3, getVy()/3); //normal knockback
@@ -60,7 +56,6 @@ public class Grapple extends Bullet{
 			if (owner.getBack() < 1)
 			{
 				owner.setBack(1);
-				owner.setVz(0);
 			}
 			owner.setVx(owner.getVx()+dir.getX()*reelSpeed);
 			owner.setVy(owner.getVy()+dir.getY()*reelSpeed);
@@ -76,7 +71,6 @@ public class Grapple extends Bullet{
 			_reelIn = true;
 			//pull up the owner
 			getOwner().setBack(1);
-			getOwner().setVz(2.5);
 			setLife(30); //set to reel in for just under 1 second
 			//stick to the wall
 			if (dir.equals("right")) setRight(t.getLeft()-1);
@@ -127,12 +121,13 @@ public class Grapple extends Bullet{
 			int y = ( getY()*i + getOwner().getY()*(LINKS-i) )/LINKS;
 			int z = ( getZ()*i + getOwner().getZ()*(LINKS-i) )/LINKS;
 			
-			//drawing position and layer
-			int top = y-16;
-			int left = x-16;
-			double layer = Mobile.calculateLayer(y, z, getH()-4, getD());
 			
-			Sprite s = new Sprite(left, top-z, 32, 32, 32, getDirInt()*32, layer, "vine.png");
+			//drawing position and layer
+			int top = y-(getH()/2)+2;
+			int left = x-(getW()/2)+2;
+			double layer = Mobile.calculateLayer(y, 0, getH()-4, getD());
+			System.out.println(top +" Z: " +z);
+			Sprite s = new Sprite(left, top, getW()-4, getH()-4, 0, 0, 0, "tempWall");
 			list.add(s);
 		}
 	}

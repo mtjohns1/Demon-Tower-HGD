@@ -13,6 +13,7 @@ import mobile.Player;
 import sprite.Sprite;
 import world.Room;
 import world.Tile;
+import bullet.BasicBullet;
 import bullet.BlastMelee;
 import bullet.Bomb;
 import bullet.Bullet;
@@ -23,11 +24,11 @@ import weapon.BlastSword;
 import weapon.Weapon;
 
 /**
- * This enemy is the boss. It uses bombs
+ * This enemy is the boss. It spits fire and splits up on death.
  * @author Matthew_J
  *
  */
-public class BossFire2 extends Enemy{
+public class BossFire3 extends Enemy{
 
 	private Player player;
 	private Bullet attack;
@@ -42,27 +43,64 @@ public class BossFire2 extends Enemy{
 	private int moveCount = 0;
 	private int oldX;
 	private int oldY;
+	private int split;
+
+	private int directionX =1, directionY =1;
 
 	/**
 	 * creates a fire boss, it shoots Bombs.
 	 * @param home Pass room boss exists in
 	 */
-	public BossFire2(Room home) {
-		super(home,11);
-		this.setMaxHp(40);
+	public BossFire3(Room home) {
+		super(home,12);
+		this.setMaxHp(20);
 
-		this.setHp(200);
-
+		this.setHp(10);
+		split=0;
 		setW(32);
 		setH(32);
 		setD(32);
 		blaster = new BlastSword();
-
+		speed=1;
 		this.setX(300);
 		this.setY(200);
 		player = home.getPlayer();
 		oldX = getX();
 		oldY = getY();
+	}
+
+	/**
+	 * creates a fire boss, it splicts.
+	 * @param home Pass room boss exists in
+	 */
+	public BossFire3(Room home,int splitCount, int x,int y) {
+		super(home,12);
+		this.setMaxHp(20);
+		split= splitCount;
+		this.setHp(10/split);
+		
+		setW(32);
+		setH(32);
+		setD(32);
+		blaster = new BlastSword();
+		speed=splitCount;
+		this.setX(x);
+		this.setY(y);
+		player = home.getPlayer();
+		oldX = getX();
+		oldY = getY();
+	}
+	
+	/*
+	 * 
+	 * @see enemy.Enemy#onDeath()
+	 */
+	public void onDeath(){
+		if(split<3){
+			new BossFire3(this.getHome(),split+1,this.getX()+32,this.getY());
+			new BossFire3(this.getHome(),split+1,this.getX()-32,this.getY());
+		}
+		
 	}
 
 	/**
@@ -81,50 +119,13 @@ public class BossFire2 extends Enemy{
 		double xDif = this.getX() - player.getX();
 		double yDif = this.getY() - player.getY();
 		double total = Math.sqrt((double)(yDif*yDif+xDif*xDif));
-		if (total >200 &&attackCountDown < 30){
-
-			attackCountDown +=1;
-
-			if(attackCountDown == 30)
-				attackBombSummon();
-			setVx(getVx()/2);
-			setVy(getVy()/2);
-
-			if (attackCountDown ==30)
-				attackCountDown =0;
-			return;
-		}
-
-		attackType =0;
-		if (total <50&& attackCountDown <30){
-
-			attackCountDown +=1;
-			if(attackCountDown ==30){
-				new BossFireExplosion(this, 0 ,0);
-
-			
-				}
-		}
-		if(attackCountDown >=30){
-			attackCountDown +=1;
-
-			setVx(getVx()/2);
-			setVy(getVy()/2);
-			if (attackCountDown ==80)
-				attackCountDown =0;
-			return;
-		}
+		attackCountDown +=1;
 		mover();
 
-		//slows down movement. creates explosions on each step.
-		bombCoolDown +=1;
-		if (bombCoolDown == 100){
-			bombCoolDown = 0;
-			new Bomb(this,getX(),getY());
-			attackCountDown =0;
-			return;
+		if (attackCountDown == 100){
+			attackCountDown = 0;
+			shooter();
 		}
-
 	}
 
 	/**
@@ -132,53 +133,34 @@ public class BossFire2 extends Enemy{
 	 */
 	public void mover(){
 
-		if(player == null){
-			player = this.getHome().getPlayer();
-			if(player == null){
-				return;
-			}
+		//handles end of screen
+				if(getRight() > getHome().getRight()){
+					directionX=-1;
+				}
+				else if(getLeft() < getHome().getLeft()){
+					directionX=1;
+				}
+				else if(getTop() < getHome().getTop()){
+					directionY=1;
+				}
+				else if(getBottom() > getHome().getBottom()){
+					directionY=-1;
+				}
+				
+				//apply acceleration
+				if (!isStunned()) {
+					setVx(getVx()+speed*directionX);
+					setVy(getVy()+speed*directionY);
+				}
 
-		}
+				//apply deceleration
+				setVx(getVx()/2);
+				setVy(getVy()/2);
 		
-		moveCount +=1;
-
-		//finds how far enemy is from player
-		double xDif = this.getX() - player.getX();
-		double yDif = this.getY() - player.getY();
-		double total = Math.sqrt((double)(yDif*yDif+xDif*xDif));
-
-		//finds direction of x and y
-		double xMove = xDif*-speed;
-		double yMove = yDif*-speed;
-		if(total ==0){
-			setVx(getVx()+1);
-			setVy(getVy()+1);
-
-		}
-
-		else{
-			xMove = xMove/total;
-			yMove = yMove/total;
-			setVx(getVx()+xMove);
-			setVy(getVy()+yMove);
-		}
-
-		//apply deceleration
-		setVx(getVx()/2);
-		setVy(getVy()/2);
-		
-		if (moveCount ==5){
-			if (oldX == getX() || oldY == getY()){
-				blaster.fire(this, 0, 0);
-			}
-			oldX=getX();
-			oldY = getY();
-		}
-
 	}
 
 	/**
-	 * logic for how to attack with fireball
+	 * logic for how to create a bomb on top of enemy
 	 */
 	public void attackBombSummon(){
 		//logic for how to move
@@ -187,27 +169,48 @@ public class BossFire2 extends Enemy{
 
 
 	/**
-	 * Manage collisions with a tile
+	 * logic for how to create a bomb on top of enemy
+	 */
+	public void shooter(){
+
+		//finds how for enemy is from player
+		int xDif = this.getX() - this.getHome().getPlayer().getX();
+		int yDif = this.getY() - this.getHome().getPlayer().getY();
+		
+		//finds direction of x and y
+		xDif = xDif*-1;
+		yDif = yDif*-1;
+		
+		//logic for how to shoot
+		new BossFireBall(this,xDif,yDif);
+	}
+	/**
+	 * Manage collisions with a tile 
+	 * when colliding bounce off wall.
 	 * 
 	 * @param t: the Tile object collided with
 	 * @param dir: the direction of the collision
 	 */	
 	public void tileCollision(Tile t, String dir) {
-		if (t.getType().contains("w") || t.getType().contains("p")) {
+		if (t.getType().contains("w")) {
 			if (dir.equals("right")) {
 				setRight(t.getLeft()-1);
+				directionX=-1;
 				setVx(0);
 			}
-			if (dir.equals("left")) {
+			else if (dir.equals("left")) {
 				setLeft(t.getRight()+1);
+				directionX=1;
 				setVx(0);
 			}
-			if (dir.equals("down")) {
+			else if (dir.equals("down")) {
 				setBottom(t.getTop()-1);
+				directionY=-1;
 				setVy(0);
-			}
-			if (dir.equals("up")) {
+				}
+			else if (dir.equals("up")) {
 				setTop(t.getBottom()+1);
+				directionY=1;
 				setVy(0);
 			}
 		}

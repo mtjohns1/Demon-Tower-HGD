@@ -20,17 +20,18 @@ import bullet.BasicMelee;
  * @author Matthew_J
  *
  */
-public class Chaser extends Enemy{
+public class Charger extends Enemy{
 
 	private Player player;
 	private Bullet attack;
 	private int speed;
-
-	public Chaser(Room home, int x, int y) {
-		super(home,1);
+	private int randomMove=0;
+	private double xDir, yDir;
+	public Charger(Room home, int x, int y) {
+		super(home,4);
 		this.setMaxHp(20);
 
-		this.setHp(5);
+		this.setHp(2);
 		this.setX(x);
 		this.setY(y);
 
@@ -38,7 +39,7 @@ public class Chaser extends Enemy{
 	}
 
 	/**
-	 * AI for enemy behavior. Chases player using shortest path, regardless of obsticals
+	 * AI
 	 * @param player
 	 */
 	public void enemyAI(){
@@ -48,44 +49,75 @@ public class Chaser extends Enemy{
 			if(player == null){
 				return;
 			}
-
 		}
+		double xDif = this.getX() - player.getX();
+		double yDif = this.getY() - player.getY();
+		double total = Math.sqrt((double)(yDif*yDif+xDif*xDif));
+		
+		if (total < 150)
+			charge();
+		else{
+			randomMove+=1;
+			if(randomMove ==0){
+				double xisNeg =Math.random();
+				double yisNeg =Math.random();
+				int xNeg =1;
+				int yNeg =1;
+				if( xisNeg < .4){
+					xNeg =-1;
+				}
+				if( yisNeg < .4){
+					yNeg =-1;
+				}
+				xDir = (Math.random()*speed-2*xNeg);
+				yDir = (Math.random()*speed-2*yNeg);
+			}
+			if(randomMove==50){
+				randomMove=-1;
+			}
+			setVx(getVx()+xDir);
+			setVy(getVy()+yDir);
 
-		//finds how for enemy is from player
-		int xDif = this.getX() - player.getX();
-		int yDif = this.getY() - player.getY();
 
-		int yMove = 0;
-		int xMove = 0;
+			//apply deceleration
+			setVx(getVx()/2);
+			setVy(getVy()/2);
+		}
+		if(getRight() > getHome().getRight()){
+			setVx(-1);
+		}
+		else if(getLeft() < getHome().getLeft()){
+			setVx(1);
+		}
+		else if(getTop() < getHome().getTop()){
+			setVy(1);
+		}
+		else if(getBottom() > this.getHome().getBottom()){
+			setVy(-1);
+		}
+	}
+
+	/**
+	 * AI for charging player;
+	 */
+	public void charge(){
+
+		//finds how far enemy is from player
+		double xDif = this.getX() - player.getX();
+		double yDif = this.getY() - player.getY();
+		double total = Math.sqrt((double)(yDif*yDif+xDif*xDif));
 
 		//finds direction of x and y
-		int xSign =1;
-		int ySign =1;
-		if (xDif > 0) xSign =-1;
-		if (yDif > 0) ySign =-1;
+		double xMove = xDif*-speed;
+		double yMove = yDif*-speed;
+		if(total ==0){
+			setVx(getVx()+1);
+			setVy(getVy()+1);
+		}
 
-		//logic for how to move
-		if(xDif == 0){
-			yMove = speed * ySign;
-		}
-		else if (yDif == 0){
-			xMove = speed * xSign;
-		}
-		else if (Math.abs(xDif) > Math.abs(yDif)){
-			xMove = speed/2 * xSign;
-			yMove = speed/3 * ySign;
-		}
-		else if (Math.abs(xDif) < Math.abs(yDif)){
-			yMove = speed/2 * ySign;
-			xMove = speed/3 * xSign;
-		}
-		else {
-			yMove =speed/2 * ySign;
-			xMove =speed/2 * xSign;
-		}
-		
-		//apply acceleration
-		if (!isStunned()) {
+		else{
+			xMove = xMove/total;
+			yMove = yMove/total;
 			setVx(getVx()+xMove);
 			setVy(getVy()+yMove);
 		}
@@ -95,8 +127,6 @@ public class Chaser extends Enemy{
 		setVy(getVy()/2);
 
 	}
-
-
 	/**
 	 * Manage collisions with a tile
 	 * 
