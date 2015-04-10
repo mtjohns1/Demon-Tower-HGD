@@ -141,14 +141,20 @@ public class Tile {
 	 * 
 	 * @param l: the list of sprites to add to
 	 */
-	public void  draw(List<Sprite> l)
-	{
+	public void  draw(List<Sprite> l) {
 		Sprite s = new Sprite(getLeft(), getTop(), 32, 32, 0, 0, calculateLayer(0), "floor.png");
 		if (getType().contains(WALL)) s = new Sprite(getLeft(), getTop()-24, 32, 56, 0, 0, calculateLayer(32), "wall.png");
-		//TODO: breakable wall sprite
-		else if(getType().contains(UP)) s = new Sprite(getLeft(), getTop()-24, 32, 56, 0, 0, calculateLayer(32), "upstairs.png");
-		else if(getType().contains(DOWN)) s = new Sprite(getLeft(), getTop()-24, 32, 56, 0, 0, calculateLayer(32), "downstairs.png");
-		else if (getType().contains(PIT)) return; //pits don't have a sprite, skip for now!
+
+		//stairs stack with floors
+		else if(getType().contains(UP)) {
+			Sprite r = new Sprite(getLeft(), getTop()-24, 32, 56, 0, 0, calculateLayer(32), "upstairs.png");
+			l.add(r);
+		}
+		else if(getType().contains(DOWN)) {
+			Sprite r = new Sprite(getLeft(), getTop()-24, 32, 56, 0, 0, calculateLayer(32), "downstairs.png");
+			l.add(r);
+		}
+		else if (getType().contains(PIT)) return; //pits don't have a floor sprite, skip it!
 		l.add(s);
 	}
 	
