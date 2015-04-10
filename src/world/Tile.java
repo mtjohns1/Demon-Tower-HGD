@@ -142,7 +142,7 @@ public class Tile {
 	 * @param l: the list of sprites to add to
 	 */
 	public void  draw(List<Sprite> l)
-	{ 
+	{
 		Sprite s = new Sprite(getLeft(), getTop(), 32, 32, 0, 0, calculateLayer(0), "floor.png");
 		if (getType().contains(WALL)) s = new Sprite(getLeft(), getTop()-24, 32, 56, 0, 0, calculateLayer(32), "wall.png");
 		//TODO: breakable wall sprite

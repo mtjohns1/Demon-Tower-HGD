@@ -8,9 +8,9 @@ import java.awt.Image;
 public class TransparencySprite extends Sprite{
 	private float Trans = 1;
 	public TransparencySprite(int x, int y, int width, int height, int spriteX,
-			int spriteY, double layer, String ImgName, float trans) {
+			int spriteY, double layer, String ImgName, double trans) {
 		super(x, y, width, height, spriteX, spriteY, layer, ImgName);
-		Trans = trans;
+		Trans = (float) trans;
 		if(Trans > 1){
 			Trans = 1;
 		}
