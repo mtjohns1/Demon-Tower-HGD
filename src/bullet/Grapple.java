@@ -16,7 +16,7 @@ import effect.GrappleReturn;
  */
 public class Grapple extends Bullet{
 
-	public static final int LINKS = 5;
+	public static final int LINKS = 15;
 	private boolean _reelIn; 
 	
 	/**
@@ -37,7 +37,7 @@ public class Grapple extends Bullet{
 		//last just under one second
 		setLife(20);
 
-		setSpriteSheet("vine.png");
+		setSpriteSheet("hook.png");
 		setSpriteW(32);
 		setSpriteH(32);
 		setSpriteDir(true);
@@ -89,7 +89,7 @@ public class Grapple extends Bullet{
 	@Override
 	public void onDeath() {
 		//spawn a grapple return effect
-		new GrappleReturn(getOwner(), getX(), getY(), getVx(), getVy(), getDir());
+		new GrappleReturn(getOwner(), getX(), getY(), getVx()/2, getVy()/2, getDir());
 	}
 	
 	@Override
@@ -132,7 +132,7 @@ public class Grapple extends Bullet{
 			int left = x-16;
 			double layer = Mobile.calculateLayer(y, z, getH()-4, getD());
 			
-			Sprite s = new Sprite(left, top-z, 32, 32, 32, getDirInt()*32, layer, "vine.png");
+			Sprite s = new Sprite(left, top-z, 32, 32, 32*(i%2+1), getDirInt()*32, layer, getSpriteSheet());
 			list.add(s);
 		}
 	}

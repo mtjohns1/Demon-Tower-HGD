@@ -31,7 +31,7 @@ public class GrappleReturn extends Effects {
 		setDir(dir);
 		
 		//associated sprites
-		setSpriteSheet("vine.png");
+		setSpriteSheet("hook.png");
 		setSpriteW(32);
 		setSpriteH(32);
 		setSpriteDir(true);
@@ -46,8 +46,8 @@ public class GrappleReturn extends Effects {
 		//set direction
 		Direction recall = new Direction(_owner.getX()-getX(), _owner.getY()-getY());
 		//apply direction
-		setVx(getVx()+recall.getX()*22);
-		setVy(getVy()+recall.getY()*22);
+		setVx(getVx()+recall.getX()*23);
+		setVy(getVy()+recall.getY()*23);
 		accelerate(0.6); //regulate speed
 		//vanish up close, it's done reeling in
 		if (recall.getLength() < 32)
@@ -80,7 +80,7 @@ public class GrappleReturn extends Effects {
 			int left = x-16;
 			double layer = Mobile.calculateLayer(y, z, getH()-4, getD());
 			
-			Sprite s = new Sprite(left, top-z, 32, 32, 32, getDirInt()*32, layer, "vine.png");
+			Sprite s = new Sprite(left, top-z, 32, 32, 32*(i%2+1), getDirInt()*32, layer, getSpriteSheet());
 			list.add(s);
 		}
 	}
