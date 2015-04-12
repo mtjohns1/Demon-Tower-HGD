@@ -139,13 +139,13 @@ public abstract class Mobile {
 	 * Ignores tiles if doesFly() returns true
 	 */
 	public void move() {
+		_ticks++; //update internal timer on movement
 		//flying objects skip collisions
 		if (doesFly()) {
 			flyMove();
 			return;
 		}
 		else landMove();
-		_ticks++; //update internal timer on movement
 	}
 
 	/**

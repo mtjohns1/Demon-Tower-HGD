@@ -1,4 +1,5 @@
 package bullet;
+import effect.ShotFade;
 import utility.Damage;
 import mobile.Actor;
 import mobile.Mobile;
@@ -25,7 +26,7 @@ public class BasicBullet extends Bullet{
 		//set default dimensions
 		setW(10);
 		setH(10);
-		setD(32);
+		setD(64);
 		
 		setSpriteSheet("light_bullet.png");
 		setSpriteW(32);
@@ -37,18 +38,8 @@ public class BasicBullet extends Bullet{
 		setDamage(1); //deals 1 damage
 		accelerate(6); //max speed
 	}
-	public void collide(Mobile m, boolean overlap, boolean nextOverlap) {
-		//non-actors and your owner are ignored
-		if (!(m instanceof Actor) || m == getOwner())
-			return;
-
-		//cast for convenience
-		Actor a = (Actor)m;
-
-		//do damage
-			a.takeDamage(new Damage(getDamage(), getKnockbackX(), getKnockbackY(), getStun()));
-
-			//vanish
-			setLife(0);
+	
+	public void onDeath() {
+		new ShotFade(this);
 	}
 }
