@@ -34,6 +34,14 @@ public class Chaser extends Enemy{
 		this.setX(x);
 		this.setY(y);
 
+		setSpriteSheet("fire_chaser.png");
+		setSpriteW(240/5);
+		setSpriteH(240/5);
+		setSpriteDir(true);
+		setDir("right");
+		setAnim(0);
+		setFrame(0);
+		
 		speed=3;
 	}
 
@@ -50,7 +58,11 @@ public class Chaser extends Enemy{
 			}
 
 		}
-
+		int x =this.getTicks();
+		
+		setFrame((x/10)%4);
+		
+		
 		//finds how for enemy is from player
 		int xDif = this.getX() - player.getX();
 		int yDif = this.getY() - player.getY();
@@ -67,9 +79,11 @@ public class Chaser extends Enemy{
 		//logic for how to move
 		if(xDif == 0){
 			yMove = speed * ySign;
+			setFrame(4);
 		}
 		else if (yDif == 0){
 			xMove = speed * xSign;
+			setFrame(4);
 		}
 		else if (Math.abs(xDif) > Math.abs(yDif)){
 			xMove = speed/2 * xSign;
@@ -93,6 +107,21 @@ public class Chaser extends Enemy{
 		//apply deceleration
 		setVx(getVx()/2);
 		setVy(getVy()/2);
+		
+
+		//read input
+		double dx = getVx();
+		double dy = getVy();
+		
+		if (Math.abs(dy) > Math.abs(dx)) {
+			if (dy < 0) setDir("up");
+			else if (dy > 0) setDir("down");
+		}
+		else if (Math.abs(dx) > Math.abs(dy)) {
+			
+			if (dx < 0) setDir("left");
+			else if (dx > 0) setDir("right");
+		}
 
 	}
 
@@ -129,6 +158,7 @@ public class Chaser extends Enemy{
 	 * call on each frame to update.
 	 */
 	public void update(){
+		
 		enemyAI();
 		if(this.getHp() <= 0){
 			this.setDead();
@@ -136,16 +166,7 @@ public class Chaser extends Enemy{
 
 	}
 
-	/**
-	 * Generate the player's sprite for this frame
-	 * 
-	 * @param list: the list of sprites to add to
-	 */
-	public void  draw(List<Sprite> list)
-	{
-		Sprite s = new Sprite(getLeft()-2, getTop()-2, getW()+4, getH()+4, 0, 0, 0, "enemy");
-		list.add(s);
-	}
+	
 
 
 	public void collide(Mobile m, boolean overlap, boolean nextOverlap) {

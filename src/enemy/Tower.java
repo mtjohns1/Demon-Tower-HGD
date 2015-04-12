@@ -13,8 +13,7 @@ import mobile.Player;
 import sprite.Sprite;
 import world.Room;
 import world.Tile;
-import bullet.BasicBullet;
-import bullet.BossFireBall;
+import bullet.*;
 
 /**
  * This enemy stand stills and shoots the player
@@ -35,6 +34,13 @@ public class Tower extends Enemy{
 		this.setX(x);
 		this.setY(y);
 		player = home.getPlayer();
+		setSpriteSheet("fire_tower.png");
+		setSpriteW(64);
+		setSpriteH(64);
+		setSpriteDir(true);
+		setDir("right");
+		setAnim(0);
+		setFrame(0);
 	}
 
 	/**
@@ -42,23 +48,38 @@ public class Tower extends Enemy{
 	 * @param player
 	 */
 	public void enemyAI(){
-
+		setVx(0);
+		setVy(0);
 		weaponCoolDown +=1;
-		if (weaponCoolDown < 50){
+
+		//finds how for enemy is from player
+		int xDif = this.getX() - this.getHome().getPlayer().getX();
+		int yDif = this.getY() - this.getHome().getPlayer().getY();
+		setFrame((getTicks()/10)%4);
+		double dx = xDif;
+		double dy = yDif;
+		if (Math.abs(dy) > Math.abs(dx)) {
+			if (dy > 0) setDir("up");
+			else if (dy < 0) setDir("down");
+		}
+		else if (Math.abs(dx) > Math.abs(dy)) {
+			
+			if (dx > 0) setDir("left");
+			else if (dx < 0) setDir("right");
+		}
+		if (weaponCoolDown < 100){
 			return;
 		}
 
 		weaponCoolDown = 0;
-		//finds how for enemy is from player
-		int xDif = this.getX() - this.getHome().getPlayer().getX();
-		int yDif = this.getY() - this.getHome().getPlayer().getY();
 		
 		//finds direction of x and y
 		xDif = xDif*-1;
 		yDif = yDif*-1;
 		
 		//logic for how to move
-		attack = new BasicBullet(this,xDif,yDif);
+		new TowerShot(this,xDif,yDif);
+	
 		
 	}
 	
@@ -96,28 +117,17 @@ public class Tower extends Enemy{
 	 */
 	public void update(){
 		enemyAI();
+		
 		if(this.getHp() <= 0){
 			this.setDead();
 		}
 	}
 	
-	/**
-	 * Generate the player's sprite for this frame
-	 * 
-	 * @param list: the list of sprites to add to
-	 */
-	public void  draw(List<Sprite> list)
-	{
-		Sprite s = new Sprite(getLeft()-2, getTop()-2, getW()+4, getH()+4, 0, 0, 0, "enemyTower");
-		list.add(s);
-	}
-	
-	
+
 	public void collide(Mobile m, boolean overlap, boolean nextOverlap) {
 		//non-actors and your owner are ignored
 		if (!(m instanceof Actor) )
 			return;
-		System.out.println("inside");
 		//cast for convenience
 		Actor a = (Actor)m;
 		//do damage
