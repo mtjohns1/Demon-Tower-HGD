@@ -72,10 +72,9 @@ public class Floor {
 
 	public Room get(int x, int y){
 		Tile tile[][] = rooms[y][x].getTiles();
-		int[] a = rooms[y][x].enemyholder;
 		int type = rooms[y][x].type;
 		Enemy enemies[] = rooms[y][x].enemies;
-		rooms[y][x] = new Room(tile, a, type, enemies);
+		rooms[y][x] = new Room(tile, type, enemies);
 		return rooms[y][x];
 
 	}

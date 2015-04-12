@@ -84,8 +84,8 @@ public class Game extends JPanel {
 		Timer t = new Timer(18);
 		
 		//generic position
-		p.setTop(100);
-		p.setLeft(100);
+		p.setTop(215);
+		p.setLeft(75);
 		
 		//main loop (it never ends!)
 		boolean paused = true;

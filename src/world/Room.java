@@ -15,10 +15,7 @@ import javax.imageio.ImageIO;
 import mobile.Mobile;
 import mobile.Player;
 import sprite.Sprite;
-import enemy.Enemy;
-import enemy.BossFire1;
-import enemy.Chaser;
-import enemy.Tower;
+import enemy.*;
 
 import java.util.Random;
 import java.awt.*;
@@ -27,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Room {
-	int[] enemyholder = {1, 1, 1};
 	Random r = new Random();
 	Tile tiles[][] = new Tile[15][20];
 	Enemy enemies[] = new Enemy[5];
@@ -96,6 +92,23 @@ public class Room {
 			
 			tiles[6][19].setType("");
 			tiles[7][19].setType("");
+			for(int x = 1; x < 19; x++){
+				for(int y = 1; y < 6; y++){
+					tiles[y][x].setType("w");
+				}
+			}
+			
+			for(int x = 1; x < 9; x++){
+				for(int y = 8; y < 14; y++){
+					tiles[y][x].setType("w");
+				}
+			}
+			
+			for(int x = 11; x < 19; x++){
+				for(int y = 8; y < 14; y++){
+					tiles[y][x].setType("w");
+				}
+			}
 		}
 
 		else if(start == 2){
@@ -140,10 +153,9 @@ public class Room {
 		
 	}
 	//This will be used for re-creating an old room
-	public Room(Tile[][] t, int[] a, int roomType, Enemy[] enemyTypes){
+	public Room(Tile[][] t, int roomType, Enemy[] enemyTypes){
 		tiles = t;
 		type = roomType;
-		enemyholder = a;
 		enemies = enemyTypes;
 		int x = 0;
 		while(x < enemies.length && enemies[x] != null){
