@@ -1,9 +1,6 @@
 package bullet;
 import effect.ShotFade;
-import utility.Damage;
-import mobile.Actor;
 import mobile.Mobile;
-import mobile.Player;
 
 /**
  * basic bullet, travels straight stops at walls and does basic damage.
