@@ -7,10 +7,15 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import powerup.Heart;
+import effect.Explosion;
+import effect.Freezeframe;
+import effect.ScreenFlash;
 import mobile.Actor;
 import mobile.Mobile;
 import mobile.Player;
 import sprite.Sprite;
+import sprite.TransparencySprite;
 import world.Room;
 import world.Tile;
 import bullet.BouncerExplosion;
@@ -360,7 +365,43 @@ public class BossFire1 extends Enemy{
 		}
 	}
 
+	@Override
+	public int takeDamage(int damage) {
+		new Explosion(this, getX(), getY()+4, 72, 72, 8, 1, 5);
+		return super.takeDamage(damage);
+	}
+	
+	@Override
+	public void onDeath()
+	{
+		new Explosion(this, getX(), getY(), 72, 72, 131, 1, 7);
+		new Freezeframe(this, 121);
+		new ScreenFlash(this, 120, 10, 20);
+	}
+	
+	/**
+	 * Draw the player's shadow
+	 * @param list the list to add sprites to 
+	 */
+	public void drawShadow(List<Sprite> list)
+	{
+		if (getSpriteSheet() == null) return; //do nothing if no sprite
+		//calculate resultant drawing position (aligned centers)
+		int drawX = getX()-32;
+		int drawY = getY()-40;
+		//generate the resulting sprite
+		Sprite s = new TransparencySprite(drawX, drawY, 64, 64, 0, 0, calculateShadowLayer()+30, "gojira_shadow.png", 0.5);
+		list.add(s);
+	}
 
+	@Override
+	public void draw(List<Sprite> list)
+	{
+		super.draw(list);
+		drawShadow(list);
+		drawHUD(list, 448);
+	}
+	
 	public void collide(Mobile m, boolean overlap, boolean nextOverlap) {
 		//non-actors and your owner are ignored
 		if (!(m instanceof Actor) )
