@@ -51,6 +51,10 @@ public class Game extends JPanel {
 		return win;
 	}
 
+	public void addMenu(Menu menu){
+		this.getMenu().add(menu);
+	}
+	
 	public void setWin(boolean win) {
 		this.win = win;
 	}
