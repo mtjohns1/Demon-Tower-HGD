@@ -38,10 +38,9 @@ public class ShotFade extends Effects {
 
 	@Override
 	public void update() {
-		
 		//advance the frames of its animation, fade out
-		setFrame(1+getTicks()/10);
-		if (getTicks() >= 40) {
+		setFrame(1+getTicks()/5);
+		if (getTicks() >= 20) {
 			setDead();
 		}
 	}
