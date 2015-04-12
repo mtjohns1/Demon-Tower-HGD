@@ -92,6 +92,7 @@ public class Room {
 			
 			tiles[6][19].setType("");
 			tiles[7][19].setType("");
+			
 			for(int x = 1; x < 19; x++){
 				for(int y = 1; y < 6; y++){
 					tiles[y][x].setType("w");
@@ -109,6 +110,8 @@ public class Room {
 					tiles[y][x].setType("w");
 				}
 			}
+			tiles = this.interestingRoom(tiles);
+
 		}
 
 		else if(start == 2){
@@ -228,50 +231,76 @@ public class Room {
 
 	public Tile[][] interestingRoom(Tile[][] t){
 		type = 3;
-		for(int i = 3; i < 5; i++){
-			tiles[2][i].setType("w");
-			tiles[3][i].setType("w");
+		a = r.nextInt(2);
 
-			tiles[6][i].setType("w");
-			tiles[7][i].setType("w");
-
-			tiles[10][i].setType("w");
-			tiles[11][i].setType("w");
-			//
-			tiles[2][i + 12].setType("w");
-			tiles[3][i + 12].setType("w");
-
-			tiles[6][i + 12].setType("w");
-			tiles[7][i + 12].setType("w");
-
-			tiles[10][i + 12].setType("w");
-			tiles[11][i + 12].setType("w");	
+		for(int x = 1; x < 19; x++){
+			for(int y = 1; y < 13; y++){
+				tiles[y][x].setType("w");
+			}
 		}
+		tiles[6][9].setType("");
+		tiles[6][10].setType("");
+		tiles[7][9].setType("");
+		tiles[7][10].setType("");
 
-		for(int i = 7; i < 13; i+=5){
-			tiles[3][i].setType("w");
-			tiles[4][i].setType("w");
-			tiles[5][i].setType("w");
-			tiles[8][i].setType("w");
-			tiles[9][i].setType("w");
-			tiles[10][i].setType("w");
+		for(int x = 9; x < 11; x++){
+			for(int y = 12; y > 8; y--){
+				tiles[y][x].setType("");
+				tiles[y - 8][x].setType("");
+			}
 		}
-
-		tiles[3][10].setType("w");
-		tiles[3][11].setType("w");
-		tiles[5][8].setType("w");
-		tiles[5][9].setType("w");
-		tiles[8][10].setType("w");
-		tiles[8][11].setType("w");
-		tiles[10][8].setType("w");
-		tiles[10][9].setType("w");
-
 		
-		enemies[0] = new Chaser(this, 200, 200);
-		enemies[1] = new Chaser(this, 100, 200);
-		enemies[2] = new Chaser(this, 200, 100);
-		enemies[3] = new Chaser(this, 100, 100);
-		enemies[4] = new Chaser(this, 400, 400);
+		for(int x = 11; x < 17; x++){
+			for(int y = 9; y > 8; y--){
+				tiles[y][x].setType("");
+				tiles[y][x - 8].setType("");
+
+			}
+		}
+		
+		for(int x = 11; x < 17; x++){
+			for(int y = 4; y > 3; y--){
+				tiles[y][x].setType("");
+				tiles[y][x - 8].setType("");
+
+			}
+		}
+		
+		for(int x = 12; x < 13; x++){
+			for(int y = 4; y < 10; y++){
+				tiles[y][x].setType("");
+				tiles[y][x - 5].setType("");
+				tiles[y][x + 5].setType("");
+				tiles[y][x - 10].setType("");
+
+
+			}
+		}
+
+		for(int x = 19; x > 17; x--){
+			for(int y = 6; y < 8; y++){
+				tiles[y][x].setType("");
+				tiles[y][x - 18].setType("");
+
+			}
+		}
+		
+		if(a == 1){
+			
+			for(int x = 4; x < 9; x++)
+				tiles[12][x].setType("");
+			for(int y = 9; y < 12; y++)
+				tiles[y][4].setType("");
+			
+			for(int x = 11; x < 16; x++)
+				tiles[1][x].setType("");
+			tiles[2][15].setType("");
+			tiles[3][15].setType("");
+
+			
+			
+		}
+		
 		return tiles;
 	}
 
