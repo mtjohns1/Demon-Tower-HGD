@@ -67,7 +67,7 @@ public class Player extends Actor {
 
 		//add default weapon
 		_wep.add(new HeroSword());
-		_wep.add(new GrapplingHook()); //grappling hook test TODO: remove, add via level
+		//_wep.add(new GrapplingHook()); //grappling hook test TODO: remove, add via level
 		_equip = 0;
 
 		//initialize local values
