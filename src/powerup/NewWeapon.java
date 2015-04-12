@@ -12,7 +12,7 @@ import java.util.List;
 import menu.GetGrapple;
 import mobile.Player;
 import sprite.Sprite;
-import weapon.Weapon;
+import weapon.*;
 import world.Room;
 
 public class NewWeapon extends Powerup {
@@ -25,6 +25,14 @@ public class NewWeapon extends Powerup {
 		setH(32);
 		setD(32);
 		_wep = weapon;
+	}
+	
+	public NewWeapon(Room home, int x, int y) {
+		super(home, x, y);
+		setW(32);
+		setH(32);
+		setD(32);
+		_wep = new GrapplingHook();
 	}
 	
 	/**
