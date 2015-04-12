@@ -16,7 +16,7 @@ import world.Tile;
  * @author Matthew_J
  *
  */
-public class BossFireExplosion extends Bullet{
+public class BouncerExplosion extends Bullet{
 	/**
 	 * Standard public constructor
 	 *  
@@ -24,7 +24,7 @@ public class BossFireExplosion extends Bullet{
 	 * @param xAxis the initial x velocity of the bullet
 	 * @param yAxis the initial y velocity of the bullet
 	 */
-	public BossFireExplosion(Mobile owner, int xAxis, int yAxis) {
+	public BouncerExplosion(Mobile owner, int xAxis, int yAxis) {
 		super(owner, xAxis, yAxis, 16);
 		
 		//set default dimensions
@@ -33,13 +33,9 @@ public class BossFireExplosion extends Bullet{
 		setH(8);
 		setD(32);
 		
-		setSpriteSheet("superbreath.png");
-		setSpriteW(64);
-		setSpriteH(64);
-		setSpriteY(-6);
 		
-		this.setX(owner.getX()+120);
-		this.setY(owner.getY()+32);
+		this.setX(owner.getX());
+		this.setY(owner.getY());
 		
 		//no range limit, for now
 		//Sprite temp = new Sprite()
@@ -52,10 +48,10 @@ public class BossFireExplosion extends Bullet{
 	}
 	public void update(){
 		setFrame((getTicks()/5)%4);
-		setW(getW()+(getTicks()/5)%4+5);
-		setH(getH()+(getTicks()/5)%4+5);
+		setW(getW()+(getTicks()/5)%4+3);
+		setH(getH()+(getTicks()/5)%4+3);
 		setLife(this.getLife()-1);
-		new BlueExplosion(this,getX(),getY(),getW(),getH(),1,1,8);
+		new BlueExplosion(this,getX(),getY(),getW(),getH(),1,1,5);
 	}
 	public void tileCollision(Tile t, String dir) {
 		//setLife(0);

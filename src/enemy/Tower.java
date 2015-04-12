@@ -79,7 +79,7 @@ public class Tower extends Enemy{
 		yDif = yDif*-1;
 		
 		//logic for how to move
-		new BossFireBall(this,xDif,yDif);
+		new TowerShot(this,xDif,yDif);
 	
 		
 	}

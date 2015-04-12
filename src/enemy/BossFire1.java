@@ -13,6 +13,7 @@ import mobile.Player;
 import sprite.Sprite;
 import world.Room;
 import world.Tile;
+import bullet.BouncerExplosion;
 import bullet.Bullet;
 import bullet.BossFireExplosion;
 import bullet.BossFireBall;
@@ -32,16 +33,17 @@ public class BossFire1 extends Enemy{
 	private int attackType =0;
 	private int attackOffset =-160;
 	private int attackCountDown =0;
-	private int speed =40;
+	private int speed =5;
 	private int incrementer =20;
-
+	private int count =0;
+	private boolean isMoving =false;
 	/**
 	 * creates a fire boss, it shoots fireballs, firebreath, and explosive steps.
 	 * @param home Pass room boss exists in
 	 */
 	public BossFire1(Room home) {
 		super(home,10);
-		this.setMaxHp(20);
+		this.setMaxHp(30);
 
 		this.setHp(200);
 
@@ -56,6 +58,7 @@ public class BossFire1 extends Enemy{
 		setSpriteSheet("gojira.png");
 		setSpriteW(80);
 		setSpriteH(80);
+		setSpriteY(-8);
 		setSpriteDir(true);
 		setDir("right");
 		setAnim(0);
@@ -70,23 +73,77 @@ public class BossFire1 extends Enemy{
 	 * @param player
 	 */
 	public void enemyAI(){
+		if(player == null){
+			player = this.getHome().getPlayer();
+			if(player == null){
+				return;
+			}
+
+		}
+		//animation
+		int xDif = this.getX() - this.getHome().getPlayer().getX();
+		int yDif = this.getY() - this.getHome().getPlayer().getY();
+		
+		double dx = xDif;
+		double dy = yDif;
+		if (Math.abs(dy) > Math.abs(dx)) {
+			if (dy > 0) setDir("up");
+			else if (dy < 0) setDir("down");
+		}
+		else if (Math.abs(dx) > Math.abs(dy)) {
+			
+			if (dx > 0) setDir("left");
+			else if (dx < 0) setDir("right");
+		}
+		
+		setFrame(3);
 		//if fire breath then keep going until it is done
 		if (attackType == 2 && attackCountDown != 5){
+			count +=1;
+			setAnim(0);
+			if(count <75){
+			setFrame(count/25);
+			}
+			else{
+			setFrame(3);
 			attackFireBreath();
+			}
 			return;
 		}
+		if (attackType == 1 ){
+			count +=1;
+			setAnim(1);
+			if(count <45){
+			setFrame(count/15);
+			}
+			else{
+			setFrame(3);
+			attackFireBall();
+			attackType=0;
+			}
+			return;
+		}
+	
 		attackCountDown =0;
 		attackType =0;
 
 
 		//slows down movement. creates explosions on each step.
 		moveCoolDown +=1;
-		if (moveCoolDown == 100){
-			moveCoolDown = 0;
+		if (moveCoolDown == 100 || isMoving){
+			isMoving =true;
+			count +=1;
+			if(count == 30){
+				isMoving = false;
+			}
+			moveCoolDown = -10;
+			setAnim(2);
+			setFrame(getTicks()/10%4);
 			mover();
 
 			return;
 		}
+		count =0;
 		this.setVx(0);
 		this.setVy(0);
 		weaponCoolDown +=1;
@@ -95,12 +152,21 @@ public class BossFire1 extends Enemy{
 		}
 		double random = Math.random()*10;
 		if (random > 5.0){
-			attackFireBall();
+
 			attackType =1;
+			
+			
 		}
 		else{
+			count +=1;
 			attackType =2;
+			if(count <15){
+			setFrame(count/5%4);
+			}
+			else{
+			
 			attackFireBreath();
+			}
 		}
 		weaponCoolDown = 0;
 
@@ -154,7 +220,8 @@ public class BossFire1 extends Enemy{
 			xMove =speed/2 * xSign;
 		}
 		//creates explosion on step
-		attack = new BossFireExplosion(this,1,1);
+		if(count ==0 || count ==5 || count ==10 || count ==15 || count ==20 ||count ==25)
+		attack = new BouncerExplosion(this,0,0);
 
 		//apply acceleration
 		setVx(getVx()+xMove);

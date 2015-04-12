@@ -29,7 +29,7 @@ public class BossFireBall extends Bullet{
 		setSpriteSheet("superbreath.png");
 		setSpriteW(64);
 		setSpriteH(64);
-		setSpriteY(8);
+		setSpriteY(-6);
 		setFrame(0);
 		setAnim(0);
 		
@@ -38,7 +38,7 @@ public class BossFireBall extends Bullet{
 		//no range limit, for now
 
 		setDamage(4); //deals 1 damage
-		accelerate(2); //max speed of 3 in each direction
+		accelerate(4); //max speed of 3 in each direction
 	}
 	public void update(){
 		setFrame((getTicks()/10)%3);
