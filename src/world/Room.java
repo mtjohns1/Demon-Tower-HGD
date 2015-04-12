@@ -12,6 +12,7 @@ import javax.swing.*;
 import javax.swing.event.*;
 import javax.imageio.ImageIO;
 
+import powerup.NewWeapon;
 import mobile.Mobile;
 import mobile.Player;
 import sprite.Sprite;
@@ -22,11 +23,13 @@ import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import powerup.*;
+
 import weapon.*;
 import game.*;
 
 public class Room {
-	Game game;
+	Game game ;
 	Random r = new Random();
 	Tile tiles[][] = new Tile[15][20];
 	Enemy enemies[] = new Enemy[5];
@@ -37,7 +40,7 @@ public class Room {
 	int enemyRoom = 0;
 	int a = 0;
 	String direction = "no change";
-	boolean bossIsDead = false;
+	boolean canSpawn = true;
 
 	/**
 	 * Creates a new blank room with walls surrounding it.
@@ -70,10 +73,12 @@ public class Room {
 			tiles = this.fourSquareRoom(tiles);
 		else if(a == 3)
 			tiles = this.threeSquareRoom(tiles);
+			
 	}
 
 	public Room(int start) //creates the starting room
 	{
+
 		for(int x = 0; x < 20; x++)
 		{
 			for(int y = 0; y < 14; y++)
@@ -161,12 +166,13 @@ public class Room {
 	//This will be used for re-creating an old room
 	public Room(Tile[][] t, int roomType, Enemy[] enemyTypes){
 		tiles = t;
+		Powerup w = new NewWeapon(this, 50, 100);
 		type = roomType;
 		enemies = enemyTypes;
 		int x = 0;
-		if(this.bossIsDead == false)
+		if(this.canSpawn == true)
 		while(x < enemies.length && enemies[x] != null){
-			generateBadguys(enemies[x].getType(), enemies[x].getX(), enemies[x].getY());
+			generateBadguys(x, enemies[x].getType(), enemies[x].getX(), enemies[x].getY());
 			x = x + 1;
 		}
 	}
@@ -431,19 +437,18 @@ public class Room {
 	 * 	2 = enemy tower
 	 * 	3 = Fire boss
 	 */
-	public void generateBadguys(int a, int x, int y){
-			Enemy enemiess;
+	public void generateBadguys(int pos, int a, int x, int y){
 			if(a == 1){
-				enemiess = new Chaser(this, x, y);
+				enemies[pos] = new Chaser(this, x, y);
 			}
 			else if(a == 2){
-				enemiess = new Tower(this, x, y);
+				enemies[pos] = new Tower(this, x, y);
 			}
 			else if(a == 3){
-				enemiess = new Bouncer(this, x, y);
+				enemies[pos] = new Bouncer(this, x, y);
 			}
 			else if(a == 10){
-					enemiess = new BossFire1(this);
+				enemies[pos] = new BossFire1(this);
 			}
 				}
 
@@ -602,7 +607,6 @@ public class Room {
 	 */
 	public void update() {		//loop through the mobiles, get their updates
 
-		
 		for (int i = 0; i < list.size(); i++) {
 			list.get(i).update();
 		}
@@ -623,8 +627,8 @@ public class Room {
 			}
 		}
 		for(int i = 0; i < 5; i++){
-			if(enemies[i] != null){
-			}
+			if(this.enemies[i] != null)
+				System.out.println(enemies[i].isDead());
 		}
 	}
 	

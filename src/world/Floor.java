@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.*;
 import enemy.Enemy;
-
+import game.*;
 
 
 public class Floor {
