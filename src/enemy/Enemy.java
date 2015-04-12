@@ -9,6 +9,7 @@ import javax.swing.*;
 import javax.swing.event.*;
 import javax.imageio.ImageIO;
 
+import effect.*;
 import mobile.Actor;
 import powerup.Heart;
 import world.Room;
@@ -30,6 +31,13 @@ public abstract class Enemy extends Actor {
 	public int getType(){
 		return type;
 	}
+	
+	@Override
+	public int takeDamage(int damage) {
+		new Explosion(this, getX(), getY(), 32, 32, 8, 1, 1);
+		return super.takeDamage(damage);
+	}
+	
 	@Override
 	public void onDeath()
 	{
@@ -37,6 +45,7 @@ public abstract class Enemy extends Actor {
 		if (Math.random() < 0.34) {
 			new Heart(getHome(), getX(), getY());
 		}
+		new Explosion(this, getX(), getY(), 32, 32, 18, 1, 2);
+		new Freezeframe(this, 18);
 	}
-	
 }
