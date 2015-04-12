@@ -87,12 +87,12 @@ public class PauseMenu extends Menu {
 			}
 		}		
 		sprites.add(button3);
-		Sprite button4 = new TransparencySprite(75, Y+125, 200, 40, 0, 0, 1001, "tempOptionsButton.png",.05f+fade);
+		Sprite button4 = new TransparencySprite(75, Y+125, 200, 40, 0, 0, 1001, "h2pButton.png",.05f+fade);
 		if(highlighted ==1){
 			if(select){
-				button4 = new TransparencySprite(75, Y+125, 200, 40, 0, 0, 1001, "tempOptionsButtonPressed.png",.05f+fade);
+				button4 = new TransparencySprite(75, Y+125, 200, 40, 0, 0, 1001, "h2pButtonPressed.png",.05f+fade);
 			}else{
-				button4 = new TransparencySprite(75, Y+125, 200, 40, 0, 0, 1001, "tempOptionsButtonHighlight.png",.05f+fade);
+				button4 = new TransparencySprite(75, Y+125, 200, 40, 0, 0, 1001, "h2pButtonHighLighted.png",.05f+fade);
 			}
 		}		
 		sprites.add(button4);
@@ -138,9 +138,7 @@ public class PauseMenu extends Menu {
 					System.exit(0);
 				}
 				if (highlighted == 1) {
-					ArrayList<Menu> temp = _game.getMenu();
-					temp.add(new OptionsMenu(c, _game));
-					_game.setMenu(temp);
+					_game.addMenu(new HowToPlayMenu(c,_game) );
 				}
 
 			}

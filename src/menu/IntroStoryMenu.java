@@ -90,13 +90,13 @@ public class IntroStoryMenu extends Menu{
 		if(finalcountdown >= 200){
 			fade += 1f/30f;
 			if(fade >= 2f)
-				_game.getMenu().add(new HowToPlayMenu(c, _game));
+				
 				isDead = !isDead;
 		}
 
 		if(c.getMenu().escape() && pause == false){
 			pause = true;
-			_game.getMenu().add(new HowToPlayMenu(c, _game));
+			
 			isDead = !isDead;
 		}
 		else if(!c.getMenu().escape() && pause == true){
@@ -106,7 +106,7 @@ public class IntroStoryMenu extends Menu{
 			select = true;
 		} else if (!c.getMenu().select() && select == true) {
 			select = false;
-			_game.getMenu().add(new HowToPlayMenu(c, _game));
+			
 			isDead = !isDead;
 
 		}
