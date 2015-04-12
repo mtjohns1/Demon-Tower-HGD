@@ -6,6 +6,7 @@ package game;
  */
 
 import javax.swing.*;
+
 import javax.swing.event.*;
 import javax.imageio.ImageIO;
 
@@ -28,6 +29,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
+import enemy.*;
 
 public class Game extends JPanel {
 

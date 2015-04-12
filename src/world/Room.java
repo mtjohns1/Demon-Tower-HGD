@@ -23,8 +23,10 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import weapon.*;
+import game.*;
 
 public class Room {
+	Game game;
 	Random r = new Random();
 	Tile tiles[][] = new Tile[15][20];
 	Enemy enemies[] = new Enemy[5];
@@ -162,6 +164,7 @@ public class Room {
 		type = roomType;
 		enemies = enemyTypes;
 		int x = 0;
+		if(this.bossIsDead == false)
 		while(x < enemies.length && enemies[x] != null){
 			generateBadguys(enemies[x].getType(), enemies[x].getX(), enemies[x].getY());
 			x = x + 1;
@@ -597,8 +600,9 @@ public class Room {
 	/**
 	 * Update all room contents
 	 */
-	public void update() {
-		//loop through the mobiles, get their updates
+	public void update() {		//loop through the mobiles, get their updates
+
+		
 		for (int i = 0; i < list.size(); i++) {
 			list.get(i).update();
 		}
@@ -618,8 +622,12 @@ public class Room {
 				i--;
 			}
 		}
+		for(int i = 0; i < 5; i++){
+			if(enemies[i] != null){
+			}
+		}
 	}
-
+	
 	/**
 	 * Generate the room's content sprites for this frame
 	 * 
@@ -642,6 +650,12 @@ public class Room {
 			list.get(i).draw(l);
 		}
 	}
-
-
+	
+	public void setGame(Game g){
+		this.game = g;
+	}
+	
+	public Game getGame(){
+		return this.game;
+	}
 }
