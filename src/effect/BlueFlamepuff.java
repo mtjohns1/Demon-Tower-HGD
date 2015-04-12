@@ -8,9 +8,9 @@ import world.Tile;
 import bullet.Grapple;
 
 
-public class Flamepuff extends Effects {
+public class BlueFlamepuff extends Effects {
 	
-	public Flamepuff(Mobile owner, int x, int y) {
+	public BlueFlamepuff(Mobile owner, int x, int y) {
 		super(owner.getHome());
 		
 		//base dimensions
@@ -28,7 +28,7 @@ public class Flamepuff extends Effects {
 		setVy(0);
 		
 		//associated sprites
-		setSpriteSheet("flame_puff.png");
+		setSpriteSheet("blue_flame_puff.png");
 		setSpriteW(48);
 		setSpriteH(48);
 		setSpriteDir(false);
