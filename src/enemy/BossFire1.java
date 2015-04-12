@@ -52,6 +52,16 @@ public class BossFire1 extends Enemy{
 
 		this.setX(300);
 		this.setY(200);
+		
+		setSpriteSheet("gojira.png");
+		setSpriteW(80);
+		setSpriteH(80);
+		setSpriteDir(true);
+		setDir("right");
+		setAnim(0);
+		setFrame(0);
+		
+		
 		player = home.getPlayer();
 	}
 
@@ -281,18 +291,6 @@ public class BossFire1 extends Enemy{
 			}
 			list.add(s);
 		}
-	}
-	
-	/**
-	 * Generate the player's sprite for this frame
-	 * 
-	 * @param list: the list of sprites to add to
-	 */
-	public void  draw(List<Sprite> list)
-	{
-		Sprite s = new Sprite(getLeft()-2, getTop()-2, getW()+4, getH()+4, 0, 0, 0, "boss1");
-		list.add(s);
-		drawHUD(list, 448);
 	}
 
 

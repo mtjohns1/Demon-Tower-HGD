@@ -22,10 +22,18 @@ public class BossFireBreath extends Bullet{
 		super(owner, xAxis, yAxis, 16);
 		_owner =owner;
 		//set default dimensions
+
 		setW(10);
 		setH(10);
 		setD(32);
-
+		
+		setSpriteSheet("firebreath.png");
+		setSpriteW(64);
+		setSpriteH(64);
+		setFrame(0);
+		setAnim(0);
+		this.setZ(0);
+		
 		//no range limit, for now
 		super.setLife(125);
 		setDamage(1); //deals 1 damage
@@ -35,6 +43,8 @@ public class BossFireBreath extends Bullet{
 
 	@Override
 	public void update() {
+
+		setFrame((getTicks()/10)%4);
 		super.setLife(super.getLife()-1);
 	}
 	@Override

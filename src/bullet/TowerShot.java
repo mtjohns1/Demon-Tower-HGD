@@ -27,10 +27,9 @@ public class TowerShot extends Bullet{
 		setH(10);
 		setD(32);
 		
-		setSpriteSheet("fire_spit.png");
-		setSpriteW(48);
-		setSpriteH(48);
-		setSpriteDir(true);
+		setSpriteSheet("firebreath.png");
+		setSpriteW(64);
+		setSpriteH(64);
 		
 		//no range limit, for now
 		

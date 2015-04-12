@@ -26,14 +26,22 @@ public class BossFireExplosion extends Bullet{
 		super(owner, xAxis, yAxis, 16);
 		
 		//set default dimensions
-		setW(0);
-		setH(0);
+
+		setW(8);
+		setH(8);
 		setD(32);
-		this.setX(owner.getX());
-		this.setY(owner.getY());
+		
+		setSpriteSheet("superbreath.png");
+		setSpriteW(64);
+		setSpriteH(64);
+		setSpriteY(8);
+		
+		this.setX(owner.getX()+120);
+		this.setY(owner.getY()+32);
+		
 		//no range limit, for now
 		//Sprite temp = new Sprite()
-		setLife(32);
+		setLife(96/2);
 		setVx(0);
 		setVy(0);
 		setDamage(2); //deals 1 damage
@@ -41,8 +49,9 @@ public class BossFireExplosion extends Bullet{
 		this.setOwner(owner);
 	}
 	public void update(){
-		setW(getW()+8);
-		setH(getH()+8);
+		setFrame((getTicks()/5)%4);
+		setW(getW()+(getTicks()/5)%4+1);
+		setH(getH()+(getTicks()/5)%4+1);
 		setLife(this.getLife()-1);
 	}
 	public void tileCollision(Tile t, String dir) {
@@ -64,10 +73,5 @@ public class BossFireExplosion extends Bullet{
 		}
 		//vanish
 		//setLife(0);
-	}
-	public void draw(List<Sprite> list)
-	{
-		Sprite s = new Sprite(getLeft(), getTop(), getW(), getH(), 0, 0, calculateLayer(), "explosion");
-		list.add(s);
 	}
 }

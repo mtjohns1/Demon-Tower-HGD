@@ -21,14 +21,27 @@ public class BossFireBall extends Bullet{
 		super(owner, xAxis, yAxis, 16);
 
 		//set default dimensions
-		setW(10);
-		setH(10);
-		setD(32);
 
+		setW(30);
+		setH(30);
+		setD(32);
+		
+		setSpriteSheet("superbreath.png");
+		setSpriteW(64);
+		setSpriteH(64);
+		setSpriteY(8);
+		setFrame(0);
+		setAnim(0);
+		
+		this.setZ(0);
+		
 		//no range limit, for now
 
 		setDamage(4); //deals 1 damage
 		accelerate(2); //max speed of 3 in each direction
+	}
+	public void update(){
+		setFrame((getTicks()/10)%3);
 	}
 	public void onDeath() {
 		BossFireExplosion temp = new BossFireExplosion(this.getOwner(),(int)-this.getVx(),(int)-this.getVy());

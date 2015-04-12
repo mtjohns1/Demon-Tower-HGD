@@ -33,6 +33,7 @@ public class Tower extends Enemy{
 		this.setHp(5);
 		this.setX(x);
 		this.setY(y);
+		
 		player = home.getPlayer();
 		setSpriteSheet("fire_tower.png");
 		setSpriteW(64);
@@ -78,7 +79,7 @@ public class Tower extends Enemy{
 		yDif = yDif*-1;
 		
 		//logic for how to move
-		new TowerShot(this,xDif,yDif);
+		new BossFireBall(this,xDif,yDif);
 	
 		
 	}
