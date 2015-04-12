@@ -25,13 +25,18 @@ public class Bouncer extends Enemy{
 	private int directionX =1, directionY =1;
 	private int speed;
 
-	public Bouncer(Room home) {
+	public Bouncer(Room home,int x, int y) {
 		super(home,3);
 		this.setMaxHp(5);
 
 		this.setHp(2);
-		this.setX(500);
-		this.setY(300);
+		this.setX(x);
+		this.setY(y);
+		setSpriteSheet("fire_bomber.png");
+		setSpriteW(48);
+		setSpriteH(48);
+		setAnim(0);
+		setFrame(0);
 
 		speed=3;
 	
@@ -43,7 +48,7 @@ public class Bouncer extends Enemy{
 	 * @param player
 	 */
 	public void enemyAI(){
-		
+		setFrame((getTicks()/10)%4);
 		//handles end of screen
 		if(getRight() > getHome().getRight()){
 			directionX=-1;
@@ -122,16 +127,7 @@ public class Bouncer extends Enemy{
 		}
 	}
 
-	/**
-	 * Generate the player's sprite for this frame
-	 * 
-	 * @param list: the list of sprites to add to
-	 */
-	public void  draw(List<Sprite> list)
-	{
-		Sprite s = new Sprite(getLeft()-2, getTop()-2, getW()+4, getH()+4, 0, 0, 0, "enemy");
-		list.add(s);
-	}
+	
 
 
 	public void collide(Mobile m, boolean overlap, boolean nextOverlap) {
