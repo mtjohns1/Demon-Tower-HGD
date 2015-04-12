@@ -105,6 +105,11 @@ public class Room {
 				tiles[2][i].setType("p");
 
 			tiles[1][12].setType("p");
+		/*	this.enemies[0] = new Tower(this, 250, 225);
+			this.enemies[1] = new Tower(this, 395, 225);
+			this.enemies[2] = new Chaser(this, 50, 225);
+			this.enemies[3] = new Chaser(this, 595, 225);
+			this.enemies[4] = new Chaser(this, 500, 225);*/
 
 		}
 		else if(start == 3){
@@ -143,7 +148,7 @@ public class Room {
 		enemyholder = a;
 		enemies = enemyTypes;
 		int x = 0;
-		while(x < enemies.length){
+		while(x < enemies.length && enemies[x] != null){
 			generateBadguys(enemies[x].getType(), enemies[x].getX(), enemies[x].getY());
 			x = x + 1;
 		}
