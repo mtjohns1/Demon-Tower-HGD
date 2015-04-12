@@ -14,6 +14,7 @@ import javax.imageio.ImageIO;
 import control.Control;
 import powerup.Powerup;
 import sprite.Sprite;
+import sprite.TransparencySprite;
 import utility.Damage;
 import utility.Direction;
 import weapon.*;
@@ -67,8 +68,6 @@ public class Player extends Actor {
 		//add default weapon
 		_wep.add(new HeroSword());
 		_wep.add(new GrapplingHook()); //grappling hook test TODO: remove, add via level
-		_wep.add(new BlastSword()); //grappling hook test TODO: remove, add via level
-		//_wep.add(new WeaponElectric()); //lightning weapon test TODO: remove, add via level
 		_equip = 0;
 
 		//initialize local values
@@ -107,7 +106,7 @@ public class Player extends Actor {
 				_lastY = getY()/32; //was there a tile size constant?
 			}
 			
-			/*stair logic here!*/ //TODO: Move into collision logic?
+			/*stair logic here!*/
 			//ascend stairs
 			if (t.getType().contains(Tile.UP)&&!_stairDebounce) {
 				getHome().setFloorDirection("up");
@@ -131,8 +130,6 @@ public class Player extends Actor {
 			else if (t.getType().contains(Tile.WATER)) {
 				_traction = 2.0;
 			}
-			
-			//TODO: Implement other standing-ground tiles too?
 		}
 
 		//if stunned, nullify inputs
@@ -351,35 +348,50 @@ public class Player extends Actor {
 	 * @param y the top edge of the HUD area, assumed to be 32 pixels high
 	 */
 	public void drawHUD(List<Sprite> list, int y) {
+		//black bar
+		Sprite s = new Sprite(0, y, 480, 640, 0, 0, 0.5, "BlackScreen.png");
+		list.add(s);
 		for (int i = 0; i < getMaxHp()/2; i++) {
 			//full heart
-			Sprite s = new Sprite(44+i*16, y, 32, 32, 0, 0, 0, "hearts.png");
+			s = new Sprite(44+i*16, y, 32, 32, 0, 0, 1.0, "hearts.png");
 			//half heart
 			if (getHp() == i*2+1) {
-				s = new Sprite(44+i*16, y, 32, 32, 32, 0, 0, "hearts.png");
+				s = new Sprite(44+i*16, y, 32, 32, 32, 0, 1.0, "hearts.png");
 			}
 			//empty heart
 			if (getHp() <= i*2) {
-				s = new Sprite(44+i*16, y, 32, 32, 64, 0, 0, "hearts.png");
+				s = new Sprite(44+i*16, y, 32, 32, 64, 0, 1.0, "hearts.png");
 			}
 			list.add(s);
 		}
 		if (getWeapons().size() > 0)
 		{
 			int swordIcon = getWeapons().get(getEquip()).getIcon();
-			Sprite s = new Sprite(4, y, 32, 32, swordIcon*32, 0, 0, "hero sword.png");
+			s = new Sprite(4, y, 32, 32, swordIcon*32, 0, 1.0, "hero sword.png");
 			list.add(s);
 		}
+	}
+	
+	/**
+	 * Draw the player's shadow
+	 * @param list the list to add sprites to 
+	 */
+	public void drawShadow(List<Sprite> list)
+	{
+		if (getSpriteSheet() == null) return; //do nothing if no sprite
+		//calculate resultant drawing position (aligned centers)
+		int drawX = getX()-16;
+		int drawY = getY()-8;
+		//generate the resulting sprite
+		Sprite s = new TransparencySprite(drawX, drawY, 32, 32, 0, 0, calculateShadowLayer()+30, "player_shadow.png", 0.5);
+		list.add(s);
 	}
 
 	@Override
 	public void draw(List<Sprite> list)
 	{
 		if ((getMercy()/5) % 2 == 0) super.draw(list);
+		drawShadow(list);
 		drawHUD(list, 448);
-		/* drawHUD(list, 448);
-		if ((getMercy()/5) % 2 > 0) return;
-		Sprite s = new Sprite(getLeft()-2, getTop()-6-getBack(), getW()+4, getH()+8, 0, 0, calculateLayer(), "hero");
-		list.add(s); */
 	}
 }

@@ -319,7 +319,6 @@ public abstract class Mobile {
 		//generate the resulting sprite
 		Sprite s = new Sprite(drawX, drawY, getSpriteW(), getSpriteH(), frameX, frameY, calculateLayer(), getSpriteSheet());
 		l.add(s);
-		//TODO: Add shadows
 	}
 
 	/**
