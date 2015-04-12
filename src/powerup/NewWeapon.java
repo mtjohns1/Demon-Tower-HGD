@@ -32,6 +32,7 @@ public class NewWeapon extends Powerup {
 	public void getCollected(Player p) {
 		p.addWeapon(_wep);
 		setDead(); //vanish
+		//TODO: Acknowledge collection
 	}
 	
 	@Override

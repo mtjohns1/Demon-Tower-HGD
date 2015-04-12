@@ -33,11 +33,15 @@ public class Tower extends Enemy{
 		this.setHp(5);
 		this.setX(x);
 		this.setY(y);
-		
+
+		this.setD(40);
+		setW(30);
+		setH(30);
 		player = home.getPlayer();
 		setSpriteSheet("fire_tower.png");
 		setSpriteW(64);
 		setSpriteH(64);
+		setSpriteY(-8);
 		setSpriteDir(true);
 		setDir("right");
 		setAnim(0);

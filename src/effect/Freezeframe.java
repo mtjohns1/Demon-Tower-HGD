@@ -31,6 +31,8 @@ public class Freezeframe extends Effects {
 		setSpriteSheet(owner.getSpriteSheet());
 		setSpriteW(owner.getSpriteW());
 		setSpriteH(owner.getSpriteH());
+		setSpriteX(owner.getSpriteX());
+		setSpriteY(owner.getSpriteY());
 		setSpriteDir(owner.getSpriteDir());
 		
 		setFrame(owner.getFrame());

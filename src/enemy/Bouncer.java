@@ -32,9 +32,14 @@ public class Bouncer extends Enemy{
 		this.setHp(2);
 		this.setX(x);
 		this.setY(y);
+		setW(30);
+		setH(30);
+		this.setD(40);
+		
 		setSpriteSheet("fire_bomber.png");
 		setSpriteW(48);
 		setSpriteH(48);
+		setSpriteY(-8);
 		setAnim(0);
 		setFrame(0);
 

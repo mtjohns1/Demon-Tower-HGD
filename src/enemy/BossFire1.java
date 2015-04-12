@@ -352,14 +352,14 @@ public class BossFire1 extends Enemy{
 		//draw health
 		for (int i = 0; i < getMaxHp()/4; i++) {
 			//full heart
-			Sprite s = new Sprite(610-i*16, y, 32, 32, 0, 0, 0, "hearts.png");
+			Sprite s = new Sprite(610-i*16, y, 32, 32, 0, 0, 1.0, "hearts.png");
 			//half heart (decreases left to right)
 			if (getHp() <= i*4+2 && getHp() > i*10) {
-				s = new Sprite(610-i*16, y, 32, 32, 96, 0, 0, "hearts.png");
+				s = new Sprite(610-i*16, y, 32, 32, 96, 0, 1.0, "hearts.png");
 			}
 			//empty heart
 			if (getHp() <= i*4) {
-				s = new Sprite(610-i*16, y, 32, 32, 64, 0, 0, "hearts.png");
+				s = new Sprite(610-i*16, y, 32, 32, 64, 0, 1.0, "hearts.png");
 			}
 			list.add(s);
 		}
@@ -377,6 +377,7 @@ public class BossFire1 extends Enemy{
 		new Explosion(this, getX(), getY(), 72, 72, 131, 1, 7);
 		new Freezeframe(this, 121);
 		new ScreenFlash(this, 120, 10, 20);
+		//TODO: Acknowledge defeat
 	}
 	
 	/**
