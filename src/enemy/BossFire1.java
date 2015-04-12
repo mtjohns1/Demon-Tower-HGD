@@ -100,7 +100,21 @@ public class BossFire1 extends Enemy{
 			if (dx > 0) setDir("left");
 			else if (dx < 0) setDir("right");
 		}
-		
+		if (moveCoolDown == 100 || isMoving){
+			isMoving =true;
+			count +=1;
+			if(count == 30){
+				isMoving = false;
+			}
+			moveCoolDown = -10;
+			setAnim(2);
+			setFrame(getTicks()/10%4);
+			mover();
+
+			return;
+		}
+		setVx(0);
+		setVx(0);
 		setFrame(3);
 		//if fire breath then keep going until it is done
 		if (attackType == 2 && attackCountDown != 5){
@@ -135,19 +149,7 @@ public class BossFire1 extends Enemy{
 
 		//slows down movement. creates explosions on each step.
 		moveCoolDown +=1;
-		if (moveCoolDown == 100 || isMoving){
-			isMoving =true;
-			count +=1;
-			if(count == 30){
-				isMoving = false;
-			}
-			moveCoolDown = -10;
-			setAnim(2);
-			setFrame(getTicks()/10%4);
-			mover();
-
-			return;
-		}
+		
 		count =0;
 		this.setVx(0);
 		this.setVy(0);
