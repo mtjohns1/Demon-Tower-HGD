@@ -26,7 +26,7 @@ public class BasicBullet extends Bullet{
 		//set default dimensions
 		setW(10);
 		setH(10);
-		setD(64);
+		setD(60);
 		
 		setSpriteSheet("light_bullet.png");
 		setSpriteW(32);
