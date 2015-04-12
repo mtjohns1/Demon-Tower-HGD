@@ -10,9 +10,7 @@ import bullet.Grapple;
 
 public class ShotFade extends Effects {
 	
-	private Mobile _owner;
-	
-	public ShotFade(Mobile owner, int x, int y, String dir) {
+	public ShotFade(Mobile owner) {
 		super(owner.getHome());
 		
 		//base dimensions
@@ -23,35 +21,27 @@ public class ShotFade extends Effects {
 		setFly(true); //ignore tiles
 		
 		//accept position and velocity
-		setX(x);
-		setY(y);
+		setX(owner.getX());
+		setY(owner.getY());
+		setZ(owner.getZ());
 		setVx(0);
 		setVy(0);
 		
-		setDir(dir);
+		setDir(owner.getDir());
 		
 		//associated sprites
-		setSpriteSheet("light_bullet.png");
-		setSpriteW(32);
-		setSpriteH(32);
-		setSpriteDir(true);
-		
-		//track owner / return target
-		_owner = owner;
+		setSpriteSheet(owner.getSpriteSheet());
+		setSpriteW(owner.getSpriteW());
+		setSpriteH(owner.getSpriteH());
+		setSpriteDir(owner.getSpriteDir());
 	}
 
 	@Override
 	public void update() {
-		setZ(_owner.getZ());
-		//set direction
-		Direction recall = new Direction(_owner.getX()-getX(), _owner.getY()-getY());
-		//apply direction
-		setVx(getVx()+recall.getX()*23);
-		setVy(getVy()+recall.getY()*23);
-		accelerate(0.6); //regulate speed
-		//vanish up close, it's done reeling in
-		if (recall.getLength() < 32)
-		{
+		
+		//advance the frames of its animation, fade out
+		setFrame(1+getTicks()/10);
+		if (getTicks() >= 40) {
 			setDead();
 		}
 	}
