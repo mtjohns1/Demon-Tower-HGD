@@ -110,7 +110,6 @@ public class Room {
 					tiles[y][x].setType("w");
 				}
 			}
-			tiles = this.interestingRoom(tiles);
 
 		}
 
@@ -224,8 +223,6 @@ public class Room {
 			this.enemies[3] = new Chaser(this, 595, 225);
 			this.enemies[4] = new Chaser(this, 500, 225);
 			
-			System.out.println(enemies[0].getX());
-
 		return tiles;
 	}
 
@@ -284,7 +281,11 @@ public class Room {
 
 			}
 		}
-		
+		this.enemies[0] = new Tower(this, 320, 220);
+		this.enemies[1] = new Chaser(this, 150, 120);
+		this.enemies[2] = new Chaser(this, 425, 150);
+
+
 		if(a == 1){
 			
 			for(int x = 4; x < 9; x++)
@@ -296,9 +297,10 @@ public class Room {
 				tiles[1][x].setType("");
 			tiles[2][15].setType("");
 			tiles[3][15].setType("");
+			
+			this.enemies[3] = new Chaser(this, 295, 320);
+			this.enemies[4] = new Chaser(this, 495, 100);
 
-			
-			
 		}
 		
 		return tiles;
@@ -431,6 +433,9 @@ public class Room {
 			}
 			else if(a == 2){
 				enemiess = new Tower(this, x, y);
+			}
+			else if(a == 3){
+				enemiess = new Bouncer(this, x, y);
 			}
 			else if(a == 10){
 				enemiess = new BossFire1(this);
