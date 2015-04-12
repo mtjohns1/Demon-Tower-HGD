@@ -16,7 +16,7 @@ public class HowToPlayMenu extends Menu{
 	private boolean enabled = false;
 	private Game _game;
 	private int Y = 0;
-	
+
 
 	Control c;
 
@@ -24,22 +24,22 @@ public class HowToPlayMenu extends Menu{
 	public boolean isDead() {
 		return isDead;
 	}
-	
-	
+
+
 	public HowToPlayMenu(Control c, Game game){
 		this.c = c;
 		//this.menuInit();
 		_game = game;
 	}
-	
+
 	public void drawMenu(ArrayList<Sprite> sprites) {
 		//Sprite Menu = new Sprite(50, Y, 500, 300, 0, 0, 1000, "menu");
 		//sprites.add(Menu);
-		TransparencySprite H2P = new TransparencySprite(0,Y,640, 631,0,0, 7000,"HowToPlayMenu.png", 1f);
-		sprites.add(H2P);
-		
+		TransparencySprite GG = new TransparencySprite(640/2 - 413/2, 480/2 - 119/2,413, 119,0,0, 7000,"GetGrapple", 1f);
+		sprites.add(GG);
+
 	}
-	
+
 	public void update(){
 		if(c.getMenu().escape() && pause == false){
 			pause = true;
@@ -55,17 +55,7 @@ public class HowToPlayMenu extends Menu{
 			isDead = !isDead;
 
 		}
-		if(c.getShoot().getY() > 0){
-			
-			if(Y > 480-631)
-				Y--;
-			
-			
-		}
-		if(c.getShoot().getY() < 0){
-			if(Y != 0)
-				Y++;
-		}
+
 	}
-	
+
 }
