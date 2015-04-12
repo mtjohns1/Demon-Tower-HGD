@@ -377,6 +377,7 @@ public class BossFire1 extends Enemy{
 		new Explosion(this, getX(), getY(), 72, 72, 131, 1, 7);
 		new Freezeframe(this, 121);
 		new ScreenFlash(this, 120, 10, 20);
+		//TODO: Acknowledge defeat
 	}
 	
 	/**
