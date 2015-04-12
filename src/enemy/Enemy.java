@@ -23,10 +23,6 @@ public abstract class Enemy extends Actor {
 	public Enemy(Room home, int x) {
 		super(home);
 		type = x;
-		//will probably be changed
-		setW(28);
-		setH(28);
-		setD(32);
 	}
 	public int getType(){
 		return type;
@@ -35,6 +31,7 @@ public abstract class Enemy extends Actor {
 	@Override
 	public int takeDamage(int damage) {
 		new Explosion(this, getX(), getY(), 32, 32, 8, 1, 1);
+		/*new Explosion(this, getX(), getY()+4, 72, 72, 8, 1, 5);*/
 		return super.takeDamage(damage);
 	}
 	
@@ -47,5 +44,8 @@ public abstract class Enemy extends Actor {
 		}
 		new Explosion(this, getX(), getY(), 32, 32, 18, 1, 2);
 		new Freezeframe(this, 18);
+		/*new Explosion(this, getX(), getY(), 72, 72, 131, 1, 7);
+		new Freezeframe(this, 121);
+		new ScreenFlash(this, 120, 10, 20);*/
 	}
 }
