@@ -20,13 +20,13 @@ public class BasicMelee extends Melee{
 		super(owner, xAxis, yAxis, 16);
 		
 		//set dimensions
-		setW(28);
-		setH(28);
+		setW(32);
+		setH(32);
 		setD(32);
 		
 		//get direction again
 		Direction dir = new Direction(xAxis, yAxis);
 		setDamage(2); //deals slightly boosted damage
-		setKnockback(dir.getX()*24, dir.getY()*24); //force back a lot
+		setKnockback(dir.getX()*20, dir.getY()*20); //force back a lot
 	}
 }
