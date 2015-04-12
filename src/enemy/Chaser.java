@@ -33,10 +33,13 @@ public class Chaser extends Enemy{
 		this.setHp(5);
 		this.setX(x);
 		this.setY(y);
-
+		setW(30);
+		setH(30);
+		this.setD(40);
 		setSpriteSheet("fire_chaser.png");
 		setSpriteW(240/5);
 		setSpriteH(240/5);
+		setSpriteY(-8);
 		setSpriteDir(true);
 		setDir("right");
 		setAnim(0);
