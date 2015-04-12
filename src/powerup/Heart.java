@@ -32,7 +32,7 @@ public class Heart extends Powerup {
 	
 	@Override
 	public void draw(List<Sprite> l) {
-		Sprite s = new Sprite(getLeft()-8, getTop()-8, getW()+16, getH()+16, 0, 0, calculateLayer(), "hearts");
+		Sprite s = new Sprite(getLeft()-8, getTop()-8, getW()+16, getH()+16, 0, 0, calculateLayer(), "hearts.png");
 		l.add(s);
 	}
 }

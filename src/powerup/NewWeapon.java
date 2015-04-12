@@ -37,7 +37,7 @@ public class NewWeapon extends Powerup {
 	@Override
 	public void draw(List<Sprite> l) {
 		int swordIcon = _wep.getIcon();
-		Sprite s = new Sprite(getLeft(), getTop(), getW(), getH(), swordIcon*32, 0, calculateLayer(), "swords");
+		Sprite s = new Sprite(getLeft(), getTop(), getW(), getH(), swordIcon*32, 0, calculateLayer(), "hero sword.png");
 		l.add(s);
 	}
 }

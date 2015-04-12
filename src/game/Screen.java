@@ -20,7 +20,7 @@ public class Screen {
 
 	public static void startup(){
 		//load images on the front end
-		Sprite.load();
+		//Sprite.load();
 
 		Control controls = new Control(); //create controls
 		Game game = new Game(controls); //initialize a game

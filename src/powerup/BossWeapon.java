@@ -42,7 +42,7 @@ public class BossWeapon extends Powerup {
 	public void draw(List<Sprite> l) {
 		//TODO: Show boss soul icon, rather than sword icon
 		int swordIcon = _wep.getIcon();
-		Sprite s = new Sprite(getLeft(), getTop(), getW(), getH(), swordIcon*32, 0, calculateLayer(), "swords");
+		Sprite s = new Sprite(getLeft(), getTop(), getW(), getH(), swordIcon*32, 0, calculateLayer(), "hero sword.png");
 		l.add(s);
 	}
 }
