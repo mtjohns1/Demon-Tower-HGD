@@ -2,6 +2,7 @@ package bullet;
 import java.util.List;
 
 import effect.BlueExplosion;
+import effect.Explosion;
 
 import mobile.Actor;
 import mobile.Mobile;
@@ -51,7 +52,7 @@ public class BouncerExplosion extends Bullet{
 		setW(getW()+(getTicks()/5)%4+3);
 		setH(getH()+(getTicks()/5)%4+3);
 		setLife(this.getLife()-1);
-		new BlueExplosion(this,getX(),getY(),getW(),getH(),1,1,5);
+		new Explosion(this,getX(),getY(),getW(),getH(),1,1,5);
 	}
 	public void tileCollision(Tile t, String dir) {
 		//setLife(0);
