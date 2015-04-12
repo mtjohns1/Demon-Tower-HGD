@@ -15,10 +15,7 @@ import javax.imageio.ImageIO;
 import mobile.Mobile;
 import mobile.Player;
 import sprite.Sprite;
-import enemy.Enemy;
-import enemy.BossFire1;
-import enemy.Chaser;
-import enemy.Tower;
+import enemy.*;
 
 import java.util.Random;
 import java.awt.*;
@@ -96,6 +93,23 @@ public class Room {
 			
 			tiles[6][19].setType("");
 			tiles[7][19].setType("");
+			for(int x = 1; x < 19; x++){
+				for(int y = 1; y < 6; y++){
+					tiles[y][x].setType("w");
+				}
+			}
+			
+			for(int x = 1; x < 9; x++){
+				for(int y = 8; y < 14; y++){
+					tiles[y][x].setType("w");
+				}
+			}
+			
+			for(int x = 11; x < 19; x++){
+				for(int y = 8; y < 14; y++){
+					tiles[y][x].setType("w");
+				}
+			}
 		}
 
 		else if(start == 2){
