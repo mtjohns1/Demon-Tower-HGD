@@ -1,4 +1,5 @@
 package bullet;
+import effect.ScreenFlash;
 import effect.ShotFade;
 import mobile.Mobile;
 

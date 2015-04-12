@@ -349,7 +349,7 @@ public class Player extends Actor {
 	 */
 	public void drawHUD(List<Sprite> list, int y) {
 		//black bar
-		Sprite s = new Sprite(0, y, 480, 640, 0, 0, 0.5, "BlackScreen.png");
+		Sprite s = new Sprite(0, y, 640, 480, 0, 0, 0.5, "BlackScreen.png");
 		list.add(s);
 		for (int i = 0; i < getMaxHp()/2; i++) {
 			//full heart
