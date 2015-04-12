@@ -66,7 +66,8 @@ public class IntroStoryMenu extends Menu{
 		sprites.add(introPP);
 		TransparencySprite introPPP = new TransparencySprite(640-Yy,0,640,240,0,0,8000,"OpeningPic3.png",1f-fade);
 		sprites.add(introPPP);
-
+		TransparencySprite blackscreen = new TransparencySprite(0,0,640,480,0,0,3000,"BlackScreen.png", 2f-fade);
+		sprites.add(blackscreen);
 	}
 
 	public void update(){
@@ -88,12 +89,14 @@ public class IntroStoryMenu extends Menu{
 		}
 		if(finalcountdown >= 200){
 			fade += 1f/30f;
-			if(fade >= 1f)
+			if(fade >= 2f)
+				_game.getMenu().add(new HowToPlayMenu(c, _game));
 				isDead = !isDead;
 		}
 
 		if(c.getMenu().escape() && pause == false){
 			pause = true;
+			_game.getMenu().add(new HowToPlayMenu(c, _game));
 			isDead = !isDead;
 		}
 		else if(!c.getMenu().escape() && pause == true){
@@ -103,6 +106,7 @@ public class IntroStoryMenu extends Menu{
 			select = true;
 		} else if (!c.getMenu().select() && select == true) {
 			select = false;
+			_game.getMenu().add(new HowToPlayMenu(c, _game));
 			isDead = !isDead;
 
 		}
