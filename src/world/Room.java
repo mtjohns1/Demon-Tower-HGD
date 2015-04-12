@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Room {
-	int[] enemyholder = {1, 1, 1};
 	Random r = new Random();
 	Tile tiles[][] = new Tile[15][20];
 	Enemy enemies[] = new Enemy[5];
@@ -154,10 +153,9 @@ public class Room {
 		
 	}
 	//This will be used for re-creating an old room
-	public Room(Tile[][] t, int[] a, int roomType, Enemy[] enemyTypes){
+	public Room(Tile[][] t, int roomType, Enemy[] enemyTypes){
 		tiles = t;
 		type = roomType;
-		enemyholder = a;
 		enemies = enemyTypes;
 		int x = 0;
 		while(x < enemies.length && enemies[x] != null){
