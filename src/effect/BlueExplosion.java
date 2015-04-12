@@ -40,7 +40,7 @@ public class BlueExplosion extends Effects {
 		for (int i = 0; i < _amp; i++) {
 			int rx = (int) (Math.random()*getW());
 			int ry = (int) (Math.random()*getW());
-			new Flamepuff(this, getLeft()+rx, getTop()+ry);
+			new BlueFlamepuff(this, getLeft()+rx, getTop()+ry);
 		}
 	}
 
