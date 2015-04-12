@@ -5,8 +5,11 @@ package powerup;
  * @author Jacob Charles
  */
 
+import game.Game;
+
 import java.util.List;
 
+import menu.GetGrapple;
 import mobile.Player;
 import sprite.Sprite;
 import weapon.Weapon;
@@ -33,6 +36,8 @@ public class NewWeapon extends Powerup {
 		p.addWeapon(_wep);
 		setDead(); //vanish
 		//TODO: Acknowledge collection
+		Game g = getHome().getGame();
+		g.addMenu(new GetGrapple(g.getControls(), g));
 	}
 	
 	@Override

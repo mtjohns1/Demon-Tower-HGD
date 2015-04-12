@@ -290,4 +290,8 @@ public class Game extends JPanel {
 	public void setReset(boolean reset) {
 		this.reset = reset;
 	}
+	
+	public Control getControls() {
+		return controls;
+	}
 }
