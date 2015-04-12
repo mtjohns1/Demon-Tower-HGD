@@ -93,7 +93,7 @@ public class Room {
 		if(start == 1){
 			tiles[13][9].setType("");
 			tiles[13][10].setType("");
-
+			
 			tiles[6][19].setType("");
 			tiles[7][19].setType("");
 		}
@@ -113,7 +113,7 @@ public class Room {
 
 		}
 		else if(start == 3){
-			enemyholder[0] = 3;
+			this.enemies[0] = new BossFire1(this);
 			this.bossRoom();
 		}
 
@@ -137,8 +137,6 @@ public class Room {
 				tiles[i + 5][15].setType("w");
 			}
 		}
-
-	generateBadguys(1, 100, 100);
 		
 	}
 	//This will be used for re-creating an old room
@@ -152,10 +150,6 @@ public class Room {
 			generateBadguys(enemies[x].getType(), enemies[x].getX(), enemies[x].getY());
 			x = x + 1;
 		}
-	}
-
-	public void enemySpawner(int type){
-
 	}
 
 	public Tile[][] fourSquareRoom(Tile[][] t){
@@ -397,7 +391,7 @@ public class Room {
 			else if(a == 2){
 				enemiess = new Tower(this, x, y);
 			}
-			else if(a == 3){
+			else if(a == 10){
 				enemiess = new BossFire1(this);
 			}
 				}
