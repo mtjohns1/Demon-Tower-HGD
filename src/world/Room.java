@@ -22,6 +22,7 @@ import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import weapon.*;
 
 public class Room {
 	Random r = new Random();
@@ -34,6 +35,7 @@ public class Room {
 	int enemyRoom = 0;
 	int a = 0;
 	String direction = "no change";
+	boolean bossIsDead = false;
 
 	/**
 	 * Creates a new blank room with walls surrounding it.
@@ -438,7 +440,7 @@ public class Room {
 				enemiess = new Bouncer(this, x, y);
 			}
 			else if(a == 10){
-				enemiess = new BossFire1(this);
+					enemiess = new BossFire1(this);
 			}
 				}
 
