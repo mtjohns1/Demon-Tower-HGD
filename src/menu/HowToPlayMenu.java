@@ -55,14 +55,14 @@ public class HowToPlayMenu extends Menu{
 			isDead = !isDead;
 
 		}
-		if(c.getShoot().getY() < 0){
+		if(c.getShoot().getY() > 0){
 			
 			if(Y > 480-631)
 				Y--;
 			
 			
 		}
-		if(c.getShoot().getY() > 0){
+		if(c.getShoot().getY() < 0){
 			if(Y != 0)
 				Y++;
 		}
