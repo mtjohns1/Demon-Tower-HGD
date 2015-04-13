@@ -92,7 +92,7 @@ public class PauseMenu extends Menu {
 			if(select){
 				button4 = new TransparencySprite(75, Y+125, 200, 40, 0, 0, 1001, "h2pButtonPressed.png",.05f+fade);
 			}else{
-				button4 = new TransparencySprite(75, Y+125, 200, 40, 0, 0, 1001, "h2pButtonHighLighted.png",.05f+fade);
+				button4 = new TransparencySprite(75, Y+125, 200, 40, 0, 0, 1001, "h2pButtonHighlighted.png",.05f+fade);
 			}
 		}		
 		sprites.add(button4);
