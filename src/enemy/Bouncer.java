@@ -53,7 +53,7 @@ public class Bouncer extends Enemy{
 	 * @param player
 	 */
 	public void enemyAI(){
-		setFrame((getTicks()/10)%4);
+		setFrame((getTicks()/5)%4);
 		//handles end of screen
 		if(getRight() > getHome().getRight()){
 			directionX=-1;
@@ -115,7 +115,7 @@ public class Bouncer extends Enemy{
 	}
 	
 	public void onDeath(){
-		BossFireExplosion temp = new BossFireExplosion(this,0,0);
+		new BossFireExplosion(this,(int)-this.getVx(),(int)-this.getVy());
 	}
 
 	/**

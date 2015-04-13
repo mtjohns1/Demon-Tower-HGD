@@ -30,7 +30,7 @@ public class Chaser extends Enemy{
 		super(home,1);
 		this.setMaxHp(20);
 
-		this.setHp(5);
+		this.setHp(6);
 		this.setX(x);
 		this.setY(y);
 		setW(30);

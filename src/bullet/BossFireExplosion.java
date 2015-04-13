@@ -38,8 +38,8 @@ public class BossFireExplosion extends Bullet{
 		setSpriteH(64);
 		setSpriteY(-6);
 		
-		this.setX(owner.getX()+120);
-		this.setY(owner.getY()+32);
+		this.setX(owner.getX());
+		this.setY(owner.getY());
 		
 		//no range limit, for now
 		//Sprite temp = new Sprite()
