@@ -37,6 +37,7 @@ public class Room {
 	Player player = null;
 	int width = 640, height = 448;
 	int type = 0;
+	int hookRoom = 0;
 	int enemyRoom = 0;
 	int a = 0;
 	String direction = "no change";
@@ -78,7 +79,7 @@ public class Room {
 
 	public Room(int start) //creates the starting room
 	{
-
+		
 		for(int x = 0; x < 20; x++)
 		{
 			for(int y = 0; y < 14; y++)
@@ -142,6 +143,7 @@ public class Room {
 		}
 
 		else if(start == 4){
+			hookRoom = 1;
 			for(int i = 4; i < 8; i++){
 				tiles[5][i].setType("w");
 				tiles[8][i].setType("w");
@@ -160,7 +162,7 @@ public class Room {
 				tiles[i + 5][4].setType("w");
 				tiles[i + 5][15].setType("w");
 			}
-			Powerup w = new NewWeapon(this, 318, 200);
+
 
 		}
 		
@@ -170,6 +172,10 @@ public class Room {
 		tiles = t;
 		type = roomType;
 		enemies = enemyTypes;
+		if(hookRoom == 1){
+		Powerup w = new NewWeapon(this, 318, 200);
+
+		}
 		int x = 0;
 		if(this.canSpawn == true)
 		while(x < enemies.length && enemies[x] != null){
@@ -626,10 +632,6 @@ public class Room {
 				list.remove(i);
 				i--;
 			}
-		}
-		for(int i = 0; i < 5; i++){
-			if(this.enemies[i] != null)
-				System.out.println(enemies[i].isDead());
 		}
 	}
 	

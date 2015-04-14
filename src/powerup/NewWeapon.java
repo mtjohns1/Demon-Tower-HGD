@@ -45,7 +45,7 @@ public class NewWeapon extends Powerup {
 		setDead(); //vanish
 		//TODO: Acknowledge collection
 		Game g = getHome().getGame();
-		g.addMenu(new GetGrapple(g.getControls(), g));
+		//g.addMenu(new GetGrapple(g.getControls(), g));
 	}
 	
 	@Override
