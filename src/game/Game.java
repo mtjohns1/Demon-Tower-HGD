@@ -187,6 +187,7 @@ public class Game extends JPanel {
 		Room r = n;
 		Player p = c;
 		r.setGame(this);
+
 		
 		if(r.getDirection().equals("east") )
 		{
