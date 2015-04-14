@@ -48,6 +48,7 @@ public class Room {
 	 */
 	public Room() //creates a blank room
 	{
+
 		for(int x = 0; x < 20; x++)
 		{
 			for(int y = 0; y < 14; y++)
@@ -74,11 +75,12 @@ public class Room {
 			tiles = this.fourSquareRoom(tiles);
 		else if(a == 3)
 			tiles = this.threeSquareRoom(tiles);
-			
+
 	}
 
 	public Room(int start) //creates the starting room
 	{
+
 		
 		for(int x = 0; x < 20; x++)
 		{
@@ -169,11 +171,13 @@ public class Room {
 	}
 	//This will be used for re-creating an old room
 	public Room(Tile[][] t, int roomType, Enemy[] enemyTypes){
+		if(hookRoom == 1){
+			System.out.println("here");
+		}
 		tiles = t;
 		type = roomType;
 		enemies = enemyTypes;
 		if(hookRoom == 1){
-		Powerup w = new NewWeapon(this, 318, 200);
 
 		}
 		int x = 0;
@@ -656,6 +660,10 @@ public class Room {
 		{
 			list.get(i).draw(l);
 		}
+	}
+	
+	public void placeHook(){
+		Powerup w = new NewWeapon(this, 318, 200);
 	}
 	
 	public void setGame(Game g){

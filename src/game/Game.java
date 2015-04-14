@@ -39,6 +39,7 @@ public class Game extends JPanel {
 	private boolean reset = false;
 	private boolean win = false;
 	private ArrayList<Menu> menu = new ArrayList<Menu>();
+	private boolean canPlace = true;
 
 
 	public ArrayList<Menu> getMenu() {
@@ -187,7 +188,12 @@ public class Game extends JPanel {
 		Room r = n;
 		Player p = c;
 		r.setGame(this);
-
+		if(mapX == 3 && mapY == 2){
+			if(canPlace == true){
+				r.placeHook();
+			canPlace = false;
+			}
+		}
 		
 		if(r.getDirection().equals("east") )
 		{

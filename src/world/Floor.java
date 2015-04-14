@@ -32,8 +32,9 @@ public class Floor {
 				else if(x == 1 && y == 1){
 					rooms[y][x] = new Room(3); //This is for the boss room
 				}
-				else if(x == 3 && y == 2)
+				else if(x == 3 && y == 2){
 					rooms[y][x] = new Room(4); //This is for the grappling hook room
+					}
 				else
 					rooms[y][x] = new Room(); //This is for random rooms
 			}
