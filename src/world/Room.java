@@ -160,13 +160,14 @@ public class Room {
 				tiles[i + 5][4].setType("w");
 				tiles[i + 5][15].setType("w");
 			}
+			Powerup w = new NewWeapon(this, 318, 200);
+
 		}
 		
 	}
 	//This will be used for re-creating an old room
 	public Room(Tile[][] t, int roomType, Enemy[] enemyTypes){
 		tiles = t;
-		Powerup w = new NewWeapon(this, 50, 100);
 		type = roomType;
 		enemies = enemyTypes;
 		int x = 0;
