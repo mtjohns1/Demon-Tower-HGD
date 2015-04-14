@@ -5,6 +5,8 @@ package sprite;
  * @author Thomas
  */
 
+import game.Game;
+
 import java.awt.image.*;
 import java.awt.*;
 import java.io.File;
@@ -49,20 +51,22 @@ public class Sprite {
 		File Floor = new File("tempBackground.png");
 		Image floor = null;
 		try {
-			floor =  ImageIO.read(Floor);
+			//floor =  ImageIO.read(Floor);
+			floor = ImageIO.read(Game.class.getResource("tempBackground.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		pics.put("tempFloor", floor);
 		
-		
 		picture[0] = floor;
 		
 		File Wall = new File("tempWall.png");
 		Image wall = null;
 		try {
-			wall =  ImageIO.read(Wall);
+			//wall =  ImageIO.read(Wall);
+			wall = ImageIO.read(Game.class.getResource("tempWall.png"));
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -75,7 +79,9 @@ public class Sprite {
 		File Hero = new File("hero dude and sword.png");
 		Image hero = null;
 		try {
-			hero =  ImageIO.read(Hero);
+			//hero =  ImageIO.read(Hero);
+			hero = ImageIO.read(Game.class.getResource("hero dude and word.png"));
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -66,15 +66,17 @@ public class Room {
 			}
 		}		
 
-		a = r.nextInt(4); 
-		if(a == 0)
-			tiles = this.layoutFour(tiles);
-		else if(a == 1)
-			tiles = this.interestingRoom(tiles);
-		else if(a == 2)
-			tiles = this.fourSquareRoom(tiles);
-		else if(a == 3)
-			tiles = this.threeSquareRoom(tiles);
+		a = r.nextInt(5); 
+		//if(a == 0)
+		//	tiles = this.layoutFour(tiles);
+		//else if(a == 1)
+		//	tiles = this.interestingRoom(tiles);
+		//else if(a == 2)
+		//	tiles = this.fourSquareRoom(tiles);
+		//else if(a == 3)
+		//	tiles = this.threeSquareRoom(tiles);
+		//else if(a == 4)
+			tiles = this.TowerMaze(tiles);
 
 	}
 
@@ -132,11 +134,7 @@ public class Room {
 				tiles[2][i].setType("p");
 
 			tiles[1][12].setType("p");
-		/*	this.enemies[0] = new Tower(this, 250, 225);
-			this.enemies[1] = new Tower(this, 395, 225);
-			this.enemies[2] = new Chaser(this, 50, 225);
-			this.enemies[3] = new Chaser(this, 595, 225);
-			this.enemies[4] = new Chaser(this, 500, 225);*/
+
 
 		}
 		else if(start == 3){
@@ -211,9 +209,9 @@ public class Room {
 		
 		this.enemies[0] = new Tower(this, 250, 225);
 		this.enemies[1] = new Tower(this, 395, 225);
-		this.enemies[2] = new Chaser(this, 50, 225);
-		this.enemies[3] = new Chaser(this, 595, 225);
-		this.enemies[4] = new Chaser(this, 500, 225);		
+		this.enemies[2] = new Chaser(this, 50, 50);
+		this.enemies[3] = new Chaser(this, 275, 275);
+		this.enemies[4] = new Chaser(this, 500, 400);		
 		
 		return tiles;
 	}
@@ -239,11 +237,11 @@ public class Room {
 			tiles[9][i].setType("w");
 			tiles[10][i].setType("w");
 		}
-			this.enemies[0] = new Tower(this, 250, 225);
-			this.enemies[1] = new Tower(this, 395, 225);
-			this.enemies[2] = new Chaser(this, 50, 225);
-			this.enemies[3] = new Chaser(this, 595, 225);
-			this.enemies[4] = new Chaser(this, 500, 225);
+		this.enemies[0] = new Tower(this, 250, 225);
+		this.enemies[1] = new Tower(this, 395, 225);
+		this.enemies[2] = new Chaser(this, 50, 50);
+		this.enemies[3] = new Chaser(this, 275, 275);
+		this.enemies[4] = new Chaser(this, 500, 400);
 			
 		return tiles;
 	}
@@ -327,6 +325,84 @@ public class Room {
 		
 		return tiles;
 	}
+	
+	public Tile[][] TowerMaze(Tile[][] t){
+		type = 6;
+		for(int x = 1; x < 19; x++){
+			for(int y = 1; y < 13; y++){
+				tiles[y][x].setType("w");
+			}
+		}
+		tiles[4][9].setType("");
+		tiles[4][10].setType("");	
+
+		
+	
+		tiles[10][9].setType("");
+		tiles[10][10].setType("");
+		
+		
+		tiles[1][9].setType("");
+		tiles[1][10].setType("");
+		tiles[12][9].setType("");
+		tiles[12][10].setType("");
+		tiles[6][1].setType("");
+		tiles[7][1].setType("");
+		tiles[6][18].setType("");
+		tiles[7][18].setType("");
+		for(int x = 11; x < 16; x++){
+			tiles[1][x].setType("");
+			tiles[1][x-7].setType("");
+			tiles[12][x].setType("");
+			tiles[12][x-7].setType("");
+
+
+		}
+		for(int y = 2; y < 6; y++){
+			tiles[y][15].setType("");
+			tiles[y][4].setType("");
+			tiles[y+6][15].setType("");
+			tiles[y+6][4].setType("");
+
+		}
+		
+		for(int y = 4; y < 9; y++){
+			tiles[y][12].setType("");
+			tiles[y][7].setType("");
+
+		}
+		
+		for(int x = 13; x < 15; x++){
+			tiles[4][x].setType("");
+			tiles[4][x - 8].setType("");
+		}
+		for(int x = 8; x < 12; x++){
+			tiles[6][x].setType("");
+			tiles[8][x].setType("");
+
+		}
+		
+		for(int x = 2; x < 5; x++){
+			tiles[6][x].setType("");
+			tiles[7][x].setType("");
+			tiles[6][x + 13].setType("");
+			tiles[7][x + 13].setType("");
+
+		}
+		this.enemies[0] = new Tower(this, 318, 140);
+		this.enemies[1] = new Tower(this, 318, 340);
+		a = r.nextInt(2);
+		if(a == 0)
+			this.enemies[2] = new Chaser(this, 350, 275);
+		else if(a == 1){
+			this.enemies[2] = new Bouncer(this, 350, 265);
+		}
+
+		
+		
+		return tiles;
+		
+	}
 
 	public Tile[][] layoutFour(Tile[][] t){
 		type = 5;
@@ -367,9 +443,9 @@ public class Room {
 		
 		this.enemies[0] = new Tower(this, 250, 225);
 		this.enemies[1] = new Tower(this, 395, 225);
-		this.enemies[2] = new Chaser(this, 50, 225);
-		this.enemies[3] = new Chaser(this, 595, 225);
-		this.enemies[4] = new Chaser(this, 500, 225);
+		this.enemies[2] = new Chaser(this, 50, 50);
+		this.enemies[3] = new Chaser(this, 275, 275);
+		this.enemies[4] = new Chaser(this, 500, 400);
 		
 		return tiles;
 	}
