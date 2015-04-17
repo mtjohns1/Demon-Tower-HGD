@@ -67,15 +67,15 @@ public class Room {
 		}		
 
 		a = r.nextInt(5); 
-		//if(a == 0)
-		//	tiles = this.layoutFour(tiles);
-		//else if(a == 1)
-		//	tiles = this.interestingRoom(tiles);
-		//else if(a == 2)
-		//	tiles = this.fourSquareRoom(tiles);
-		//else if(a == 3)
-		//	tiles = this.threeSquareRoom(tiles);
-		//else if(a == 4)
+		if(a == 0)
+			tiles = this.layoutFour(tiles);
+		else if(a == 1)
+			tiles = this.interestingRoom(tiles);
+		else if(a == 2)
+			tiles = this.fourSquareRoom(tiles);
+		else if(a == 3)
+			tiles = this.threeSquareRoom(tiles);
+		else if(a == 4)
 			tiles = this.TowerMaze(tiles);
 
 	}
